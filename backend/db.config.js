@@ -3,7 +3,7 @@ const { Pool } = require("pg");
 
 const database = process.env.PGDATABASE;
 
-const connectionString = 'postgres://postgres:circleshare@localhost:5432/database'
+const connectionString = 'postgres://postgres:circleshare@localhost:5432/postgres'
 
 const pool = new Pool({
   connectionString: connectionString,

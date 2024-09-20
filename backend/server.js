@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5003;
 
 // Function to handle health check (fetch Categories)
 const getCategories = (req, res) => {
-  pool.query('SELECT * FROM Categories', (error, categories) => {
+  pool.query('SELECT * FROM "Categories"', (error, categories) => {
     if (error) {
       return res.status(500).json({ error: 'Database query failed' });
     }
