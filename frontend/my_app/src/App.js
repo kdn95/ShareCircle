@@ -1,22 +1,30 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './App.css';
 
 function App() {
+  const [categories, setCategories] = useState([]);
+
+  // Fetch data from the backend when the component mounts
+  useEffect(() => {
+    axios.get('http://localhost:5003/') // Adjust the port if necessary
+      .then((response) => {
+        setCategories(response.data);  // Assuming response.data is an array of categories
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Categories</h1>
+        <ul>
+          {categories.map((category) => (
+            <li key={category.id}>{category.category_name}</li>  // Adjust based on your table's column names
+          ))}
+        </ul>
       </header>
     </div>
   );
