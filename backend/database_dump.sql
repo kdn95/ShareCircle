@@ -37,8 +37,14 @@ ALTER TABLE public."Categories" OWNER TO postgres;
 --
 
 COPY public."Categories" ("ID", "Name") FROM stdin;
-1	Health
-2	Outdoor
+7	Health & Fitness
+8	Outdoor
+6	Baby & Kids
+5	Entertainment
+4	Furniture
+3	Tools & Equipment
+2	Clothes
+1	Electronics
 \.
 
 
