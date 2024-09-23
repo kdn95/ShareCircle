@@ -24,28 +24,128 @@ SET default_table_access_method = heap;
 -- Name: Categories; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE IF NOT EXISTS public."Categories" (
+CREATE TABLE public."Categories" (
     "ID" integer NOT NULL,
     "Name" text
 );
 
+
 ALTER TABLE public."Categories" OWNER TO postgres;
 
 --
--- Insert or Update Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: Items; Type: TABLE; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."Categories" ("ID", "Name") VALUES
-(7, 'Health & Fitness'),
-(8, 'Outdoor'),
-(6, 'Baby & Kids'),
-(5, 'Entertainment'),
-(4, 'Furniture'),
-(3, 'Tools & Equipment'),
-(2, 'Clothes'),
-(1, 'Electronics')
-ON CONFLICT ("ID") DO UPDATE SET
-    "Name" = EXCLUDED."Name";
+CREATE TABLE public."Items" (
+    "Item_id" integer NOT NULL,
+    "Item_name" text,
+    "Category_id" integer NOT NULL,
+    "Renter_id" integer,
+    "Description" text,
+    "Price_per_day" integer,
+    "Image_url" text,
+    "Availability" text
+);
+
+
+ALTER TABLE public."Items" OWNER TO postgres;
+
+--
+-- Name: Items_Category_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Items_Category_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Items_Category_id_seq" OWNER TO postgres;
+
+--
+-- Name: Items_Category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Items_Category_id_seq" OWNED BY public."Items"."Category_id";
+
+
+--
+-- Name: Items_Item_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Items_Item_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Items_Item_id_seq" OWNER TO postgres;
+
+--
+-- Name: Items_Item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Items_Item_id_seq" OWNED BY public."Items"."Item_id";
+
+
+--
+-- Name: Items Item_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Items" ALTER COLUMN "Item_id" SET DEFAULT nextval('public."Items_Item_id_seq"'::regclass);
+
+
+--
+-- Name: Items Category_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Items" ALTER COLUMN "Category_id" SET DEFAULT nextval('public."Items_Category_id_seq"'::regclass);
+
+
+--
+-- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Categories" ("ID", "Name") FROM stdin;
+7	Health & Fitness
+8	Outdoor
+6	Baby & Kids
+5	Entertainment
+4	Furniture
+3	Tools & Equipment
+2	Clothes
+1	Electronics
+\.
+
+
+--
+-- Data for Name: Items; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Description", "Price_per_day", "Image_url", "Availability") FROM stdin;
+1	Drone	1	\N	Great Drone	35	\N	Available
+\.
+
+
+--
+-- Name: Items_Category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Items_Category_id_seq"', 1, false);
+
+
+--
+-- Name: Items_Item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Items_Item_id_seq"', 1, true);
+
 
 --
 -- Name: Categories Categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -54,5 +154,24 @@ ON CONFLICT ("ID") DO UPDATE SET
 ALTER TABLE ONLY public."Categories"
     ADD CONSTRAINT "Categories_pkey" PRIMARY KEY ("ID");
 
+
+--
+-- Name: Items Items_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Items"
+    ADD CONSTRAINT "Items_pkey" PRIMARY KEY ("Item_id");
+
+
+--
+-- Name: Items FK_categories; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Items"
+    ADD CONSTRAINT "FK_categories" FOREIGN KEY ("Category_id") REFERENCES public."Categories"("ID") NOT VALID;
+
+
+--
 -- PostgreSQL database dump complete
 --
+
