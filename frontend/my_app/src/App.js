@@ -7,7 +7,7 @@ function App() {
 
   // Fetch data from the backend when the component mounts
   useEffect(() => {
-    axios.get('http://localhost:5003/') // Adjust the port if necessary
+    axios.get('http://localhost:5003/') // GET request to backend api endpoint
       .then((response) => {
         setCategories(response.data);  // Assuming response.data is an array of categories
       })
