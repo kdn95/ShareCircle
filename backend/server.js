@@ -121,27 +121,21 @@ app.get('/Outdoors', getOutdoors);
 
 
 
-app.get('/Electronics/:item_id', (req, res) => {
-  // Correctly access the item_id from the route parameter
-  const itemId = req.params.item_id;
-
+app.get('/Electronics/:Item_id', async (req, res) => {
+  const itemId = req.params.Item_id;
+  console.log('Fetching item with Item_id:', itemId);
   const query = 'SELECT * FROM "Items" WHERE "Item_id" = $1';
 
-
-  pool.query(query, [itemId], (error, result) => {
-    if (error) {
-      // Return a 500 status with a proper error message
-      return res.status(500).json({ error: 'Database query failed' });
-    }
-
-    // If no items were found, return a 404 error
+  try {
+    const result = await pool.query(query, [itemId]);
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Item not found' });
     }
-    
-    // Return the found item
     res.status(200).json(result.rows[0]);
-  });
+  } catch (error) {
+    console.error('Error executing query:', error);
+    res.status(500).json({ error: 'Database query failed' });
+  }
 });
 
 
