@@ -130,6 +130,13 @@ COPY public."Categories" ("ID", "Name") FROM stdin;
 
 COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Description", "Price_per_day", "Image_url", "Availability") FROM stdin;
 1	Drone	1	\N	Great Drone	35	\N	Available
+2	Chanel Jumper	2	\N	Vintage	45	\N	Available
+3	Jack Hammer	3	\N	One hell of a good Jack Hammer	30	\N	Available
+4	Couch	4	\N	Limited edition	80	\N	Available
+5	Nintendo Switch	5	\N	Has Animal Crossing	40	\N	Available
+6	Baby Cot	6	\N	Spongebob themed	60	\N	Available
+7	Massage Gun	7	\N	Has multiple attachments	30	\N	Available
+8	Camping Chair	8	\N	Has a cup holder	12	\N	Available
 \.
 
 
@@ -144,7 +151,7 @@ SELECT pg_catalog.setval('public."Items_Category_id_seq"', 1, false);
 -- Name: Items_Item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Items_Item_id_seq"', 1, true);
+SELECT pg_catalog.setval('public."Items_Item_id_seq"', 8, true);
 
 
 --
