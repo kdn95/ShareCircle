@@ -20,11 +20,15 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
+DROP TABLE IF EXISTS public."Items" CASCADE;
+DROP TABLE IF EXISTS public."Categories" CASCADE;
+
+
 --
 -- Name: Categories; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Categories" (
+CREATE TABLE IF NOT EXIST public."Categories" (
     "ID" integer NOT NULL,
     "Name" text
 );
@@ -36,7 +40,7 @@ ALTER TABLE public."Categories" OWNER TO postgres;
 -- Name: Items; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Items" (
+CREATE TABLE IF NOT EXIST public."Items" (
     "Item_id" integer NOT NULL,
     "Item_name" text,
     "Category_id" integer NOT NULL,
