@@ -24,29 +24,28 @@ SET default_table_access_method = heap;
 -- Name: Categories; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Categories" (
+CREATE TABLE IF NOT EXISTS public."Categories" (
     "ID" integer NOT NULL,
     "Name" text
 );
 
-
 ALTER TABLE public."Categories" OWNER TO postgres;
 
 --
--- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Insert or Update Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Categories" ("ID", "Name") FROM stdin;
-7	Health & Fitness
-8	Outdoor
-6	Baby & Kids
-5	Entertainment
-4	Furniture
-3	Tools & Equipment
-2	Clothes
-1	Electronics
-\.
-
+INSERT INTO public."Categories" ("ID", "Name") VALUES
+(7, 'Health & Fitness'),
+(8, 'Outdoor'),
+(6, 'Baby & Kids'),
+(5, 'Entertainment'),
+(4, 'Furniture'),
+(3, 'Tools & Equipment'),
+(2, 'Clothes'),
+(1, 'Electronics')
+ON CONFLICT ("ID") DO UPDATE SET
+    "Name" = EXCLUDED."Name";
 
 --
 -- Name: Categories Categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -55,8 +54,5 @@ COPY public."Categories" ("ID", "Name") FROM stdin;
 ALTER TABLE ONLY public."Categories"
     ADD CONSTRAINT "Categories_pkey" PRIMARY KEY ("ID");
 
-
---
 -- PostgreSQL database dump complete
 --
-
