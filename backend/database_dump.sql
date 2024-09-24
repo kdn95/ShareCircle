@@ -20,11 +20,14 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
+DROP TABLE IF EXISTS public."Items" CASCADE;
+DROP TABLE IF EXISTS public."Categories" CASCADE;
+
 --
 -- Name: Categories; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Categories" (
+CREATE TABLE IF NOT EXISTS public."Categories" (
     "ID" integer NOT NULL,
     "Name" text
 );
@@ -36,7 +39,7 @@ ALTER TABLE public."Categories" OWNER TO postgres;
 -- Name: Items; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Items" (
+CREATE TABLE IF NOT EXISTS public."Items" (
     "Item_id" integer NOT NULL,
     "Item_name" text,
     "Category_id" integer NOT NULL,
@@ -138,6 +141,30 @@ COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Descri
 6	Baby Cot	6	\N	Spongebob themed	60	\N	Available	Karen
 7	Massage Gun	7	\N	Has multiple attachments	30	\N	Available	Nicole
 8	Camping Chair	8	\N	Has a cup holder	12	\N	Available	Carole
+9	Projector	1	\N	Works Well	20	\N	Available	Jed
+10	Wedding Dress	2	\N	In near-perfect condition	45	\N	Available	Sarah
+11	Tool Box	3	\N	Has all tools needed	10	\N	Available	Barry
+12	Foldable Table	4	\N	Large and clean	12	\N	Available	James
+13	Xbox 360	5	\N	Includes Halo & GTA	20	\N	Available	Amanda
+14	Stroller	6	\N	For babies and dogs, very clean	14	\N	Available	Michelle
+15	Kettlebells	7	\N	5KG, comes in a set of two	6	\N	Available	Tim
+16	Camping Table	8	\N	Clean and very handy	14	\N	Available	Georgia
+17	Playstation 2	1	\N	Works well includes GTA and extra controllers	20	\N	Available	Samuel
+18	Gameboy Advance	1	\N	Comes with 20 games, good condition	9	\N	Available	Mark
+19	Prada Scarf	2	\N	Clean and warm	25	\N	Available	Sharon
+20	Gucci Suit	2	\N	Comes in a set with trousers, jacket and vest	100	\N	Available	Rudy
+21	Drill	3	\N	Comes with a set of drill bits	40	\N	Available	Andy
+22	Chainsaw	3	\N	Comes with protective cover	35	\N	Available	Will
+23	Set of Dining Chairs	4	\N	Comes in a set of 4	50	\N	Available	Kate
+24	Book Shelf	4	\N	For temporary storage of your books	40	\N	Available	Kevin
+25	Monopoly Board Game	5	\N	Includes all cards and pieces	7	\N	Available	Samantha
+26	Chess Set	5	\N	Includes all pieces	7	\N	Available	George
+27	Kids Swim Vest	6	\N	Helps your kids float	5	\N	Available	Suzie
+28	Kids Electric Hummer	6	\N	Kids sized electric car, comes with charger	25	\N	Available	Riley
+29	Resistance Bands	7	\N	Comes with 3 different sizes	10	\N	Available	Jordan
+30	Boxing Gloves	7	\N	Comes in 3 different sizes, S/M/L	6	\N	Available	Thomas
+31	Torch	8	\N	Uses AA batteries (included)	2	\N	Available	Eleanor
+32	Portable Gas Cooker	8	\N	Works well, does not come with gas canister	15	\N	Available	Peter
 \.
 
 
