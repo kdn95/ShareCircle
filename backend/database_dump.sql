@@ -20,15 +20,11 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
-DROP TABLE IF EXISTS public."Items" CASCADE;
-DROP TABLE IF EXISTS public."Categories" CASCADE;
-
-
 --
 -- Name: Categories; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE IF NOT EXIST public."Categories" (
+CREATE TABLE public."Categories" (
     "ID" integer NOT NULL,
     "Name" text
 );
@@ -40,7 +36,7 @@ ALTER TABLE public."Categories" OWNER TO postgres;
 -- Name: Items; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE IF NOT EXIST public."Items" (
+CREATE TABLE public."Items" (
     "Item_id" integer NOT NULL,
     "Item_name" text,
     "Category_id" integer NOT NULL,
@@ -48,7 +44,8 @@ CREATE TABLE IF NOT EXIST public."Items" (
     "Description" text,
     "Price_per_day" integer,
     "Image_url" text,
-    "Availability" text
+    "Availability" text,
+    "Renter_name" text
 );
 
 
@@ -132,15 +129,15 @@ COPY public."Categories" ("ID", "Name") FROM stdin;
 -- Data for Name: Items; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Description", "Price_per_day", "Image_url", "Availability") FROM stdin;
-1	Drone	1	\N	Great Drone	35	\N	Available
-2	Chanel Jumper	2	\N	Vintage	45	\N	Available
-3	Jack Hammer	3	\N	One hell of a good Jack Hammer	30	\N	Available
-4	Couch	4	\N	Limited edition	80	\N	Available
-5	Nintendo Switch	5	\N	Has Animal Crossing	40	\N	Available
-6	Baby Cot	6	\N	Spongebob themed	60	\N	Available
-7	Massage Gun	7	\N	Has multiple attachments	30	\N	Available
-8	Camping Chair	8	\N	Has a cup holder	12	\N	Available
+COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Description", "Price_per_day", "Image_url", "Availability", "Renter_name") FROM stdin;
+1	Drone	1	\N	Great Drone	35	\N	Available	Bob
+2	Chanel Jumper	2	\N	Vintage	45	\N	Available	Betty
+3	Jack Hammer	3	\N	One hell of a good Jack Hammer	30	\N	Available	Adrian
+4	Couch	4	\N	Limited edition	80	\N	Available	Patrick
+5	Nintendo Switch	5	\N	Has Animal Crossing	40	\N	Available	Christina
+6	Baby Cot	6	\N	Spongebob themed	60	\N	Available	Karen
+7	Massage Gun	7	\N	Has multiple attachments	30	\N	Available	Nicole
+8	Camping Chair	8	\N	Has a cup holder	12	\N	Available	Carole
 \.
 
 
