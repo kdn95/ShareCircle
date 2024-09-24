@@ -1,13 +1,10 @@
 require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
-const cors = require('cors'); // Import CORS
 const pool = require(__dirname + '/db.config.js');
 
 const app = express();
 const PORT = process.env.PORT || 5004;
 
-// Use CORS middleware
-app.use(cors());
 
 // ALL CATEGORIES - HOMEPAGE
 // Function to handle health check (fetch Categories)
