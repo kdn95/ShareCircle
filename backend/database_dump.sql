@@ -99,6 +99,44 @@ ALTER SEQUENCE public."Items_Item_id_seq" OWNED BY public."Items"."Item_id";
 
 
 --
+-- Name: Renters; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Renters" (
+    "Renter_id" integer NOT NULL,
+    "First_name" text NOT NULL,
+    "Last_name" text,
+    "Rating" integer,
+    "Address" text,
+    "Profile_pic" text
+);
+
+
+ALTER TABLE public."Renters" OWNER TO postgres;
+
+--
+-- Name: Renters_Renter_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Renters_Renter_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Renters_Renter_id_seq" OWNER TO postgres;
+
+--
+-- Name: Renters_Renter_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Renters_Renter_id_seq" OWNED BY public."Renters"."Renter_id";
+
+
+--
 -- Name: Items Item_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -110,6 +148,13 @@ ALTER TABLE ONLY public."Items" ALTER COLUMN "Item_id" SET DEFAULT nextval('publ
 --
 
 ALTER TABLE ONLY public."Items" ALTER COLUMN "Category_id" SET DEFAULT nextval('public."Items_Category_id_seq"'::regclass);
+
+
+--
+-- Name: Renters Renter_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Renters" ALTER COLUMN "Renter_id" SET DEFAULT nextval('public."Renters_Renter_id_seq"'::regclass);
 
 
 --
@@ -169,6 +214,15 @@ COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Descri
 
 
 --
+-- Data for Name: Renters; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Renters" ("Renter_id", "First_name", "Last_name", "Rating", "Address", "Profile_pic") FROM stdin;
+1	Bob	Sponge	4	123 Smith Street, Melbourne 3000 Victoria	\N
+\.
+
+
+--
 -- Name: Items_Category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -180,6 +234,13 @@ SELECT pg_catalog.setval('public."Items_Category_id_seq"', 1, false);
 --
 
 SELECT pg_catalog.setval('public."Items_Item_id_seq"', 8, true);
+
+
+--
+-- Name: Renters_Renter_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Renters_Renter_id_seq"', 1, false);
 
 
 --
@@ -196,6 +257,22 @@ ALTER TABLE ONLY public."Categories"
 
 ALTER TABLE ONLY public."Items"
     ADD CONSTRAINT "Items_pkey" PRIMARY KEY ("Item_id");
+
+
+--
+-- Name: Renters Renters_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Renters"
+    ADD CONSTRAINT "Renters_pkey" PRIMARY KEY ("Renter_id");
+
+
+--
+-- Name: Items FK_Renter_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Items"
+    ADD CONSTRAINT "FK_Renter_id" FOREIGN KEY ("Renter_id") REFERENCES public."Renters"("Renter_id") NOT VALID;
 
 
 --
