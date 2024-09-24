@@ -19,6 +19,26 @@ const getCategories = (req, res) => {
 // Route to get Categories data
 app.get('/', getCategories);
 
+// get renters within a certain (atm 5km) radius 
+app.get('/renters/nearby', async (req, res) => {
+  const { latitude, longitude, radius_km } = req.query;
+
+  try {
+    const query = `
+      SELECT "Renter_id", "First_name", "Last_name", "Address", "location",
+             ST_Distance(location, ST_SetSRID(ST_MakePoint($1, $2), 4326)) AS distance
+      FROM "Renters"
+      WHERE ST_DWithin(location, ST_SetSRID(ST_MakePoint($1, $2), 4326), $3 * 1000);
+    `;
+    const result = await pool.query(query, [longitude, latitude, radius_km]);
+
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error('Error fetching nearby renters:', error);
+    res.status(500).json({ error: 'Failed to fetch nearby renters' });
+  }
+});
+
 
 // GET SPECIFIC CATEGORY - worked for Categories list
 // Should show all items according to category name
@@ -56,7 +76,7 @@ app.get('/:category_name/:itemId', async (req, res) => {
     INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
     WHERE "Categories"."Name" = $1 AND "Items"."Item_id" = $2
   `;
-  
+
   try {
     const result = await pool.query(query, [categoryName, itemId]);
     if (result.rows.length === 0) {
@@ -68,6 +88,7 @@ app.get('/:category_name/:itemId', async (req, res) => {
     res.status(500).json({ error: 'Database query failed' });
   }
 });
+
 
 
 // Start server

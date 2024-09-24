@@ -16,12 +16,27 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-SET default_tablespace = '';
+--
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
+--
 
-SET default_table_access_method = heap;
+
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
 
 DROP TABLE IF EXISTS public."Items" CASCADE;
 DROP TABLE IF EXISTS public."Categories" CASCADE;
+DROP TABLE IF EXISTS public."Renters" CASCADE;
+
+--
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner:
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
 
 --
 -- Name: Categories; Type: TABLE; Schema: public; Owner: postgres
@@ -102,13 +117,14 @@ ALTER SEQUENCE public."Items_Item_id_seq" OWNED BY public."Items"."Item_id";
 -- Name: Renters; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Renters" (
+CREATE TABLE IF NOT EXISTS public."Renters" (
     "Renter_id" integer NOT NULL,
     "First_name" text NOT NULL,
     "Last_name" text,
     "Rating" integer,
     "Address" text,
-    "Profile_pic" text
+    "Profile_pic" text,
+    location public.geography(Point,4326)
 );
 
 
@@ -178,38 +194,39 @@ COPY public."Categories" ("ID", "Name") FROM stdin;
 --
 
 COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Description", "Price_per_day", "Image_url", "Availability", "Renter_name") FROM stdin;
-1	Drone	1	\N	Great Drone	35	\N	Available	Bob
-2	Chanel Jumper	2	\N	Vintage	45	\N	Available	Betty
-3	Jack Hammer	3	\N	One hell of a good Jack Hammer	30	\N	Available	Adrian
-4	Couch	4	\N	Limited edition	80	\N	Available	Patrick
-5	Nintendo Switch	5	\N	Has Animal Crossing	40	\N	Available	Christina
-6	Baby Cot	6	\N	Spongebob themed	60	\N	Available	Karen
-7	Massage Gun	7	\N	Has multiple attachments	30	\N	Available	Nicole
-8	Camping Chair	8	\N	Has a cup holder	12	\N	Available	Carole
-9	Projector	1	\N	Works Well	20	\N	Available	Jed
-10	Wedding Dress	2	\N	In near-perfect condition	45	\N	Available	Sarah
-11	Tool Box	3	\N	Has all tools needed	10	\N	Available	Barry
-12	Foldable Table	4	\N	Large and clean	12	\N	Available	James
-13	Xbox 360	5	\N	Includes Halo & GTA	20	\N	Available	Amanda
-14	Stroller	6	\N	For babies and dogs, very clean	14	\N	Available	Michelle
-15	Kettlebells	7	\N	5KG, comes in a set of two	6	\N	Available	Tim
-16	Camping Table	8	\N	Clean and very handy	14	\N	Available	Georgia
-17	Playstation 2	1	\N	Works well includes GTA and extra controllers	20	\N	Available	Samuel
-18	Gameboy Advance	1	\N	Comes with 20 games, good condition	9	\N	Available	Mark
-19	Prada Scarf	2	\N	Clean and warm	25	\N	Available	Sharon
-20	Gucci Suit	2	\N	Comes in a set with trousers, jacket and vest	100	\N	Available	Rudy
-21	Drill	3	\N	Comes with a set of drill bits	40	\N	Available	Andy
-22	Chainsaw	3	\N	Comes with protective cover	35	\N	Available	Will
-23	Set of Dining Chairs	4	\N	Comes in a set of 4	50	\N	Available	Kate
-24	Book Shelf	4	\N	For temporary storage of your books	40	\N	Available	Kevin
-25	Monopoly Board Game	5	\N	Includes all cards and pieces	7	\N	Available	Samantha
-26	Chess Set	5	\N	Includes all pieces	7	\N	Available	George
-27	Kids Swim Vest	6	\N	Helps your kids float	5	\N	Available	Suzie
-28	Kids Electric Hummer	6	\N	Kids sized electric car, comes with charger	25	\N	Available	Riley
-29	Resistance Bands	7	\N	Comes with 3 different sizes	10	\N	Available	Jordan
-30	Boxing Gloves	7	\N	Comes in 3 different sizes, S/M/L	6	\N	Available	Thomas
-31	Torch	8	\N	Uses AA batteries (included)	2	\N	Available	Eleanor
-32	Portable Gas Cooker	8	\N	Works well, does not come with gas canister	15	\N	Available	Peter
+1	Drone	1	1	Great Drone	35	\N	Available	Bob
+2	Chanel Jumper	2	2	Vintage	45	\N	Available	Betty
+3	Jack Hammer	3	3	One hell of a good Jack Hammer	30	\N	Available	Adrian
+4	Couch	4	4	Limited edition	80	\N	Available	Patrick
+5	Nintendo Switch	5	5	Has Animal Crossing	40	\N	Available	Christina
+6	Baby Cot	6	6	Spongebob themed	60	\N	Available	Karen
+7	Massage Gun	7	7	Has multiple attachments	30	\N	Available	Nicole
+8	Camping Chair	8	8	Has a cup holder	12	\N	Available	Carole
+9	Projector	1	9	Works Well	20	\N	Available	Jed
+10	Wedding Dress	2	10	In near-perfect condition	45	\N	Available	Sarah
+11	Tool Box	3	11	Has all tools needed	10	\N	Available	Barry
+12	Foldable Table	4	12	Large and clean	12	\N	Available	James
+13	Xbox 360	5	13	Includes Halo & GTA	20	\N	Available	Amanda
+14	Stroller	6	14	For babies and dogs, very clean	14	\N	Available	Michelle
+15	Kettlebells	7	15	5KG, comes in a set of two	6	\N	Available	Tim
+16	Camping Table	8	16	Clean and very handy	14	\N	Available	Georgia
+17	Playstation 2	1	17	Works well includes GTA and extra controllers	20	\N	Available	Samuel
+18	Gameboy Advance	1	18	Comes with 20 games, good condition	9	\N	Available	Mark
+19	Prada Scarf	2	19	Clean and warm	25	\N	Available	Sharon
+20	Gucci Suit	2	20	Comes in a set with trousers, jacket and vest	100	\N	Available	Rudy
+21	Drill	3	21	Comes with a set of drill bits	40	\N	Available	Andy
+22	Chainsaw	3	22	Comes with protective cover	35	\N	Available	Will
+23	Set of Dining Chairs	4	23	Comes in a set of 4	50	\N	Available	Kate
+24	Book Shelf	4	24	For temporary storage of your books	40	\N	Available	Kevin
+25	Monopoly Board Game	5	25	Includes all cards and pieces	7	\N	Available	Samantha
+26	Chess Set	5	26	Includes all pieces	7	\N	Available	George
+27	Kids Swim Vest	6	27	Helps your kids float	5	\N	Available	Suzie
+28	Kids Electric Hummer	6	28	Kids sized electric car, comes with charger	25	\N	Available	Riley
+29	Resistance Bands	7	29	Comes with 3 different sizes	10	\N	Available	Jordan
+30	Boxing Gloves	7	30	Comes in 3 different sizes, S/M/L	6	\N	Available	Thomas
+31	Torch	8	31	Uses AA batteries (included)	2	\N	Available	Eleanor
+32	Portable Gas Cooker	8	32	Works well, does not come with gas canister	15	\N	Available	Peter
+33	DVD player	1	32	Plays Blue-Rays	18	\N	Available	Peter
 \.
 
 
@@ -217,8 +234,47 @@ COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Descri
 -- Data for Name: Renters; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Renters" ("Renter_id", "First_name", "Last_name", "Rating", "Address", "Profile_pic") FROM stdin;
-1	Bob	Sponge	4	123 Smith Street, Melbourne 3000 Victoria	\N
+COPY public."Renters" ("Renter_id", "First_name", "Last_name", "Rating", "Address", "Profile_pic", location) FROM stdin;
+7	Nicole	Gorospe	5	\N	\N	\N
+8	Carole	Zen	5	\N	\N	\N
+9	Jed	Roberts	2	\N	\N	\N
+10	Sarah	McNamara	4	\N	\N	\N
+11	Barry	Stewart	3	\N	\N	\N
+12	James	Bond	2	\N	\N	\N
+13	Amanda	Ciccione	5	\N	\N	\N
+14	Michelle	Anderson	2	\N	\N	\N
+15	Tim	Jones	5	\N	\N	\N
+16	Georgia	Smith	2	\N	\N	\N
+17	Samuel	Jackson	4	\N	\N	\N
+18	Mark	Zuckerberg	1	\N	\N	\N
+19	Sharon	Osborne	5	\N	\N	\N
+20	Rudy	OnRails	2	\N	\N	\N
+21	Andy	Warhol	4	\N	\N	\N
+22	Will	Smot	2	\N	\N	\N
+23	Kate	Price	3	\N	\N	\N
+24	Kevin	Null	2	\N	\N	\N
+25	Samantha	Zagare	4	\N	\N	\N
+26	George	Washington	2	\N	\N	\N
+27	Suzie	Sarroso	5	\N	\N	\N
+28	Riley	Summers	1	\N	\N	\N
+29	Jordan	Vieola	5	\N	\N	\N
+30	Thomas	Wender	2	\N	\N	\N
+31	Eleanor	Flower	5	\N	\N	\N
+32	Peter	Pan	1	\N	\N	\N
+2	Betty	Holberton	5	Federation Square, Melbourne, VIC, 3000	\N	0101000020E6100000C5FEB27BF21E62409B559FABADE842C0
+3	Adrian	Liew	5	1 Convention Centre Place, South Wharf, VIC 3006	\N	0101000020E6100000A60A4625751E62407DAEB6627FE942C0
+4	Patrick	Star	4	513 Elizabeth St, Melbourne, VIC 3000	\N	0101000020E6100000E9263108AC1E62409EEFA7C64BE742C0
+5	Christina	Quach	5	Birdwood Ave, Melbourne, VIC 3004	\N	0101000020E610000068226C787A1F6240FAEDEBC039EB42C0
+6	Karen	Compli	1	7 Riverside Quay, Southbank, VIC 3006	\N	0101000020E6100000B459F5B9DA1E62400C022B8716E942C0
+1	Bob	Sponge	4	9 Power Street, Melbourne, VIC, 3006	\N	0101000020E6100000D4981073C91E624046239F573CE942C0
+\.
+
+
+--
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
 \.
 
 
