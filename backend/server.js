@@ -3,7 +3,7 @@ const express = require('express');
 const pool = require(__dirname + '/db.config.js');
 
 const app = express();
-const PORT = process.env.PORT || 5004;
+const PORT = process.env.PORT || 5003;
 
 
 // ALL CATEGORIES - HOMEPAGE
@@ -25,7 +25,7 @@ app.get('/renters/nearby', async (req, res) => {
 
   try {
     const query = `
-      SELECT "Renter_id", "First_name", "Last_name", "Address", "location",
+      SELECT "Renter_id", "First_name", "Last_name", "Rating", "Address", "location",
              ST_Distance(location, ST_SetSRID(ST_MakePoint($1, $2), 4326)) AS distance
       FROM "Renters"
       WHERE ST_DWithin(location, ST_SetSRID(ST_MakePoint($1, $2), 4326), $3 * 1000);
