@@ -2,9 +2,23 @@ require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
 const pool = require(__dirname + '/db.config.js');
 
+const { auth } = require('express-oauth2-jwt-bearer');
+
 const app = express();
 const PORT = process.env.PORT || 5003;
 
+
+// JWT check middleware
+const jwtCheck = auth({
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
+  tokenSigningAlg: 'RS256',
+});
+
+
+// Signup Route
+
+// Login Route
 
 // ALL CATEGORIES - HOMEPAGE
 // Function to handle health check (fetch Categories)
@@ -19,8 +33,8 @@ const getCategories = (req, res) => {
 // Route to get Categories data
 app.get('/', getCategories);
 
-// get renters within a certain (atm 5km) radius 
-app.get('/renters/nearby', async (req, res) => {
+// get renters within a certain (atm 5km) radius (protected)
+app.get('/renters/nearby', jwtCheck, async (req, res) => {
   const { latitude, longitude, radius_km } = req.query;
 
   try {
