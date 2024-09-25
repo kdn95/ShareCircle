@@ -8,6 +8,8 @@ const { auth } = require('express-oauth2-jwt-bearer');
 const app = express();
 const PORT = process.env.PORT || 5004;
 
+// Add CORS middleware
+app.use(cors({ origin: 'http://localhost:3000' }));  // Update with your frontend URL
 
 // JWT check middleware
 const jwtCheck = auth({
@@ -36,7 +38,7 @@ app.get('/', getCategories);
 
 
 // get items within a certain (e.g., 5km) radius (protected)
-app.get('/items/nearby', async (req, res) => {
+app.get('/items/nearby', jwtCheck, async (req, res) => {
   const { latitude, longitude, radius_km } = req.query;
 
   try {
