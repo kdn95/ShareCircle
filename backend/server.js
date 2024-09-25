@@ -5,7 +5,7 @@ const pool = require(__dirname + '/db.config.js');
 const { auth } = require('express-oauth2-jwt-bearer');
 
 const app = express();
-const PORT = process.env.PORT || 5003;
+const PORT = process.env.PORT || 5004;
 
 
 // JWT check middleware
