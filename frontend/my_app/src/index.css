@@ -6,20 +6,17 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: #333;
   color: #fff;
   padding: 1rem;
-  justify-content: center;
 }
-
 .navbar-center .nav-links {
   list-style-type: none;
   display: flex;
@@ -27,13 +24,37 @@ code {
   padding: 0;
   text-align: center;
 }
-
 .navbar-center .nav-links li {
   margin-right: 1rem;
   text-align: center;
 }
-
-.navbar-center .nav-links a {
+.navbar-center .nav-links li a {
   color: #fff;
   text-decoration: none;
 }
+
+.categories-container {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  background-color: white;
+}
+.categories-container .category-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+.categories-container .category-card:hover {
+  transform: scale(1.05);
+}
+.categories-container .category-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/*# sourceMappingURL=index.css.map */

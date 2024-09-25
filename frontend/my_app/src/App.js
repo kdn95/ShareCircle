@@ -40,7 +40,7 @@ const App = () => {
           <h2>Welcome, {user.name}!</h2>
         </>
       )}
-      <Categories />
+      <Categories /> {/* Render the Categories component */}
       <Navbar />
     </div>
   );

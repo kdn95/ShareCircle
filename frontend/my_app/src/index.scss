@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center; // Centered as per your original code
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+
+  &-center { // Using a BEM-like approach
+    .nav-links {
+      list-style-type: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+
+      li {
+        margin-right: 1rem;
+        text-align: center;
+
+        a {
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+
+
+.categories-container {
+  position: relative; // This can be default, or absolute based on needs
+  z-index: 2; // Set a higher z-index to appear in front
+  padding: 20px; // Inner padding
+  background-color: white; // Background color of the foreground
+
+  .category-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    width: 200px; // Set a fixed width for the card
+    text-align: center;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s; // Optional: for a hover effect
+
+    &:hover {
+      transform: scale(1.05); // Optional: scale effect on hover
+    }
+
+    img {
+      width: 100%; // Make the image responsive
+      height: auto; // Maintain aspect ratio
+      border-radius: 4px; // Rounded corners for the image
+    }
+  }
+}
