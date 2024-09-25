@@ -1,5 +1,6 @@
 require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
+const cors = require('cors'); // Import CORS
 const pool = require(__dirname + '/db.config.js');
 
 const { auth } = require('express-oauth2-jwt-bearer');
@@ -33,25 +34,29 @@ const getCategories = (req, res) => {
 // Route to get Categories data
 app.get('/', getCategories);
 
-// get renters within a certain (atm 5km) radius (protected)
-app.get('/renters/nearby', jwtCheck, async (req, res) => {
+
+// get items within a certain (e.g., 5km) radius (protected)
+app.get('/items/nearby', async (req, res) => {
   const { latitude, longitude, radius_km } = req.query;
 
   try {
     const query = `
-      SELECT "Renter_id", "First_name", "Last_name", "Rating", "Address", "location",
-             ST_Distance(location, ST_SetSRID(ST_MakePoint($1, $2), 4326)) AS distance
-      FROM "Renters"
+      SELECT "Item_name", "Description", "Price_per_day", "Image_url", "Availability", "Renter_name"
+      FROM "Items"
+      INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
       WHERE ST_DWithin(location, ST_SetSRID(ST_MakePoint($1, $2), 4326), $3 * 1000);
     `;
+    // Correct order of parameters: [longitude, latitude, radius_km]
     const result = await pool.query(query, [longitude, latitude, radius_km]);
 
     res.status(200).json(result.rows);
   } catch (error) {
-    console.error('Error fetching nearby renters:', error);
-    res.status(500).json({ error: 'Failed to fetch nearby renters' });
+    console.error('Error fetching nearby items:', error);
+    res.status(500).json({ error: 'Failed to fetch nearby items' });
   }
 });
+
+
 
 
 // GET SPECIFIC CATEGORY - worked for Categories list
@@ -90,7 +95,6 @@ app.get('/:category_name/:itemId', async (req, res) => {
     INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
     WHERE "Categories"."Name" = $1 AND "Items"."Item_id" = $2
   `;
-
   try {
     const result = await pool.query(query, [categoryName, itemId]);
     if (result.rows.length === 0) {
@@ -102,7 +106,6 @@ app.get('/:category_name/:itemId', async (req, res) => {
     res.status(500).json({ error: 'Database query failed' });
   }
 });
-
 
 
 // Start server
