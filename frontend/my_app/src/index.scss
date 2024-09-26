@@ -9,7 +9,8 @@ body {
   display: flex;
   justify-content: center; // Centered as per your original code
   align-items: center;
-  padding: 1rem; // No change since it's already in rem
+  color: #494949;
+  padding: 1rem;
 
   &-center { // Using a BEM-like approach
     .nav-links {
