@@ -13,7 +13,7 @@ const Categories = () => {
   // Function to fetch categories from the API
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('http://localhost:5004/'); // Adjust the endpoint accordingly
+      const response = await axios.get('http://localhost:5007/'); // Adjust the endpoint accordingly
       setCategories(response.data); // Set the categories data
     } catch (error) {
       console.error('Error fetching categories:', error);

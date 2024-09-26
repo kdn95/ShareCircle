@@ -6,7 +6,7 @@ const cloudinary = require('cloudinary').v2;
 const { auth } = require('express-oauth2-jwt-bearer');
 
 const app = express();
-const PORT = process.env.PORT || 5004;
+const PORT = process.env.PORT || 5007;
 
 // Add CORS middleware
 app.use(cors({ origin: 'http://localhost:3000' }));  // Update with your frontend URL
@@ -77,6 +77,10 @@ app.get('/', getCategories);
 // get items within a certain (e.g., 5km) radius (protected)
 app.get('/items/nearby', jwtCheck, async (req, res) => {
   const { latitude, longitude, radius_km } = req.query;
+
+  if (!latitude || !longitude || !radius_km) {
+    return res.status(400).json({ error: 'Latitude, longitude, and radius_km are required.' });
+  }
 
   try {
     const query = `
