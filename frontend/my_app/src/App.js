@@ -15,16 +15,47 @@ const App = () => {
     loginWithRedirect();
   };
 
+  // Function to handle account click
+  const handleAccountClick = () => {
+    loginWithRedirect();
+  };
+
+  // for secure fetch for renters/nearby
+  const fetchProtectedData = useCallback(async () => {
+    try {
+      const token = await getAccessTokenSilently();
+      const response = await fetch('http://localhost:5003/renters/nearby', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      console.log(data); // Use this data in your frontend
+    } catch (error) {
+      console.error('Error fetching protected data:', error);
+    }
+  }, [getAccessTokenSilently]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchProtectedData();
+    }
+  }, [isAuthenticated, fetchProtectedData]);
 
   return (
-    <Router>
-      <Routes>
-      <Route path="/" element={<><Categories /><Home /></>} />
-      <Route path="/category/:category_name" element={<CategoryItems />} /> {/* New route for category items */}
-      <Route path="/items/nearby" element={<NearbyItems />} />
-    </Routes>
-    <Navbar onAccountClick={handleAccountClick} />  {/* Pass the function to Navbar */}
-  </Router>
+    <div>
+      {!isAuthenticated && (
+        <button onClick={() => loginWithRedirect()}>Log In</button>
+      )}
+      {isAuthenticated && (
+        <>
+          <button onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
+          <h2>Welcome, {user.name}!</h2>
+        </>
+      )}
+      <Categories /> {/* Render the Categories component */}
+      <Navbar onAccountClick={handleAccountClick} /> {/* Pass the function to Navbar */}
+    </div>
   );
 };
 
