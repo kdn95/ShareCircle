@@ -9,7 +9,6 @@ body {
   display: flex;
   justify-content: center; // Centered as per your original code
   align-items: center;
-  color: #494949;
   padding: 1rem;
 
   &-center { // Using a BEM-like approach
@@ -43,6 +42,12 @@ body {
       }
     }
   }
+}
+
+.categories-title {
+  text-align: center;
+  font-weight: 600;
+  color: #494949;
 }
 
 .categories-title {
