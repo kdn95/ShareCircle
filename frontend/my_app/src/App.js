@@ -33,7 +33,8 @@ const App = () => {
         <Route path="/items/nearby" element={<NearbyItems />} />
       </Routes>
       <Categories /> {/* Render the Categories component */}
-    </Router>
+      <Navbar onAccountClick={handleAccountClick} /> {/* Pass the function to Navbar */}
+    </div>
   );
 };
 
