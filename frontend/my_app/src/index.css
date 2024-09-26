@@ -9,7 +9,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #494949;
   padding: 1rem;
 }
 .navbar-center .nav-links {
@@ -24,6 +23,10 @@ body {
   display: flex; /* Use flexbox for each item */
   flex-direction: column; /* Stack items vertically */
   align-items: center; /* Center items horizontally */
+  padding: 12px;
+  display: flex; /* Use flexbox for each item */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
   padding: 0.75rem;
 }
 .navbar-center .nav-links li .nav-icon {
@@ -31,8 +34,12 @@ body {
   color: #494949;
 }
 .navbar-center .nav-links li a {
-  color: #494949;
+  color: #757575;
+  font-weight: 600;
   text-decoration: none;
+}
+.navbar-center .nav-links li img {
+  margin-bottom: 8px;
 }
 .navbar-center .nav-links li img {
   margin-bottom: 0.5rem;
@@ -48,14 +55,24 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  font-size: 200px;
 }
 .categories-container .MuiCard-root {
   flex: 0 0 calc(50% - 20px);
   margin: 10px;
 }
 .categories-container .category-item {
-  background: #8ABEEA;
+  background: #B7DFF5;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+.categories-container .category-image {
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+.categories-container h3 {
+  color: #494949;
 }
 .categories-container .no-undies {
   text-decoration: none;
