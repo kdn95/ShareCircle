@@ -1,8 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import Categories from './Components/Categories';
 import Navbar from './Components/Navbar';
-import Auth from './Components/Auth'; // Renamed to Auth
-import { useAuth0 } from '@auth0/auth0-react'; // Import Auth0 hook
+import NearbyItems from './Components/NearbyItems';
+import Home from './Components/Home';
 import './index.css';
 
 const App = () => {
@@ -18,11 +20,20 @@ const App = () => {
   };
 
   return (
-    <div>
-      <Auth onAccountClick={handleAccountClick} /> {/* Auth0 component */}
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home 
+            isAuthenticated={isAuthenticated} 
+            user={user} 
+            loginWithRedirect={loginWithRedirect} 
+            logout={logout} 
+          />}
+          />
+        <Route path="/items/nearby" element={<NearbyItems />} />
+      </Routes>
       <Categories /> {/* Render the Categories component */}
-      <Navbar onAccountClick={handleAccountClick} /> {/* Pass the function to Navbar */}
-    </div>
+    </Router>
   );
 };
 
