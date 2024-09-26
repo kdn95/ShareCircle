@@ -32,13 +32,11 @@ const Categories = () => {
           <CardActionArea>
             <CardMedia
               component="img"
-              className="category-image"
               height="140"
-              image={category.ImageUrl || '/static/images/cards/default.jpg'} // Fallback image if none is available
-              alt={category.Name} // Alt text for the image
+              image={category.Category_pic || '/static/images/cards/default.jpg'} // Fallback image
+              alt={category.Name}
             />
             <CardContent>
-              {/* Category Name */}
               <h3>{category.Name}</h3>
             </CardContent>
           </CardActionArea>
