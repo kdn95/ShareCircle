@@ -19,7 +19,7 @@ const jwtCheck = auth({
 });
 
 cloudinary.config({
-  cloud_name: 'dbsawv974'
+  cloud_name: dbsawv974
 });
 
 const url = cloudinary.url('vpdpedviilmpsieolvi5')
