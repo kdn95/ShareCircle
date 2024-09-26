@@ -2,7 +2,7 @@ require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
 const cors = require('cors'); // Import CORS
 const pool = require(__dirname + '/db.config.js');
-
+const cloudinary = require('cloudinary').v2;
 const { auth } = require('express-oauth2-jwt-bearer');
 
 const app = express();
@@ -17,6 +17,13 @@ const jwtCheck = auth({
   issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
   tokenSigningAlg: 'RS256',
 });
+
+cloudinary.config({
+  cloud_name: dbsawv974
+});
+
+const url = cloudinary.url('vpdpedviilmpsieolvi5')
+
 
 
 // Signup Route
