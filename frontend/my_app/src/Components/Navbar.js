@@ -10,20 +10,20 @@ const Navbar = ({ onAccountClick }) => {
       <div className="navbar-center">
         <ul className="nav-links">
           <li>
-            <img src="/images/navbar/home.png" alt="home" />
+            <HomeIcon className="nav-icon" alt="home" />
             <a href="/">Home</a>
           </li>
           <li>
-            <img src="/images/navbar/bookings.png" alt="bookings"/>
+            <BookingsIcon className="nav-icon" alt="bookings" />
             <a href="/bookings">Bookings</a>
           </li>
           <li>
-            <img src="/images/navbar/chat.png" alt="chat"/>
+            <ChatIcon className="nav-icon" alt="chat" />
             <a href="/chat">Chat</a>
           </li>
           <li>
-            <img src="/images/navbar/User.png"alt="account"/>
-            <a href="/account">Account</a>
+            <AccountIcon className="nav-icon" alt="account" />
+            <a href="#" onClick={onAccountClick}>Account</a> {/* Change href to "#" */}
           </li>
         </ul>
       </div>
