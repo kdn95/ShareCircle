@@ -31,7 +31,7 @@ const Categories = () => {
     <h1 className="categories-title">Categories</h1>
     <div className="categories-container">
       {categories.map((category) => (
-        <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.ID} className="category-item">
+        <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.ID} className="category-item"> {/* Unique key */}
           <CardActionArea>
           <Link to={`/category/${category.Name}`}> {/* Link to category items page */}
             <CardMedia
