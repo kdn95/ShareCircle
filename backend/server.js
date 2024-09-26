@@ -68,7 +68,7 @@ app.get('/items/nearby', jwtCheck, async (req, res) => {
 
 
 
-// GET SPECIFIC CATEGORY - worked for Categories list
+// GET SPECIFIC CATEGORY
 // Should show all items according to category name
 app.get('/:category_name', async (req, res) => {
   const categoryName = req.params.category_name;
