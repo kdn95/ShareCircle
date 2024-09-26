@@ -179,14 +179,14 @@ ALTER TABLE ONLY public."Renters" ALTER COLUMN "Renter_id" SET DEFAULT nextval('
 --
 
 COPY public."Categories" ("ID", "Name", "Category_pic") FROM stdin;
-7	Health & Fitness	\N
-8	Outdoor	\N
-6	Baby & Kids	\N
-5	Entertainment	\N
-4	Furniture	\N
-3	Tools & Equipment	\N
-2	Clothes	\N
 1	Electronics	https://res.cloudinary.com/dbsawv974/image/upload/vpdpedviilmpsieolvi5?_a=BAMAH2M20
+2	Clothes	https://res.cloudinary.com/dbsawv974/image/upload/Clothes_trqeyr?_a=BAMAH2M20
+3	Tools & Equipment	https://res.cloudinary.com/dbsawv974/image/upload/Tools_iuurcq?_a=BAMAH2M20
+4	Furniture	https://res.cloudinary.com/dbsawv974/image/upload/Furniture_zidfkt?_a=BAMAH2M20
+5	Entertainment	https://res.cloudinary.com/dbsawv974/image/upload/Entertainment_bt3mwb?_a=BAMAH2M20
+6	Baby & Kids	https://res.cloudinary.com/dbsawv974/image/upload/Baby_lxx1bf?_a=BAMAH2M20
+7	Health & Fitness	https://res.cloudinary.com/dbsawv974/image/upload/Fitness_p0jyfd?_a=BAMAH2M20
+8	Outdoor	https://res.cloudinary.com/dbsawv974/image/upload/Outdoor_dgryio?_a=BAMAH2M20
 \.
 
 
