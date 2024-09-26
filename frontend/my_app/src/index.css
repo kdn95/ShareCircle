@@ -9,6 +9,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #494949;
   padding: 1rem;
 }
 .navbar-center .nav-links {
@@ -30,8 +31,7 @@ body {
   color: #494949;
 }
 .navbar-center .nav-links li a {
-  color: #757575;
-  font-weight: 600;
+  color: #494949;
   text-decoration: none;
 }
 .navbar-center .nav-links li img {
