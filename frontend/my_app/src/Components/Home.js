@@ -47,6 +47,7 @@ const Home = () => {
   
   // Navigate to nearby items
   const handleFetchNearbyItems = () => {
+    // Navigate to the nearby items page
     navigate('/items/nearby');
   };
 
