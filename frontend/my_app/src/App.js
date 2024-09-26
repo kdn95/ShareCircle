@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Categories from './Components/Categories';
 import Navbar from './Components/Navbar';
+import Auth from './Components/Auth'; // Renamed to Auth
 import NearbyItems from './Components/NearbyItems';
 import Home from './Components/Home';
 import './index.css';
