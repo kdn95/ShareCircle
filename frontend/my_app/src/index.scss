@@ -5,15 +5,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
 
 .navbar {
   display: flex;
   justify-content: center; // Centered as per your original code
   align-items: center;
-  color: #494949;
   padding: 1rem;
 
   &-center { // Using a BEM-like approach
@@ -23,14 +19,21 @@ code {
       margin: 0;
       padding: 0;
       text-align: center;
+      justify-content: space-around;
 
       li {
-        margin-right: 1rem;
-        text-align: center;
+        display: flex; /* Use flexbox for each item */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        padding: 12px;
 
         a {
-          color: #494949;
+          color: #757575;
+          font-weight: 600;
           text-decoration: none;
+        }
+        img {
+          margin-bottom: 8px;
         }
       }
     }
@@ -41,7 +44,6 @@ code {
   display: flex;                // Enables Flexbox
   flex-wrap: wrap;             // Allows items to wrap onto the next line
   justify-content: space-between; // Adjusts space between items
-  font-size: 200px;
 
 
   .MuiCard-root {
@@ -50,9 +52,21 @@ code {
   }
 
   .category-item {
-    background: #8ABEEA;
+    background: #B7DFF5;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid white;
+  }
+  .category-image {
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid white;
+  }
+  h3 {
+    color: #494949
   }
 }
+
 
 
 
