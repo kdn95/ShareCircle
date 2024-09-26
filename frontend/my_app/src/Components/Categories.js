@@ -34,7 +34,6 @@ const Categories = () => {
           <CardActionArea>
             <CardMedia
               component="img"
-              className="category-image"
               height="140"
               image={category.Category_pic || '/static/images/cards/default.jpg'} // Fallback image
               alt={category.Name}
