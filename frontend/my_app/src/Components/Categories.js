@@ -36,11 +36,12 @@ const Categories = () => {
               component="img"
               className="category-image"
               height="140"
-              image={category.Category_pic || '/static/images/cards/default.jpg'} // Fallback image
-              alt={category.Name}
+              image={category.ImageUrl || '/images/fitness.jpg'} // Fallback image if none is available
+              alt={category.Name} // Alt text for the image
             />
             <CardContent>
-              <h3>{category.Name}</h3>
+              {/* Category Name */}
+              <h3 ClassName="category-name">{category.Name}</h3>
             </CardContent>
           </CardActionArea>
         </Card>
