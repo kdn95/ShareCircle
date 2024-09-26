@@ -12,7 +12,7 @@ const App = () => {
   const { loginWithRedirect } = useAuth0();
   
   const handleAccountClick = () => {
-    loginWithRedirect();
+    console.log('Account clicked');
   };
 
 
