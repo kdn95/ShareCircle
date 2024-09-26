@@ -19,6 +19,7 @@ SET row_security = off;
 --
 -- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
 --
+
 DROP TABLE IF EXISTS public."Items" CASCADE;
 DROP TABLE IF EXISTS public."Categories" CASCADE;
 DROP TABLE IF EXISTS public."Renters" CASCADE;
@@ -43,7 +44,8 @@ SET default_table_access_method = heap;
 
 CREATE TABLE IF NOT EXISTS public."Categories" (
     "ID" integer NOT NULL,
-    "Name" text
+    "Name" text,
+    "Category_pic" text
 );
 
 
@@ -176,15 +178,15 @@ ALTER TABLE ONLY public."Renters" ALTER COLUMN "Renter_id" SET DEFAULT nextval('
 -- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Categories" ("ID", "Name") FROM stdin;
-7	Health & Fitness
-8	Outdoor
-6	Baby & Kids
-5	Entertainment
-4	Furniture
-3	Tools & Equipment
-2	Clothes
-1	Electronics
+COPY public."Categories" ("ID", "Name", "Category_pic") FROM stdin;
+7	Health & Fitness	\N
+8	Outdoor	\N
+6	Baby & Kids	\N
+5	Entertainment	\N
+4	Furniture	\N
+3	Tools & Equipment	\N
+2	Clothes	\N
+1	Electronics	https://res.cloudinary.com/dbsawv974/image/upload/vpdpedviilmpsieolvi5?_a=BAMAH2M20
 \.
 
 
