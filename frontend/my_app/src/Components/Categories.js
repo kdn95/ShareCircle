@@ -31,14 +31,13 @@ const Categories = () => {
     <h1 className="categories-title">Categories</h1>
     <div className="categories-container">
       {categories.map((category) => (
-        <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.ID} className="category-item">
+        <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.id} className="category-item">
           <CardActionArea>
-          <Link to={`/category/${category.Name}`} className="no-undies"> {/* Link to category items page */}
             <CardMedia
               component="img"
               className="category-image"
               height="140"
-              image={category.Category_pic}
+              image={category.Category_pic || '/static/images/cards/default.jpg'} // Fallback image
               alt={category.Name}
             />
             <CardContent>
