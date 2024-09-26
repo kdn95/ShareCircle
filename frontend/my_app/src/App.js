@@ -28,6 +28,11 @@ const App = () => {
   //   } else {
   //     console.error('Geolocation is not supported by this browser.');
   //   }
+  // Function to handle account click
+  const handleAccountClick = () => {
+    loginWithRedirect();
+  };
+
   // };
 
   // console.log('User location:', userLocation);
@@ -95,7 +100,8 @@ const App = () => {
         <Route path="/items/nearby" element={<NearbyItems />} />
       </Routes>
       <Categories /> {/* Render the Categories component */}
-    </Router>
+      <Navbar onAccountClick={handleAccountClick} /> {/* Pass the function to Navbar */}
+    </div>
   );
 };
 
