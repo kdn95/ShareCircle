@@ -7,6 +7,11 @@ import './index.css';
 const App = () => {
   const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
+  // Function to handle account click
+  const handleAccountClick = () => {
+    loginWithRedirect();
+  };
+
   // for secure fetch for renters/nearby
   const fetchProtectedData = useCallback(async () => {
     try {
@@ -41,7 +46,7 @@ const App = () => {
         </>
       )}
       <Categories /> {/* Render the Categories component */}
-      <Navbar />
+      <Navbar onAccountClick={handleAccountClick} /> {/* Pass the function to Navbar */}
     </div>
   );
 };

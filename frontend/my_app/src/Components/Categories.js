@@ -26,12 +26,15 @@ const Categories = () => {
   }, []); // Empty dependency array ensures this only runs once
 
   return (
+    <>
+    <h1 className="categories-title">Categories</h1>
     <div className="categories-container">
       {categories.map((category) => (
-        <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.id} className="category-item">
+        <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.ID} className="category-item">
           <CardActionArea>
             <CardMedia
               component="img"
+              className="category-image"
               height="140"
               image={category.Category_pic || '/static/images/cards/default.jpg'} // Fallback image
               alt={category.Name}
@@ -43,6 +46,7 @@ const Categories = () => {
         </Card>
       ))}
     </div>
+    </>
   );
 };
 
