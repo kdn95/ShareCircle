@@ -9,7 +9,7 @@ body {
   display: flex;
   justify-content: center; // Centered as per your original code
   align-items: center;
-  padding: 1rem;
+  padding: 1rem; // No change since it's already in rem
 
   &-center { // Using a BEM-like approach
     .nav-links {
@@ -42,12 +42,6 @@ body {
       }
     }
   }
-}
-
-.categories-title {
-  text-align: center;
-  font-weight: 600;
-  color: #494949;
 }
 
 .categories-title {
