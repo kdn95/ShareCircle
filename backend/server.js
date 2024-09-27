@@ -33,10 +33,10 @@ cloudinary.config({
 });
 
 // Function to upload images on Cloudinary, transform them and get URL on command line
-// (async function() {
-//   try {
-//     const results = await cloudinary.uploader.upload('./images/Electronics/Playstation2.jpg'); // Specify the correct image file
-//     console.log('Upload successful:', results);
+(async function() {
+  try {
+    const results = await cloudinary.uploader.upload('./images/Clothes.jpg'); // Specify the correct image file
+    console.log('Upload successful:', results);
 
     const url = cloudinary.url(results.public_id, {
       transformation: [
