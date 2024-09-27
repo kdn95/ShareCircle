@@ -179,14 +179,14 @@ ALTER TABLE ONLY public."Renters" ALTER COLUMN "Renter_id" SET DEFAULT nextval('
 --
 
 COPY public."Categories" ("ID", "Name", "Category_pic") FROM stdin;
-1	Electronics	https://res.cloudinary.com/dbsawv974/image/upload/vpdpedviilmpsieolvi5?_a=BAMAH2M20
-2	Clothes	https://res.cloudinary.com/dbsawv974/image/upload/Clothes_trqeyr?_a=BAMAH2M20
-3	Tools & Equipment	https://res.cloudinary.com/dbsawv974/image/upload/Tools_iuurcq?_a=BAMAH2M20
-4	Furniture	https://res.cloudinary.com/dbsawv974/image/upload/Furniture_zidfkt?_a=BAMAH2M20
-5	Entertainment	https://res.cloudinary.com/dbsawv974/image/upload/Entertainment_bt3mwb?_a=BAMAH2M20
-6	Baby & Kids	https://res.cloudinary.com/dbsawv974/image/upload/Baby_lxx1bf?_a=BAMAH2M20
-7	Health & Fitness	https://res.cloudinary.com/dbsawv974/image/upload/Fitness_p0jyfd?_a=BAMAH2M20
-8	Outdoor	https://res.cloudinary.com/dbsawv974/image/upload/Outdoor_dgryio?_a=BAMAH2M20
+6	Baby & Kids	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/aqg6kzxdwdse9sikk7az?_a=BAMAH2M20
+1	Electronics	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/gvlchx68f52jdqdl5npd?_a=BAMAH2M20
+3	Tools & Equipment	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/jtmf9v8kru4npa626hie?_a=BAMAH2M20
+4	Furniture	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/agemikvklffgdpol1h45?_a=BAMAH2M20
+5	Entertainment	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/fizhjkssenhtncfcg0ct?_a=BAMAH2M20
+7	Health & Fitness	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/rfg2xu3yknsstsy81vxr?_a=BAMAH2M20
+8	Outdoor	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/anpyrl2p11nynivverza?_a=BAMAH2M20
+2	Clothes	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/wmmjchv21wy7qqjf7cz8?_a=BAMAH2M20
 \.
 
 
