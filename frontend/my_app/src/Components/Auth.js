@@ -8,7 +8,7 @@ const Auth = ({ onAccountClick }) => {
   const fetchProtectedData = useCallback(async () => {
     try {
       const token = await getAccessTokenSilently();
-      const response = await fetch('http://localhost:5003/renters/nearby', {
+      const response = await fetch('http://localhost:5008/items/nearby', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

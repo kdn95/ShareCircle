@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import Categories from './Components/Categories';
 import Navbar from './Components/Navbar';
 import NearbyItems from './Components/NearbyItems';
 import Categories from './Components/Categories';
@@ -15,6 +14,7 @@ const App = () => {
   const handleAccountClick = () => {
     console.log('Account clicked');
   };
+
 
   return (
     <Router>

@@ -12,6 +12,7 @@ const NearbyItems = () => {
   const fetchItemsNearby = async () => {
     if (userLocation) {
       try {
+        // no issues with getting token
         const token = await getAccessTokenSilently();
         const response = await fetch(`http://localhost:5007/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=1000`, {
           headers: {
@@ -45,6 +46,7 @@ const NearbyItems = () => {
 
   useEffect(() => {
     if (userLocation) {
+      console.log('User Location:', userLocation);
       fetchItemsNearby(); // Fetch nearby items if location is available
     }
   }, [userLocation]);
