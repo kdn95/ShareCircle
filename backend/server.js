@@ -6,7 +6,7 @@ const cloudinary = require('cloudinary').v2;
 const { auth } = require('express-oauth2-jwt-bearer');
 
 const app = express();
-const PORT = process.env.PORT || 5007;
+const PORT = process.env.PORT || 5008;
 
 // Add CORS middleware
 app.use(cors({ origin: 'http://localhost:3000' }));  // Update with your frontend URL
@@ -58,7 +58,6 @@ cloudinary.config({
     console.error('Upload failed:', error); // Log any errors that occur during the upload
   }
 })();
-
 
 
 
