@@ -12,7 +12,11 @@ const App = () => {
   const { loginWithRedirect } = useAuth0();
   
   const handleAccountClick = () => {
-    console.log('Account clicked');
+    if (!isAuthenticated) {
+      loginWithRedirect(); // Redirect to login if not authenticated
+    } else {
+      console.log('Account clicked');
+    }
   };
 
 
