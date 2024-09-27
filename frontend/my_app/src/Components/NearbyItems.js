@@ -20,8 +20,9 @@ const NearbyItems = () => {
   const fetchItemsNearby = async () => {
     if (userLocation) {
       try {
+        // no issues with getting token
         const token = await getAccessTokenSilently();
-        const response = await fetch(`http://localhost:5007/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=10`, {
+        const response = await fetch(`http://localhost:5008/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=10`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -45,6 +46,7 @@ const NearbyItems = () => {
 
   useEffect(() => {
     if (userLocation) {
+      console.log('User Location:', userLocation);
       fetchItemsNearby(); // Fetch nearby items if location is available
     }
   }, [userLocation]);
@@ -52,6 +54,7 @@ const NearbyItems = () => {
   return (
     <div>
       <h2>Nearby Items</h2>
+      <button onClick={fetchItemsNearby}>Fetch Nearby Items</button>
       <ul>
         {nearbyItems.map((item) => (
           <li key={item.Item_id}>
