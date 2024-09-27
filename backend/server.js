@@ -18,6 +18,13 @@ const jwtCheck = auth({
   tokenSigningAlg: 'RS256',
 });
 
+// configuration for Cloudinary
+cloudinary.config({
+  cloud_name: 'dbsawv974',
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: 'dbsawv974',
@@ -26,31 +33,32 @@ cloudinary.config({
 });
 
 // Function to upload images on Cloudinary, transform them and get URL on command line
-// (async function() {
-//   try {
-//     const results = await cloudinary.uploader.upload('./images/Clothes.jpg'); // Specify the correct image file
-//     console.log('Upload successful:', results);
+(async function() {
+  try {
+    const results = await cloudinary.uploader.upload('./images/Clothes.jpg'); // Specify the correct image file
+    console.log('Upload successful:', results);
 
-//     const url = cloudinary.url(results.public_id, {
-//       transformation: [
-//         {
-//           quality: 'auto',
-//           fetch_format: 'auto'
-//         },
-//         {
-//           width: 400,
-//           height: 340,
-//           crop: 'fill',
-//           gravity: 'auto'
-//         }
-//       ]
-//     });
+    const url = cloudinary.url(results.public_id, {
+      transformation: [
+        {
+          quality: 'auto',
+          fetch_format: 'auto'
+        },
+        {
+          width: 400,
+          height: 340,
+          crop: 'fill',
+          gravity: 'auto'
+        }
+      ]
+    });
 
-//     console.log('Transformed Image URL:', url); // Log the transformed URL
-//   } catch (error) {
-//     console.error('Upload failed:', error); // Log any errors that occur during the upload
-//   }
-// })();
+    console.log('Transformed Image URL:', url); // Log the transformed URL
+  } catch (error) {
+    console.error('Upload failed:', error); // Log any errors that occur during the upload
+  }
+})();
+
 
 
 
