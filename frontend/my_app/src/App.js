@@ -18,7 +18,8 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar onAccountClick={handleAccountClick} /> {/* Pass the function to Navbar */}
+      <Navbar onAccountClick={handleAccountClick} />  {/* Pass the function to Navbar */}
+      <Categories />
       <Routes>
       <Route path="/" element={<><Categories /><Home /></>} />
       <Route path="/category/:category_name" element={<CategoryItems />} /> {/* New route for category items */}
