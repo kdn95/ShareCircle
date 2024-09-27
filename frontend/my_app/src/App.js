@@ -12,18 +12,17 @@ const App = () => {
   const { loginWithRedirect } = useAuth0();
   
   const handleAccountClick = () => {
-    console.log('Account clicked');
+    loginWithRedirect();
   };
 
 
   return (
     <Router>
+      <Navbar onAccountClick={handleAccountClick} /> {/* Pass the function to Navbar */}
       <Routes>
-      <Route path="/" element={<><Categories /><Home /></>} />
-      <Route path="/category/:category_name" element={<CategoryItems />} /> {/* New route for category items */}
+      <Route path="/" element={<Home />} />
       <Route path="/items/nearby" element={<NearbyItems />} />
     </Routes>
-    <Navbar onAccountClick={handleAccountClick} />  {/* Pass the function to Navbar */}
   </Router>
   );
 };
