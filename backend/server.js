@@ -18,13 +18,6 @@ const jwtCheck = auth({
   tokenSigningAlg: 'RS256',
 });
 
-// configuration for Cloudinary
-cloudinary.config({
-  cloud_name: 'dbsawv974',
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: 'dbsawv974',
