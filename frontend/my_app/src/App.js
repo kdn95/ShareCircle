@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Navbar from './Components/Navbar';
 import NearbyItems from './Components/NearbyItems';
+import Categories from './Components/Categories';
 import Home from './Components/Home';
 import './index.css';
 
@@ -16,7 +17,8 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar onAccountClick={handleAccountClick} /> {/* Pass the function to Navbar */}
+      <Navbar onAccountClick={handleAccountClick} />  {/* Pass the function to Navbar */}
+      <Categories />
       <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/items/nearby" element={<NearbyItems />} />
