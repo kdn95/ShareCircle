@@ -76,5 +76,8 @@ body {
   margin-bottom: 0.8125rem;
   font-weight: 400;
 }
+.categories-container .no-undies {
+  text-decoration: none;
+}
 
 /*# sourceMappingURL=index.css.map */
