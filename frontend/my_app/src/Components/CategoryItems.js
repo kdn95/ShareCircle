@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Import to access the category name from the URL
 import axios from 'axios';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import CardActionArea from '@mui/material/CardActionArea';
-import StarIcon from '@mui/icons-material/Star';
-import '../index.css'; // Assuming your custom CSS is here
+import { getUserLocation } from '../Location';
 
 const CategoryItems = () => {
   const { category_name } = useParams(); // Get the category name from the URL
@@ -39,8 +34,13 @@ const CategoryItems = () => {
   }, [category_name]);
 
   return (
-    <div className="Category-items-container">
-      <h1 className="Category-items-title">Items in {category_name}</h1>
+    <div>
+      <h1>Items in {category_name}</h1>
+      {userAddress && (
+        <p>
+          {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
+          </p>
+        )}{/* Display user's address */}
       <div className="items-container">
         {items.length > 0 ? (
           items.map(item => (
