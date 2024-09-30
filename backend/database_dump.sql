@@ -195,7 +195,6 @@ COPY public."Categories" ("ID", "Name", "Category_pic") FROM stdin;
 --
 
 COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Description", "Price_per_day", "Image_url", "Availability", "Renter_name") FROM stdin;
-1	Drone	1	1	Great Drone	35	\N	Available	Bob
 2	Chanel Jumper	2	2	Vintage	45	\N	Available	Betty
 3	Jack Hammer	3	3	One hell of a good Jack Hammer	30	\N	Available	Adrian
 4	Couch	4	4	Limited edition	80	\N	Available	Patrick
@@ -203,7 +202,6 @@ COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Descri
 6	Baby Cot	6	6	Spongebob themed	60	\N	Available	Karen
 7	Massage Gun	7	7	Has multiple attachments	30	\N	Available	Nicole
 8	Camping Chair	8	8	Has a cup holder	12	\N	Available	Carole
-9	Projector	1	9	Works Well	20	\N	Available	Jed
 10	Wedding Dress	2	10	In near-perfect condition	45	\N	Available	Sarah
 11	Tool Box	3	11	Has all tools needed	10	\N	Available	Barry
 12	Foldable Table	4	12	Large and clean	12	\N	Available	James
@@ -211,8 +209,6 @@ COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Descri
 14	Stroller	6	14	For babies and dogs, very clean	14	\N	Available	Michelle
 15	Kettlebells	7	15	5KG, comes in a set of two	6	\N	Available	Tim
 16	Camping Table	8	16	Clean and very handy	14	\N	Available	Georgia
-17	Playstation 2	1	17	Works well includes GTA and extra controllers	20	\N	Available	Samuel
-18	Gameboy Advance	1	18	Comes with 20 games, good condition	9	\N	Available	Mark
 19	Prada Scarf	2	19	Clean and warm	25	\N	Available	Sharon
 20	Gucci Suit	2	20	Comes in a set with trousers, jacket and vest	100	\N	Available	Rudy
 21	Drill	3	21	Comes with a set of drill bits	40	\N	Available	Andy
@@ -227,7 +223,11 @@ COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Descri
 30	Boxing Gloves	7	30	Comes in 3 different sizes, S/M/L	6	\N	Available	Thomas
 31	Torch	8	31	Uses AA batteries (included)	2	\N	Available	Eleanor
 32	Portable Gas Cooker	8	32	Works well, does not come with gas canister	15	\N	Available	Peter
-33	DVD player	1	32	Plays Blue-Rays	18	\N	Available	Peter
+1	Drone	1	1	Great Drone	35	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/mtr2noxkuzhjdtnr41ss?_a=BAMAH2M20	Available	Bob
+9	Projector	1	9	Works Well	20	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/aclefwojjvmdtpokdwmj?_a=BAMAH2M20	Available	Jed
+17	Playstation 2	1	17	Works well includes GTA and extra controllers	20	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/w3yhak7nqlc1zltrd9ro?_a=BAMAH2M20	Available	Samuel
+18	Gameboy Advance	1	18	Comes with 20 games, good condition	9	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/tbll2jt2acugg91wbthz?_a=BAMAH2M20	Available	Mark
+33	DVD player	1	32	Plays Blue-Rays	18	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ktxqa1weuwhxjmffzyki?_a=BAMAH2M20	Available	Peter
 \.
 
 
