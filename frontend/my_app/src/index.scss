@@ -88,59 +88,69 @@ body {
   }
 }
 
-.category-items-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.items-container {
-  h3.item-header {
-    color: #494949;
-    font-weight: 700;
-  }
-  .rating-container {
-    display: flex;
-    align-items: center; /* Vertically align items */
-  }
-  .star-icon {
-    margin-right: 0.2rem; /* Add some space between the star and the rating */
-    color: #C9D7A4;
-    height: 1.35rem;
-    width: auto;
-  }
-  .renter-rating {
-    font-size: 1rem;
-    line-height: 1;
-  }
-  p {
-    font-family: "Inter", sans-serif;
-    font-size: 0.75rem;
-  }
-}
-
-.items-container {
-  display: flex;                // Enables Flexbox
-  flex-wrap: wrap;             // Allows items to wrap onto the next line
-  justify-content: space-between; // Adjusts space between items
-
-  .MuiCard-root {
-    flex: 0 0 calc(50% - 1.25rem);  // Converted from 20px to 1.25rem
-    margin: 0.375rem;                // Converted from 10px to 0.625rem
-  }
-  .item-image {
-    height: auto;
-    border-radius: 0.625rem; // Converted from 10px to 0.625rem
-    border: 0.125rem solid white; // Converted from 2px to 0.125rem
-  }
-}
-
 .Category-items-title {
   margin-left: 1rem;
   font-weight: 600;
   color: #494949;
-    
+}
+
+
+p.user-address {
+  display: block;
+  color: #494949;
+  margin: 1rem 0; // Margin in rem
+  padding-left: 1rem; // Padding in rem (adjusted from 20px to 1.25rem)
+}
+
+.Category-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .MuiCard-root {
+    flex: 0 0 calc(50% - 1.25rem); // Adjusted from pixels to rem
+    margin: 0.375rem; // Margin in rem
+  }
+
+  .item-image {
+    height: auto;
+    border-radius: 0.625rem; // Border radius in rem
+    border: 0.125rem solid white; // Border in rem
+  }
+
+  h3.item-header {
+    color: #494949;
+    font-weight: 700;
+  }
+
+  .rating-container {
+    display: flex;
+    align-items: center; // Vertically align items
+  }
+
+  .star-icon {
+    margin-right: 0.2rem; // Space between star and rating in rem
+    color: #C9D7A4;
+    height: 1.35rem; // Height in rem
+    width: auto;
+  }
+
+  .renter-rating {
+    font-size: 1rem; // Font size in rem
+    line-height: 1;
+  }
+
   p {
-    margin-left: 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem; // Font size in rem
   }
 }
+
