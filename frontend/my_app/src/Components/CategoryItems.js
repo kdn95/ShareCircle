@@ -45,9 +45,9 @@ const CategoryItems = () => {
         {items.length > 0 ? (
           items.map(item => (
             <div key={item.Item_id}>
-              <h3>{item.Item_name}</h3>
-              <p>{item.Description}</p>
-              <p>Price: ${item.Price_per_day} per day</p>
+              <h3 className="item-header">{item.Item_name}</h3>
+              <p className="item-description">{item.Description}</p>
+              <p className="item-price">Price: ${item.Price_per_day} per day</p>
               <img src={item.Image_url} alt={item.Item_name} />
             </div>
           ))
