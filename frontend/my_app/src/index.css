@@ -81,7 +81,26 @@ body {
 }
 
 .items-container h3.item-header {
-  color: aqua;
+  color: #494949;
+  font-weight: 700;
+}
+.items-container .rating-container {
+  display: flex;
+  align-items: center; /* Vertically align items */
+}
+.items-container .star-icon {
+  margin-right: 0.2rem; /* Add some space between the star and the rating */
+  color: #C9D7A4;
+  height: 1.35rem;
+  width: auto;
+}
+.items-container .renter-rating {
+  font-size: 1rem;
+  line-height: 1;
+}
+.items-container p {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
 }
 
 /*# sourceMappingURL=index.css.map */

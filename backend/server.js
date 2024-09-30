@@ -6,7 +6,7 @@ const cloudinary = require('cloudinary').v2;
 const { auth } = require('express-oauth2-jwt-bearer');
 
 const app = express();
-const PORT = process.env.PORT || 5008;
+const PORT = process.env.PORT || 5007;
 
 // Add CORS middleware
 app.use(cors({ origin: 'http://localhost:3000' }));  // Update with your frontend URL
@@ -114,8 +114,10 @@ app.get('/:category_name', async (req, res) => {
   const categoryName = req.params.category_name;
   console.log('Fetching items with Category_name:', categoryName);
   const query = `
-    SELECT * FROM "Items"
+    SELECT "Items".*, "Categories"."Name" AS "CategoryName", "Renters"."Rating"
+    FROM "Items"
     INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
+    INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
     WHERE "Categories"."Name" = $1
   `;
 
