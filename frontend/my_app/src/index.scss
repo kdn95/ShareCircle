@@ -83,4 +83,32 @@ body {
     margin-bottom: 0.8125rem;
     font-weight: 400;
   }
+  .no-undies {
+    text-decoration: none;
+  }
+}
+
+.items-container {
+  h3.item-header {
+    color: #494949;
+    font-weight: 700;
+  }
+  .rating-container {
+    display: flex;
+    align-items: center; /* Vertically align items */
+  }
+  .star-icon {
+    margin-right: 0.2rem; /* Add some space between the star and the rating */
+    color: #C9D7A4;
+    height: 1.35rem;
+    width: auto;
+  }
+  .renter-rating {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  p {
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+  }
 }

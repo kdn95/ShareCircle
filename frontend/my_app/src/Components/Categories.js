@@ -4,6 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
+import { Link } from 'react-router-dom';
 import '../index.css'; // Assuming your custom CSS is here
 
 const Categories = () => {
@@ -13,7 +14,7 @@ const Categories = () => {
   // Function to fetch categories from the API
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('http://localhost:5008/'); // Adjust the endpoint accordingly
+      const response = await axios.get('http://localhost:5007/'); // Adjust the endpoint accordingly
       setCategories(response.data); // Set the categories data
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -32,16 +33,18 @@ const Categories = () => {
       {categories.map((category) => (
         <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.ID} className="category-item">
           <CardActionArea>
+          <Link to={`/category/${category.Name}`} className="no-undies"> {/* Link to category items page */}
             <CardMedia
               component="img"
               className="category-image"
               height="140"
-              image={category.Category_pic || '/static/images/cards/default.jpg'} // Fallback image
+              image={category.Category_pic}
               alt={category.Name}
             />
             <CardContent>
               <h3>{category.Name}</h3>
             </CardContent>
+            </Link>
           </CardActionArea>
         </Card>
       ))}
