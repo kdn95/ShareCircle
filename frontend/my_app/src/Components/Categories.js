@@ -33,11 +33,12 @@ const Categories = () => {
       {categories.map((category) => (
         <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.ID} className="category-item">
           <CardActionArea>
+          <Link to={`/category/${category.Name}`}> {/* Link to category items page */}
             <CardMedia
               component="img"
               className="category-image"
               height="140"
-              image={category.Category_pic || '/static/images/cards/default.jpg'} // Fallback image
+              image={category.Category_pic}
               alt={category.Name}
             />
             <CardContent>
