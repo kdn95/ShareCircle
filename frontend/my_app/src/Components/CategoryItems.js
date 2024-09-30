@@ -7,10 +7,12 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 import StarIcon from '@mui/icons-material/Star';
 import '../index.css'; // Assuming your custom CSS is here
+import { getUserLocation } from '../Location';
 
 const CategoryItems = () => {
   const { category_name } = useParams(); // Get the category name from the URL
   const [items, setItems] = useState([]);
+  const [userAddress, setUserAddress] = useState({});
 
   const fetchCategoryItems = async () => {
     try {
@@ -23,11 +25,29 @@ const CategoryItems = () => {
 
   useEffect(() => {
     fetchCategoryItems();
-  }, [category_name]); // Re-fetch if category_name changes
+    
+    const fetchUserLocation = async () => {
+      try {
+        const location = await getUserLocation();
+        console.log('User location:', location); // Debugging log
+        setUserAddress(location.address || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' });
+      } catch (error) {
+        console.error('Error getting user location:', error);
+      }
+    };
+  
+    fetchUserLocation(); // Get user location when component mounts
+  }, [category_name]);
 
   return (
     <div className="Category-items-container">
       <h1 className="Category-items-title">Items in {category_name}</h1>
+      <h1>Items in {category_name}</h1>
+      {userAddress && (
+        <p>
+          {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
+          </p>
+        )}{/* Display user's address */}
       <div className="items-container">
         {items.length > 0 ? (
           items.map(item => (
