@@ -44,26 +44,12 @@ const CategoryItems = () => {
       <div className="items-container">
         {items.length > 0 ? (
           items.map(item => (
-            <Card sx={{ maxWidth: 345, margin: '20px' }} key={item.Item_id} className="category-items-card">
-              <CardActionArea>
-                <CardMedia
-                    component="img"
-                    className="item-image"
-                    height="140"
-                    image={item.Image_url}
-                    alt={item.Item_name}
-                />
-                <CardContent>
-                  <h3 className="item-header">{item.Item_name}</h3>
-                  <div className="rating-container">
-                    <StarIcon className="star-icon" alt="star-icon" />
-                    <p className="renter-rating"> {item.Rating}</p> {/* Add rating instead */}
-                  </div>
-                  <p className="item-price">Price: ${item.Price_per_day} per day</p>
-                  {/* <img src={item.Image_url} alt={item.Item_name} /> */}
-                </CardContent>
-              </CardActionArea>
-            </Card>
+            <div key={item.Item_id}>
+              <h3>{item.Item_name}</h3>
+              <p>{item.Description}</p>
+              <p>Price: ${item.Price_per_day} per day</p>
+              <img src={item.Image_url} alt={item.Item_name} />
+            </div>
           ))
         ) : (
           <p>No items found for this category.</p>
