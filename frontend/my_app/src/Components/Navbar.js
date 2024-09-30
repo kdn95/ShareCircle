@@ -23,7 +23,9 @@ const Navbar = ({ onAccountClick }) => {
           </li>
           <li>
             <AccountIcon className="nav-icon" alt="account" />
-            <a href="#" onClick={onAccountClick}>Account</a> {/* Change href to "#" */}
+            <button onClick={onAccountClick} className="account-button">
+              Account
+            </button>
           </li>
         </ul>
       </div>

@@ -9,7 +9,7 @@ const NearbyItems = () => {
   const [userAddress, setUserAddress] = useState({});
 
   // Fetch nearby items
-  const fetchItemsNearby = async () => {
+  const fetchItemsNearby = useCallback(async () => {
     if (userLocation) {
       try {
         // no issues with getting token
@@ -30,7 +30,7 @@ const NearbyItems = () => {
         console.error('Error fetching nearby items:', error);
       }
     }
-  };
+  }, [getAccessTokenSilently, userLocation]);
 
   useEffect(() => {
     getUserLocation()

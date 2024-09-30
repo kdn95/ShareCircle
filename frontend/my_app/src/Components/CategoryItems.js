@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom'; // Import to access the category name from the URL
 import axios from 'axios';
 import Card from '@mui/material/Card';
@@ -14,14 +14,14 @@ const CategoryItems = () => {
   const [items, setItems] = useState([]);
   const [userAddress, setUserAddress] = useState({});
 
-  const fetchCategoryItems = async () => {
+  const fetchCategoryItems = useCallback(async () => {
     try {
       const response = await axios.get(`http://localhost:5007/${category_name}`); // Fetch items by category
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);
     }
-  };
+  }, [category_name]);
 
   useEffect(() => {
     fetchCategoryItems();
@@ -37,7 +37,7 @@ const CategoryItems = () => {
     };
   
     fetchUserLocation(); // Get user location when component mounts
-  }, [category_name]);
+  }, [fetchCategoryItems]);
 
   return (
     <div className="Category-items-container">

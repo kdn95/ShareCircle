@@ -39,6 +39,20 @@ body {
         img {
           margin-bottom: 0.5rem; // Converted from 8px to 0.5rem
         }
+
+        .account-button {
+          background: none;              /* No background */
+          border: none;                 /* No border */
+          color: #757575;               /* Match link color */
+          text-decoration: none;         /* Remove any underline */
+          cursor: pointer;              /* Pointer cursor for button */
+          font-weight: 600;             /* Match font weight of links */
+          font-family: "Inter", sans-serif; /* Match font family */
+          padding: 0;                   /* Remove default padding */
+          font-size: inherit;           /* Inherit font size from parent */
+          line-height: inherit;         /* Inherit line height from parent */
+          transition: color 0.3s;     /* Smooth transition for hover effect */
+        }
       }
     }
   }
