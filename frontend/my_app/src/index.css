@@ -89,4 +89,8 @@ body {
   text-decoration: none;
 }
 
+.items-container h3.item-header {
+  color: aqua;
+}
+
 /*# sourceMappingURL=index.css.map */
