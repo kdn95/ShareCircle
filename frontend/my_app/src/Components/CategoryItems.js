@@ -26,12 +26,12 @@ const CategoryItems = () => {
   }, [category_name]); // Re-fetch if category_name changes
 
   return (
-    <div>
-      <h1>Items in {category_name}</h1>
+    <div className="Category-items-container">
+      <h1 className="Category-items-title">Items in {category_name}</h1>
       <div className="items-container">
         {items.length > 0 ? (
           items.map(item => (
-            <Card sx={{ maxWidth: 345, margin: '20px' }} key={item.Item_id}>
+            <Card sx={{ maxWidth: 345, margin: '20px' }} key={item.Item_id} className="category-items-card">
               <CardActionArea>
                 <CardMedia
                     component="img"
@@ -47,7 +47,7 @@ const CategoryItems = () => {
                     <p className="renter-rating"> {item.Rating}</p> {/* Add rating instead */}
                   </div>
                   <p className="item-price">Price: ${item.Price_per_day} per day</p>
-                  <img src={item.Image_url} alt={item.Item_name} />
+                  {/* <img src={item.Image_url} alt={item.Item_name} /> */}
                 </CardContent>
               </CardActionArea>
             </Card>
