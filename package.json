@@ -2,8 +2,5 @@
   "dependencies": {
     "cors": "^2.8.5",
     "netstat": "^0.0.2"
-  },
-  "scripts": {
-    "build": "npm run build"
   }
 }
