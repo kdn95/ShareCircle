@@ -129,5 +129,8 @@ body {
   font-weight: 600;
   color: #494949;
 }
+.Category-items-title p {
+  margin-left: 1rem;
+}
 
 /*# sourceMappingURL=index.css.map */
