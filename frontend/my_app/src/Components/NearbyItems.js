@@ -49,7 +49,7 @@ const NearbyItems = () => {
       console.log('User Location:', userLocation);
       fetchItemsNearby(); // Fetch nearby items if location is available
     }
-  }, [userLocation]);
+  }, [userLocation, fetchItemsNearby]);
 
   return (
     <div>
