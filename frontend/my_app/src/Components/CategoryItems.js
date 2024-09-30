@@ -7,10 +7,12 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 import StarIcon from '@mui/icons-material/Star';
 import '../index.css'; // Assuming your custom CSS is here
+import { getUserLocation } from '../Location';
 
 const CategoryItems = () => {
   const { category_name } = useParams(); // Get the category name from the URL
   const [items, setItems] = useState([]);
+  const [userAddress, setUserAddress] = useState({});
 
   const fetchCategoryItems = async () => {
     try {
@@ -23,15 +25,33 @@ const CategoryItems = () => {
 
   useEffect(() => {
     fetchCategoryItems();
-  }, [category_name]); // Re-fetch if category_name changes
+    
+    const fetchUserLocation = async () => {
+      try {
+        const location = await getUserLocation();
+        console.log('User location:', location); // Debugging log
+        setUserAddress(location.address || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' });
+      } catch (error) {
+        console.error('Error getting user location:', error);
+      }
+    };
+  
+    fetchUserLocation(); // Get user location when component mounts
+  }, [category_name]);
 
   return (
-    <div>
+    <div className="Category-items-container">
+      <h1 className="Category-items-title">Items in {category_name}</h1>
       <h1>Items in {category_name}</h1>
+      {userAddress && (
+        <p>
+          {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
+          </p>
+        )}{/* Display user's address */}
       <div className="items-container">
         {items.length > 0 ? (
           items.map(item => (
-            <Card sx={{ maxWidth: 345, margin: '20px' }} key={item.Item_id}>
+            <Card sx={{ maxWidth: 345, margin: '20px' }} key={item.Item_id} className="category-items-card">
               <CardActionArea>
                 <CardMedia
                     component="img"
@@ -47,7 +67,7 @@ const CategoryItems = () => {
                     <p className="renter-rating"> {item.Rating}</p> {/* Add rating instead */}
                   </div>
                   <p className="item-price">Price: ${item.Price_per_day} per day</p>
-                  <img src={item.Image_url} alt={item.Item_name} />
+                  {/* <img src={item.Image_url} alt={item.Item_name} /> */}
                 </CardContent>
               </CardActionArea>
             </Card>

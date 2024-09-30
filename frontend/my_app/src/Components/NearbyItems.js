@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { getUserLocation } from '../Location'; // Correct import path
 
 const NearbyItems = () => {
   const { getAccessTokenSilently } = useAuth0();
   const [nearbyItems, setNearbyItems] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
-
-  // Function to get user location
-  const getUserLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        setUserLocation({ latitude, longitude });
-      });
-    }
-  };
+  const [userAddress, setUserAddress] = useState({});
 
   // Fetch nearby items
   const fetchItemsNearby = async () => {
@@ -41,7 +33,15 @@ const NearbyItems = () => {
   };
 
   useEffect(() => {
-    getUserLocation(); // Get user location when component mounts
+    getUserLocation()
+      .then(({ latitude, longitude, address }) => {
+        console.log('User Location:', { latitude, longitude, address }); // Debugging log
+        setUserLocation({ latitude, longitude });
+        setUserAddress(address || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' });
+      })
+      .catch((error) => {
+        console.error('Error getting user location:', error);
+      });
   }, []);
 
   useEffect(() => {
@@ -55,6 +55,11 @@ const NearbyItems = () => {
     <div>
       <h2>Nearby Items</h2>
       <button onClick={fetchItemsNearby}>Fetch Nearby Items</button>
+      {userAddress && (
+        <p>
+          {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
+          </p>
+        )}
       <ul>
         {nearbyItems.map((item) => (
           <li key={item.Item_id}>
