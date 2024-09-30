@@ -20,6 +20,7 @@ SET row_security = off;
 -- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
 --
 
+
 DROP TABLE IF EXISTS public."Items" CASCADE;
 DROP TABLE IF EXISTS public."Categories" CASCADE;
 DROP TABLE IF EXISTS public."Renters" CASCADE;
@@ -195,39 +196,39 @@ COPY public."Categories" ("ID", "Name", "Category_pic") FROM stdin;
 --
 
 COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Description", "Price_per_day", "Image_url", "Availability", "Renter_name") FROM stdin;
-2	Chanel Jumper	2	2	Vintage	45	\N	Available	Betty
-3	Jack Hammer	3	3	One hell of a good Jack Hammer	30	\N	Available	Adrian
-4	Couch	4	4	Limited edition	80	\N	Available	Patrick
-5	Nintendo Switch	5	5	Has Animal Crossing	40	\N	Available	Christina
-6	Baby Cot	6	6	Spongebob themed	60	\N	Available	Karen
-7	Massage Gun	7	7	Has multiple attachments	30	\N	Available	Nicole
-8	Camping Chair	8	8	Has a cup holder	12	\N	Available	Carole
-10	Wedding Dress	2	10	In near-perfect condition	45	\N	Available	Sarah
-11	Tool Box	3	11	Has all tools needed	10	\N	Available	Barry
-12	Foldable Table	4	12	Large and clean	12	\N	Available	James
-13	Xbox 360	5	13	Includes Halo & GTA	20	\N	Available	Amanda
-14	Stroller	6	14	For babies and dogs, very clean	14	\N	Available	Michelle
-15	Kettlebells	7	15	5KG, comes in a set of two	6	\N	Available	Tim
-16	Camping Table	8	16	Clean and very handy	14	\N	Available	Georgia
-19	Prada Scarf	2	19	Clean and warm	25	\N	Available	Sharon
-20	Gucci Suit	2	20	Comes in a set with trousers, jacket and vest	100	\N	Available	Rudy
-21	Drill	3	21	Comes with a set of drill bits	40	\N	Available	Andy
-22	Chainsaw	3	22	Comes with protective cover	35	\N	Available	Will
-23	Set of Dining Chairs	4	23	Comes in a set of 4	50	\N	Available	Kate
-24	Book Shelf	4	24	For temporary storage of your books	40	\N	Available	Kevin
-25	Monopoly Board Game	5	25	Includes all cards and pieces	7	\N	Available	Samantha
-26	Chess Set	5	26	Includes all pieces	7	\N	Available	George
-27	Kids Swim Vest	6	27	Helps your kids float	5	\N	Available	Suzie
-28	Kids Electric Hummer	6	28	Kids sized electric car, comes with charger	25	\N	Available	Riley
-29	Resistance Bands	7	29	Comes with 3 different sizes	10	\N	Available	Jordan
-30	Boxing Gloves	7	30	Comes in 3 different sizes, S/M/L	6	\N	Available	Thomas
-31	Torch	8	31	Uses AA batteries (included)	2	\N	Available	Eleanor
-32	Portable Gas Cooker	8	32	Works well, does not come with gas canister	15	\N	Available	Peter
 1	Drone	1	1	Great Drone	35	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/mtr2noxkuzhjdtnr41ss?_a=BAMAH2M20	Available	Bob
 9	Projector	1	9	Works Well	20	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/aclefwojjvmdtpokdwmj?_a=BAMAH2M20	Available	Jed
 17	Playstation 2	1	17	Works well includes GTA and extra controllers	20	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/w3yhak7nqlc1zltrd9ro?_a=BAMAH2M20	Available	Samuel
 18	Gameboy Advance	1	18	Comes with 20 games, good condition	9	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/tbll2jt2acugg91wbthz?_a=BAMAH2M20	Available	Mark
 33	DVD player	1	32	Plays Blue-Rays	18	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ktxqa1weuwhxjmffzyki?_a=BAMAH2M20	Available	Peter
+2	Chanel Jumper	2	2	Vintage	45	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/cxwcmqcivlyx5nfieuxx?_a=BAMAH2M20	Available	Betty
+10	Wedding Dress	2	10	In near-perfect condition	45	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/z86vgbebo2v42o337dyr?_a=BAMAH2M20	Available	Sarah
+19	Prada Scarf	2	19	Clean and warm	25	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/z32zi9rrynxeypc7kvpk?_a=BAMAH2M20	Available	Sharon
+20	Gucci Suit	2	20	Comes in a set with trousers, jacket and vest	100	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/xyaciuesddafk5vby5ge?_a=BAMAH2M20	Available	Rudy
+3	Jack Hammer	3	3	One hell of a good Jack Hammer	30	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/xhvxnzim083w5cyjvsjh?_a=BAMAH2M20	Available	Adrian
+4	Couch	4	4	Limited edition	80	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/tepn0druayo555eay7in?_a=BAMAH2M20	Available	Patrick
+5	Nintendo Switch	5	5	Has Animal Crossing	40	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/qfb6pc2pg378gexjj3z9?_a=BAMAH2M20	Available	Christina
+6	Baby Cot	6	6	Spongebob themed	60	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/leuwedn34mahkesqqv3i?_a=BAMAH2M20	Available	Karen
+7	Massage Gun	7	7	Has multiple attachments	30	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/xc9lv7ld4loiws2akevw?_a=BAMAH2M20	Available	Nicole
+8	Camping Chair	8	8	Has a cup holder	12	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ynyfmujfrcvibngzpbdr?_a=BAMAH2M20	Available	Carole
+11	Tool Box	3	11	Has all tools needed	10	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/nykeign7wg0g4plr4vol?_a=BAMAH2M20	Available	Barry
+12	Foldable Table	4	12	Large and clean	12	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/kswh4z1yrcozbp6kjpbv?_a=BAMAH2M20	Available	James
+13	Xbox 360	5	13	Includes Halo & GTA	20	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/teegayopiljdmtkluvxr?_a=BAMAH2M20	Available	Amanda
+14	Stroller	6	14	For babies and dogs, very clean	14	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ouc2nbwbzldotas4fcfn?_a=BAMAH2M20	Available	Michelle
+15	Kettlebells	7	15	5KG, comes in a set of two	6	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/jnc9rlb5pooqlwthlftv?_a=BAMAH2M20	Available	Tim
+16	Camping Table	8	16	Clean and very handy	14	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/q6pntfkkaerfrztsraxi?_a=BAMAH2M20	Available	Georgia
+21	Drill	3	21	Comes with a set of drill bits	40	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/jr21uri8tvezdjoiypbg?_a=BAMAH2M20	Available	Andy
+22	Chainsaw	3	22	Comes with protective cover	35	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/oeufclcl047zss3spczk?_a=BAMAH2M20	Available	Will
+26	Chess Set	5	26	Includes all pieces	7	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/kgcszrvnyn187pbstenr?_a=BAMAH2M20	Available	George
+23	Set of Dining Chairs	4	23	Comes in a set of 4	50	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/dzlebkpshuplqdgkiqcu?_a=BAMAH2M20	Available	Kate
+24	Book Shelf	4	24	For temporary storage of your books	40	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/kqupa3lqcviueiqfme5p?_a=BAMAH2M20	Available	Kevin
+25	Monopoly Board Game	5	25	Includes all cards and pieces	7	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/wyhymv6ziorfbgngyd0c?_a=BAMAH2M20	Available	Samantha
+27	Kids Swim Vest	6	27	Helps your kids float	5	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/yx0flbep8s4pyfialf0y?_a=BAMAH2M20	Available	Suzie
+28	Kids Electric Hummer	6	28	Kids sized electric car, comes with charger	25	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/isirmzteqizmdac2uaxr?_a=BAMAH2M20	Available	Riley
+29	Resistance Bands	7	29	Comes with 3 different sizes	10	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/t01rjylzw6gd2vaabqj7?_a=BAMAH2M20	Available	Jordan
+30	Boxing Gloves	7	30	Comes in 3 different sizes, S/M/L	6	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/y0xdsebe3xjmskztec93?_a=BAMAH2M20	Available	Thomas
+31	Torch	8	31	Uses AA batteries (included)	2	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ufswb8mxnfrrgiilzlvz?_a=BAMAH2M20	Available	Eleanor
+32	Portable Gas Cooker	8	32	Works well, does not come with gas canister	15	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/palknnf5pc8eyt8341lq?_a=BAMAH2M20	Available	Peter
 \.
 
 
