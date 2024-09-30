@@ -2,13 +2,13 @@ require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
 const cors = require('cors'); // Import CORS
 const pool = require(__dirname + '/db.config.js');
-
+const cloudinary = require('cloudinary').v2;
 const { auth } = require('express-oauth2-jwt-bearer');
 
 const stripe = require('stripe')('sk_test_wsFx86XDJWwmE4dMskBgJYrt');
 
 const app = express();
-const PORT = process.env.PORT || 5003;
+const PORT = process.env.PORT || 5008;
 
 // Add CORS middleware
 app.use(cors({ origin: 'http://localhost:3000' }));  // Update with your frontend URL
@@ -23,6 +23,42 @@ const jwtCheck = auth({
   issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
   tokenSigningAlg: 'RS256',
 });
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: 'dbsawv974',
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Function to upload images on Cloudinary, transform them and get URL on command line
+// (async function() {
+//   try {
+//     const results = await cloudinary.uploader.upload('./images/Clothes.jpg'); // Specify the correct image file
+//     console.log('Upload successful:', results);
+
+//     const url = cloudinary.url(results.public_id, {
+//       transformation: [
+//         {
+//           quality: 'auto',
+//           fetch_format: 'auto'
+//         },
+//         {
+//           width: 400,
+//           height: 340,
+//           crop: 'fill',
+//           gravity: 'auto'
+//         }
+//       ]
+//     });
+
+//     console.log('Transformed Image URL:', url); // Log the transformed URL
+//   } catch (error) {
+//     console.error('Upload failed:', error); // Log any errors that occur during the upload
+//   }
+// })();
+
+
 
 
 // Signup Route
@@ -47,6 +83,10 @@ app.get('/', getCategories);
 app.get('/items/nearby', jwtCheck, async (req, res) => {
   const { latitude, longitude, radius_km } = req.query;
 
+  if (!latitude || !longitude || !radius_km) {
+    return res.status(400).json({ error: 'Latitude, longitude, and radius_km are required.' });
+  }
+
   try {
     const query = `
       SELECT "Item_name", "Description", "Price_per_day", "Image_url", "Availability", "Renter_name"
@@ -67,7 +107,7 @@ app.get('/items/nearby', jwtCheck, async (req, res) => {
 
 
 
-// GET SPECIFIC CATEGORY - worked for Categories list
+// GET SPECIFIC CATEGORY
 // Should show all items according to category name
 app.get('/:category_name', async (req, res) => {
   const categoryName = req.params.category_name;
