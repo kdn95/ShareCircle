@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getUserLocation } from '../Location';
+import PlaceIcon from '@mui/icons-material/Place';
 // import fetchItemsNearby from './NearbyItems';
 
 
@@ -56,7 +57,7 @@ const Home = () => {
     <button onClick={() => loginWithRedirect()}>Log In</button>
   ) : (
     <>
-      <button onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
+      <button className="login-button" onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
       <h2 className="welcome">Welcome, {user.name}!</h2>
       {userAddress && (
         <p className="user-address">
@@ -64,7 +65,10 @@ const Home = () => {
         </p>
         )}
       {/* Button to fetch nearby items */}
-      <button onClick={handleFetchNearbyItems}>Fetch Nearby Items</button>
+      <button className="nearby-items-button"
+      onClick={handleFetchNearbyItems}><PlaceIcon className="Place-icon" />
+      Fetch Nearby Items
+      </button>
     </>
   )}
 </div>
