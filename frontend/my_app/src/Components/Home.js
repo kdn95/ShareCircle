@@ -16,7 +16,7 @@ const Home = () => {
   const fetchProtectedData = useCallback(async () => {
     try {
       const token = await getAccessTokenSilently();
-      const response = await fetch('http://localhost:5007/', {
+      const response = await fetch('http://localhost:5008/', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
