@@ -51,8 +51,7 @@ body {
   transition: color 0.3s;
 }
 
-.categories-title,
-.Category-items-title {
+.categories-title {
   text-align: center;
   font-weight: 600;
   color: #494949;
@@ -107,6 +106,12 @@ p.user-address {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+.Category-items-container .Category-items-title,
+.items-container .Category-items-title {
+  text-align: center;
+  font-weight: 600;
+  color: #494949;
 }
 .Category-items-container .MuiCard-root,
 .items-container .MuiCard-root {

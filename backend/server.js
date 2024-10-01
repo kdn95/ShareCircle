@@ -112,7 +112,9 @@ app.get('/:category_name', async (req, res) => {
     INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
     INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
     WHERE "Categories"."Name" = $1
+    ORDER BY "Price_per_day" ASC
   `;
+  // add sort by option in query
 
   try {
     const result = await pool.query(query, [categoryName]);

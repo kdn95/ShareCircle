@@ -54,7 +54,7 @@ const Home = () => {
   return (
     <div>
   {!isAuthenticated ? (
-    <button onClick={() => loginWithRedirect()}>Log In</button>
+    <button className="login-button" onClick={() => loginWithRedirect()}>Log In</button>
   ) : (
     <>
       <button className="login-button" onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
