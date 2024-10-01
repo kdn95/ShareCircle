@@ -57,11 +57,11 @@ const Home = () => {
   ) : (
     <>
       <button onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
-      <h2>Welcome, {user.name}!</h2>
+      <h2 className="welcome">Welcome, {user.name}!</h2>
       {userAddress && (
-        <p>
+        <p className="user-address">
           {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
-          </p>
+        </p>
         )}
       {/* Button to fetch nearby items */}
       <button onClick={handleFetchNearbyItems}>Fetch Nearby Items</button>
