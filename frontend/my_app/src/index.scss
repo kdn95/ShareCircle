@@ -11,7 +11,7 @@ body {
   align-items: center;
   padding: 1rem; // No change since it's already in rem
 
-  &-center { // Using a BEM-like approach
+  &-center {
     .nav-links {
       list-style-type: none;
       display: flex;
@@ -21,10 +21,10 @@ body {
       justify-content: space-around;
 
       li {
-        display: flex; /* Use flexbox for each item */
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center items horizontally */
-        padding: 0.75rem; // Converted from 12px to 0.75rem
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.75rem;
 
         .nav-icon {
           margin-bottom: 0.5rem;
@@ -36,175 +36,270 @@ body {
           font-weight: 600;
           text-decoration: none;
         }
+
         img {
-          margin-bottom: 0.5rem; // Converted from 8px to 0.5rem
+          margin-bottom: 0.5rem;
         }
 
         .account-button {
-          background: none;              /* No background */
-          border: none;                 /* No border */
-          color: #757575;               /* Match link color */
-          text-decoration: none;         /* Remove any underline */
-          cursor: pointer;              /* Pointer cursor for button */
-          font-weight: 600;             /* Match font weight of links */
-          font-family: "Inter", sans-serif; /* Match font family */
-          padding: 0;                   /* Remove default padding */
-          font-size: inherit;           /* Inherit font size from parent */
-          line-height: inherit;         /* Inherit line height from parent */
-          transition: color 0.3s;     /* Smooth transition for hover effect */
+          background: none;
+          border: none;
+          color: #757575;
+          text-decoration: none; // Remove any underline
+          cursor: pointer;
+          font-weight: 600;
+          font-family: inherit; // Inherit font family
+          padding: 0; // Remove default padding
+          font-size: inherit; // Inherit font size
+          line-height: inherit; // Inherit line height
+          transition: color 0.3s; // Smooth transition for hover effect
         }
       }
     }
   }
 }
 
-.categories-title {
+// LIST OF ALL CATEGORIES PAGE (HOMEPAGE)
+.categories-title,
+.Category-items-title {
   text-align: center;
   font-weight: 600;
   color: #494949;
 }
 
 .categories-container {
-  display: flex;                // Enables Flexbox
-  flex-wrap: wrap;             // Allows items to wrap onto the next line
-  justify-content: space-between; // Adjusts space between items
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
   .MuiCard-root {
-    flex: 0 0 calc(50% - 1.25rem);  // Converted from 20px to 1.25rem
-    margin: 0.375rem;                // Converted from 10px to 0.625rem
+    flex: 0 0 calc(50% - 1.25rem);
+    margin: 0.375rem;
   }
 
   .category-card {
     background: #B7DFF5;
-    padding: 0.625rem; // Converted from 10px to 0.625rem
-    border-radius: 0.625rem; // Converted from 10px to 0.625rem
-    border: 0.125rem solid white; // Converted from 2px to 0.125rem
+    padding: 0.625rem;
+    border-radius: 0.625rem;
+    border: 0.125rem solid white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
   }
+
   .category-image {
     height: auto;
-    border-radius: 0.625rem; // Converted from 10px to 0.625rem
-    border: 0.125rem solid white; // Converted from 2px to 0.125rem
+    border-radius: 0.625rem;
+    border: 0.125rem solid white;
   }
+
   h3 {
     color: #494949;
     font-size: 1.375rem;
-    margin: 0;
-    margin-bottom: 0.8125rem;
+    margin: 0 0 0.8125rem;
     font-weight: 400;
   }
-  .no-undies {
-    text-decoration: none;
-  }
 }
 
-.Category-items-title {
-  margin-left: 1rem;
-  font-weight: 600;
-  color: #494949;
+// STUFF WE DONT WANT UNDERLINED
+.no-undies {
+  text-decoration: none;
+  color: inherit;
 }
-
 
 p.user-address {
   display: block;
   color: #494949;
-  margin: 1rem 0; // Margin in rem
-  padding-left: 1rem; // Padding in rem (adjusted from 20px to 1.25rem)
+  margin: 1rem 0;
+  padding-left: 1rem; // Adjusted from 20px to 1.25rem
 }
 
-.Category-items-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: flex-start;
-
-}
-
+// LIST OF ITEMS IN A SPECIFIC CATEGORY PAGE
+.Category-items-container,
 .items-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 
   .MuiCard-root {
-    flex: 0 0 calc(50% - 1.25rem); // Adjusted from pixels to rem
-    margin: 0.375rem; // Margin in rem
+    flex: 0 0 calc(50% - 1.25rem);
+    margin: 0.375rem;
   }
 
   .item-image {
     height: auto;
-    border-radius: 0.625rem; // Border radius in rem
-    border: 0.125rem solid white; // Border in rem
+    border-radius: 0.625rem;
+    border: 0.125rem solid white;
+  }
+
+  h3.item-header,
+  p {
+    color: #494949;
+    text-decoration: none;
   }
 
   h3.item-header {
-    color: #494949;
     font-weight: 700;
   }
+}
 
-  .rating-container {
-    display: flex;
-    align-items: center; // Vertically align items
-  }
+.rating-container {
+  display: flex;
+  align-items: center;
+  color: #494949;
+}
 
-  .star-icon {
-    margin-right: 0.2rem; // Space between star and rating in rem
-    color: #C9D7A4;
-    height: 1.35rem; // Height in rem
-    width: auto;
-  }
+.star-icon {
+  margin-right: 0.2rem;
+  color: #C9D7A4;
+  height: 1.35rem;
+}
 
-  .renter-rating {
-    font-size: 1rem; // Font size in rem
-    line-height: 1;
-  }
-
-  p {
-    font-family: "Inter", sans-serif;
-    font-size: 0.75rem; // Font size in rem
-  }
+.renter-rating {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 h2.welcome {
   display: block;
   color: #494949;
-  margin: 1rem 0; // Margin in rem
+  margin: 1rem 0;
   padding-left: 1rem;
 }
 
-button.nearby-items-button {
+// BUTTONS
+button {
   display: flex;
   align-items: center;
   justify-content: center;
   color: #494949;
-  margin: 1rem 1rem; /* Moves the button inward by centering it horizontally */
-  padding: 0.5rem 1rem; /* Adjust button padding if needed */
+  padding: 0.5rem 1rem;
   font-family: "Inter", sans-serif;
-  width: 50%; /* Set the width of the button to 50% of the container */
-  max-width: 18.75rem; /* Optional: limit the maximum width of the button */
-  text-align: center; /* Center the text */
-  border: none; /* Optional: adjust button border if needed */
-  background-color: #C9D7A4; /* Optional: change background color */
+  width: 50%;
+  border: none; // Optional: adjust button border if needed
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 0.625rem;
+
+  &.nearby-items-button {
+    max-width: 18.75rem; // Optional: limit the maximum width
+    background-color: #C9D7A4; // Optional: change background color
+    margin: 1rem 1rem;
+  }
+
+  &.login-button {
+    max-width: 9.375rem; // Optional: limit the maximum width
+    background-color: #f0f0f0; // Optional: change background color
+    margin: 1rem 1rem;
+  }
+  
+  &.rent-button {
+    background-color: #C9D7A4;
+  }
 }
 
-button.login-button {
-  display: block;
-  color: #494949;
-  margin: 1rem 1rem; /* Moves the button inward by centering it horizontally */
-  padding: 0.5rem 1rem; /* Adjust button padding if needed */
-  font-family: "Inter", sans-serif;
-  width: 50%; /* Set the width of the button to 50% of the container */
-  max-width: 9.375rem; /* Optional: limit the maximum width of the button */
-  text-align: center; /* Center the text */
-  border: none; /* Optional: adjust button border if needed */
-  background-color: #f0f0f0; /* Optional: change background color */
-  cursor: pointer;
-  transition: background-color 0.3s;
-  border-radius: 0.625rem;
+// ITEM LISTING PAGE (SINGLE ITEM)
+.item-details-container {
+  display: flex; /* Optional, if you want to further control inner content */
+  justify-content: center;
+  align-items: center; /* Center inner content horizontally */
+  flex-direction: column; /* Stack items vertically if needed */
+  padding: 20px;
+
+  .item-details-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+    border-radius: 0.625rem; /* Rounded corners for the card */
+  }
+
+  .item-image {
+    height: auto;
+  }
+
+  .item-header-container {
+    display: flex;
+    justify-content: space-between; /* Space between the two items */
+    align-items: center; /* Center vertically */
+    padding-bottom: 0.5rem;
+  }
+  
+  .item-name {
+    margin: 0; /* Remove default margin */
+    color: #494949;
+    font-weight: 600;
+  }
+  
+  .item-price {
+    margin: 0; /* Remove default margin */
+    font-weight: 800;
+  }
+
+  .description-availability-container {
+    display: flex;
+    justify-content: space-between; /* Space between the two items */
+    align-items: center; /* Center vertically */
+  }
+  
+  .item-description,
+  .item-availability {
+    margin: 0; /* Remove default margin */
+    color: #757575;
+  }
+
+  .renter-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the left */
+    color: #494949;
+    padding-top: 3rem;
+  
+    .renter-info {
+      display: flex;
+      justify-content: space-between; /* Align items to the ends */
+      align-items: center; /* Center items vertically */
+      width: 100%; /* Ensure it takes the full width of the parent container */
+      
+      .renter-full-name {
+        margin: 0; /* Remove default margin */
+      }
+  
+      .chat-icon {
+        margin-left: auto; /* Pushes the chat icon to the right */
+        color: #757575;
+      }
+    }
+  
+    .rating-container {
+      display: flex; /* Keep this as flex for horizontal alignment of stars and rating */
+      align-items: center;
+      color: #494949;
+      padding-top: 0.5rem; /* Space between renter info and rating */
+  
+      .star-icon {
+        margin-right: 0.2rem; /* Space between star icon and rating */
+        color: #C9D7A4;
+        height: 1rem;
+      }
+  
+      .renter-rating {
+        font-size: 0.75rem;
+        line-height: 1;
+        margin: 0; /* Ensure no extra margin */
+        margin-left: 0.3rem; /* Space between the star icon and the rating */
+      }
+    }
+  }
+  .rent-button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    button {
+      margin-top: 1rem;
+      font-weight: 600;
+      width: 18.75rem;
+      height: 2.1875rem;
+    }
+  }
 }

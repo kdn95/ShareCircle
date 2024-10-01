@@ -137,6 +137,7 @@ app.get('/:category_name/:itemId', async (req, res) => {
   const query = `
     SELECT * FROM "Items"
     INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
+    INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
     WHERE "Categories"."Name" = $1 AND "Items"."Item_id" = $2
   `;
   try {
