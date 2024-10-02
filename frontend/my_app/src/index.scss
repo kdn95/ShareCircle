@@ -1,3 +1,4 @@
+// General Styles
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -5,6 +6,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// Navbar Styles
 .navbar {
   display: flex;
   justify-content: center; // Centered as per your original code
@@ -59,7 +61,7 @@ body {
   }
 }
 
-// LIST OF ALL CATEGORIES PAGE (HOMEPAGE)
+// Categories Page Styles
 .categories-title {
   text-align: center;
   font-weight: 600;
@@ -116,7 +118,7 @@ body {
   }
 }
 
-// STUFF WE DONT WANT UNDERLINED
+// Styles for Links without Underlines
 .no-undies {
   text-decoration: none;
   color: inherit;
@@ -129,27 +131,38 @@ p.user-address {
   padding-left: 1rem; // Adjusted from 20px to 1.25rem
 }
 
-// LIST OF ITEMS IN A SPECIFIC CATEGORY PAGE
+// Items in a Specific Category Page
 .Category-items-container {
   display: flex;
   flex-direction: column;
   align-items: center; // Center item cards horizontally
   padding: 1rem; // Optional: padding around the container for better spacing
 
-  .Category-items-address-container {
-    flex-direction: column;
+  .Category-items-title-address-container {
+    align-self: flex-start; // Align title and address to the left
+    width: 100%; // Ensure it takes full width of the container
+    margin-bottom: 2rem; // Space below the title-address container
   }
-
-  p.user-address {
-  color: #494949;
-  margin: 1rem 0;
-  display: block;
-}
 
   .Category-items-title {
     font-weight: 600;
     color: #494949;
-    padding-left: 1rem;
+    padding-left: 1rem; // Add padding to the left if needed
+    margin: 0; // Remove margin for better control
+    padding-bottom: 1rem;
+  }
+
+  p.user-address {
+    color: #494949;
+    margin: 0; // Remove margin to avoid extra spacing
+    padding-left: 1rem; // Adjust padding as needed
+  }
+
+  .items-container {
+    display: flex; // Enable flex for item cards
+    flex-wrap: wrap; // Allow item cards to wrap to the next line if necessary
+    justify-content: center; // Center item cards horizontally
+    width: 100%; // Ensure items container takes full width
   }
 
   .MuiCard-root {
@@ -176,23 +189,25 @@ p.user-address {
   }
 }
 
+// Rating Styles
 .rating-container {
   display: flex;
   align-items: center;
   color: #494949;
+
+  .star-icon {
+    margin-right: 0.2rem;
+    color: #C9D7A4;
+    height: 1.35rem;
+  }
+
+  .renter-rating {
+    font-size: 1rem;
+    line-height: 1;
+  }
 }
 
-.star-icon {
-  margin-right: 0.2rem;
-  color: #C9D7A4;
-  height: 1.35rem;
-}
-
-.renter-rating {
-  font-size: 1rem;
-  line-height: 1;
-}
-
+// Welcome Message Styles
 h2.welcome {
   display: block;
   color: #494949;
@@ -200,7 +215,7 @@ h2.welcome {
   padding-left: 1rem;
 }
 
-// BUTTONS
+// Button Styles
 button {
   display: flex;
   align-items: center;
@@ -241,7 +256,7 @@ button {
   }
 }
 
-// ITEM LISTING PAGE (SINGLE ITEM)
+// Item Listing Page (Single Item) Styles
 .item-details-container {
   display: flex; /* Optional, if you want to further control inner content */
   justify-content: center;
@@ -322,19 +337,27 @@ button {
       display: flex; /* Keep this as flex for horizontal alignment of stars */
       align-items: center; /* Center align */
       color: #494949;
-      margin-top: -0.5rem;
+      padding-top: 0.5rem; /* Space between renter info and rating */
+  
+      .star-icon {
+        margin-right: 0.2rem;
+        color: #C9D7A4; /* Star color */
+      }
+  
+      .renter-rating {
+        font-size: 1rem; /* Rating text size */
+        line-height: 1; /* Line height for alignment */
+      }
     }
   
-    .star-icon {
-      margin-right: 0.2rem;
-      color: #C9D7A4;
-      height: 1.35rem;
-    }
-  
-    .renter-rating {
-      font-size: 0.95rem;
-      line-height: 1;
-      padding-right: 0.09rem;
+    button {
+      margin-top: 1rem; /* Space above the button */
+      padding: 0.5rem 1rem; /* Button padding */
+      background-color: #C9D7A4; /* Button background color */
+      color: #494949; /* Button text color */
+      border: none; /* Remove border for a clean look */
+      border-radius: 0.625rem; /* Rounded button corners */
+      cursor: pointer; /* Change cursor on hover */
     }
   }
 }
