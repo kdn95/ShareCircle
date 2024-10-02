@@ -337,4 +337,21 @@ button.rent-button {
   }
 }
 
-/*# sourceMappingURL=index.css.map */
+.map-container {
+  width: 100%; /* Full width */
+  height: 300px; /* Fixed height */
+  border: 2px solid #ccc; /* Light grey border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  position: relative; /* Position relative for absolute positioning of markers */
+}
+
+/* Optional: Add a hover effect */
+.map-container:hover {
+  border-color: #007cbf; /* Change border color on hover */
+}
+
+/* You can also define styles for the overall container */
+.nearby-items-container {
+  margin: 20px; /* Add margin for spacing */
+}

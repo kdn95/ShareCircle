@@ -4,7 +4,6 @@ import { getUserLocation } from '../Location'; // Correct import path
 import mapboxgl from 'mapbox-gl'; // Import Mapbox
 import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox CSS
 
-
 const NearbyItems = () => {
   const { getAccessTokenSilently } = useAuth0();
   const [nearbyItems, setNearbyItems] = useState([]);
@@ -12,8 +11,9 @@ const NearbyItems = () => {
   const [userAddress, setUserAddress] = useState({});
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
+  const userMarkerRef = useRef(null);
 
-  mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhcmVjaXJjbGUtdGVhbSIsImEiOiJjbTFyNng1MGgwN3JtMmxvZnUwOWZ3ZGh0In0.FUYlTsV3I4uZKwf0r6ZOkQ';
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhcmVjaXJjbGUtdGVhbSIsImEiOiJjbTFyNng1MGgwN3JtMmxvZnUwOWZ3ZGh0In0.FUYlTsV3I4uZKwf0r6ZOkQ'; // Replace with your access token
 
 
   // Fetch nearby items
@@ -21,7 +21,6 @@ const NearbyItems = () => {
     if (userLocation) {
       setLoading(true); // Set loading to true before fetching
       try {
-        // no issues with getting token
         const token = await getAccessTokenSilently();
         // const response = await fetch(`https://project-sc.onrender.com/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=1000`, {
           const response = await fetch(`http://localhost:5008/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=1000`, {
@@ -44,19 +43,48 @@ const NearbyItems = () => {
     }
   }, [getAccessTokenSilently, userLocation]);
 
-  // Update map with nearby item markers when they are fetched
   useEffect(() => {
-    if (mapRef.current && nearbyItems.length > 0) {
-      nearbyItems.forEach(item => {
-        if (item.longitude && item.latitude) {
-          new mapboxgl.Marker()
-            .setLngLat([item.longitude, item.latitude])
-            .setPopup(new mapboxgl.Popup().setHTML(`<h4>${item.Item_name}</h4><p>Price: $${item.Price_per_day}/day</p>`))
-            .addTo(mapRef.current);
-        }
-      });
+    if (userLocation && mapContainerRef.current) {
+      // Initialize the map
+      if (!mapRef.current) {
+        mapRef.current = new mapboxgl.Map({
+          container: mapContainerRef.current,
+          style: 'mapbox://styles/mapbox/streets-v11', // Make sure this is the correct style
+          center: [userLocation.longitude, userLocation.latitude], // Center map on user's location
+          zoom: 15,
+        });
+  
+        // Create the user marker
+        userMarkerRef.current = new mapboxgl.Marker({ color: 'red' })
+          .setLngLat([userLocation.longitude, userLocation.latitude])
+          .setPopup(new mapboxgl.Popup().setHTML('<h4>You are here!</h4>'))
+          .addTo(mapRef.current);
+      } else {
+        // Update map center and user marker if already initialized
+        mapRef.current.setCenter([userLocation.longitude, userLocation.latitude]);
+        userMarkerRef.current.setLngLat([userLocation.longitude, userLocation.latitude]);
+      }
     }
-  }, [nearbyItems]);
+  
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+      }
+    };
+  }, [userLocation]);
+  
+  // useEffect(() => {
+  //   if (userLocation && nearbyItems.length > 0) {
+  //     nearbyItems.forEach(item => {
+  //       if (item.longitude && item.latitude) {
+  //         new mapboxgl.Marker()
+  //           .setLngLat([item.longitude, item.latitude])
+  //           .setPopup(new mapboxgl.Popup().setHTML(`<h4>${item.Item_name}</h4><p>Price: $${item.Price_per_day}/day</p>`))
+  //           .addTo(mapRef.current);
+  //       }
+  //     });
+  //   }
+  // }, [userLocation, nearbyItems]);  
 
 
   useEffect(() => {
@@ -85,13 +113,13 @@ const NearbyItems = () => {
       {userAddress && (
         <p>
           {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
-          </p>
-        )}
+        </p>
+      )}
 
-      {/* Add the map container */}
+      {/* Map container */}
       <div
         ref={mapContainerRef}
-        style={{ width: '100%', height: '500px' }} // Adjust map container height/width as needed
+        style={{ width: '100%', height: '300px' }} // Adjust map container height/width as needed
         className="map-container"
       />
 
