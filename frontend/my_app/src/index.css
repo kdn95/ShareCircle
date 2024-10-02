@@ -110,7 +110,7 @@ p.user-address {
 .Category-items-container .Category-items-title-address-container {
   align-self: flex-start;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .Category-items-container .Category-items-title {
   font-weight: 600;
@@ -155,12 +155,14 @@ p.user-address {
   align-items: center;
   color: #494949;
 }
-.rating-container .star-icon {
+
+.star-icon {
   margin-right: 0.2rem;
   color: #C9D7A4;
   height: 1.35rem;
 }
-.rating-container .renter-rating {
+
+.renter-rating {
   font-size: 1rem;
   line-height: 1;
 }
@@ -265,21 +267,26 @@ button.rent-button {
   padding-top: 0.5rem; /* Space between renter info and rating */
 }
 .item-details-container .renter-container .rating-container .star-icon {
-  margin-right: 0.2rem;
-  color: #C9D7A4; /* Star color */
+  margin-right: 0.2rem; /* Space between star icon and rating */
+  color: #C9D7A4;
+  height: 1rem;
 }
 .item-details-container .renter-container .rating-container .renter-rating {
-  font-size: 1rem; /* Rating text size */
-  line-height: 1; /* Line height for alignment */
+  font-size: 0.75rem;
+  line-height: 1;
+  margin: 0; /* Ensure no extra margin */
+  margin-left: 0.3rem; /* Space between the star icon and the rating */
 }
-.item-details-container .renter-container button {
-  margin-top: 1rem; /* Space above the button */
-  padding: 0.5rem 1rem; /* Button padding */
-  background-color: #C9D7A4; /* Button background color */
-  color: #494949; /* Button text color */
-  border: none; /* Remove border for a clean look */
-  border-radius: 0.625rem; /* Rounded button corners */
-  cursor: pointer; /* Change cursor on hover */
+.item-details-container .rent-button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.item-details-container .rent-button-container button {
+  margin-top: 1rem;
+  font-weight: 600;
+  width: 18.75rem;
+  height: 2.1875rem;
 }
 
 /*# sourceMappingURL=index.css.map */
