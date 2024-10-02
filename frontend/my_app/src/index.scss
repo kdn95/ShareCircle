@@ -224,7 +224,17 @@ button {
   }
   
   &.rent-button {
-    background-color: #C9D7A4;
+    background-color: #C9D7A4; // Button background color
+    padding: 0.5rem 1rem; // Button padding
+    color: #494949; // Text color
+    border: none; // Remove default border
+    border-radius: 0.625rem; // Rounded corners
+    cursor: pointer; // Pointer cursor on hover
+    transition: background-color 0.3s; // Smooth background color transition
+    display: block; // Ensure it behaves like a block element
+    margin: 1rem auto; // Center horizontally using margin
+    max-width: 220px; // Optional: set a maximum width for the button
+    text-align: center; // Center text inside the button
   }
 }
 
@@ -284,10 +294,17 @@ button {
   
     .renter-info {
       display: flex;
-      justify-content: space-between; /* Align items to the ends */
-      align-items: center; /* Center items vertically */
+      align-items: flex-start; /* Center items vertically */
       width: 100%; /* Ensure it takes the full width of the parent container */
       
+      .renter-profile-pic {
+        width: 40px; /* Set width */
+        height: 40px; /* Set height */
+        border-radius: 50%; /* Make the image circular */
+        object-fit: cover; /* Ensure the image covers the area */
+        margin-right: 10px; /* Space between the image and the name */
+      }
+  
       .renter-full-name {
         margin: 0; /* Remove default margin */
       }
@@ -299,35 +316,22 @@ button {
     }
   
     .rating-container {
-      display: flex; /* Keep this as flex for horizontal alignment of stars and rating */
-      align-items: center;
+      display: flex; /* Keep this as flex for horizontal alignment of stars */
+      align-items: center; /* Center align */
       color: #494949;
-      padding-top: 0.5rem; /* Space between renter info and rating */
-  
-      .star-icon {
-        margin-right: 0.2rem; /* Space between star icon and rating */
-        color: #C9D7A4;
-        height: 1rem;
-      }
-  
-      .renter-rating {
-        font-size: 0.75rem;
-        line-height: 1;
-        margin: 0; /* Ensure no extra margin */
-        margin-left: 0.3rem; /* Space between the star icon and the rating */
-      }
+      margin-top: -0.5rem;
     }
-  }
-  .rent-button-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-
-    button {
-      margin-top: 1rem;
-      font-weight: 600;
-      width: 18.75rem;
-      height: 2.1875rem;
+  
+    .star-icon {
+      margin-right: 0.2rem;
+      color: #C9D7A4;
+      height: 1.35rem;
+    }
+  
+    .renter-rating {
+      font-size: 0.95rem;
+      line-height: 1;
+      padding-right: 0.09rem;
     }
   }
 }

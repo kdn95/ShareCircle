@@ -199,6 +199,16 @@ button.login-button {
 }
 button.rent-button {
   background-color: #C9D7A4;
+  padding: 0.5rem 1rem;
+  color: #494949;
+  border: none;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: block;
+  margin: 1rem auto;
+  max-width: 220px;
+  text-align: center;
 }
 
 .item-details-container {
@@ -249,9 +259,15 @@ button.rent-button {
 }
 .item-details-container .renter-container .renter-info {
   display: flex;
-  justify-content: space-between; /* Align items to the ends */
-  align-items: center; /* Center items vertically */
+  align-items: flex-start; /* Center items vertically */
   width: 100%; /* Ensure it takes the full width of the parent container */
+}
+.item-details-container .renter-container .renter-info .renter-profile-pic {
+  width: 40px; /* Set width */
+  height: 40px; /* Set height */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Ensure the image covers the area */
+  margin-right: 10px; /* Space between the image and the name */
 }
 .item-details-container .renter-container .renter-info .renter-full-name {
   margin: 0; /* Remove default margin */
@@ -261,32 +277,20 @@ button.rent-button {
   color: #757575;
 }
 .item-details-container .renter-container .rating-container {
-  display: flex; /* Keep this as flex for horizontal alignment of stars and rating */
-  align-items: center;
+  display: flex; /* Keep this as flex for horizontal alignment of stars */
+  align-items: center; /* Center align */
   color: #494949;
-  padding-top: 0.5rem; /* Space between renter info and rating */
+  margin-top: -0.5rem;
 }
-.item-details-container .renter-container .rating-container .star-icon {
-  margin-right: 0.2rem; /* Space between star icon and rating */
+.item-details-container .renter-container .star-icon {
+  margin-right: 0.2rem;
   color: #C9D7A4;
-  height: 1rem;
+  height: 1.35rem;
 }
-.item-details-container .renter-container .rating-container .renter-rating {
-  font-size: 0.75rem;
+.item-details-container .renter-container .renter-rating {
+  font-size: 0.95rem;
   line-height: 1;
-  margin: 0; /* Ensure no extra margin */
-  margin-left: 0.3rem; /* Space between the star icon and the rating */
-}
-.item-details-container .rent-button-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-.item-details-container .rent-button-container button {
-  margin-top: 1rem;
-  font-weight: 600;
-  width: 18.75rem;
-  height: 2.1875rem;
+  padding-right: 0.09rem;
 }
 
 /*# sourceMappingURL=index.css.map */

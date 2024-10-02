@@ -50,12 +50,19 @@ const ItemsListing = () => {
           </div>
           <div className="renter-container">
             <div className="renter-info">
-              <p className="renter-full-name">{item.Renter_name} {item.Last_name}</p>
+              <img
+                src={item.Profile_pic} // Use Profile_pic from item data
+                alt="Renter Profile"
+                className="renter-profile-pic" // Class for styling
+              />
+              <div className="renter-details">
+                <p className="renter-full-name">{item.Renter_name} {item.Last_name}</p>
+                <div className="rating-container">
+                  <p className="renter-rating">{item.Rating}</p> {/* Renter's rating */}
+                  <StarIcon className="star-icon" alt="star-icon" />
+                </div>
+              </div>
               <ChatIcon className="chat-icon" alt="chat" />
-            </div>
-            <div className="rating-container">
-              <p className="renter-rating">{item.Rating}</p> {/* Renter's rating */}
-              <StarIcon className="star-icon" alt="star-icon" />
             </div>
           </div>
           <div className="rent-button-container">
