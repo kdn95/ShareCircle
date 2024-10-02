@@ -6,10 +6,11 @@ const connectionString = process.env.DATABASE_URL;
 const pool = new Pool({
   connectionString: connectionString,
   ssl: {
-    rejectUnauthorized: false // Ensure to set this if your database requires SSL
+    rejectUnauthorized: false // Set this if your database requires SSL
   }
 });
 
+// Export query and end methods for database interactions
 module.exports = {
   query: (text, params) => pool.query(text, params),
   end: () => pool.end(),
