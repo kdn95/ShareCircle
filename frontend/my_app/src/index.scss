@@ -1,3 +1,4 @@
+// General Styles
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -5,6 +6,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// Navbar Styles
 .navbar {
   display: flex;
   justify-content: center; // Centered as per your original code
@@ -59,7 +61,7 @@ body {
   }
 }
 
-// LIST OF ALL CATEGORIES PAGE (HOMEPAGE)
+// Categories Page Styles
 .categories-title {
   text-align: center;
   font-weight: 600;
@@ -116,7 +118,7 @@ body {
   }
 }
 
-// STUFF WE DONT WANT UNDERLINED
+// Styles for Links without Underlines
 .no-undies {
   text-decoration: none;
   color: inherit;
@@ -187,23 +189,25 @@ p.user-address {
   }
 }
 
+// Rating Styles
 .rating-container {
   display: flex;
   align-items: center;
   color: #494949;
+
+  .star-icon {
+    margin-right: 0.2rem;
+    color: #C9D7A4;
+    height: 1.35rem;
+  }
+
+  .renter-rating {
+    font-size: 1rem;
+    line-height: 1;
+  }
 }
 
-.star-icon {
-  margin-right: 0.2rem;
-  color: #C9D7A4;
-  height: 1.35rem;
-}
-
-.renter-rating {
-  font-size: 1rem;
-  line-height: 1;
-}
-
+// Welcome Message Styles
 h2.welcome {
   display: block;
   color: #494949;
@@ -211,7 +215,7 @@ h2.welcome {
   padding-left: 1rem;
 }
 
-// BUTTONS
+// Button Styles
 button {
   display: flex;
   align-items: center;
@@ -252,7 +256,7 @@ button {
   }
 }
 
-// ITEM LISTING PAGE (SINGLE ITEM)
+// Item Listing Page (Single Item) Styles
 .item-details-container {
   display: flex; /* Optional, if you want to further control inner content */
   justify-content: center;
