@@ -7,6 +7,9 @@ const connectionString = 'postgres://postgres:circleshare@localhost:5432/postgre
 
 const pool = new Pool({
   connectionString: connectionString,
+  ssl: {
+    rejectUnauthorized: false // Ensure to set this if your database requires SSL
+  }
 });
 
 module.exports = {
