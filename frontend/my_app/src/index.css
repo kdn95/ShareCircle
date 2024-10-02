@@ -170,12 +170,14 @@ p.user-address {
   align-items: center;
   color: #494949;
 }
-.rating-container .star-icon {
+
+.star-icon {
   margin-right: 0.2rem;
   color: #C9D7A4;
   height: 1.35rem;
 }
-.rating-container .renter-rating {
+
+.renter-rating {
   font-size: 1rem;
   line-height: 1;
 }
