@@ -1,15 +1,18 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getUserLocation } from '../Location'; // Correct import path
-import LogoLoader from './LogoLoader'; // Import your LogoLoader component
-import '../index.css'; // Assuming your custom CSS is here
+import mapboxgl from 'mapbox-gl'; // Import Mapbox
+import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox CSS
+
 
 const NearbyItems = () => {
   const { getAccessTokenSilently } = useAuth0();
   const [nearbyItems, setNearbyItems] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const [userAddress, setUserAddress] = useState({});
-  const [loading, setLoading] = useState(false); // Initialize loading state
+  const mapContainerRef = useRef(null);
+  const mapRef = useRef(null);
+
 
   // Fetch nearby items
   const fetchItemsNearby = useCallback(async () => {
