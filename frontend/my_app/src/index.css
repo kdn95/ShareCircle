@@ -125,7 +125,7 @@ p.user-address {
 .Category-items-container .Category-items-title-address-container {
   align-self: flex-start;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .Category-items-container .Category-items-title {
   font-weight: 600;
@@ -170,12 +170,14 @@ p.user-address {
   align-items: center;
   color: #494949;
 }
-.rating-container .star-icon {
+
+.star-icon {
   margin-right: 0.2rem;
   color: #C9D7A4;
   height: 1.35rem;
 }
-.rating-container .renter-rating {
+
+.renter-rating {
   font-size: 1rem;
   line-height: 1;
 }
@@ -296,12 +298,15 @@ button.rent-button {
   margin-top: -0.5rem;
 }
 .item-details-container .renter-container .rating-container .star-icon {
-  margin-right: 0.2rem;
-  color: #C9D7A4; /* Star color */
+  margin-right: 0.2rem; /* Space between star icon and rating */
+  color: #C9D7A4;
+  height: 1rem;
 }
 .item-details-container .renter-container .rating-container .renter-rating {
-  font-size: 1rem; /* Rating text size */
-  line-height: 1; /* Line height for alignment */
+  font-size: 0.75rem;
+  line-height: 1;
+  margin: 0; /* Ensure no extra margin */
+  margin-left: 0.3rem; /* Space between the star icon and the rating */
 }
 
 /* LogoLoader.scss */
