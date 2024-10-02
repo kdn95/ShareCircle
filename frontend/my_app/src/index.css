@@ -118,21 +118,25 @@ p.user-address {
 
 .Category-items-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  text-align: left;
+}
+.Category-items-container .Category-items-address-container,
+.items-container .Category-items-address-container {
   flex-direction: column;
-  align-items: center;
-  padding: 1rem;
 }
-.Category-items-container .Category-items-title-address-container {
-  align-self: flex-start;
-  width: 100%;
-  margin-bottom: 1rem;
+.Category-items-container p.user-address,
+.items-container p.user-address {
+  color: #494949;
+  margin: 1rem 0;
+  display: block;
 }
-.Category-items-container .Category-items-title {
+.Category-items-container .Category-items-title,
+.items-container .Category-items-title {
   font-weight: 600;
   color: #494949;
   padding-left: 1rem;
-  margin: 0;
-  padding-bottom: 1rem;
 }
 .Category-items-container p.user-address {
   color: #494949;
