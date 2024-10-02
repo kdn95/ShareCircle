@@ -333,32 +333,19 @@ button {
       display: flex; /* Keep this as flex for horizontal alignment of stars */
       align-items: center; /* Center align */
       color: #494949;
-      padding-top: 0.5rem; /* Space between renter info and rating */
-  
-      .star-icon {
-        margin-right: 0.2rem; /* Space between star icon and rating */
-        color: #C9D7A4;
-        height: 1rem;
-      }
-  
-      .renter-rating {
-        font-size: 0.75rem;
-        line-height: 1;
-        margin: 0; /* Ensure no extra margin */
-        margin-left: 0.3rem; /* Space between the star icon and the rating */
-      }
+      margin-top: -0.5rem;
     }
-  }
-  .rent-button-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-
-    button {
-      margin-top: 1rem;
-      font-weight: 600;
-      width: 18.75rem;
-      height: 2.1875rem;
+  
+    .star-icon {
+      margin-right: 0.2rem;
+      color: #C9D7A4;
+      height: 1.35rem;
+    }
+  
+    .renter-rating {
+      font-size: 0.95rem;
+      line-height: 1;
+      padding-right: 0.09rem;
     }
   }
 }
