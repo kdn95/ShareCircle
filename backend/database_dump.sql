@@ -20,7 +20,6 @@ SET row_security = off;
 -- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
 --
 
-
 DROP TABLE IF EXISTS public."Items" CASCADE;
 DROP TABLE IF EXISTS public."Categories" CASCADE;
 DROP TABLE IF EXISTS public."Renters" CASCADE;
@@ -237,38 +236,38 @@ COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Descri
 --
 
 COPY public."Renters" ("Renter_id", "First_name", "Last_name", "Rating", "Address", "Profile_pic", location) FROM stdin;
-2	Betty	Holberton	5	Federation Square, Melbourne, VIC, 3000	\N	0101000020E6100000C5FEB27BF21E62409B559FABADE842C0
-3	Adrian	Liew	5	1 Convention Centre Place, South Wharf, VIC 3006	\N	0101000020E6100000A60A4625751E62407DAEB6627FE942C0
-4	Patrick	Star	4	513 Elizabeth St, Melbourne, VIC 3000	\N	0101000020E6100000E9263108AC1E62409EEFA7C64BE742C0
-5	Christina	Quach	5	Birdwood Ave, Melbourne, VIC 3004	\N	0101000020E610000068226C787A1F6240FAEDEBC039EB42C0
-6	Karen	Compli	1	7 Riverside Quay, Southbank, VIC 3006	\N	0101000020E6100000B459F5B9DA1E62400C022B8716E942C0
-1	Bob	Sponge	4	9 Power Street, Melbourne, VIC, 3006	\N	0101000020E6100000D4981073C91E624046239F573CE942C0
-7	Nicole	Gorospe	5	123 George St, Sydney, NSW 2000	\N	0101000020E6100000B4C876BE9FE66240D7A3703D0AEF40C0
-8	Carole	Zen	5	456 King St, Newtown, NSW 2042	\N	0101000020E610000039B4C876BEE562407B14AE47E1F240C0
-9	Jed	Roberts	2	789 Oxford St, Bondi Junction, NSW 2022	\N	0101000020E61000009CA223B9FCE7624060764F1E16F240C0
-10	Sarah	McNamara	4	101 Pacific Hwy, North Sydney, NSW 2060	\N	0101000020E61000005BB1BFEC9EE6624008AC1C5A64EB40C0
-11	Barry	Stewart	3	555 Military Rd, Mosman, NSW 2088	\N	0101000020E6100000280F0BB5A6E7624099BB96900FEA40C0
-12	James	Bond	2	32 Parramatta Rd, Homebush, NSW 2140	\N	0101000020E6100000A52C431CEBE26240AE47E17A14EE40C0
-13	Amanda	Ciccione	5	300 Victoria Rd, Gladesville, NSW 2111	\N	0101000020E610000058A835CD3BE46240B4C876BE9FEA40C0
-14	Michelle	Anderson	2	25 Lane Cove Rd, Ryde, NSW 2112	\N	0101000020E6100000BADA8AFD65E36240D5E76A2BF6E740C0
-15	Tim	Jones	5	99 Belmore Rd, Randwick, NSW 2031	\N	0101000020E6100000598638D6C5E76240211FF46C56F540C0
-16	Georgia	Smith	2	66 Norton St, Leichhardt, NSW 2040	\N	0101000020E6100000A245B6F3FDE462401B2FDD2406F140C0
-17	Samuel	Jackson	4	200 Bourke St, Melbourne, VIC 3000	\N	0101000020E6100000AC8BDB68001F62404703780B24E842C0
-18	Mark	Zuckerberg	1	300 Swanston St, Melbourne, VIC 3000	\N	0101000020E6100000E25817B7D11E6240AB3E575BB1E742C0
-19	Sharon	Osborne	5	150 Lygon St, Carlton, VIC 3053	\N	0101000020E61000007E8CB96B091F62408351499D80E642C0
-20	Rudy	OnRails	2	100 Chapel St, South Yarra, VIC 3141	\N	0101000020E610000019E25817B71F62405DDC460378EB42C0
-21	Andy	Warhol	4	250 High St, Kew, VIC 3101	\N	0101000020E61000001EA7E8482E216240567DAEB662E742C0
-22	Will	Smot	2	12 Glenferrie Rd, Malvern, VIC 3144	\N	0101000020E61000001E166A4DF320624075029A081BEE42C0
-23	Kate	Price	3	340 St Kilda Rd, St Kilda, VIC 3182	\N	0101000020E61000006C09F9A0671F62402EFF21FDF6ED42C0
-24	Kevin	Null	2	500 Lonsdale St, Melbourne, VIC 3000	\N	0101000020E6100000713D0AD7A31E6240D5E76A2BF6E742C0
-25	Samantha	Zagare	4	50 Maribyrnong Rd, Ascot Vale, VIC 3032	\N	0101000020E61000001DC9E53FA41D6240A54E401361E342C0
-26	George	Washington	2	70 Sydney Rd, Brunswick, VIC 3056	\N	0101000020E6100000986E1283C01E6240C217265305E342C0
-27	Suzie	Sarroso	5	150 Pitt St, Sydney, NSW 2000	\N	0101000020E6100000B1E1E995B2E66240F4FDD478E9EE40C0
-28	Riley	Summers	1	100 Miller St, North Sydney, NSW 2060	\N	0101000020E6100000CA54C1A8A4E66240FA7E6ABC74EB40C0
-29	Jordan	Vieola	5	200 Victoria Rd, Drummoyne, NSW 2047	\N	0101000020E610000005A3923A01E562405BB1BFEC9EEC40C0
-30	Thomas	Wender	2	75 Collins St, Melbourne, VIC 3000	\N	0101000020E6100000371AC05B201F6240AA60545227E842C0
-31	Eleanor	Flower	5	250 St Georges Rd, Fitzroy North, VIC 3068	\N	0101000020E6100000A167B3EA731F6240780B24287EE442C0
-32	Peter	Pan	1	150 Queens Rd, Melbourne, VIC 3004	\N	0101000020E61000005305A3923A1F62405B423EE8D9EC42C0
+1	Bob	Sponge	4	9 Power Street, Melbourne, VIC, 3006	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ncm7fjol1y4ffw5syg2o?_a=BAMAH2M20	0101000020E6100000D4981073C91E624046239F573CE942C0
+2	Betty	Holberton	5	Federation Square, Melbourne, VIC, 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/zjcsmjnbortjbqdzxek5?_a=BAMAH2M20	0101000020E6100000C5FEB27BF21E62409B559FABADE842C0
+3	Adrian	Liew	5	1 Convention Centre Place, South Wharf, VIC 3006	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ujz4f5kufyuadtqugzse?_a=BAMAH2M20	0101000020E6100000A60A4625751E62407DAEB6627FE942C0
+4	Patrick	Star	4	513 Elizabeth St, Melbourne, VIC 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/qsnqezhyxsue6paaidzz?_a=BAMAH2M20	0101000020E6100000E9263108AC1E62409EEFA7C64BE742C0
+5	Christina	Quach	5	Birdwood Ave, Melbourne, VIC 3004	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/diysdsoqffanpk8tbmic?_a=BAMAH2M20	0101000020E610000068226C787A1F6240FAEDEBC039EB42C0
+6	Karen	Compli	1	7 Riverside Quay, Southbank, VIC 3006	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/diysdsoqffanpk8tbmic?_a=BAMAH2M20	0101000020E6100000B459F5B9DA1E62400C022B8716E942C0
+7	Nicole	Gorospe	5	123 George St, Sydney, NSW 2000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/qakoin5fl7041mb0ym2g?_a=BAMAH2M20	0101000020E6100000B4C876BE9FE66240D7A3703D0AEF40C0
+8	Carole	Zen	5	456 King St, Newtown, NSW 2042	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/tzuw90oue6j6v8vfyoga?_a=BAMAH2M20	0101000020E610000039B4C876BEE562407B14AE47E1F240C0
+9	Jed	Roberts	2	789 Oxford St, Bondi Junction, NSW 2022	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/djae85791ltbwhuyiodw?_a=BAMAH2M20	0101000020E61000009CA223B9FCE7624060764F1E16F240C0
+10	Sarah	McNamara	4	101 Pacific Hwy, North Sydney, NSW 2060	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/nmayojmlo7mqvbutnwgu?_a=BAMAH2M20	0101000020E61000005BB1BFEC9EE6624008AC1C5A64EB40C0
+11	Barry	Stewart	3	555 Military Rd, Mosman, NSW 2088	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/rvy5yrgzyfortm7fmypt?_a=BAMAH2M20	0101000020E6100000280F0BB5A6E7624099BB96900FEA40C0
+12	James	Bond	2	32 Parramatta Rd, Homebush, NSW 2140	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/cdqjt34be9ym5b8dsosj?_a=BAMAH2M20	0101000020E6100000A52C431CEBE26240AE47E17A14EE40C0
+13	Amanda	Ciccione	5	300 Victoria Rd, Gladesville, NSW 2111	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/lnolrmvtzhyxxrhzy8pk?_a=BAMAH2M20	0101000020E610000058A835CD3BE46240B4C876BE9FEA40C0
+14	Michelle	Anderson	2	25 Lane Cove Rd, Ryde, NSW 2112	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/q8z89peiucaaigqzoqbn?_a=BAMAH2M20	0101000020E6100000BADA8AFD65E36240D5E76A2BF6E740C0
+15	Tim	Jones	5	99 Belmore Rd, Randwick, NSW 2031	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/mpwt30b6muqdbquddzzs?_a=BAMAH2M20	0101000020E6100000598638D6C5E76240211FF46C56F540C0
+16	Georgia	Smith	2	66 Norton St, Leichhardt, NSW 2040	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/n0wmqnnr45zji801x3jq?_a=BAMAH2M20	0101000020E6100000A245B6F3FDE462401B2FDD2406F140C0
+17	Samuel	Jackson	4	200 Bourke St, Melbourne, VIC 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/kklbk29lajsbklylsswv?_a=BAMAH2M20	0101000020E6100000AC8BDB68001F62404703780B24E842C0
+18	Mark	Zuckerberg	1	300 Swanston St, Melbourne, VIC 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/fx1cjvqnf7o0ku1wahob?_a=BAMAH2M20	0101000020E6100000E25817B7D11E6240AB3E575BB1E742C0
+19	Sharon	Osborne	5	150 Lygon St, Carlton, VIC 3053	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/aso9wzj2lljjnkvj3cxd?_a=BAMAH2M20	0101000020E61000007E8CB96B091F62408351499D80E642C0
+20	Rudy	OnRails	2	100 Chapel St, South Yarra, VIC 3141	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/yafc4zj3nzesaw4hi9tf?_a=BAMAH2M20	0101000020E610000019E25817B71F62405DDC460378EB42C0
+21	Andy	Warhol	4	250 High St, Kew, VIC 3101	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ox4dijwixkalfiybkzzh?_a=BAMAH2M20	0101000020E61000001EA7E8482E216240567DAEB662E742C0
+22	Will	Smot	2	12 Glenferrie Rd, Malvern, VIC 3144	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/m9p0w9ndqpzf3re41sxd?_a=BAMAH2M20	0101000020E61000001E166A4DF320624075029A081BEE42C0
+23	Kate	Price	3	340 St Kilda Rd, St Kilda, VIC 3182	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ab9nswmhdo7fft710nm7?_a=BAMAH2M20	0101000020E61000006C09F9A0671F62402EFF21FDF6ED42C0
+24	Kevin	Null	2	500 Lonsdale St, Melbourne, VIC 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/c2yrfkalr4cqjye9a2ox?_a=BAMAH2M20	0101000020E6100000713D0AD7A31E6240D5E76A2BF6E742C0
+25	Samantha	Zagare	4	50 Maribyrnong Rd, Ascot Vale, VIC 3032	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/avz8jkxdz37jgou4yg5w?_a=BAMAH2M20	0101000020E61000001DC9E53FA41D6240A54E401361E342C0
+26	George	Washington	2	70 Sydney Rd, Brunswick, VIC 3056	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/v2ntopkttnbhefutelhh?_a=BAMAH2M20	0101000020E6100000986E1283C01E6240C217265305E342C0
+27	Suzie	Sarroso	5	150 Pitt St, Sydney, NSW 2000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ygm3ylqo4ix7bipbik7d?_a=BAMAH2M20	0101000020E6100000B1E1E995B2E66240F4FDD478E9EE40C0
+28	Riley	Summers	1	100 Miller St, North Sydney, NSW 2060	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/dg5pgee6uf2mzfllzsjw?_a=BAMAH2M20	0101000020E6100000CA54C1A8A4E66240FA7E6ABC74EB40C0
+29	Jordan	Vieola	5	200 Victoria Rd, Drummoyne, NSW 2047	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/wez9ld3csdx2witnpl1o?_a=BAMAH2M20	0101000020E610000005A3923A01E562405BB1BFEC9EEC40C0
+30	Thomas	Wender	2	75 Collins St, Melbourne, VIC 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/gu7aqxinvi7lveszlpr1?_a=BAMAH2M20	0101000020E6100000371AC05B201F6240AA60545227E842C0
+31	Eleanor	Flower	5	250 St Georges Rd, Fitzroy North, VIC 3068	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/lraezgx1g8flm1wj5hz2?_a=BAMAH2M20	0101000020E6100000A167B3EA731F6240780B24287EE442C0
+32	Peter	Pan	1	150 Queens Rd, Melbourne, VIC 3004	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/anke5i6kw5wkjqjhdu6z?_a=BAMAH2M20	0101000020E61000005305A3923A1F62405B423EE8D9EC42C0
 \.
 
 
