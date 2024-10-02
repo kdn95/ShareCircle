@@ -13,6 +13,8 @@ const NearbyItems = () => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
 
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhcmVjaXJjbGUtdGVhbSIsImEiOiJjbTFyNng1MGgwN3JtMmxvZnUwOWZ3ZGh0In0.FUYlTsV3I4uZKwf0r6ZOkQ';
+
 
   // Fetch nearby items
   const fetchItemsNearby = useCallback(async () => {
@@ -42,6 +44,21 @@ const NearbyItems = () => {
     }
   }, [getAccessTokenSilently, userLocation]);
 
+  // Update map with nearby item markers when they are fetched
+  useEffect(() => {
+    if (mapRef.current && nearbyItems.length > 0) {
+      nearbyItems.forEach(item => {
+        if (item.longitude && item.latitude) {
+          new mapboxgl.Marker()
+            .setLngLat([item.longitude, item.latitude])
+            .setPopup(new mapboxgl.Popup().setHTML(`<h4>${item.Item_name}</h4><p>Price: $${item.Price_per_day}/day</p>`))
+            .addTo(mapRef.current);
+        }
+      });
+    }
+  }, [nearbyItems]);
+
+
   useEffect(() => {
     getUserLocation()
       .then(({ latitude, longitude, address }) => {
@@ -68,25 +85,25 @@ const NearbyItems = () => {
       {userAddress && (
         <p>
           {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
-        </p>
-      )}
-      {loading ? ( // Show loader while fetching
-        <LogoLoader />
-      ) : (
-        <ul>
-          {nearbyItems.length > 0 ? ( // Check if nearby items are available
-            nearbyItems.map((item) => (
-              <li key={item.Item_id}>
-                <h4>{item.Item_name}</h4>
-                <p>{item.Description}</p>
-                <p>Price: ${item.Price_per_day} per day</p>
-              </li>
-            ))
-          ) : (
-            <p>No nearby items found.</p> // Message if no items are available
-          )}
-        </ul>
-      )}
+          </p>
+        )}
+
+      {/* Add the map container */}
+      <div
+        ref={mapContainerRef}
+        style={{ width: '100%', height: '500px' }} // Adjust map container height/width as needed
+        className="map-container"
+      />
+
+      <ul>
+        {nearbyItems.map((item) => (
+          <li key={item.Item_id}>
+            <h4>{item.Item_name}</h4>
+            <p>{item.Description}</p>
+            <p>Price: ${item.Price_per_day} per day</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
