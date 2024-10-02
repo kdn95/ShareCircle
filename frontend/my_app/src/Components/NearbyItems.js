@@ -22,8 +22,7 @@ const NearbyItems = () => {
       setLoading(true); // Set loading to true before fetching
       try {
         const token = await getAccessTokenSilently();
-        // const response = await fetch(`https://project-sc.onrender.com/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=1000`, {
-          const response = await fetch(`http://localhost:5008/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=1000`, {
+        const response = await fetch(`http://localhost:5008/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=20`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -51,8 +50,21 @@ const NearbyItems = () => {
           container: mapContainerRef.current,
           style: 'mapbox://styles/mapbox/streets-v11', // Make sure this is the correct style
           center: [userLocation.longitude, userLocation.latitude], // Center map on user's location
-          zoom: 15,
+          zoom: 13,
         });
+
+        const navControl = new mapboxgl.NavigationControl();
+        mapRef.current.addControl(navControl, 'top-right'); // Add to top-right corner
+
+        mapRef.current.addControl(
+          new mapboxgl.GeolocateControl({
+            positionOptions: {
+              enableHighAccuracy: true
+            },
+            trackUserLocation: true,
+            showUserHeading: true
+          })
+        );
   
         // Create the user marker
         userMarkerRef.current = new mapboxgl.Marker({ color: 'red' })
