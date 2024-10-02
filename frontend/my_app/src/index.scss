@@ -120,12 +120,23 @@ p.user-address {
 .items-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+  text-align: left;
+
+  .Category-items-address-container {
+    flex-direction: column;
+  }
+
+  p.user-address {
+  color: #494949;
+  margin: 1rem 0;
+  display: block;
+}
 
   .Category-items-title {
-    text-align: center;
     font-weight: 600;
     color: #494949;
+    padding-left: 1rem;
   }
 
   .MuiCard-root {
