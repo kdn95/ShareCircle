@@ -74,6 +74,15 @@ body {
   .MuiCard-root {
     flex: 0 0 calc(50% - 1.25rem);
     margin: 0.375rem;
+
+     // Responsive adjustments for smaller screens
+     @media (max-width: 768px) { // Adjust breakpoint as necessary
+      flex: 0 0 calc(50% - 1rem); // Two cards per row on small screens
+    }
+    
+    @media (max-width: 480px) { // Adjust breakpoint for mobile
+      flex: 0 0 calc(100% - 1rem); // One card per row on very small screens
+    }
   }
 
   .category-card {
