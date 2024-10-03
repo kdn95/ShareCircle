@@ -1,6 +1,6 @@
 // LogoLoader.js
 import React from 'react';
-import './LogoLoader.css'; // Create this CSS file for styling
+import '../index.css'; // Create this CSS file for styling
 
 const LogoLoader = () => {
   return (
