@@ -34,7 +34,7 @@ cloudinary.config({
 // Function to upload images on Cloudinary, transform them and get URL on command line
 // (async function() {
 //   try {
-//     const results = await cloudinary.uploader.upload('./images/Clothes.jpg'); // Specify the correct image file
+//     const results = await cloudinary.uploader.upload('./images/profile_pics/KarenCompli2.jpg'); // Specify the correct image file
 //     console.log('Upload successful:', results);
 
 //     const url = cloudinary.url(results.public_id, {
@@ -113,10 +113,14 @@ app.get('/:category_name', async (req, res) => {
   const categoryName = req.params.category_name;
   console.log('Fetching items with Category_name:', categoryName);
   const query = `
-    SELECT * FROM "Items"
+    SELECT "Items".*, "Categories"."Name" AS "CategoryName", "Renters"."Rating"
+    FROM "Items"
     INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
+    INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
     WHERE "Categories"."Name" = $1
+    ORDER BY "Price_per_day" ASC
   `;
+  // add sort by option in query
 
   try {
     const result = await pool.query(query, [categoryName]);
@@ -141,6 +145,7 @@ app.get('/:category_name/:itemId', async (req, res) => {
   const query = `
     SELECT * FROM "Items"
     INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
+    INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
     WHERE "Categories"."Name" = $1 AND "Items"."Item_id" = $2
   `;
   try {

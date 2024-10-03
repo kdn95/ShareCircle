@@ -1,11 +1,15 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { getUserLocation } from '../Location';
+import PlaceIcon from '@mui/icons-material/Place';
 // import fetchItemsNearby from './NearbyItems';
 
 
 const Home = () => {
   const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
+  // const [userLocation, setUserLocation] = useState(null);
+  const [userAddress, setUserAddress] = useState({});
   const navigate = useNavigate();
 
   // Fetch protected data for renters/nearby items
@@ -27,12 +31,20 @@ const Home = () => {
   useEffect(() => {
     if (isAuthenticated) {
       fetchProtectedData();
+  
+      const fetchUserLocation = async () => {
+        try {
+          const location = await getUserLocation();
+          console.log('User location:', location); // Debugging log
+          setUserAddress(location.address || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' });
+        } catch (error) {
+          console.error('Error getting user location:', error);
+        }
+      };
+  
+      fetchUserLocation(); // Get user location when the user is authenticated
     }
   }, [isAuthenticated, fetchProtectedData]);
-
-  const handleFetchHome =  () => {
-    navigate('/');
-  };
   
   // Navigate to nearby items
   const handleFetchNearbyItems = () => {
@@ -42,13 +54,21 @@ const Home = () => {
   return (
     <div>
   {!isAuthenticated ? (
-    <button onClick={() => loginWithRedirect()}>Log In</button>
+    <button className="login-button" onClick={() => loginWithRedirect()}>Log In</button>
   ) : (
     <>
-      <button onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
-      <h2>Welcome, {user.name}!</h2>
+      <button className="login-button" onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
+      <h2 className="welcome">Welcome, {user.name}!</h2>
+      {userAddress && (
+        <p className="user-address">
+          {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
+        </p>
+        )}
       {/* Button to fetch nearby items */}
-      <button onClick={handleFetchNearbyItems}>Fetch Nearby Items</button>
+      <button className="nearby-items-button"
+      onClick={handleFetchNearbyItems}><PlaceIcon className="Place-icon" />
+      Fetch Nearby Items
+      </button>
     </>
   )}
 </div>

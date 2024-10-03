@@ -1,28 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { getUserLocation } from '../Location'; // Correct import path
 
 const NearbyItems = () => {
   const { getAccessTokenSilently } = useAuth0();
   const [nearbyItems, setNearbyItems] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
-
-  // Function to get user location
-  const getUserLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        setUserLocation({ latitude, longitude });
-      });
-    }
-  };
+  const [userAddress, setUserAddress] = useState({});
 
   // Fetch nearby items
-  const fetchItemsNearby = async () => {
+  const fetchItemsNearby = useCallback(async () => {
     if (userLocation) {
       try {
         // no issues with getting token
         const token = await getAccessTokenSilently();
-        const response = await fetch(`http://localhost:5008/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=10`, {
+        const response = await fetch(`http://localhost:5008/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=1000`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -38,10 +30,18 @@ const NearbyItems = () => {
         console.error('Error fetching nearby items:', error);
       }
     }
-  };
+  }, [getAccessTokenSilently, userLocation]);
 
   useEffect(() => {
-    getUserLocation(); // Get user location when component mounts
+    getUserLocation()
+      .then(({ latitude, longitude, address }) => {
+        console.log('User Location:', { latitude, longitude, address }); // Debugging log
+        setUserLocation({ latitude, longitude });
+        setUserAddress(address || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' });
+      })
+      .catch((error) => {
+        console.error('Error getting user location:', error);
+      });
   }, []);
 
   useEffect(() => {
@@ -49,12 +49,17 @@ const NearbyItems = () => {
       console.log('User Location:', userLocation);
       fetchItemsNearby(); // Fetch nearby items if location is available
     }
-  }, [userLocation]);
+  }, [userLocation, fetchItemsNearby]);
 
   return (
     <div>
       <h2>Nearby Items</h2>
       <button onClick={fetchItemsNearby}>Fetch Nearby Items</button>
+      {userAddress && (
+        <p>
+          {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
+          </p>
+        )}
       <ul>
         {nearbyItems.map((item) => (
           <li key={item.Item_id}>
