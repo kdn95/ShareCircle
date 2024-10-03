@@ -70,22 +70,19 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem; // Space between cards
+  gap: 1rem;
 
   .MuiCard-root {
-    flex: 0 0 calc(50% - 1rem); // Two cards per row by default
-    max-width: calc(50% - 1rem);
+    flex: 0 0 calc(50% - 1rem);
     margin: 0.5rem;
 
-    // Responsive adjustments for smaller screens
-    @media (max-width: 768px) {
-      flex: 0 0 calc(50% - 1rem); // Two cards per row for tablet-sized screens
-      max-width: calc(50% - 1rem);
+     // Responsive adjustments for smaller screens
+     @media (max-width: 768px) { // Adjust breakpoint as necessary
+      flex: 0 0 calc(50% - 1rem); // Two cards per row on small screens
     }
-
-    @media (max-width: 480px) {
-      flex: 0 0 calc(50% - 1rem); // Ensure two cards per row on mobile
-      max-width: calc(50% - 1rem); // Prevent cards from getting too wide
+    
+    @media (max-width: 480px) { // Adjust breakpoint for mobile
+      flex: 0 0 calc(100% - 1rem); // One card per row on very small screens
     }
   }
 
