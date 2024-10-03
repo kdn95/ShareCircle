@@ -10,7 +10,8 @@ const PORT = process.env.PORT || 5006;
 
 // Define allowed origins
 const allowedOrigins = [
-  'http://localhost:3000', // Your frontend URL
+  'http://localhost:3000',
+  'https://sharecircle.netlify.app/', // Your frontend URL
   // Add more origins as needed
 ];
 
@@ -23,7 +24,10 @@ app.use(cors({
       return callback(new Error(msg), false);
     }
     return callback(null, true);
-  }
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Include OPTIONS method
+  preflightContinue: false, // Pass the CORS preflight response to the next handler
+  optionsSuccessStatus: 204 // Some legacy browsers choke on 204
 }));
 
 // JWT check middleware
