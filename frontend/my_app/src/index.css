@@ -79,6 +79,16 @@ body {
     flex: 0 0 calc(100% - 1rem);
   }
 }
+@media (max-width: 768px) {
+  .categories-container .MuiCard-root {
+    flex: 0 0 calc(50% - 1rem);
+  }
+}
+@media (max-width: 480px) {
+  .categories-container .MuiCard-root {
+    flex: 0 0 calc(100% - 1rem);
+  }
+}
 .categories-container .category-card {
   background: #B7DFF5;
   padding: 0.625rem;
