@@ -327,8 +327,8 @@ button.rent-button {
   height: 100vh; /* Full height to center the loader */
 }
 .logo-loader .loader-image {
-  width: 100px; /* Adjust the size of your logo */
-  height: 100px;
+  width: 12.5rem; /* Adjust the size of your logo */
+  height: 12.5rem;
   animation: spin 1s linear infinite; /* Animation for spinning */
 }
 
