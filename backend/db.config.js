@@ -4,7 +4,11 @@ const { Pool } = require("pg");
 // Directly using your Render database details in the connection string
 const connectionString = process.env.DATABASE_URL;
 const pool = new Pool({
-  connectionString: connectionString,
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
 });
 
 module.exports = {
