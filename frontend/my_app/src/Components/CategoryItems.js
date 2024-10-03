@@ -8,18 +8,23 @@ import CardActionArea from '@mui/material/CardActionArea';
 import StarIcon from '@mui/icons-material/Star';
 import '../index.css'; // Assuming your custom CSS is here
 import { getUserLocation } from '../Location';
+import LogoLoader from './LogoLoader'; // Import your LogoLoader component
 
 const CategoryItems = () => {
   const { category_name } = useParams(); // Get the category name from the URL
   const [items, setItems] = useState([]);
   const [userAddress, setUserAddress] = useState({});
+  const [loading, setLoading] = useState(true); // Initialize loading state
 
   const fetchCategoryItems = useCallback(async () => {
+    setLoading(true); // Set loading to true before fetching data
     try {
       const response = await axios.get(`https://project-sc.onrender.com/${category_name}`); // Fetch items by category
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);
+    } finally {
+      setLoading(false); // Set loading to false after fetching is complete
     }
   }, [category_name]);
 
@@ -39,14 +44,18 @@ const CategoryItems = () => {
     fetchUserLocation(); // Get user location when component mounts
   }, [fetchCategoryItems]);
 
+  if (loading) {
+    return <LogoLoader />; // Show loader while loading
+  }
+
   return (
     <div className="Category-items-container">
       <div className="Category-items-title-address-container">
-      <h1 className="Category-items-title">Items in {category_name}</h1>
-      {userAddress && (
-      <p className="user-address">
-        {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
-      </p>
+        <h1 className="Category-items-title">Items in {category_name}</h1>
+        {userAddress && (
+          <p className="user-address">
+            {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
+          </p>
         )}{/* Display user's address */}
       </div>
       <div className="items-container">
