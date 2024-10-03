@@ -73,7 +73,7 @@ body {
 }
 @media (max-width: 480px) {
   .categories-container .MuiCard-root {
-    flex: 0 0 calc(100% - 1rem);
+    flex: 0 0 calc(50% - 1rem);
   }
 }
 .categories-container .category-card {
