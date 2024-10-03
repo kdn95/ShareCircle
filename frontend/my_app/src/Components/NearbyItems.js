@@ -13,7 +13,7 @@ const NearbyItems = () => {
   const mapRef = useRef(null);
   const userMarkerRef = useRef(null);
 
-  mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhcmVjaXJjbGUtdGVhbSIsImEiOiJjbTFyNng1MGgwN3JtMmxvZnUwOWZ3ZGh0In0.FUYlTsV3I4uZKwf0r6ZOkQ'; // Replace with your access token
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhcmVjaXJjbGUtdGVhbSIsImEiOiJjbTFyNjZ0MXIwN3Y5MmpuNHoyaGFrN3I2In0.R6r5R4DZM3oAi3nBNyCvNg'; // Replace with your access token
 
 
   // Fetch nearby items
@@ -27,7 +27,7 @@ const NearbyItems = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
+        console.log(nearbyItems);
         if (!response.ok) {
           throw new Error('Failed to fetch nearby items');
         }
@@ -43,67 +43,67 @@ const NearbyItems = () => {
   }, [getAccessTokenSilently, userLocation]);
 
   useEffect(() => {
-    if (userLocation && mapContainerRef.current) {
-      // Initialize the map
-      if (!mapRef.current) {
-        mapRef.current = new mapboxgl.Map({
-          container: mapContainerRef.current,
-          style: 'mapbox://styles/mapbox/streets-v11', // Make sure this is the correct style
-          center: [userLocation.longitude, userLocation.latitude], // Center map on user's location
-          zoom: 13,
+      if (userLocation && mapContainerRef.current) {
+        // Initialize the map
+        if (!mapRef.current) {
+          mapRef.current = new mapboxgl.Map({
+            container: mapContainerRef.current,
+            style: 'mapbox://styles/mapbox/standard', // Make sure this is the correct style
+            center: [userLocation.longitude, userLocation.latitude], // Center map on user's location
+            zoom: 11,
+          });
+
+          const navControl = new mapboxgl.NavigationControl();
+          mapRef.current.addControl(navControl, 'top-right'); // Add to top-right corner
+
+          mapRef.current.addControl(
+            new mapboxgl.GeolocateControl({
+              positionOptions: {
+                enableHighAccuracy: true
+              },
+              trackUserLocation: true,
+              showUserHeading: true
+            })
+          );
+    
+          // Create the user marker
+          userMarkerRef.current = new mapboxgl.Marker({ color: 'red' })
+            .setLngLat([userLocation.longitude, userLocation.latitude])
+            .setPopup(new mapboxgl.Popup().setHTML('<h4>You are here!</h4>'))
+            .addTo(mapRef.current);
+        } else {
+          // Update map center and user marker if already initialized
+          mapRef.current.setCenter([userLocation.longitude, userLocation.latitude]);
+          userMarkerRef.current.setLngLat([userLocation.longitude, userLocation.latitude]);
+        }
+      }
+    
+      return () => {
+        if (mapRef.current) {
+          mapRef.current.remove();
+        }
+      };
+    }, [userLocation]);
+    
+    useEffect(() => {
+      if (userLocation && nearbyItems.length > 0) {
+        nearbyItems.forEach(item => {
+          if (item.longitude && item.latitude) {
+            new mapboxgl.Marker()
+              .setLngLat([item.longitude, item.latitude])
+              .setPopup(new mapboxgl.Popup().setHTML(`<h4>${item.Item_name}</h4><p>Price: $${item.Price_per_day}/day</p>`))
+              .addTo(mapRef.current);
+          }
         });
-
-        const navControl = new mapboxgl.NavigationControl();
-        mapRef.current.addControl(navControl, 'top-right'); // Add to top-right corner
-
-        mapRef.current.addControl(
-          new mapboxgl.GeolocateControl({
-            positionOptions: {
-              enableHighAccuracy: true
-            },
-            trackUserLocation: true,
-            showUserHeading: true
-          })
-        );
-  
-        // Create the user marker
-        userMarkerRef.current = new mapboxgl.Marker({ color: 'red' })
-          .setLngLat([userLocation.longitude, userLocation.latitude])
-          .setPopup(new mapboxgl.Popup().setHTML('<h4>You are here!</h4>'))
-          .addTo(mapRef.current);
-      } else {
-        // Update map center and user marker if already initialized
-        mapRef.current.setCenter([userLocation.longitude, userLocation.latitude]);
-        userMarkerRef.current.setLngLat([userLocation.longitude, userLocation.latitude]);
       }
-    }
-  
-    return () => {
-      if (mapRef.current) {
-        mapRef.current.remove();
-      }
-    };
-  }, [userLocation]);
-  
-  // useEffect(() => {
-  //   if (userLocation && nearbyItems.length > 0) {
-  //     nearbyItems.forEach(item => {
-  //       if (item.longitude && item.latitude) {
-  //         new mapboxgl.Marker()
-  //           .setLngLat([item.longitude, item.latitude])
-  //           .setPopup(new mapboxgl.Popup().setHTML(`<h4>${item.Item_name}</h4><p>Price: $${item.Price_per_day}/day</p>`))
-  //           .addTo(mapRef.current);
-  //       }
-  //     });
-  //   }
-  // }, [userLocation, nearbyItems]);  
+    }, [userLocation, nearbyItems]);
 
 
   useEffect(() => {
     getUserLocation()
-      .then(({ latitude, longitude, address }) => {
-        console.log('User Location:', { latitude, longitude, address }); // Debugging log
-        setUserLocation({ latitude, longitude });
+      .then(({ longitude, latitude, address }) => {
+        console.log('User Location:', { longitude, latitude, address }); // Debugging log
+        setUserLocation({ longitude, latitude });
         setUserAddress(address || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' });
       })
       .catch((error) => {
@@ -134,7 +134,6 @@ const NearbyItems = () => {
         style={{ width: '100%', height: '300px' }} // Adjust map container height/width as needed
         className="map-container"
       />
-
       <ul>
         {nearbyItems.map((item) => (
           <li key={item.Item_id}>
