@@ -16,7 +16,7 @@ const CategoryItems = () => {
 
   const fetchCategoryItems = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:5008/${category_name}`); // Fetch items by category
+      const response = await axios.get(`https://project-sc.onrender.com/${category_name}`); // Fetch items by category
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);
