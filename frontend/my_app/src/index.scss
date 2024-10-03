@@ -70,6 +70,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 0 -0.5rem; // Optional: Adjust margin to fit container
   gap: 1rem;
 
   .MuiCard-root {

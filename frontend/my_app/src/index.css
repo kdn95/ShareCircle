@@ -61,6 +61,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 0 -0.5rem;
   gap: 1rem;
 }
 .categories-container .MuiCard-root {
