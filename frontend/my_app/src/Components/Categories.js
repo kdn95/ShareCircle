@@ -31,22 +31,22 @@ const Categories = () => {
     <h1 className="categories-title">Categories</h1>
     <div className="categories-container">
       {categories.map((category) => (
-        <Card sx={{ flex: '0 0 calc(50% - 1rem)', margin: '0.5rem' }} key={category.ID} className="category-card">
+        <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.ID} className="category-card">
           <CardActionArea>
-            <Link to={`/category/${category.Name}`} className="no-undies">
-              <CardMedia
-                component="img"
-                className="category-image"
-                height="140"
-                image={category.Category_pic}
-                alt={category.Name}
-              />
-              <CardContent>
-                <h3>{category.Name}</h3>
-              </CardContent>
+          <Link to={`/category/${category.Name}`} className="no-undies"> {/* Link to category items page */}
+            <CardMedia
+              component="img"
+              className="category-image"
+              height="140"
+              image={category.Category_pic}
+              alt={category.Name}
+            />
+            <CardContent>
+              <h3>{category.Name}</h3>
+            </CardContent>
             </Link>
           </CardActionArea>
-      </Card>
+        </Card>
       ))}
     </div>
     </>
