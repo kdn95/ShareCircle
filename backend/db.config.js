@@ -1,12 +1,13 @@
 require("dotenv").config();
 const { Pool } = require("pg");
 
-const database = process.env.PGDATABASE;
-
-const connectionString = 'postgres://postgres:circleshare@localhost:5432/postgres'
-
+// Create a connection pool using environment variables
 const pool = new Pool({
-  connectionString: connectionString,
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
 });
 
 module.exports = {
