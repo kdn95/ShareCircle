@@ -78,15 +78,13 @@ body {
     max-width: 345px; // Optional: restrict card size
     width: 100%; // Ensure cards take full width available in the container
 
-    // Responsive adjustments for smaller screens
-    @media (max-width: 768px) {
-      flex: 0 0 calc(50% - 1rem); // Two cards per row for tablet-sized screens
-      max-width: calc(50% - 1rem);
+     // Responsive adjustments for smaller screens
+     @media (max-width: 768px) { // Adjust breakpoint as necessary
+      flex: 0 0 calc(50% - 1rem); // Two cards per row on small screens
     }
-
-    @media (max-width: 480px) {
-      flex: 0 0 calc(50% - 1rem); // Ensure two cards per row on mobile
-      max-width: calc(50% - 1rem); // Prevent cards from getting too wide
+    
+    @media (max-width: 480px) { // Adjust breakpoint for mobile
+      flex: 0 0 calc(100% - 1rem); // One card per row on very small screens
     }
   }
 
