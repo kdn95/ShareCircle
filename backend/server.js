@@ -9,17 +9,21 @@ const app = express();
 const PORT = process.env.PORT || 5006;
 
 // Define allowed origins
-// const allowedOrigins = [
-//   'http://localhost:3000',
-//   'https://sharecircle.netlify.app/', // Your frontend URL
-//   // Add more origins as needed
-// ];
+const allowedOrigins = [
+  'http://localhost:3000', // Your frontend URL
+  // Add more origins as needed
+];
 
 app.use(cors({
-  // origin: 'https://sharecircle.netlify.app',
-  origin: 'http://localhost:3000/',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify methods allowed
-  credentials: true, // Allow credentials if needed
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
 }));
 
 // JWT check middleware
