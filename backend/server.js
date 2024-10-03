@@ -8,8 +8,23 @@ const { auth } = require('express-oauth2-jwt-bearer');
 const app = express();
 const PORT = process.env.PORT || 5008;
 
-// Add CORS middleware
-app.use(cors({ origin: 'http://localhost:3000' }));  // Update with your frontend URL
+// Define allowed origins
+const allowedOrigins = [
+  'http://localhost:3000', // Your frontend URL
+  // Add more origins as needed
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 // JWT check middleware
 const jwtCheck = auth({
