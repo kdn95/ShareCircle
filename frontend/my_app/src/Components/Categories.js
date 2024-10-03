@@ -33,27 +33,31 @@ const Categories = () => {
 
   return (
     <>
-    <h1 className="categories-title">Categories</h1>
-    <div className="categories-container">
-      {categories.map((category) => (
-        <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.ID} className="category-card">
-          <CardActionArea>
-          <Link to={`/category/${category.Name}`} className="no-undies"> {/* Link to category items page */}
-            <CardMedia
-              component="img"
-              className="category-image"
-              height="140"
-              image={category.Category_pic}
-              alt={category.Name}
-            />
-            <CardContent>
-              <h3>{category.Name}</h3>
-            </CardContent>
-            </Link>
-          </CardActionArea>
-        </Card>
-      ))}
-    </div>
+      <h1 className="categories-title">Categories</h1>
+      {loading ? ( // Show loader while loading
+        <LogoLoader />
+      ) : (
+        <div className="categories-container">
+          {categories.map((category) => (
+            <Card sx={{ maxWidth: 345, margin: '20px' }} key={category.ID} className="category-card">
+              <CardActionArea>
+                <Link to={`/category/${category.Name}`} className="no-undies"> {/* Link to category items page */}
+                  <CardMedia
+                    component="img"
+                    className="category-image"
+                    height="140"
+                    image={category.Category_pic}
+                    alt={category.Name}
+                  />
+                  <CardContent>
+                    <h3>{category.Name}</h3>
+                  </CardContent>
+                </Link>
+              </CardActionArea>
+            </Card>
+          ))}
+        </div>
+      )}
     </>
   );
 };
