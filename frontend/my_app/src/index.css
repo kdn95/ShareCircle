@@ -65,16 +65,19 @@ body {
 }
 .categories-container .MuiCard-root {
   flex: 0 0 calc(50% - 1rem);
+  max-width: calc(50% - 1rem);
   margin: 0.5rem;
 }
 @media (max-width: 768px) {
   .categories-container .MuiCard-root {
     flex: 0 0 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
   }
 }
 @media (max-width: 480px) {
   .categories-container .MuiCard-root {
     flex: 0 0 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
   }
 }
 .categories-container .category-card {
