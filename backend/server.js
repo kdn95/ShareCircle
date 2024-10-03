@@ -16,13 +16,7 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: 'https://sharecircle.netlify.app', // Replace with your front-end domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify methods allowed
   credentials: true, // Allow credentials if needed
 }));
