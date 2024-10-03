@@ -16,18 +16,9 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Include OPTIONS method
-  preflightContinue: false, // Pass the CORS preflight response to the next handler
-  optionsSuccessStatus: 204 // Some legacy browsers choke on 204
+  origin: 'https://sharecircle.netlify.app', // Replace with your front-end domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify methods allowed
+  credentials: true, // Allow credentials if needed
 }));
 
 // JWT check middleware
