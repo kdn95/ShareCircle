@@ -82,7 +82,7 @@ body {
     }
     
     @media (max-width: 480px) { // Adjust breakpoint for mobile
-      flex: 0 0 calc(100% - 1rem); // One card per row on very small screens
+      flex: 0 0 calc(50% - 1rem); // One card per row on very small screens
     }
   }
 
