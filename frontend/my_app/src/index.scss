@@ -73,16 +73,16 @@ body {
   gap: 1rem;
 
   .MuiCard-root {
-    flex: 0 0 calc(50% - 1rem);
+    flex: 0 0 calc(50% - 1rem); // Default to two cards per row (50% width) on small screens
     margin: 0.5rem;
 
-     // Responsive adjustments for smaller screens
-     @media (max-width: 768px) { // Adjust breakpoint as necessary
-      flex: 0 0 calc(50% - 1rem); // Two cards per row on small screens
+    // Responsive adjustments for larger screens
+    @media (min-width: 768px) { // Adjust breakpoint as necessary for larger screens like tablets or laptops
+      flex: 0 0 calc(33.33% - 1rem); // Three cards per row on medium-sized screens
     }
     
-    @media (max-width: 480px) { // Adjust breakpoint for mobile
-      flex: 0 0 calc(100% - 1rem); // One card per row on very small screens
+    @media (min-width: 1024px) { // For larger screens like laptops
+      flex: 0 0 calc(25% - 1rem); // Four cards per row on large screens
     }
   }
 
