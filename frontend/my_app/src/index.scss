@@ -69,11 +69,12 @@ body {
 .categories-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1rem;
 
   .MuiCard-root {
-    flex: 0 0 calc(50% - 1.25rem);
-    margin: 0.375rem;
+    flex: 0 0 calc(50% - 1rem);
+    margin: 0.5rem;
 
      // Responsive adjustments for smaller screens
      @media (max-width: 768px) { // Adjust breakpoint as necessary
@@ -81,7 +82,7 @@ body {
     }
     
     @media (max-width: 480px) { // Adjust breakpoint for mobile
-      flex: 0 0 calc(50% - 1rem); // One card per row on very small screens
+      flex: 0 0 calc(100% - 1rem); // One card per row on very small screens
     }
   }
 
