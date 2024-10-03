@@ -51,11 +51,11 @@ const CategoryItems = () => {
   return (
     <div className="Category-items-container">
       <div className="Category-items-title-address-container">
-      <h1 className="Category-items-title">Items in {category_name}</h1>
-      {userAddress && (
-      <p className="user-address">
-        {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
-      </p>
+        <h1 className="Category-items-title">Items in {category_name}</h1>
+        {userAddress && (
+          <p className="user-address">
+            {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
+          </p>
         )}{/* Display user's address */}
       </div>
       <div className="items-container">
