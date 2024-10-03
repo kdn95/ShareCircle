@@ -304,4 +304,27 @@ button.rent-button {
   padding-right: 0.09rem;
 }
 
+/* LogoLoader.scss */
+.logo-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height to center the loader */
+}
+.logo-loader .loader-image {
+  width: 100px; /* Adjust the size of your logo */
+  height: 100px;
+  animation: spin 1s linear infinite; /* Animation for spinning */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /*# sourceMappingURL=index.css.map */

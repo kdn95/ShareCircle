@@ -6,27 +6,36 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import StarIcon from '@mui/icons-material/Star';
 import ChatIcon from '@mui/icons-material/Chat';
+import LogoLoader from './LogoLoader'; // Import your LogoLoader component
 import '../index.css'; // Assuming your custom CSS is here
 
 const ItemsListing = () => {
   const { category_name, itemId } = useParams(); // Get category name and itemId from the URL
   const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true); // Initialize loading state
 
   useEffect(() => {
     const fetchItemDetails = async () => {
+      setLoading(true); // Set loading to true before fetching data
       try {
         const response = await axios.get(`https://project-sc.onrender.com/${category_name}/${itemId}`);
         setItem(response.data); // Set item data
       } catch (error) {
         console.error('Error fetching item details:', error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching is complete
       }
     };
 
     fetchItemDetails();
   }, [category_name, itemId]);
 
+  if (loading) {
+    return <LogoLoader />; // Show loader while loading
+  }
+
   if (!item) {
-    return <p>Loading item details...</p>;
+    return <p>No item found.</p>; // Handle case where item is not found
   }
 
   return (
@@ -42,11 +51,11 @@ const ItemsListing = () => {
         <CardContent>
           <div className="item-header-container">
             <h2 className="item-name">{item.Item_name}</h2>
-            <p className="item-price"> ${item.Price_per_day} per day</p>
+            <p className="item-price">${item.Price_per_day} per day</p>
           </div>
           <div className="description-availability-container">
             <p className="item-description">{item.Description}</p>
-            <p className="item-availability"> {item.Availability ? 'Available now' : 'Not Available'}</p>
+            <p className="item-availability">{item.Availability ? 'Available now' : 'Not Available'}</p>
           </div>
           <div className="renter-container">
             <div className="renter-info">
