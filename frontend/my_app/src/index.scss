@@ -78,13 +78,9 @@ body {
     max-width: 345px; // Optional: restrict card size
     width: 100%; // Ensure cards take full width available in the container
 
-    // Responsive adjustments for larger screens
-    @media (min-width: 768px) { // Adjust breakpoint as necessary for larger screens like tablets or laptops
-      flex: 0 0 calc(33.33% - 1rem); // Three cards per row on medium-sized screens
-    }
-    
-    @media (min-width: 1024px) { // For larger screens like laptops
-      flex: 0 0 calc(25% - 1rem); // Four cards per row on large screens
+     // Responsive adjustments for larger screens
+     @media (min-width: 768px) { // Medium and larger screens
+      flex: 0 0 calc(25% - 1rem); // Four cards per row
     }
   }
 

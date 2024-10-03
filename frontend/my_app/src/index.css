@@ -81,11 +81,6 @@ body {
 }
 @media (min-width: 768px) {
   .categories-container .MuiCard-root {
-    flex: 0 0 calc(33.33% - 1rem);
-  }
-}
-@media (min-width: 1024px) {
-  .categories-container .MuiCard-root {
     flex: 0 0 calc(25% - 1rem);
   }
 }
