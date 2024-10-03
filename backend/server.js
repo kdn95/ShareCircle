@@ -94,9 +94,10 @@ app.get('/items/nearby', jwtCheck, async (req, res) => {
 
   try {
     const query = `
-      SELECT "Item_name", "Description", "Price_per_day", "Image_url", "Availability", "Renter_name",
-      ST_X(location) AS longitude, 
-      ST_Y(location) AS latitude
+      SELECT "Item_id", "Item_name", "Description", "Price_per_day", "Image_url", "Availability",
+      ST_X("Renters"."location") AS "renter_longitude", 
+      ST_Y("Renters"."location") AS "renter_latitude",
+      "Renters"."Renter_name"
       FROM "Items"
       INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
       WHERE ST_DWithin(location, ST_SetSRID(ST_MakePoint($1, $2), 4326), $3 * 1000);

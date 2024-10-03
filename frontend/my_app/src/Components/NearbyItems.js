@@ -34,6 +34,7 @@ const NearbyItems = () => {
 
         const data = await response.json();
         setNearbyItems(data);
+        // console.log("Fetched Nearby Items:", data);
       } catch (error) {
         console.error('Error fetching nearby items:', error);
       } finally {
@@ -88,10 +89,16 @@ const NearbyItems = () => {
     useEffect(() => {
       if (userLocation && nearbyItems.length > 0) {
         nearbyItems.forEach(item => {
-          if (item.longitude && item.latitude) {
+          // Add item markers to map (using renter's location)
+          console.log('Renter Location:', item.renter_latitude, item.renter_longitude);
+          if (item.renter_latitude && item.renter_longitude) {
             new mapboxgl.Marker()
-              .setLngLat([item.longitude, item.latitude])
-              .setPopup(new mapboxgl.Popup().setHTML(`<h4>${item.Item_name}</h4><p>Price: $${item.Price_per_day}/day</p>`))
+              .setLngLat([item.renter_longitude, item.renter_latitude])
+              .setPopup(new mapboxgl.Popup().setHTML(`
+                <h4>${item.Item_name}</h4>
+                <p>Price: $${item.Price_per_day}/day</p>
+                <p>Renter: ${item.Renter_name}</p>
+              `))
               .addTo(mapRef.current);
           }
         });
