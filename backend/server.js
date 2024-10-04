@@ -106,6 +106,7 @@ app.get('/items/nearby', jwtCheck, async (req, res) => {
       "Items"."Renter_name"
   FROM "Items"
   INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
+  INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
   WHERE ST_DWithin("Renters"."location", ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography, $3 * 1000);
     `;
     // Correct order of parameters: [longitude, latitude, radius_km]

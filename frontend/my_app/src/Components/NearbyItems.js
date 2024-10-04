@@ -1,8 +1,15 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
+import { Link, useParams } from 'react-router-dom'; // Import to access the category name from the URL
 import { useAuth0 } from '@auth0/auth0-react';
 import { getUserLocation } from '../Location'; // Correct import path
 import mapboxgl from 'mapbox-gl'; // Import Mapbox
 import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox CSS
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CardActionArea from '@mui/material/CardActionArea';
+import StarIcon from '@mui/icons-material/Star';
+import '../index.css'; // Assuming your custom CSS is here
 
 const NearbyItems = () => {
   const { getAccessTokenSilently } = useAuth0();
@@ -13,9 +20,10 @@ const NearbyItems = () => {
   const mapRef = useRef(null);
   const userMarkerRef = useRef(null);
   const markersRef = useRef([]);
+  const { category_name } = useParams(); // Get the category name from the URL
 
 
-  mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhcmVjaXJjbGUtdGVhbSIsImEiOiJjbTF1NXIwMGMwOWxxMmlwbTNwd2lmMTVmIn0.4SVJBm_yh14wEUCRWzb04g'; // Replace with your access token
+  mapboxgl.accessToken = process.env.REACT_APP_MB_TOKEN; // Replace with your access token
 
   const clearMarkers = () => {
     markersRef.current.forEach(marker => marker.remove());
@@ -29,7 +37,7 @@ const NearbyItems = () => {
       // setLoading(true); // Set loading to true before fetching
       try {
         const token = await getAccessTokenSilently();
-        const response = await fetch(`http://localhost:5006/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=50`, {
+        const response = await fetch(`http://localhost:5006/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=1000`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -140,30 +148,47 @@ const NearbyItems = () => {
   }, [userLocation, fetchItemsNearby]);
 
   return (
-    <div>
+    <div className="Nearby-items-container">
       <h2>Nearby Items</h2>
-      <button onClick={fetchItemsNearby}>Fetch Nearby Items</button>
       {userAddress && (
         <p>
           {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
         </p>
       )}
-
+      
       {/* Map container */}
-      <div
-        ref={mapContainerRef}
-        style={{ width: '100%', height: '300px' }} // Adjust map container height/width as needed
-        className="map-container"
-      />
-      <ul>
-        {nearbyItems.map((item) => (
-          <li key={item.Item_id}>
-            <h4>{item.Item_name}</h4>
-            <p>{item.Description}</p>
-            <p>Price: ${item.Price_per_day} per day</p>
-          </li>
-        ))}
-      </ul>
+      <div ref={mapContainerRef} style={{ width: '100%', height: '300px' }} className="map-container" />
+
+      {/* Display items using MUI Cards */}
+      <div className="items-container">
+        {nearbyItems.length > 0 ? (
+          nearbyItems.map(item => (
+            <Card sx={{ maxWidth: 345, margin: '20px' }} key={item.Item_id} className="category-items-card">
+                <Link to={`/category/${category_name}/${item.Item_id}`} className="no-undies"> {/* Link to item details */}
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={item.Image_url}
+                  alt={item.Item_name}
+                />
+                <CardContent>
+                  <h3 className="item-header">{item.Item_name}</h3>
+                  <div className="rating-container">
+                    <StarIcon className="star-icon" alt="star-icon" />
+                    <p className="renter-rating">{item.Rating}</p>
+                  </div>
+                  <p className="item-price">Price: ${item.Price_per_day} per day</p>
+                  <p className="renter-name">Renter: {item.Renter_name}</p>
+                </CardContent>
+              </CardActionArea>
+              </Link>
+            </Card>
+          ))
+        ) : (
+          <p>No nearby items found.</p>
+        )}
+      </div>
     </div>
   );
 };
