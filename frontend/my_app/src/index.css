@@ -317,8 +317,8 @@ button.rent-button {
   height: 100vh; /* Full height to center the loader */
 }
 .logo-loader .loader-image {
-  width: 12.5rem; /* Adjust the size of your logo */
-  height: 12.5rem;
+  width: 11rem; /* Adjust the size of your logo */
+  height: 11rem;
   animation: pulse 1.5s ease-in-out infinite; /* Updated animation for pulsing */
 }
 
