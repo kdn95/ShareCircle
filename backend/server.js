@@ -9,14 +9,15 @@ const app = express();
 const PORT = process.env.PORT || 5008;
 
 // Define allowed origins
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://sharecircle.netlify.app/', // Your frontend URL
-  // Add more origins as needed
-];
+// const allowedOrigins = [
+//   'http://localhost:3000',
+//   'https://sharecircle.netlify.app/', // Your frontend URL
+//   // Add more origins as needed
+// ];
 
 app.use(cors({
-  origin: 'https://sharecircle.netlify.app', // Replace with your front-end domain
+  // origin: 'https://sharecircle.netlify.app',
+  origin: 'http://localhost:3000/',
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify methods allowed
   credentials: true, // Allow credentials if needed
 }));
