@@ -26,7 +26,7 @@ const NearbyItems = () => {
   // Fetch nearby items
   const fetchItemsNearby = useCallback(async () => {
     if (userLocation) {
-      setLoading(true); // Set loading to true before fetching
+      // setLoading(true); // Set loading to true before fetching
       try {
         const token = await getAccessTokenSilently();
         const response = await fetch(`http://localhost:5006/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=50`, {
@@ -45,9 +45,9 @@ const NearbyItems = () => {
         console.log("Fetched Nearby Items:", data);
       } catch (error) {
         console.error('Error fetching nearby items:', error);
-      } finally {
-        setLoading(false); // Set loading to false after fetching is complete
-      }
+      } // } finally {
+      //   setLoading(false); // Set loading to false after fetching is complete
+      // }
     }
   }, [getAccessTokenSilently, userLocation]);
 

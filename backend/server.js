@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5006;
 
 app.use(cors({
   // origin: 'https://sharecircle.netlify.app',
-  origin: 'http://localhost:3000/',
+  origin: 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify methods allowed
   credentials: true, // Allow credentials if needed
 }));
