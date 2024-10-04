@@ -15,8 +15,7 @@ const Home = () => {
   const fetchProtectedData = useCallback(async () => {
     try {
       const token = await getAccessTokenSilently();
-      // const response = await fetch('https://project-sc.onrender.com/', {
-        const response = await fetch('http://localhost:5008/', {
+      const response = await fetch('http://localhost:5009/', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

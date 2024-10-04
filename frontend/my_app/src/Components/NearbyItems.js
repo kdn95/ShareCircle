@@ -12,9 +12,15 @@ const NearbyItems = () => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const userMarkerRef = useRef(null);
+  const markersRef = useRef([]);
+
 
   mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhcmVjaXJjbGUtdGVhbSIsImEiOiJjbTFyNjZ0MXIwN3Y5MmpuNHoyaGFrN3I2In0.R6r5R4DZM3oAi3nBNyCvNg'; // Replace with your access token
 
+  const clearMarkers = () => {
+    markersRef.current.forEach(marker => marker.remove());
+    markersRef.current = []; // Clear markers array
+  };
 
   // Fetch nearby items
   const fetchItemsNearby = useCallback(async () => {
@@ -22,19 +28,20 @@ const NearbyItems = () => {
       setLoading(true); // Set loading to true before fetching
       try {
         const token = await getAccessTokenSilently();
-        const response = await fetch(`http://localhost:5008/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=20`, {
+        const response = await fetch(`http://localhost:5009/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=50`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(nearbyItems);
+        console.log('Response status:', response.status);
+
         if (!response.ok) {
           throw new Error('Failed to fetch nearby items');
         }
 
         const data = await response.json();
         setNearbyItems(data);
-        // console.log("Fetched Nearby Items:", data);
+        console.log("Fetched Nearby Items:", data);
       } catch (error) {
         console.error('Error fetching nearby items:', error);
       } finally {
@@ -86,13 +93,15 @@ const NearbyItems = () => {
       };
     }, [userLocation]);
     
+    //items nearby my location
     useEffect(() => {
       if (userLocation && nearbyItems.length > 0) {
+        clearMarkers(); // Clear any previous markers
         nearbyItems.forEach(item => {
           // Add item markers to map (using renter's location)
-          console.log('Renter Location:', item.renter_latitude, item.renter_longitude);
+          console.log('Renter Location:', item.renter_longitude, item.renter_latitude);
           if (item.renter_latitude && item.renter_longitude) {
-            new mapboxgl.Marker()
+            const marker = new mapboxgl.Marker()
               .setLngLat([item.renter_longitude, item.renter_latitude])
               .setPopup(new mapboxgl.Popup().setHTML(`
                 <h4>${item.Item_name}</h4>
@@ -100,6 +109,7 @@ const NearbyItems = () => {
                 <p>Renter: ${item.Renter_name}</p>
               `))
               .addTo(mapRef.current);
+            markersRef.current.push(marker); // Store marker reference
           }
         });
       }
@@ -121,6 +131,7 @@ const NearbyItems = () => {
   useEffect(() => {
     if (userLocation) {
       console.log('User Location:', userLocation);
+      console.log('Nearby Items state:', nearbyItems); // Add this log
       fetchItemsNearby(); // Fetch nearby items if location is available
     }
   }, [userLocation, fetchItemsNearby]);
