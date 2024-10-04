@@ -164,7 +164,7 @@ const NearbyItems = () => {
         {nearbyItems.length > 0 ? (
           nearbyItems.map(item => (
             <Card sx={{ maxWidth: 345, margin: '20px' }} key={item.Item_id} className="category-items-card">
-                <Link to={`/category/${category_name}/${item.Item_id}`} className="no-undies"> {/* Link to item details */}
+                <Link to={`/category/${item.category}/${item.Item_id}`} className="no-undies"> {/* Link to item details */}
               <CardActionArea>
                 <CardMedia
                   component="img"
