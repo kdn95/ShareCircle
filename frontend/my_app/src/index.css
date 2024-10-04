@@ -319,15 +319,21 @@ button.rent-button {
 .logo-loader .loader-image {
   width: 12.5rem; /* Adjust the size of your logo */
   height: 12.5rem;
-  animation: spin 1s linear infinite; /* Animation for spinning */
+  animation: pulse 1.5s ease-in-out infinite; /* Updated animation for pulsing */
 }
 
-@keyframes spin {
+@keyframes pulse {
   0% {
-    transform: rotate(0deg);
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1); /* Slightly increase the size */
+    opacity: 0.7; /* Add a fade effect for a smoother pulse */
   }
   100% {
-    transform: rotate(360deg);
+    transform: scale(1);
+    opacity: 1;
   }
 }
 

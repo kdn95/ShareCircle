@@ -361,11 +361,21 @@ button {
   .loader-image {
     width: 12.5rem; /* Adjust the size of your logo */
     height: 12.5rem;
-    animation: spin 1s linear infinite; /* Animation for spinning */
+    animation: pulse 1.5s ease-in-out infinite; /* Updated animation for pulsing */
   }
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1); /* Slightly increase the size */
+    opacity: 0.7; /* Add a fade effect for a smoother pulse */
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
