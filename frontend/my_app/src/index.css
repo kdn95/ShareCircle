@@ -59,43 +59,46 @@ body {
 
 .categories-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
+  flex-wrap: wrap; /* Allow cards to wrap to the next row */
+  justify-content: center; /* Center cards in the container */
+  gap: 1rem; /* Space between cards */
+  /* Responsive adjustments for smaller screens */
 }
 .categories-container .MuiCard-root {
-  flex: 0 0 calc(50% - 1.25rem);
-  margin: 0.375rem;
-  max-width: 345px;
-  width: 100%;
+  flex: 0 0 calc(33.33% - 1rem); /* Three cards per row with space for margins */
+  margin: 0.5rem; /* Space between cards */
+  max-width: 21.56rem; /* Restrict card size */
+  width: 100%; /* Ensure cards take full width available in the container */
 }
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   .categories-container .MuiCard-root {
-    flex: 0 0 calc(50% - 1rem);
+    flex: 0 0 calc(50% - 1rem); /* Two cards per row on small screens */
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .categories-container .MuiCard-root {
-    flex: 0 0 calc(100% - 1rem);
+    flex: 0 0 calc(100% - 1rem); /* One card per row on very small screens */
   }
 }
 .categories-container .category-card {
+  flex: 0 0 calc(33.33% - 1rem); /* Three cards per row with spacing */
+  margin: 0.5rem;
+  max-width: 345px; /* Set the maximum width of the card */
   background: #B7DFF5;
-  padding: 0.625rem;
   border-radius: 0.625rem;
-  border: 0.125rem solid white;
+  border: 2px solid white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
-  flex-wrap: wrap;
-  width: 100%;
 }
 .categories-container .category-image {
   height: auto;
+  width: 95%;
   border-radius: 0.625rem;
   border: 0.125rem solid white;
+  margin: 0 auto;
+  margin-top: 0.5rem;
 }
 .categories-container h3 {
   color: #494949;
@@ -144,11 +147,12 @@ p.user-address {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+  align-items: center;
 }
-.Category-items-container .MuiCard-root {
+.Category-items-container .items-container .MuiCard-root {
   flex: 0 0 calc(50% - 1.25rem);
   margin: 0.375rem;
-  max-width: 345px;
+  max-width: 21.56rem;
   width: 100%;
 }
 .Category-items-container .item-image {
@@ -222,7 +226,7 @@ button.rent-button {
   transition: background-color 0.3s;
   display: block;
   margin: 1rem auto;
-  max-width: 220px;
+  max-width: 13.75rem;
   text-align: center;
 }
 
@@ -231,10 +235,10 @@ button.rent-button {
   justify-content: center;
   align-items: center; /* Center inner content horizontally */
   flex-direction: column; /* Stack items vertically if needed */
-  padding: 20px;
+  padding: 1.25rem;
 }
 .item-details-container .item-details-card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+  box-shadow: 0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
   border-radius: 0.625rem; /* Rounded corners for the card */
 }
 .item-details-container .item-image {
@@ -278,11 +282,11 @@ button.rent-button {
   width: 100%; /* Ensure it takes the full width of the parent container */
 }
 .item-details-container .renter-container .renter-info .renter-profile-pic {
-  width: 40px; /* Set width */
-  height: 40px; /* Set height */
+  width: 2.5rem; /* Set width */
+  height: 2.5rem; /* Set height */
   border-radius: 50%; /* Make the image circular */
   object-fit: cover; /* Ensure the image covers the area */
-  margin-right: 10px; /* Space between the image and the name */
+  margin-right: 0.625rem; /* Space between the image and the name */
 }
 .item-details-container .renter-container .renter-info .renter-full-name {
   margin: 0; /* Remove default margin */
@@ -335,6 +339,32 @@ button.rent-button {
     transform: scale(1);
     opacity: 1;
   }
+}
+.Nearby-items-container {
+  padding: 1rem;
+}
+.Nearby-items-container .Nearby-item-image {
+  height: auto;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+  gap: 1.25rem;
+}
+
+.category-items-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Nearby-items {
+  font-weight: 600;
+  color: #494949;
+  padding-left: 1rem;
+  margin: 0;
+  padding-top: 2rem;
 }
 
 /*# sourceMappingURL=index.css.map */
