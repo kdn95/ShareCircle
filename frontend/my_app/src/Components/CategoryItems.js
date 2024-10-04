@@ -19,7 +19,8 @@ const CategoryItems = () => {
   const fetchCategoryItems = useCallback(async () => {
     setLoading(true); // Set loading to true before fetching data
     try {
-      const response = await axios.get(`https://project-sc.onrender.com/${category_name}`); // Fetch items by category
+      // const response = await axios.get(`https://project-sc.onrender.com/${category_name}`); // Fetch items by category
+      const response = await axios.get(`http://localhost:5008/${category_name}`); // Fetch items by category
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);
@@ -30,7 +31,7 @@ const CategoryItems = () => {
 
   useEffect(() => {
     fetchCategoryItems();
-    
+
     const fetchUserLocation = async () => {
       try {
         const location = await getUserLocation();
@@ -40,7 +41,7 @@ const CategoryItems = () => {
         console.error('Error getting user location:', error);
       }
     };
-  
+
     fetchUserLocation(); // Get user location when component mounts
   }, [fetchCategoryItems]);
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // For fetching route parameters
-import axios from 'axios'; 
+import axios from 'axios';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -18,7 +18,8 @@ const ItemsListing = () => {
     const fetchItemDetails = async () => {
       setLoading(true); // Set loading to true before fetching data
       try {
-        const response = await axios.get(`https://project-sc.onrender.com/${category_name}/${itemId}`);
+        // const response = await axios.get(`https://project-sc.onrender.com/${category_name}/${itemId}`);
+        const response = await axios.get(`http://localhost:5008/${category_name}/${itemId}`);
         setItem(response.data); // Set item data
       } catch (error) {
         console.error('Error fetching item details:', error);
