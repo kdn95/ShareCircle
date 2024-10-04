@@ -15,20 +15,21 @@ const NearbyItems = () => {
   const markersRef = useRef([]);
 
 
-  mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhcmVjaXJjbGUtdGVhbSIsImEiOiJjbTFyNjZ0MXIwN3Y5MmpuNHoyaGFrN3I2In0.R6r5R4DZM3oAi3nBNyCvNg'; // Replace with your access token
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhcmVjaXJjbGUtdGVhbSIsImEiOiJjbTF1NXIwMGMwOWxxMmlwbTNwd2lmMTVmIn0.4SVJBm_yh14wEUCRWzb04g'; // Replace with your access token
 
   const clearMarkers = () => {
     markersRef.current.forEach(marker => marker.remove());
     markersRef.current = []; // Clear markers array
   };
 
+  
   // Fetch nearby items
   const fetchItemsNearby = useCallback(async () => {
     if (userLocation) {
       setLoading(true); // Set loading to true before fetching
       try {
         const token = await getAccessTokenSilently();
-        const response = await fetch(`http://localhost:5009/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=50`, {
+        const response = await fetch(`http://localhost:5006/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=50`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -89,6 +90,7 @@ const NearbyItems = () => {
       return () => {
         if (mapRef.current) {
           mapRef.current.remove();
+          mapRef.current = null;
         }
       };
     }, [userLocation]);
@@ -101,6 +103,7 @@ const NearbyItems = () => {
           // Add item markers to map (using renter's location)
           console.log('Renter Location:', item.renter_longitude, item.renter_latitude);
           if (item.renter_latitude && item.renter_longitude) {
+            console.log(`Creating marker at: ${item.renter_longitude}, ${item.renter_latitude}`);
             const marker = new mapboxgl.Marker()
               .setLngLat([item.renter_longitude, item.renter_latitude])
               .setPopup(new mapboxgl.Popup().setHTML(`
@@ -118,9 +121,9 @@ const NearbyItems = () => {
 
   useEffect(() => {
     getUserLocation()
-      .then(({ longitude, latitude, address }) => {
-        console.log('User Location:', { longitude, latitude, address }); // Debugging log
-        setUserLocation({ longitude, latitude });
+      .then(({ latitude, longitude, address }) => {
+        console.log('User Location:', { latitude, longitude, address }); // Debugging log
+        setUserLocation({ latitude, longitude });
         setUserAddress(address || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' });
       })
       .catch((error) => {
@@ -131,7 +134,7 @@ const NearbyItems = () => {
   useEffect(() => {
     if (userLocation) {
       console.log('User Location:', userLocation);
-      console.log('Nearby Items state:', nearbyItems); // Add this log
+      // console.log('Nearby Items state:', nearbyItems); // Add this log
       fetchItemsNearby(); // Fetch nearby items if location is available
     }
   }, [userLocation, fetchItemsNearby]);

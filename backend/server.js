@@ -6,7 +6,7 @@ const cloudinary = require('cloudinary').v2;
 const { auth } = require('express-oauth2-jwt-bearer');
 
 const app = express();
-const PORT = process.env.PORT || 5009;
+const PORT = process.env.PORT || 5006;
 
 // Define allowed origins
 // const allowedOrigins = [
@@ -95,15 +95,15 @@ app.get('/items/nearby', jwtCheck, async (req, res) => {
   try {
     const query = `
       SELECT 
-  "Item_id", 
-  "Item_name", 
-  "Description", 
-  "Price_per_day", 
-  "Image_url", 
-  "Availability",
-  ST_X(ST_AsText("Renters"."location"::geometry)) AS "renter_longitude", 
-  ST_Y(ST_AsText("Renters"."location"::geometry)) AS "renter_latitude",
-  "Renters"."Renter_name"
+      "Item_id", 
+      "Item_name", 
+      "Description", 
+      "Price_per_day", 
+      "Image_url", 
+      "Availability",
+      ST_X(ST_AsText("Renters"."location"::geometry)) AS "renter_longitude", 
+      ST_Y(ST_AsText("Renters"."location"::geometry)) AS "renter_latitude",
+      "Items"."Renter_name"
   FROM "Items"
   INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
   WHERE ST_DWithin("Renters"."location", ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography, $3 * 1000);

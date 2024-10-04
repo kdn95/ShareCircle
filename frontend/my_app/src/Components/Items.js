@@ -18,7 +18,7 @@ const ItemsListing = () => {
     const fetchItemDetails = async () => {
       setLoading(true); // Set loading to true before fetching data
       try {
-        const response = await axios.get(`http://localhost:5009/${category_name}/${itemId}`);
+        const response = await axios.get(`http://localhost:5006/${category_name}/${itemId}`);
         setItem(response.data); // Set item data
       } catch (error) {
         console.error('Error fetching item details:', error);
