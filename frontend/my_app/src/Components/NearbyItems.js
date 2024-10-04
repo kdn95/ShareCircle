@@ -140,49 +140,30 @@ const NearbyItems = () => {
   }, [userLocation, fetchItemsNearby]);
 
   return (
-    <div className="Category-items-container">
-      <div className="Category-items-title-address-container">
-      <h2 className="Category-items-title">Nearby Items</h2>
+    <div>
+      <h2>Nearby Items</h2>
       <button onClick={fetchItemsNearby}>Fetch Nearby Items</button>
       {userAddress && (
-        <p className="user-address">
+        <p>
           {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
         </p>
       )}
-      </div>
-      {loading ? ( // Show loader while fetching
-        <LogoLoader />
-      ) : (
-        <div className="items-container">
-          {nearbyItems.length > 0 ? ( // Check if nearby items are available
-            nearbyItems.map((item) => (
-              <Card sx={{ maxWidth: 345, margin: '20px' }} key={item.Item_id} className="category-items-card">
-                <Link to={`/category/${category_name}/${item.Item_id}`} className="no-undies"> {/* Link to item details */}
-                  <CardActionArea>
-                  <CardMedia
-                      component="img"
-                      className="item-image"
-                      height="140"
-                      image={item.Image_url}
-                      alt={item.Item_name}
-                  />
-                  <CardContent>
-                    <h3 className="item-header">{item.Item_name}</h3>
-                    <div className="rating-container">
-                      <StarIcon className="star-icon" alt="star-icon" />
-                      <p className="renter-rating"> {item.Rating}</p> {/* Add rating instead */}
-                    </div>
-                    <p className="item-price">Price: ${item.Price_per_day} per day</p>
-                  </CardContent>
-                  </CardActionArea>
-                </Link>
-              </Card>
-            ))
-          ) : (
-            <p>No nearby items found.</p> // Message if no items are available
-          )}
-        </div>
-      )}
+
+      {/* Map container */}
+      <div
+        ref={mapContainerRef}
+        style={{ width: '100%', height: '300px' }} // Adjust map container height/width as needed
+        className="map-container"
+      />
+      <ul>
+        {nearbyItems.map((item) => (
+          <li key={item.Item_id}>
+            <h4>{item.Item_name}</h4>
+            <p>{item.Description}</p>
+            <p>Price: ${item.Price_per_day} per day</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
