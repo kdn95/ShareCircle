@@ -12,7 +12,7 @@ import Calendar from './Calendar';
 import format from 'date-fns/format';
 import '../index.css';
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`);
 
 const ItemsListing = () => {
   const { category_name, itemId } = useParams();
@@ -54,31 +54,30 @@ const ItemsListing = () => {
     setShowCalendar(false);
   };
 
-  // Proceed to payment
   const handleProceedToPayment = async () => {
     if (!confirmedDates) return;
 
     try {
-      const stripe = await stripePromise; // Load Stripe.js
-      const response = await axios.post('http://localhost:5006/create-payment-intent', {
-        amount: item.Price_per_day * (confirmedDates.endDate - confirmedDates.startDate) / (1000 * 60 * 60 * 24), // Calculate total amount
-        category: item.category, // Include category if needed
-      });
+        const stripe = await stripePromise; // Load Stripe.js
+        const response = await axios.post('http://localhost:5006/create-checkout-session', {
+            amount: Math.round(item.Price_per_day * (confirmedDates.endDate - confirmedDates.startDate) / (1000 * 60 * 60 * 24)), // Calculate total amount
+            category: item.Category_id, // Send the category
+        });
 
-      const { clientSecret } = response.data;
+        const { id } = response.data; // Get the session ID from the response
 
-      // Redirect to Stripe Checkout
-      const result = await stripe.redirectToCheckout({
-        clientSecret,
-      });
+        // Redirect to Stripe Checkout
+        const result = await stripe.redirectToCheckout({ sessionId: id });
 
-      if (result.error) {
-        console.error(result.error.message);
-      }
+        if (result.error) {
+            console.error(result.error.message);
+            // Handle any error that occurs during redirection
+        }
     } catch (error) {
-      console.error('Error creating payment intent:', error.response?.data || error.message);
+        console.error('Error creating checkout session:', error.response?.data || error.message);
     }
-  };
+};
+
 
   return (
     <div className="item-details-container">
