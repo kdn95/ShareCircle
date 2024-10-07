@@ -4,8 +4,11 @@ const cors = require('cors'); // Import CORS
 const pool = require(__dirname + '/db.config.js');
 const cloudinary = require('cloudinary').v2;
 const { auth } = require('express-oauth2-jwt-bearer');
+const Stripe = require('stripe');
 
 const app = express();
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+app.use(express.json());
 const PORT = process.env.PORT || 5006;
 
 // Define allowed origins
@@ -21,6 +24,12 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify methods allowed
   credentials: true, // Allow credentials if needed
 }));
+
+app.use((req, res, next) => {
+  console.log(`Incoming request: ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 
 // JWT check middleware
 const jwtCheck = auth({
@@ -82,6 +91,27 @@ const getCategories = (req, res) => {
 };
 // Route to get Categories data
 app.get('/', getCategories);
+
+// STRIPE PAYMENT
+app.post('/create-payment-intent', async (req, res) => {
+  const { amount } = req.body; // Amount in cents
+
+  if (!category) {
+    return res.status(400).json({ error: 'Category not found' });
+  }
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: 'aud', // Change this to your desired currency
+    });
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
 
 
 // get items within a certain (e.g., 5km) radius (protected)
@@ -175,6 +205,8 @@ app.get('/:category_name/:itemId', async (req, res) => {
     res.status(500).json({ error: 'Database query failed' });
   }
 });
+
+
 
 
 // Start server

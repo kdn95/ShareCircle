@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -11,12 +12,14 @@ import Calendar from './Calendar';
 import format from 'date-fns/format';
 import '../index.css';
 
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
 const ItemsListing = () => {
   const { category_name, itemId } = useParams();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [confirmedDates, setConfirmedDates] = useState(null); // State to hold confirmed dates
+  const [confirmedDates, setConfirmedDates] = useState(null);
 
   useEffect(() => {
     const fetchItemDetails = async () => {
@@ -42,23 +45,39 @@ const ItemsListing = () => {
     return <p>No item found.</p>;
   }
 
-  // Function to handle Rent Now button click
   const handleRentNowClick = () => {
-    setShowCalendar(true); // Open the calendar when the button is clicked
+    setShowCalendar(true);
   };
 
-  // Function to handle confirmed dates from Calendar
   const handleConfirmDates = (dates) => {
     setConfirmedDates(dates);
-    setShowCalendar(false); // Close calendar after confirming dates
-    console.log('Confirmed Dates:', dates); // You can further process these dates as needed
+    setShowCalendar(false);
   };
 
-  // Function to handle proceed to payment
-  const handleProceedToPayment = () => {
-    // Logic to proceed to payment
-    console.log('Proceeding to payment...');
-    // You can redirect or show the payment form here
+  // Proceed to payment
+  const handleProceedToPayment = async () => {
+    if (!confirmedDates) return;
+
+    try {
+      const stripe = await stripePromise; // Load Stripe.js
+      const response = await axios.post('http://localhost:5006/create-payment-intent', {
+        amount: item.Price_per_day * (confirmedDates.endDate - confirmedDates.startDate) / (1000 * 60 * 60 * 24), // Calculate total amount
+        category: item.category, // Include category if needed
+      });
+
+      const { clientSecret } = response.data;
+
+      // Redirect to Stripe Checkout
+      const result = await stripe.redirectToCheckout({
+        clientSecret,
+      });
+
+      if (result.error) {
+        console.error(result.error.message);
+      }
+    } catch (error) {
+      console.error('Error creating payment intent:', error.response?.data || error.message);
+    }
   };
 
   return (
@@ -100,18 +119,13 @@ const ItemsListing = () => {
           <div className="rent-button-container">
             <button className="rent-button" onClick={handleRentNowClick}>Rent Now</button>
           </div>
-
-          {/* Conditionally show the Calendar component */}
           {showCalendar && <Calendar onConfirmDates={handleConfirmDates} />}
         </CardContent>
       </Card>
-
-      {/* Display confirmed dates if they exist */}
       {confirmedDates && (
         <div className="confirmed-dates">
           <h4 className="dates-title">Confirmed Dates:</h4>
           <p className="date-range">{format(confirmedDates.startDate, 'dd/MM/yyyy')} - {format(confirmedDates.endDate, 'dd/MM/yyyy')}</p>
-          {/* Proceed to Payment Button */}
           <button className="proceed-button" onClick={handleProceedToPayment}>
             Proceed to Payment
           </button>
