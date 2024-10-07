@@ -25,7 +25,7 @@ const ItemsListing = () => {
     const fetchItemDetails = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:5006/${category_name}/${itemId}`);
+        const response = await axios.get(`http://localhost:5005/${category_name}/${itemId}`);
         setItem(response.data);
       } catch (error) {
         console.error('Error fetching item details:', error);
@@ -59,7 +59,7 @@ const ItemsListing = () => {
 
     try {
         const stripe = await stripePromise; // Load Stripe.js
-        const response = await axios.post('http://localhost:5006/create-checkout-session', {
+        const response = await axios.post('http://localhost:5005/create-checkout-session', {
             amount: Math.round(item.Price_per_day * (confirmedDates.endDate - confirmedDates.startDate) / (1000 * 60 * 60 * 24)), // Calculate total amount
             category: item.Category_id, // Send the category
         });
