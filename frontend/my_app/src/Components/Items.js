@@ -1,55 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // For fetching route parameters
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import StarIcon from '@mui/icons-material/Star';
 import ChatIcon from '@mui/icons-material/Chat';
-import LogoLoader from './LogoLoader'; // Import your LogoLoader component
-import Calendar from './Calendar'; // Import your Calendar component
-import '../index.css'; // Assuming your custom CSS is here
+import LogoLoader from './LogoLoader';
+import Calendar from './Calendar';
+import format from 'date-fns/format';
+import '../index.css';
 
 const ItemsListing = () => {
-  const { category_name, itemId } = useParams(); // Get category name and itemId from the URL
+  const { category_name, itemId } = useParams();
   const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(true); // Initialize loading state
-  const [showCalendar, setShowCalendar] = useState(false); // State to show calendar
-  const [selectedDates, setSelectedDates] = useState({}); // State to store selected dates
+  const [loading, setLoading] = useState(true);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [confirmedDates, setConfirmedDates] = useState(null); // State to hold confirmed dates
 
   useEffect(() => {
     const fetchItemDetails = async () => {
-      setLoading(true); // Set loading to true before fetching data
+      setLoading(true);
       try {
         const response = await axios.get(`http://localhost:5006/${category_name}/${itemId}`);
-        setItem(response.data); // Set item data
+        setItem(response.data);
       } catch (error) {
         console.error('Error fetching item details:', error);
       } finally {
-        setLoading(false); // Set loading to false after fetching is complete
+        setLoading(false);
       }
     };
 
     fetchItemDetails();
   }, [category_name, itemId]);
 
-  const handleRentNowClick = () => {
-    setShowCalendar(true); // Show calendar when Rent Now is clicked
-  };
-
-  const handleDatesChange = (dates) => {
-    setSelectedDates(dates); // Store the selected dates
-    setShowCalendar(false); // Close the calendar after selecting dates
-    // Optionally, you could trigger an API call to confirm the rental dates here
-  };
-
   if (loading) {
-    return <LogoLoader />; // Show loader while loading
+    return <LogoLoader />;
   }
 
   if (!item) {
-    return <p>No item found.</p>; // Handle case where item is not found
+    return <p>No item found.</p>;
   }
+
+  // Function to handle Rent Now button click
+  const handleRentNowClick = () => {
+    setShowCalendar(true); // Open the calendar when the button is clicked
+  };
+
+  // Function to handle confirmed dates from Calendar
+  const handleConfirmDates = (dates) => {
+    setConfirmedDates(dates);
+    setShowCalendar(false); // Close calendar after confirming dates
+    console.log('Confirmed Dates:', dates); // You can further process these dates as needed
+  };
 
   return (
     <div className="item-details-container">
@@ -73,14 +76,14 @@ const ItemsListing = () => {
           <div className="renter-container">
             <div className="renter-info">
               <img
-                src={item.Profile_pic} // Use Profile_pic from item data
+                src={item.Profile_pic}
                 alt="Renter Profile"
-                className="renter-profile-pic" // Class for styling
+                className="renter-profile-pic"
               />
               <div className="renter-details">
                 <p className="renter-full-name">{item.Renter_name} {item.Last_name}</p>
                 <div className="rating-container">
-                  <p className="renter-rating">{item.Rating}</p> {/* Renter's rating */}
+                  <p className="renter-rating">{item.Rating}</p>
                   <StarIcon className="star-icon" alt="star-icon" />
                 </div>
               </div>
@@ -90,13 +93,17 @@ const ItemsListing = () => {
           <div className="rent-button-container">
             <button className="rent-button" onClick={handleRentNowClick}>Rent Now</button>
           </div>
+
+          {/* Conditionally show the Calendar component */}
+          {showCalendar && <Calendar onConfirmDates={handleConfirmDates} />}
         </CardContent>
       </Card>
 
-      {/* Conditionally render the Calendar component */}
-      {showCalendar && (
-        <div className="calendar-modal">
-          <Calendar onDatesChange={handleDatesChange} />
+      {/* Display confirmed dates if they exist */}
+      {confirmedDates && (
+        <div className="confirmed-dates">
+          <h4 className="dates-title">Confirmed Dates:</h4>
+          <p className="date-range">{format(confirmedDates.startDate, 'dd/MM/yyyy')} - {format(confirmedDates.endDate, 'dd/MM/yyyy')}</p>
         </div>
       )}
     </div>

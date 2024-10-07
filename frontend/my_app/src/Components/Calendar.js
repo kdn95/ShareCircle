@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRange } from 'react-date-range';
-import { format } from 'date-fns';
 
-const Calendar = ({ onDatesChange }) => {
+
+const Calendar = ({ onConfirmDates }) => {
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -15,7 +15,11 @@ const Calendar = ({ onDatesChange }) => {
 
   const handleSelect = (item) => {
     setDates([item.selection]);
-    onDatesChange(item.selection); // Pass selected dates back to parent
+  };
+
+  const handleConfirmDates = () => {
+    // Call the onConfirmDates function passed from ItemsListing
+    onConfirmDates(dates[0]);
   };
 
   return (
@@ -24,13 +28,14 @@ const Calendar = ({ onDatesChange }) => {
         editableDateInputs={true}
         onChange={handleSelect}
         moveRangeOnFirstSelection={false}
-        ranges={dates}
         minDate={new Date()}
+        ranges={dates}
         className="calendar"
       />
-      <p>
-        Selected: {`${format(dates[0].startDate, 'MM/dd/yyyy')} - ${format(dates[0].endDate, 'MM/dd/yyyy')}`}
-      </p>
+      {/* Confirm Dates Button */}
+      <button onClick={handleConfirmDates} className="confirm-dates-button">
+        Confirm Dates
+      </button>
     </div>
   );
 };
