@@ -92,26 +92,42 @@ const getCategories = (req, res) => {
 // Route to get Categories data
 app.get('/', getCategories);
 
-// STRIPE PAYMENT
-app.post('/create-payment-intent', async (req, res) => {
-  const { amount } = req.body; // Amount in cents
+// STRIPE CHECKOUT SESSION
+app.post('/create-checkout-session', async (req, res) => {
+  console.log('Incoming request body:', req.body);
+  const { amount, category } = req.body; // Extract amount and category
 
-  if (!category) {
-    return res.status(400).json({ error: 'Category not found' });
+  // Validate the inputs
+  if (!amount || !category) {
+      return res.status(400).json({ error: 'Amount and category are required' });
   }
 
   try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency: 'aud', // Change this to your desired currency
-    });
-    res.send({
-      clientSecret: paymentIntent.client_secret,
-    });
+      const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'], // Specify the payment methods
+          line_items: [{
+              price_data: {
+                  currency: 'aud', // Currency for the transaction
+                  product_data: {
+                      name: 'Your Product Name', // Replace with the actual product name
+                      // Add other product details if necessary
+                  },
+                  unit_amount: amount, // Amount in cents
+              },
+              quantity: 1, // Adjust quantity as needed
+          }],
+          mode: 'payment', // Payment mode
+          success_url: 'http://localhost:3000/success', // Redirect on success
+          cancel_url: 'http://localhost:3000/cancel', // Redirect on cancel
+      });
+
+      res.json({ id: session.id }); // Send the session ID back to the client
   } catch (error) {
-    res.status(500).send({ error: error.message });
+      console.error('Error creating checkout session:', error);
+      res.status(500).send({ error: error.message });
   }
 });
+
 
 
 // get items within a certain (e.g., 5km) radius (protected)
@@ -124,14 +140,14 @@ app.get('/items/nearby', jwtCheck, async (req, res) => {
 
   try {
     const query = `
-      SELECT 
-      "Item_id", 
-      "Item_name", 
-      "Description", 
-      "Price_per_day", 
-      "Image_url", 
+      SELECT
+      "Item_id",
+      "Item_name",
+      "Description",
+      "Price_per_day",
+      "Image_url",
       "Availability",
-      ST_X(ST_AsText("Renters"."location"::geometry)) AS "renter_longitude", 
+      ST_X(ST_AsText("Renters"."location"::geometry)) AS "renter_longitude",
       ST_Y(ST_AsText("Renters"."location"::geometry)) AS "renter_latitude",
       "Items"."Renter_name",
       "Categories"."Name" AS "category"
