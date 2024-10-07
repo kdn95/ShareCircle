@@ -58,25 +58,27 @@ const ItemsListing = () => {
     if (!confirmedDates) return;
 
     try {
-        const stripe = await stripePromise; // Load Stripe.js
+        const stripe = await stripePromise;
+        const numberOfDays = (confirmedDates.endDate - confirmedDates.startDate) / (1000 * 60 * 60 * 24);
+        const totalAmount = Math.round(item.Price_per_day * numberOfDays * 100); // Convert to cents
+
         const response = await axios.post('http://localhost:5005/create-checkout-session', {
-            amount: Math.round(item.Price_per_day * (confirmedDates.endDate - confirmedDates.startDate) / (1000 * 60 * 60 * 24)), // Calculate total amount
-            category: item.Category_id, // Send the category
+            amount: totalAmount, // Pass amount in cents
+            category: item.Category_id,
         });
 
-        const { id } = response.data; // Get the session ID from the response
+        const { id } = response.data;
 
-        // Redirect to Stripe Checkout
         const result = await stripe.redirectToCheckout({ sessionId: id });
 
         if (result.error) {
             console.error(result.error.message);
-            // Handle any error that occurs during redirection
         }
     } catch (error) {
         console.error('Error creating checkout session:', error.response?.data || error.message);
     }
 };
+
 
 
   return (
