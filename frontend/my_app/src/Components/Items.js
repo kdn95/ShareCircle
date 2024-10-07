@@ -7,12 +7,15 @@ import CardMedia from '@mui/material/CardMedia';
 import StarIcon from '@mui/icons-material/Star';
 import ChatIcon from '@mui/icons-material/Chat';
 import LogoLoader from './LogoLoader'; // Import your LogoLoader component
+import Calendar from './Calendar'; // Import your Calendar component
 import '../index.css'; // Assuming your custom CSS is here
 
 const ItemsListing = () => {
   const { category_name, itemId } = useParams(); // Get category name and itemId from the URL
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true); // Initialize loading state
+  const [showCalendar, setShowCalendar] = useState(false); // State to show calendar
+  const [selectedDates, setSelectedDates] = useState({}); // State to store selected dates
 
   useEffect(() => {
     const fetchItemDetails = async () => {
@@ -29,6 +32,16 @@ const ItemsListing = () => {
 
     fetchItemDetails();
   }, [category_name, itemId]);
+
+  const handleRentNowClick = () => {
+    setShowCalendar(true); // Show calendar when Rent Now is clicked
+  };
+
+  const handleDatesChange = (dates) => {
+    setSelectedDates(dates); // Store the selected dates
+    setShowCalendar(false); // Close the calendar after selecting dates
+    // Optionally, you could trigger an API call to confirm the rental dates here
+  };
 
   if (loading) {
     return <LogoLoader />; // Show loader while loading
@@ -75,10 +88,17 @@ const ItemsListing = () => {
             </div>
           </div>
           <div className="rent-button-container">
-            <button className="rent-button">Rent Now</button>
+            <button className="rent-button" onClick={handleRentNowClick}>Rent Now</button>
           </div>
         </CardContent>
       </Card>
+
+      {/* Conditionally render the Calendar component */}
+      {showCalendar && (
+        <div className="calendar-modal">
+          <Calendar onDatesChange={handleDatesChange} />
+        </div>
+      )}
     </div>
   );
 };

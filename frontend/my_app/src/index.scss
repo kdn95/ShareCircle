@@ -416,3 +416,18 @@ button {
   margin: 0; // Remove margin for better control
   padding-top: 2rem;
 }
+
+.calendar-modal {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.calendar-container {
+  width: 100%;
+}
