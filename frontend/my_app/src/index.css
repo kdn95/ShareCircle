@@ -402,4 +402,20 @@ button.rent-button {
   margin-top: 0.25rem;
 }
 
+.proceed-button {
+  margin-top: 1rem; /* Add some space above the button */
+  padding: 10px 20px; /* Add padding for the button */
+  background-color: #B7DFF5; /* Green background */
+  color: #494949; /* White text */
+  border: 3px solid transparent; /* Remove border */
+  border-radius: 0.625rem; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Increase font size */
+  width: 13.75rem;
+}
+
+.proceed-button:hover {
+  border-color: #C9D7A4; /* Darker green on hover */
+}
+
 /*# sourceMappingURL=index.css.map */

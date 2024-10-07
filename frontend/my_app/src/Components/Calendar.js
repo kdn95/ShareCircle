@@ -22,15 +22,17 @@ const Calendar = ({ onConfirmDates }) => {
     onConfirmDates(dates[0]);
   };
 
+
   return (
     <div className="calendar-container">
       <DateRange
         editableDateInputs={true}
         onChange={handleSelect}
+        rangeColors={['#8ABEE8']}
         moveRangeOnFirstSelection={false}
         minDate={new Date()}
         ranges={dates}
-        className="calendar"
+        className="calendar custom-date-range"
       />
       {/* Confirm Dates Button */}
       <button onClick={handleConfirmDates} className="confirm-dates-button">

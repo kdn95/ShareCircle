@@ -54,6 +54,13 @@ const ItemsListing = () => {
     console.log('Confirmed Dates:', dates); // You can further process these dates as needed
   };
 
+  // Function to handle proceed to payment
+  const handleProceedToPayment = () => {
+    // Logic to proceed to payment
+    console.log('Proceeding to payment...');
+    // You can redirect or show the payment form here
+  };
+
   return (
     <div className="item-details-container">
       <Card sx={{ maxWidth: 400, margin: '20px' }} className="item-details-card">
@@ -104,6 +111,10 @@ const ItemsListing = () => {
         <div className="confirmed-dates">
           <h4 className="dates-title">Confirmed Dates:</h4>
           <p className="date-range">{format(confirmedDates.startDate, 'dd/MM/yyyy')} - {format(confirmedDates.endDate, 'dd/MM/yyyy')}</p>
+          {/* Proceed to Payment Button */}
+          <button className="proceed-button" onClick={handleProceedToPayment}>
+            Proceed to Payment
+          </button>
         </div>
       )}
     </div>
