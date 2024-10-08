@@ -13,6 +13,7 @@ import format from 'date-fns/format';
 import '../index.css';
 import mapboxgl from 'mapbox-gl'; // Import Mapbox
 import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox CSS
+import Modal from '@mui/material/Modal'; // Import Modal
 
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`);
@@ -181,18 +182,29 @@ const ItemsListing = () => {
           <div className="rent-button-container">
             <button className="rent-button" onClick={handleRentNowClick}>Rent Now</button>
           </div>
-          {showCalendar && <Calendar onConfirmDates={handleConfirmDates} />}
-        </CardContent>
-      </Card>
-      {confirmedDates && (
-        <div className="confirmed-dates">
-          <h4 className="dates-title">Confirmed Dates:</h4>
-          <p className="date-range">{format(confirmedDates.startDate, 'dd/MM/yyyy')} - {format(confirmedDates.endDate, 'dd/MM/yyyy')}</p>
-          <button className="proceed-button" onClick={handleProceedToPayment}>
+          {/* {showCalendar && <Calendar onConfirmDates={handleConfirmDates} />}  */}
+          {/* Modal for Calendar */}
+          <Modal
+          open={showCalendar}
+          onClose={() => setShowCalendar(false)}
+          aria-labelledby="calendar-modal-title"
+          aria-describedby="calendar-modal-description"
+          >
+            <div className="calendar-modal">
+              <Calendar onConfirmDates={handleConfirmDates} />
+            </div>
+            </Modal>
+            {confirmedDates && (
+              <div className="confirmed-dates">
+                <h4 className="dates-title">Confirmed Dates:</h4>
+                <p className="date-range">{format(confirmedDates.startDate, 'dd/MM/yyyy')} - {format(confirmedDates.endDate, 'dd/MM/yyyy')}</p>
+                <button className="proceed-button" onClick={handleProceedToPayment}>
             Proceed to Payment
           </button>
         </div>
       )}
+        </CardContent>
+      </Card>
     </div>
   );
 };
