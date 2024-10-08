@@ -74,8 +74,8 @@ const CategoryItems = () => {
                   <CardContent>
                     <h3 className="item-header">{item.Item_name}</h3>
                     <div className="rating-container">
+                    <p className="renter-rating"> {item.Rating}</p> {/* Add rating instead */}
                       <StarIcon className="star-icon" alt="star-icon" />
-                      <p className="renter-rating"> {item.Rating}</p> {/* Add rating instead */}
                     </div>
                     <p className="item-price">Price: ${item.Price_per_day} per day</p>
                     {/* <img src={item.Image_url} alt={item.Item_name} /> */}
