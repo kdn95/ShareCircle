@@ -95,10 +95,10 @@ app.get('/', getCategories);
 // STRIPE CHECKOUT SESSION
 app.post('/create-checkout-session', async (req, res) => {
   console.log('Incoming request body:', req.body);
-  const { amount, category } = req.body; // Extract amount and category
+  const { amount, category, itemName } = req.body; // Extract amount and category
 
   // Validate the inputs
-  if (!amount || !category) {
+  if (!amount || !category || !itemName) {
       return res.status(400).json({ error: 'Amount and category are required' });
   }
 
@@ -109,7 +109,7 @@ app.post('/create-checkout-session', async (req, res) => {
               price_data: {
                   currency: 'aud', // Currency for the transaction
                   product_data: {
-                      name: 'Your Product Name', // Replace with the actual product name
+                      name: itemName, // Replace with the actual product name
                       // Add other product details if necessary
                   },
                   unit_amount: amount, // Amount in cents
