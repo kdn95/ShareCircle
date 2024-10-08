@@ -9,7 +9,7 @@ const Stripe = require('stripe');
 const app = express();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 app.use(express.json());
-const PORT = process.env.PORT || 5004;
+const PORT = process.env.PORT || 5005;
 
 // Define allowed origins
 // const allowedOrigins = [
@@ -151,7 +151,8 @@ app.get('/items/nearby', jwtCheck, async (req, res) => {
       ST_X(ST_AsText("Renters"."location"::geometry)) AS "renter_longitude",
       ST_Y(ST_AsText("Renters"."location"::geometry)) AS "renter_latitude",
       "Items"."Renter_name",
-      "Categories"."Name" AS "category"
+      "Categories"."Name" AS "category",
+      "Renters"."Rating" AS "Rating"
   FROM "Items"
   INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
   INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
