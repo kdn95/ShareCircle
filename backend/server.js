@@ -9,7 +9,7 @@ const Stripe = require('stripe');
 const app = express();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 app.use(express.json());
-const PORT = process.env.PORT || 5005;
+const PORT = process.env.PORT || 5006;
 
 // Define allowed origins
 // const allowedOrigins = [
@@ -205,7 +205,13 @@ app.get('/:category_name/:itemId', async (req, res) => {
 
   // Query to fetch an item by Category_id and Item_id
   const query = `
-    SELECT * FROM "Items"
+    SELECT
+    "Items".*,
+    "Categories"."Name" AS "CategoryName",
+    "Renters"."Rating",
+    ST_X(ST_AsText("Renters"."location"::geometry)) AS "renter_longitude",
+    ST_Y(ST_AsText("Renters"."location"::geometry)) AS "renter_latitude"
+    FROM "Items"
     INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
     INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
     WHERE "Categories"."Name" = $1 AND "Items"."Item_id" = $2

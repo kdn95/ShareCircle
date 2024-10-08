@@ -419,3 +419,12 @@ button.rent-button {
 }
 
 /*# sourceMappingURL=index.css.map */
+.map-container {
+  margin-top: 20px;
+}
+
+.mapbox-container {
+  width: 100%;
+  height: 300px;
+  margin: 20px 0;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
@@ -11,6 +11,9 @@ import LogoLoader from './LogoLoader';
 import Calendar from './Calendar';
 import format from 'date-fns/format';
 import '../index.css';
+import mapboxgl from 'mapbox-gl'; // Import Mapbox
+import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox CSS
+
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`);
 
@@ -21,11 +24,17 @@ const ItemsListing = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [confirmedDates, setConfirmedDates] = useState(null);
 
+  const mapContainerRef = useRef(null);
+  const mapRef = useRef(null);
+  const markerRef = useRef([]);
+
+  mapboxgl.accessToken = process.env.REACT_APP_MB_TOKEN;
+
   useEffect(() => {
     const fetchItemDetails = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:5005/${category_name}/${itemId}`);
+        const response = await axios.get(`http://localhost:5006/${category_name}/${itemId}`);
         setItem(response.data);
       } catch (error) {
         console.error('Error fetching item details:', error);
@@ -37,14 +46,6 @@ const ItemsListing = () => {
     fetchItemDetails();
   }, [category_name, itemId]);
 
-  if (loading) {
-    return <LogoLoader />;
-  }
-
-  if (!item) {
-    return <p>No item found.</p>;
-  }
-
   const handleRentNowClick = () => {
     setShowCalendar(true);
   };
@@ -54,31 +55,73 @@ const ItemsListing = () => {
     setShowCalendar(false);
   };
 
-  const handleProceedToPayment = async () => {
-    if (!confirmedDates) return;
-
-    try {
-        const stripe = await stripePromise;
-        const numberOfDays = (confirmedDates.endDate - confirmedDates.startDate) / (1000 * 60 * 60 * 24);
-        const totalAmount = Math.round(item.Price_per_day * numberOfDays * 100); // Convert to cents
-
-        const response = await axios.post('http://localhost:5005/create-checkout-session', {
-            amount: totalAmount, // Pass amount in cents
-            category: item.Category_id,
+  useEffect(() => {
+    console.log(mapContainerRef.current);
+    if (item && mapContainerRef.current && item.renter_longitude && item.renter_latitude) {
+      if (!mapRef.current) {
+        mapRef.current = new mapboxgl.Map({
+          container: mapContainerRef.current,
+          style: 'mapbox://styles/mapbox/standard',
+          center: [item.renter_longitude, item.renter_latitude],
+          zoom: 12,
         });
 
-        const { id } = response.data;
-
-        const result = await stripe.redirectToCheckout({ sessionId: id });
-
-        if (result.error) {
-            console.error(result.error.message);
-        }
-    } catch (error) {
-        console.error('Error creating checkout session:', error.response?.data || error.message);
+        // const navControl = new mapboxgl.NavigationControl();
+        // mapRef.current.addControl(navControl, 'top-right');
+  
+        markerRef.current = new mapboxgl.Marker({ color: 'blue' })
+          .setLngLat([item.renter_longitude, item.renter_latitude])
+          .setPopup(new mapboxgl.Popup().setHTML(`<h4>${item.Item_name}</h4>`))
+          .addTo(mapRef.current);
+      } else {
+        console.log("something here");
+        mapRef.current.setCenter([item.renter_longitude, item.renter_latitude]);
+        markerRef.current.setLngLat([item.renter_longitude, item.renter_latitude]);
+      }
     }
-};
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+  }, [item]);
 
+  const handleProceedToPayment = async () => {
+    if (!confirmedDates || !confirmedDates.startDate || !confirmedDates.endDate) {
+      console.error('Invalid date range.');
+      return;
+    }
+  
+    try {
+      const stripe = await stripePromise;
+      const numberOfDays = (confirmedDates.endDate - confirmedDates.startDate) / (1000 * 60 * 60 * 24);
+      const totalAmount = Math.round(item.Price_per_day * numberOfDays * 100); // Convert to cents
+  
+      const response = await axios.post('http://localhost:5005/create-checkout-session', {
+        amount: totalAmount,
+        category: item.Category_id,
+      });
+  
+      const { id } = response.data;
+  
+      const result = await stripe.redirectToCheckout({ sessionId: id });
+  
+      if (result.error) {
+        console.error(result.error.message);
+      }
+    } catch (error) {
+      console.error('Error creating checkout session:', error.response?.data || error.message);
+    }
+  };
+  
+  if (loading) {
+    return <LogoLoader />;
+  }
+
+  if (!item) {
+    return <p>No item found.</p>;
+  }
 
 
   return (
@@ -117,6 +160,8 @@ const ItemsListing = () => {
               <ChatIcon className="chat-icon" alt="chat" />
             </div>
           </div>
+          {/* Map container */}
+          <div ref={mapContainerRef} style={{ width: '100%', height: '300px' }} className="map-container" />
           <div className="rent-button-container">
             <button className="rent-button" onClick={handleRentNowClick}>Rent Now</button>
           </div>
