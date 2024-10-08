@@ -110,6 +110,7 @@ const ItemsListing = () => {
       const stripe = await stripePromise;
       const numberOfDays = (confirmedDates.endDate - confirmedDates.startDate) / (1000 * 60 * 60 * 24);
       const totalAmount = Math.round(item.Price_per_day * numberOfDays * 100); // Convert to cents
+      const currentPageUrl = window.location.href;
   
       const response = await axios.post('http://localhost:5004/create-checkout-session', {
         amount: totalAmount,
@@ -118,6 +119,7 @@ const ItemsListing = () => {
         imageUrl: item.Image_url,
         renterFirstName: item.First_name,
         renterLastName: item.Last_name,
+        previousPageUrl: currentPageUrl
       });
   
       const { id } = response.data;

@@ -95,7 +95,7 @@ app.get('/', getCategories);
 // STRIPE CHECKOUT SESSION
 app.post('/create-checkout-session', async (req, res) => {
   console.log('Incoming request body:', req.body);
-  const { amount, category, itemName, renterFirstName, renterLastName, imageUrl } = req.body; // Extract amount and category
+  const { amount, category, itemName, renterFirstName, renterLastName, imageUrl, previousPageUrl} = req.body; // Extract amount and category
 
   // Validate the inputs
   if (!amount || !category || !itemName || !imageUrl || !renterFirstName || !renterLastName) {
@@ -119,7 +119,7 @@ app.post('/create-checkout-session', async (req, res) => {
           }],
           mode: 'payment', // Payment mode
           success_url: 'http://localhost:3000/success', // Redirect on success
-          cancel_url: 'http://localhost:3000/', // Redirect on cancel
+          cancel_url: previousPageUrl, // Redirect to previous item page
       });
 
       res.json({ id: session.id }); // Send the session ID back to the client
