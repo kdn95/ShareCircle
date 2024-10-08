@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 import StarIcon from '@mui/icons-material/Star';
+import { Select, MenuItem } from '@mui/material';
 import LogoLoader from './LogoLoader'; // Import your LogoLoader component
 import '../index.css'; // Assuming your custom CSS is here
 
@@ -23,6 +24,7 @@ const NearbyItems = () => {
   const userMarkerRef = useRef(null);
   const markersRef = useRef([]);
   const { category_name } = useParams(); // Get the category name from the URL
+  const [radius, setRadius] = useState(5);
 
   mapboxgl.accessToken = process.env.REACT_APP_MB_TOKEN; // Replace with your access token
 
@@ -31,13 +33,21 @@ const NearbyItems = () => {
     markersRef.current = []; // Clear markers array
   };
 
+  const handleRadiusSelect = (event) => {
+    setRadius(event.target.value); // Update Radius based on user selection
+    fetchItemsNearby(event.target.value); // Fetch nearby items with new radius
+  };
+
+
+
+
   // Fetch nearby items
-  const fetchItemsNearby = useCallback(async () => {
+  const fetchItemsNearby = useCallback(async (radius_km = radius) => {
     if (userLocation) {
       setLoading(true); // Set loading to true before fetching
       try {
         const token = await getAccessTokenSilently();
-        const response = await fetch(`http://localhost:5005/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=1000`, {
+        const response = await fetch(`http://localhost:5005/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=${radius_km}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -57,7 +67,7 @@ const NearbyItems = () => {
         setLoading(false); // Set loading to false after fetching is complete
       }
     }
-  }, [getAccessTokenSilently, userLocation]);
+  }, [getAccessTokenSilently, userLocation, radius]);
 
   useEffect(() => {
     if (userLocation && mapContainerRef.current) {
@@ -82,7 +92,7 @@ const NearbyItems = () => {
             showUserHeading: true
           })
         );
-    
+
         // Create the user marker
         userMarkerRef.current = new mapboxgl.Marker({ color: 'red' })
           .setLngLat([userLocation.longitude, userLocation.latitude])
@@ -94,7 +104,7 @@ const NearbyItems = () => {
         userMarkerRef.current.setLngLat([userLocation.longitude, userLocation.latitude]);
       }
     }
-    
+
     return () => {
       if (mapRef.current) {
         mapRef.current.remove();
@@ -102,7 +112,7 @@ const NearbyItems = () => {
       }
     };
   }, [userLocation]);
-    
+
   // Items nearby my location
   useEffect(() => {
     if (userLocation && nearbyItems.length > 0) {
@@ -154,10 +164,26 @@ const NearbyItems = () => {
           {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
         </p>
       )}
-  
+
+      {/* Radius Dropdown Selector */}
+      <div className="radius-selector">
+        <Select
+          value={radius} // Selected radius, default is 20 km
+          onChange={handleRadiusSelect}
+          label="Search Radius"
+          >
+            <MenuItem value={5}>5 km</MenuItem>
+            <MenuItem value={20}>20 km</MenuItem> {/* Default selected */}
+            <MenuItem value={100}>100 km</MenuItem>
+            <MenuItem value={500}>500 km</MenuItem>
+            <MenuItem value={1000}>1000 km</MenuItem>
+          </Select>
+          <p>Search radius: {radius} km</p>
+      </div>
+
       {/* Map container */}
       <div ref={mapContainerRef} style={{ width: '100%', height: '300px' }} className="map-container" />
-  
+
       {/* Show loader while fetching data */}
       {loading ? (
         <LogoLoader />
@@ -196,7 +222,7 @@ const NearbyItems = () => {
         </div>
       )}
     </div>
-  );  
+  );
 };
 
 export default NearbyItems;
