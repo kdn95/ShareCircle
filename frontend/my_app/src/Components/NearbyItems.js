@@ -37,7 +37,7 @@ const NearbyItems = () => {
       setLoading(true); // Set loading to true before fetching
       try {
         const token = await getAccessTokenSilently();
-        const response = await fetch(`http://localhost:5006/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=1000`, {
+        const response = await fetch(`http://localhost:5004/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=1000`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

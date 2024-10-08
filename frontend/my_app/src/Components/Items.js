@@ -30,11 +30,16 @@ const ItemsListing = () => {
 
   mapboxgl.accessToken = process.env.REACT_APP_MB_TOKEN;
 
+  // const clearMarkers = () => {
+  //   markerRef.current.forEach(marker => marker.remove());
+  //   markerRef.current = []; // Clear markers array
+  // };
+
   useEffect(() => {
     const fetchItemDetails = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:5006/${category_name}/${itemId}`);
+        const response = await axios.get(`http://localhost:5004/${category_name}/${itemId}`);
         setItem(response.data);
       } catch (error) {
         console.error('Error fetching item details:', error);
@@ -58,18 +63,25 @@ const ItemsListing = () => {
   useEffect(() => {
     console.log(mapContainerRef.current);
     if (item && mapContainerRef.current && item.renter_longitude && item.renter_latitude) {
+      // clearMarkers();
       if (!mapRef.current) {
         mapRef.current = new mapboxgl.Map({
           container: mapContainerRef.current,
           style: 'mapbox://styles/mapbox/standard',
           center: [item.renter_longitude, item.renter_latitude],
           zoom: 12,
+          minZoom: 10,      // Set the minimum zoom level (further out)
+          maxZoom: 13,      // Set the maximum zoom level (closer in, but limited)
         });
 
         // const navControl = new mapboxgl.NavigationControl();
         // mapRef.current.addControl(navControl, 'top-right');
+
+        // Create a custom div for the marker
+        const markerElement = document.createElement('div');
+        markerElement.className = 'custom-marker';  // Add this class for styling
   
-        markerRef.current = new mapboxgl.Marker({ color: 'blue' })
+        markerRef.current = new mapboxgl.Marker(markerElement)
           .setLngLat([item.renter_longitude, item.renter_latitude])
           .setPopup(new mapboxgl.Popup().setHTML(`<h4>${item.Item_name}</h4>`))
           .addTo(mapRef.current);
