@@ -205,8 +205,7 @@ app.get('/:category_name/:itemId', async (req, res) => {
 
   // Query to fetch an item by Category_id and Item_id
   const query = `
-    SELECT
-    "Items".*,
+    SELECT *,
     "Categories"."Name" AS "CategoryName",
     "Renters"."Rating",
     ST_X(ST_AsText("Renters"."location"::geometry)) AS "renter_longitude",
