@@ -114,6 +114,7 @@ const ItemsListing = () => {
         amount: totalAmount,
         category: item.Category_id,
         itemName: item.Item_name,
+        imageUrl: item.Image_url,
         renterFirstName: item.First_name,
         renterLastName: item.Last_name,
       });

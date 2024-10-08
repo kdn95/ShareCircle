@@ -95,10 +95,10 @@ app.get('/', getCategories);
 // STRIPE CHECKOUT SESSION
 app.post('/create-checkout-session', async (req, res) => {
   console.log('Incoming request body:', req.body);
-  const { amount, category, itemName, renterFirstName, renterLastName } = req.body; // Extract amount and category
+  const { amount, category, itemName, renterFirstName, renterLastName, imageUrl } = req.body; // Extract amount and category
 
   // Validate the inputs
-  if (!amount || !category || !itemName || !renterFirstName || !renterLastName) {
+  if (!amount || !category || !itemName || !imageUrl || !renterFirstName || !renterLastName) {
       return res.status(400).json({ error: 'Amount and category are required' });
   }
 
@@ -110,7 +110,8 @@ app.post('/create-checkout-session', async (req, res) => {
                   currency: 'aud', // Currency for the transaction
                   product_data: {
                       name: itemName,
-                      description: `Rented from: ${renterFirstName} ${renterLastName}`, // Replace with the actual product name
+                      description: `Rented from: ${renterFirstName} ${renterLastName}`,
+                      images: [imageUrl],  // Replace with the actual product name
                   },
                   unit_amount: amount, // Amount in cents
               },
