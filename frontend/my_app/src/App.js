@@ -8,10 +8,11 @@ import CategoryItems from './Components/CategoryItems';
 import ItemsListing from './Components/Items';
 import Home from './Components/Home';
 import './index.css';
+import SuccessPage from './Components/SuccessPage';
 
 const App = () => {
   const { loginWithRedirect } = useAuth0();
-  
+
   const handleAccountClick = () => {
     loginWithRedirect();
   };
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/" element={<><Home /><Categories /></>} />
         <Route path="/category/:category_name" element={<CategoryItems />} /> {/* New route for category items */}
         <Route path="/category/:category_name/:itemId" element={<ItemsListing />} /> {/* New route for item details */}
+        <Route path="/success" element={<SuccessPage />} /> {/* New route for SuccessPage */}
       </Routes>
     <Navbar onAccountClick={handleAccountClick} />  {/* Pass the function to Navbar */}
   </Router>
