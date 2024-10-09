@@ -156,6 +156,8 @@ const ItemsListing = () => {
       localStorage.setItem('paymentItemPrice', (totalAmount / 100).toFixed(2)); // Store total amount (in dollars)
       localStorage.setItem('paymentRenterName', `${item.First_name} ${item.Last_name}`); // Renter's name
       localStorage.setItem('paymentItemPhoto', item.Image_url); // Item photo
+      localStorage.setItem('paymentStartDate', confirmedDates.startDate.toISOString()); // Store start date as ISO string
+      localStorage.setItem('paymentEndDate', confirmedDates.endDate.toISOString());     // Store end date as ISO string
       localStorage.setItem('paymentMessage', 'Payment Successful');
 
       const response = await axios.post('http://localhost:5005/create-checkout-session', {

@@ -536,4 +536,12 @@ button {
   flex-direction: column;
   color:#494949;
   font-family: "Inter", sans-serif;
+
+  .rental-period {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+  }
 }

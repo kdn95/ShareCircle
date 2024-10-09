@@ -480,5 +480,12 @@ button.rent-button {
   color: #494949;
   font-family: "Inter", sans-serif;
 }
+.Success-page .rental-period {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+}
 
 /*# sourceMappingURL=index.css.map */
