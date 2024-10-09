@@ -173,10 +173,8 @@ const NearbyItems = () => {
           label="Search Radius"
           >
             <MenuItem value={5}>5 km</MenuItem>
+            <MenuItem value={15}>15 km</MenuItem>
             <MenuItem value={20}>20 km</MenuItem> {/* Default selected */}
-            <MenuItem value={100}>100 km</MenuItem>
-            <MenuItem value={500}>500 km</MenuItem>
-            <MenuItem value={1000}>1000 km</MenuItem>
           </Select>
           <p>Search radius: {radius} km</p>
       </div>

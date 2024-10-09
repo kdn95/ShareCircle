@@ -112,8 +112,8 @@ const ItemsListing = () => {
               13,  // At zoom level 13
               50, // Example larger radius in pixels
             ],
-            'circle-color': '#007cbf',
-            'circle-opacity': 0.5,
+            'circle-color': '#8ABEE8',
+            'circle-opacity': 0.4,
           },
         });
       });
