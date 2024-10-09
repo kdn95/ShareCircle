@@ -170,7 +170,7 @@ const NearbyItems = () => {
         {userAddress && (
           <p className="user-address">
             <PushPinIcon className="push-pin-icon" />
-            {userAddress.street}, {userAddress.city}, {stateAbbreviations[formatState(userAddress.state)] || userAddress.state} {userAddress.postcode}
+            {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
           </p>
         )}
 
