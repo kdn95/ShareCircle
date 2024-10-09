@@ -443,4 +443,32 @@ button.rent-button {
   border-color: #B7DFF5;
 }
 
+.map-container {
+  height: 300px;
+  margin: 20px 0;
+}
+
+.custom-marker {
+  width: 120px; /* Larger circle to resemble a general area marker */
+  height: 120px;
+  background-color: rgba(138, 190, 232, 0.4); /* Faint blue with low opacity */
+  border-radius: 50%; /* Make it a circle */
+  border: none; /* Remove border to make it seamless */
+  box-shadow: 0 0 15px rgba(138, 190, 232, 0.6); /* Soft glow around the marker */
+  opacity: 0.6; /* Slightly translucent */
+}
+
+.custom-marker::before {
+  content: "";
+  position: absolute;
+  width: 50px; /* Larger faded area */
+  height: 50px;
+  background-color: rgba(138, 190, 232, 0.2); /* Even fainter blue for the outer circle */
+  border-radius: 50%; /* Keep it circular */
+  top: -10px; /* Center the outer circle */
+  left: -10px;
+  opacity: 0.5; /* More translucency for subtle effect */
+  box-shadow: 0 0 30px rgba(138, 190, 232, 0.4); /* Wide spread glow for faded effect */
+}
+
 /*# sourceMappingURL=index.css.map */
