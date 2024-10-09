@@ -527,3 +527,13 @@ button {
   opacity: 0.5;             /* More translucency for subtle effect */
   box-shadow: 0 0 30px rgba(138, 190, 232, 0.4); /* Wide spread glow for faded effect */
 }
+
+.Success-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  color:#494949;
+  font-family: "Inter", sans-serif;
+}

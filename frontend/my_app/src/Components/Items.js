@@ -152,6 +152,10 @@ const ItemsListing = () => {
       const currentPageUrl = window.location.href;
 
       // Store the message in local storage
+      localStorage.setItem('paymentItemName', item.Item_name);
+      localStorage.setItem('paymentItemPrice', (totalAmount / 100).toFixed(2)); // Store total amount (in dollars)
+      localStorage.setItem('paymentRenterName', `${item.First_name} ${item.Last_name}`); // Renter's name
+      localStorage.setItem('paymentItemPhoto', item.Image_url); // Item photo
       localStorage.setItem('paymentMessage', 'Payment Successful');
 
       const response = await axios.post('http://localhost:5005/create-checkout-session', {
