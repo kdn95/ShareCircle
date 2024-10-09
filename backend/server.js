@@ -177,7 +177,7 @@ app.get('/:category_name', async (req, res) => {
   const categoryName = req.params.category_name;
   console.log('Fetching items with Category_name:', categoryName);
   const query = `
-    SELECT "Items".*, "Categories"."Name" AS "CategoryName", "Renters"."Rating"
+    SELECT "Items".*, "Categories"."Name" AS "CategoryName", "Renters"."Rating", "Renters"."Profile_pic"
     FROM "Items"
     INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
     INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"

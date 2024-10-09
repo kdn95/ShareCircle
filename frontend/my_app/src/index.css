@@ -155,6 +155,18 @@ p.user-address {
   max-width: 21.56rem;
   width: 100%;
 }
+.Category-items-container .items-container .renter-profile-pic {
+  width: 2.5rem; /* Set width */
+  height: 2.5rem; /* Set height */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Ensure the image covers the area */
+  margin-right: 0.625rem; /* Space between the image and the name */
+}
+.Category-items-container .items-container .renter-info {
+  display: flex;
+  align-items: flex-start; /* Center items vertically */
+  width: 100%; /* Ensure it takes the full width of the parent container */
+}
 .Category-items-container .item-image {
   height: auto;
   border-radius: 0.625rem;
@@ -419,35 +431,3 @@ button.rent-button {
 }
 
 /*# sourceMappingURL=index.css.map */
-.map-container {
-  margin-top: 20px;
-}
-
-.mapbox-container {
-  width: 100%;
-  height: 300px;
-  margin: 20px 0;
-}
-
-.custom-marker {
-  width: 120px;               /* Larger circle to resemble a general area marker */
-  height: 120px;
-  background-color: rgba(138, 190, 232, 0.4);  /* Faint blue with low opacity */
-  border-radius: 50%;        /* Make it a circle */
-  border: none;              /* Remove border to make it seamless */
-  box-shadow: 0 0 15px rgba(138, 190, 232, 0.6); /* Soft glow around the marker */
-  opacity: 0.6;              /* Slightly translucent */
-}
-
-.custom-marker::before {
-  content: '';
-  position: absolute;
-  width: 50px;              /* Larger faded area */
-  height: 50px;
-  background-color: rgba(138, 190, 232, 0.2); /* Even fainter blue for the outer circle */
-  border-radius: 50%;       /* Keep it circular */
-  top: -10px;               /* Center the outer circle */
-  left: -10px;
-  opacity: 0.5;             /* More translucency for subtle effect */
-  box-shadow: 0 0 30px rgba(138, 190, 232, 0.4); /* Wide spread glow for faded effect */
-}

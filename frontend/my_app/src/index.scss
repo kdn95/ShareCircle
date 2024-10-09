@@ -136,6 +136,7 @@ p.user-address {
 }
 
 // LIST OF ITEMS IN A SPECIFIC CATEGORY PAGE AND NEARBY ITEMS
+
 .Category-items-container {
   display: flex;
   flex-direction: column;
@@ -175,8 +176,21 @@ p.user-address {
       max-width: 21.56rem; // Optional: restrict card size
       width: 100%; // Ensure cards take full width available in the container
     }
-  }
 
+    .renter-profile-pic {
+      width: 2.5rem; /* Set width */
+      height: 2.5rem; /* Set height */
+      border-radius: 50%; /* Make the image circular */
+      object-fit: cover; /* Ensure the image covers the area */
+      margin-right: 0.625rem; /* Space between the image and the name */
+    }
+    
+    .renter-info {
+      display: flex;
+      align-items: flex-start; /* Center items vertically */
+      width: 100%; /* Ensure it takes the full width of the parent container */
+    }
+  }
 
 
   .item-image {
