@@ -151,6 +151,9 @@ const ItemsListing = () => {
       const totalAmount = Math.round(item.Price_per_day * numberOfDays * 100); // Convert to cents
       const currentPageUrl = window.location.href;
 
+      // Store the message in local storage
+      localStorage.setItem('paymentMessage', 'Payment Successful');
+
       const response = await axios.post('http://localhost:5005/create-checkout-session', {
         amount: totalAmount,
         category: item.Category_id,
