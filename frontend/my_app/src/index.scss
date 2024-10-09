@@ -378,64 +378,7 @@ button {
   }
 }
 
-/* LogoLoader.scss */
-.logo-loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; /* Full height to center the loader */
-
-  .loader-image {
-    width: 11rem; /* Adjust the size of your logo */
-    height: 11rem;
-    animation: pulse 1.5s ease-in-out infinite; /* Updated animation for pulsing */
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1); /* Slightly increase the size */
-    opacity: 0.7; /* Add a fade effect for a smoother pulse */
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.Nearby-items-container {
-  padding: 1rem; // Optional: padding around the container for better spacing
-
-  .Nearby-item-image {
-    height: auto;
-  }
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr)); // Adjust min width of cards
-  gap: 1.25rem; // Space between grid items
-}
-
-.category-items-card {
-  display: flex; // Ensures card content is centered
-  flex-direction: column; // Keeps the card's content stacked
-  justify-content: space-between; // Space between elements inside the card
-}
-
-.Nearby-items {
-  font-weight: 600;
-  color: #494949;
-  padding-left: 1rem; // Add padding to the left if needed
-  margin: 0; // Remove margin for better control
-  padding-top: 2rem;
-}
-
+// ITEMS LISTING PAGE CALENDAR
 .calendar-modal {
   position: fixed;
   top: 20%;
@@ -489,28 +432,155 @@ button {
   border-color: #C9D7A4; /* Darker green on hover */
 }
 
+.Success-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  color:#494949;
+  font-family: "Inter", sans-serif;
+
+  .rental-period {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+  }
+}
+
+
+
+// LOGO LOADER
+.logo-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height to center the loader */
+
+  .loader-image {
+    width: 11rem; /* Adjust the size of your logo */
+    height: 11rem;
+    animation: pulse 1.5s ease-in-out infinite; /* Updated animation for pulsing */
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1); /* Slightly increase the size */
+    opacity: 0.7; /* Add a fade effect for a smoother pulse */
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// NEARBY ITEMS PAGE
+.Nearby-items-container {
+  padding: 1rem; // Optional: padding around the container for better spacing
+  display: flex;
+  flex-direction: column;
+  align-items: center;  // Center items horizontally
+  justify-content: center; // Center items vertically if you want the entire container to be centered vertically
+
+  .Nearby-item-image {
+    height: auto;
+  }
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr)); // Adjust min width of cards
+  gap: 1.25rem; // Space between grid items
+}
+
+.category-items-card {
+  display: flex; // Ensures card content is centered
+  flex-direction: column; // Keeps the card's content stacked
+  justify-content: space-between; // Space between elements inside the card
+}
+
+.Nearby-items {
+  font-weight: 600;
+  color: #494949;
+  padding-left: 1rem; // Add padding to the left if needed
+  margin: 0; // Remove margin for better control
+  padding-top: 2rem;
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center; // Center the title text
+  font-family: "Inter", sans-serif;
+}
+
 .Nearby-items-map-container {
+  // Styles for the container that holds the map and other items
+  display: flex;
+  flex-direction: column;
+  align-items: center;  // Center items horizontally
+  justify-content: center;
+
+  .address-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f7f7f7; // Light background to resemble a search bar
+    border: 1px solid #B7DFF5; // Border color similar to input fields
+    border-radius: 0.625rem; // Rounded corners to look like a search bar
+    padding: 7px 7px; // Padding to space the elements inside
+    margin-bottom: 4rem; // Space below the search bar
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Slight shadow for depth
+    width: 40%;
+    justify-content: space-between;
+
+    .push-pin-icon {
+      margin-right: 0.5rem; /* Space between icon and text */
+      color: #757575; /* Color of the icon */
+      vertical-align: middle; /* Aligns icon vertically with text */
+    }
+  }
+
+  .user-address {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    color: #333;
+  }
 
   .radius-selector {
+    display: flex;
+    align-items: center; // Align the dropdown and label
     font-family: "Inter", sans-serif;
-  }
-  .MuiInputBase-root {
-    display: inline-block;
-    font-family: "Inter", sans-serif;
-    color: #494949;
-    margin: 20px;
-  }
+    padding-left: 1rem;
+    
+    .MuiInputBase-root {
+      font-family: "Inter", sans-serif;
+      color: #494949;
+      margin: 0; // Remove margin to keep elements aligned in one line
+    }
 
-  .MuiOutlinedInput-notchedOutline {
-    border-color: #B7DFF5;
-  }
+    .MuiOutlinedInput-notchedOutline {
+      border-color: #B7DFF5; // Match border color to other inputs
+    }
 
+    p {
+      margin: 10px;
+      font-size: 14px;
+      color: #494949;
+    }
+  }
 }
 
 .map-container {
   height: 300px;
   margin: 20px 0;
 }
+
 
 // .custom-marker {
 //   width: 120px;               /* Larger circle to resemble a general area marker */
@@ -536,24 +606,8 @@ button {
 //   box-shadow: 0 0 30px rgba(138, 190, 232, 0.4); /* Wide spread glow for faded effect */
 // }
 
-.Success-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
-  color:#494949;
-  font-family: "Inter", sans-serif;
 
-  .rental-period {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: "Inter", sans-serif;
-  }
-}
-
+// PROFILE PAGE
 .login-prompt {
   display: flex;
   flex-direction: column; // Stack items vertically

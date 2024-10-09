@@ -1,50 +1,60 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom'; // Import to access the category name from the URL
+import { Link, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { getUserLocation } from '../Location'; // Correct import path
-import mapboxgl from 'mapbox-gl'; // Import Mapbox
-import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox CSS
+import { getUserLocation } from '../Location';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 import StarIcon from '@mui/icons-material/Star';
+import PushPinIcon from '@mui/icons-material/PushPin';
 import { Select, MenuItem } from '@mui/material';
-import LogoLoader from './LogoLoader'; // Import your LogoLoader component
-import '../index.css'; // Assuming your custom CSS is here
+import LogoLoader from './LogoLoader';
+import '../index.css';
 
 const NearbyItems = () => {
   const { getAccessTokenSilently } = useAuth0();
   const [nearbyItems, setNearbyItems] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const [userAddress, setUserAddress] = useState({});
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const userMarkerRef = useRef(null);
   const markersRef = useRef([]);
-  const { category_name } = useParams(); // Get the category name from the URL
+  const { category_name } = useParams();
   const [radius, setRadius] = useState(5);
 
-  mapboxgl.accessToken = process.env.REACT_APP_MB_TOKEN; // Replace with your access token
+  mapboxgl.accessToken = process.env.REACT_APP_MB_TOKEN;
+
+  // Step 1: Create the state abbreviation mapping
+  const stateAbbreviations = {
+    "New South Wales": "NSW",
+    "Victoria": "VIC",
+    "Queensland": "QLD",
+    "Western Australia": "WA",
+    "South Australia": "SA",
+    "Tasmania": "TAS",
+    "Northern Territory": "NT",
+    "Australian Capital Territory": "ACT",
+    // Add other states and territories as needed
+  };
 
   const clearMarkers = () => {
     markersRef.current.forEach(marker => marker.remove());
-    markersRef.current = []; // Clear markers array
+    markersRef.current = [];
   };
 
   const handleRadiusSelect = (event) => {
-    setRadius(event.target.value); // Update Radius based on user selection
-    fetchItemsNearby(event.target.value); // Fetch nearby items with new radius
+    setRadius(event.target.value);
+    fetchItemsNearby(event.target.value);
   };
 
-
-
-
-  // Fetch nearby items
   const fetchItemsNearby = useCallback(async (radius_km = radius) => {
     if (userLocation) {
-      setLoading(true); // Set loading to true before fetching
+      setLoading(true);
       try {
         const token = await getAccessTokenSilently();
         const response = await fetch(`http://localhost:5005/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=${radius_km}`, {
@@ -52,7 +62,6 @@ const NearbyItems = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log('Response status:', response.status);
 
         if (!response.ok) {
           throw new Error('Failed to fetch nearby items');
@@ -60,28 +69,26 @@ const NearbyItems = () => {
 
         const data = await response.json();
         setNearbyItems(data);
-        console.log("Fetched Nearby Items:", data);
       } catch (error) {
         console.error('Error fetching nearby items:', error);
       } finally {
-        setLoading(false); // Set loading to false after fetching is complete
+        setLoading(false);
       }
     }
   }, [getAccessTokenSilently, userLocation, radius]);
 
   useEffect(() => {
     if (userLocation && mapContainerRef.current) {
-      // Initialize the map
       if (!mapRef.current) {
         mapRef.current = new mapboxgl.Map({
           container: mapContainerRef.current,
-          style: 'mapbox://styles/mapbox/standard', // Make sure this is the correct style
-          center: [userLocation.longitude, userLocation.latitude], // Center map on user's location
+          style: 'mapbox://styles/mapbox/standard',
+          center: [userLocation.longitude, userLocation.latitude],
           zoom: 11,
         });
 
         const navControl = new mapboxgl.NavigationControl();
-        mapRef.current.addControl(navControl, 'top-right'); // Add to top-right corner
+        mapRef.current.addControl(navControl, 'top-right');
 
         mapRef.current.addControl(
           new mapboxgl.GeolocateControl({
@@ -93,13 +100,11 @@ const NearbyItems = () => {
           })
         );
 
-        // Create the user marker
         userMarkerRef.current = new mapboxgl.Marker({ color: 'red' })
           .setLngLat([userLocation.longitude, userLocation.latitude])
           .setPopup(new mapboxgl.Popup().setHTML('<h4>You are here!</h4>'))
           .addTo(mapRef.current);
       } else {
-        // Update map center and user marker if already initialized
         mapRef.current.setCenter([userLocation.longitude, userLocation.latitude]);
         userMarkerRef.current.setLngLat([userLocation.longitude, userLocation.latitude]);
       }
@@ -113,15 +118,11 @@ const NearbyItems = () => {
     };
   }, [userLocation]);
 
-  // Items nearby my location
   useEffect(() => {
     if (userLocation && nearbyItems.length > 0) {
-      clearMarkers(); // Clear any previous markers
+      clearMarkers();
       nearbyItems.forEach(item => {
-        // Add item markers to map (using renter's location)
-        console.log('Renter Location:', item.renter_longitude, item.renter_latitude);
         if (item.renter_latitude && item.renter_longitude) {
-          console.log(`Creating marker at: ${item.renter_longitude}, ${item.renter_latitude}`);
           const marker = new mapboxgl.Marker()
             .setLngLat([item.renter_longitude, item.renter_latitude])
             .setPopup(new mapboxgl.Popup().setHTML(`
@@ -130,7 +131,7 @@ const NearbyItems = () => {
               <p>Renter: ${item.Renter_name}</p>
             `))
             .addTo(mapRef.current);
-          markersRef.current.push(marker); // Store marker reference
+          markersRef.current.push(marker);
         }
       });
     }
@@ -139,7 +140,6 @@ const NearbyItems = () => {
   useEffect(() => {
     getUserLocation()
       .then(({ latitude, longitude, address }) => {
-        console.log('User Location:', { latitude, longitude, address }); // Debugging log
         setUserLocation({ latitude, longitude });
         setUserAddress(address || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' });
       })
@@ -150,39 +150,37 @@ const NearbyItems = () => {
 
   useEffect(() => {
     if (userLocation) {
-      console.log('User Location:', userLocation);
-      // console.log('Nearby Items state:', nearbyItems); // Add this log
-      fetchItemsNearby(); // Fetch nearby items if location is available
+      fetchItemsNearby();
     }
   }, [userLocation, fetchItemsNearby]);
 
   return (
     <div className="Nearby-items-map-container">
       <h1 className="Nearby-items">Nearby Items</h1>
-      {userAddress && (
-        <p className="user-address">
-          {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
-        </p>
-      )}
+      <div className="address-bar">
+        {userAddress && (
+          <p className="user-address">
+            <PushPinIcon className="push-pin-icon" />
+            {userAddress.street}, {userAddress.city}, {stateAbbreviations[userAddress.state] || userAddress.state} {userAddress.postcode}
+          </p>
+        )}
 
-      {/* Radius Dropdown Selector */}
-      <div className="radius-selector">
-        <Select
-          value={radius} // Selected radius, default is 20 km
-          onChange={handleRadiusSelect}
-          label="Search Radius"
+        <div className="radius-selector">
+          <Select
+            value={radius}
+            onChange={handleRadiusSelect}
+            label="Search Radius"
           >
             <MenuItem value={5}>5 km</MenuItem>
             <MenuItem value={15}>15 km</MenuItem>
-            <MenuItem value={20}>20 km</MenuItem> {/* Default selected */}
+            <MenuItem value={20}>20 km</MenuItem>
           </Select>
           <p>Search radius: {radius} km</p>
+        </div>
       </div>
 
-      {/* Map container */}
       <div ref={mapContainerRef} style={{ width: '100%', height: '300px' }} className="map-container" />
 
-      {/* Show loader while fetching data */}
       {loading ? (
         <LogoLoader />
       ) : (
@@ -203,7 +201,7 @@ const NearbyItems = () => {
                       <CardContent>
                         <h3 className="item-header">{item.Item_name}</h3>
                         <div className="rating-container">
-                        <p className="renter-rating">{item.Rating}</p>
+                          <p className="renter-rating">{item.Rating}</p>
                           <StarIcon className="star-icon" alt="star-icon" />
                         </div>
                         <p className="item-price">Price: ${item.Price_per_day} per day</p>

@@ -329,61 +329,6 @@ button.rent-button {
   padding-right: 0.09rem;
 }
 
-/* LogoLoader.scss */
-.logo-loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; /* Full height to center the loader */
-}
-.logo-loader .loader-image {
-  width: 11rem; /* Adjust the size of your logo */
-  height: 11rem;
-  animation: pulse 1.5s ease-in-out infinite; /* Updated animation for pulsing */
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1); /* Slightly increase the size */
-    opacity: 0.7; /* Add a fade effect for a smoother pulse */
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-.Nearby-items-container {
-  padding: 1rem;
-}
-.Nearby-items-container .Nearby-item-image {
-  height: auto;
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
-  gap: 1.25rem;
-}
-
-.category-items-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.Nearby-items {
-  font-weight: 600;
-  color: #494949;
-  padding-left: 1rem;
-  margin: 0;
-  padding-top: 2rem;
-}
-
 .calendar-modal {
   position: fixed;
   top: 20%;
@@ -435,24 +380,6 @@ button.rent-button {
   border-color: #C9D7A4; /* Darker green on hover */
 }
 
-.Nearby-items-map-container .radius-selector {
-  font-family: "Inter", sans-serif;
-}
-.Nearby-items-map-container .MuiInputBase-root {
-  display: inline-block;
-  font-family: "Inter", sans-serif;
-  color: #494949;
-  margin: 20px;
-}
-.Nearby-items-map-container .MuiOutlinedInput-notchedOutline {
-  border-color: #B7DFF5;
-}
-
-.map-container {
-  height: 300px;
-  margin: 20px 0;
-}
-
 .Success-page {
   display: flex;
   justify-content: center;
@@ -468,6 +395,122 @@ button.rent-button {
   justify-content: center;
   align-items: center;
   font-family: "Inter", sans-serif;
+}
+
+.logo-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height to center the loader */
+}
+.logo-loader .loader-image {
+  width: 11rem; /* Adjust the size of your logo */
+  height: 11rem;
+  animation: pulse 1.5s ease-in-out infinite; /* Updated animation for pulsing */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1); /* Slightly increase the size */
+    opacity: 0.7; /* Add a fade effect for a smoother pulse */
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.Nearby-items-container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.Nearby-items-container .Nearby-item-image {
+  height: auto;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+  gap: 1.25rem;
+}
+
+.category-items-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Nearby-items {
+  font-weight: 600;
+  color: #494949;
+  padding-left: 1rem;
+  margin: 0;
+  padding-top: 2rem;
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+}
+
+.Nearby-items-map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.Nearby-items-map-container .address-bar {
+  display: flex;
+  align-items: center;
+  background-color: #f7f7f7;
+  border: 1px solid #B7DFF5;
+  border-radius: 0.625rem;
+  padding: 7px 7px;
+  margin-bottom: 4rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 40%;
+  justify-content: space-between;
+}
+.Nearby-items-map-container .address-bar .push-pin-icon {
+  margin-right: 0.5rem; /* Space between icon and text */
+  color: #757575; /* Color of the icon */
+  vertical-align: middle; /* Aligns icon vertically with text */
+}
+.Nearby-items-map-container .user-address {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+.Nearby-items-map-container .radius-selector {
+  display: flex;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  padding-left: 1rem;
+}
+.Nearby-items-map-container .radius-selector .MuiInputBase-root {
+  font-family: "Inter", sans-serif;
+  color: #494949;
+  margin: 0;
+}
+.Nearby-items-map-container .radius-selector .MuiOutlinedInput-notchedOutline {
+  border-color: #B7DFF5;
+}
+.Nearby-items-map-container .radius-selector p {
+  margin: 10px;
+  font-size: 14px;
+  color: #494949;
+}
+
+.map-container {
+  height: 300px;
+  margin: 20px 0;
 }
 
 .login-prompt {
