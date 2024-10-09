@@ -42,6 +42,15 @@ const NearbyItems = () => {
     // Add other states and territories as needed
   };
 
+  const formatState = (state) => {
+    if (!state) return '';
+    return state
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   const clearMarkers = () => {
     markersRef.current.forEach(marker => marker.remove());
     markersRef.current = [];
@@ -161,7 +170,7 @@ const NearbyItems = () => {
         {userAddress && (
           <p className="user-address">
             <PushPinIcon className="push-pin-icon" />
-            {userAddress.street}, {userAddress.city}, {stateAbbreviations[userAddress.state] || userAddress.state} {userAddress.postcode}
+            {userAddress.street}, {userAddress.city}, {stateAbbreviations[formatState(userAddress.state)] || userAddress.state} {userAddress.postcode}
           </p>
         )}
 
