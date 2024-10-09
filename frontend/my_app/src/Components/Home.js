@@ -1,15 +1,13 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getUserLocation } from '../Location';
-import PlaceIcon from '@mui/icons-material/Place';
 import LogoLoader from './LogoLoader';
 
 const Home = () => {
   const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   const [userAddress, setUserAddress] = useState({});
   const [loading, setLoading] = useState(true); // Initialize loading state
-  const navigate = useNavigate();
+
 
   // Fetch protected data for renters/nearby items
   const fetchProtectedData = useCallback(async () => {
@@ -49,10 +47,6 @@ const Home = () => {
     fetchData(); // Call fetchData when the user authentication state changes
   }, [isAuthenticated, fetchProtectedData]);
 
-  // Navigate to nearby items
-  const handleFetchNearbyItems = () => {
-    navigate('/items/nearby');
-  };
 
   return (
     <div>
@@ -71,11 +65,6 @@ const Home = () => {
                   {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
                 </p>
               )}
-              {/* Button to fetch nearby items */}
-              <button className="nearby-items-button" onClick={handleFetchNearbyItems}>
-                <PlaceIcon className="Place-icon" />
-                Fetch Nearby Items
-              </button>
             </>
           )}
         </>
