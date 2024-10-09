@@ -81,16 +81,55 @@ const ItemsListing = () => {
         // Create a custom div for the marker
         const markerElement = document.createElement('div');
         markerElement.className = 'custom-marker';  // Add this class for styling
-  
+
         markerRef.current = new mapboxgl.Marker(markerElement)
           .setLngLat([item.renter_longitude, item.renter_latitude])
           .setPopup(new mapboxgl.Popup().setHTML(`<h4>${item.Item_name}</h4>`))
           .addTo(mapRef.current);
+
+        // Add a circle layer for the radius
+      mapRef.current.on('load', () => {
+        mapRef.current.addLayer({
+          id: 'radius-circle',
+          type: 'circle',
+          source: {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: [item.renter_longitude, item.renter_latitude],
+              },
+            },
+          },
+          paint: {
+            'circle-radius': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              10,  // At zoom level 10, set radius
+              25,  // Example radius in pixels
+              13,  // At zoom level 13
+              50, // Example larger radius in pixels
+            ],
+            'circle-color': '#007cbf',
+            'circle-opacity': 0.5,
+          },
+        });
+      });
       } else {
-        console.log("something here");
+        console.log("Updating existing map");
         mapRef.current.setCenter([item.renter_longitude, item.renter_latitude]);
         markerRef.current.setLngLat([item.renter_longitude, item.renter_latitude]);
-      }
+      // Update the circle's position
+      mapRef.current.getSource('radius-circle').setData({
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [item.renter_longitude, item.renter_latitude],
+        },
+      });
+    }
     }
     return () => {
       if (mapRef.current) {
@@ -105,13 +144,13 @@ const ItemsListing = () => {
       console.error('Invalid date range.');
       return;
     }
-  
+
     try {
       const stripe = await stripePromise;
       const numberOfDays = (confirmedDates.endDate - confirmedDates.startDate) / (1000 * 60 * 60 * 24);
       const totalAmount = Math.round(item.Price_per_day * numberOfDays * 100); // Convert to cents
       const currentPageUrl = window.location.href;
-  
+
       const response = await axios.post('http://localhost:5005/create-checkout-session', {
         amount: totalAmount,
         category: item.Category_id,
@@ -121,11 +160,11 @@ const ItemsListing = () => {
         renterLastName: item.Last_name,
         previousPageUrl: currentPageUrl
       });
-  
+
       const { id } = response.data;
-  
+
       const result = await stripe.redirectToCheckout({ sessionId: id });
-  
+
       if (result.error) {
         console.error(result.error.message);
       }
@@ -133,7 +172,7 @@ const ItemsListing = () => {
       console.error('Error creating checkout session:', error.response?.data || error.message);
     }
   };
-  
+
   if (loading) {
     return <LogoLoader />;
   }
