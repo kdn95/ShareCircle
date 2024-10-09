@@ -8,7 +8,6 @@ const Home = () => {
   const [userAddress, setUserAddress] = useState({});
   const [loading, setLoading] = useState(true); // Initialize loading state
 
-
   // Fetch protected data for renters/nearby items
   const fetchProtectedData = useCallback(async () => {
     try {
@@ -47,7 +46,6 @@ const Home = () => {
     fetchData(); // Call fetchData when the user authentication state changes
   }, [isAuthenticated, fetchProtectedData]);
 
-
   return (
     <div>
       {loading ? ( // Show loader while loading
@@ -55,10 +53,23 @@ const Home = () => {
       ) : (
         <>
           {!isAuthenticated ? (
-            <button className="login-button" onClick={() => loginWithRedirect()}>Log In</button>
+            <button 
+              className="login-button" 
+              onClick={() => loginWithRedirect({
+                redirectUri: `${window.location.origin}/profile`, // Redirect user to /profile after login
+                appState: { returnTo: '/profile' } // Ensure redirection to /profile
+              })}
+            >
+              Log In
+            </button>
           ) : (
             <>
-              <button className="login-button" onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
+              <button 
+                className="login-button" 
+                onClick={() => logout({ returnTo: `${window.location.origin}` })}
+              >
+                Log Out
+              </button>
               <h2 className="welcome">Welcome, {user.name}!</h2>
               {userAddress && (
                 <p className="user-address">

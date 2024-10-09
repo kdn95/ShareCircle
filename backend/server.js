@@ -171,6 +171,46 @@ app.get('/items/nearby', jwtCheck, async (req, res) => {
 
 
 
+// USER PROFILE/ACCOUNTS PAGE
+const userProfiles = new Map(); // In-memory store for user profiles
+
+// Middleware to get user profile
+app.get('/profile', jwtCheck, async (req, res) => {
+  const userId = req.user.sub; // Get user ID from Auth0 token
+
+  // Check if user profile exists in memory
+  if (userProfiles.has(userId)) {
+    return res.status(200).json(userProfiles.get(userId)); // Return user profile
+  }
+
+  // If profile does not exist, create one using Auth0 user info
+  const profile = {
+    name: req.user.name,
+    email: req.user.email,
+    picture: req.user.picture,
+    // Add other Auth0 user properties as needed
+  };
+
+  userProfiles.set(userId, profile); // Store profile in memory
+  res.status(200).json(profile);
+});
+
+// Example endpoint to update user profile (optional)
+app.put('/profile', jwtCheck, (req, res) => {
+  const userId = req.user.sub; // Get user ID from Auth0 token
+  const updatedProfile = req.body; // Assume updated profile data comes in the request body
+
+  if (userProfiles.has(userId)) {
+    const currentProfile = userProfiles.get(userId);
+    const newProfile = { ...currentProfile, ...updatedProfile };
+    userProfiles.set(userId, newProfile); // Update in-memory profile
+    return res.status(200).json(newProfile);
+  }
+
+  res.status(404).json({ error: 'Profile not found' });
+});
+
+
 
 // GET SPECIFIC CATEGORY
 // Should show all items according to category name

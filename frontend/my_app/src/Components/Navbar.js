@@ -15,6 +15,11 @@ const handleFetchNearbyItems = () => {
   navigate('/items/nearby');
 };
 
+// Navigate to profile page
+const handleProfilePage = () => {
+  navigate('/profile');
+};
+
   return (
     <nav className="navbar">
       <div className="navbar-center">
@@ -35,7 +40,7 @@ const handleFetchNearbyItems = () => {
           </li>
           <li>
             <AccountIcon className="nav-icon" alt="account" />
-            <button onClick={onAccountClick} className="account-button">
+            <button onClick={handleProfilePage} className="account-button">
               Account
             </button>
           </li>
