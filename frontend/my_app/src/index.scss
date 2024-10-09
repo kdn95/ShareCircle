@@ -184,7 +184,7 @@ p.user-address {
       object-fit: cover; /* Ensure the image covers the area */
       margin-right: 0.625rem; /* Space between the image and the name */
     }
-    
+
     .renter-info {
       display: flex;
       align-items: flex-start; /* Center items vertically */
@@ -484,5 +484,20 @@ button {
   border-color: #C9D7A4; /* Darker green on hover */
 }
 
+.Nearby-items-map-container {
 
+  .radius-selector {
+    font-family: "Inter", sans-serif;
+  }
+  .MuiInputBase-root {
+    display: inline-block;
+    font-family: "Inter", sans-serif;
+    color: #494949;
+    margin: 20px;
+  }
+  
+  .MuiOutlinedInput-notchedOutline {
+    border-color: #B7DFF5;
+  }
 
+}
