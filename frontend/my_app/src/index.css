@@ -167,6 +167,10 @@ p.user-address {
   align-items: flex-start; /* Center items vertically */
   width: 100%; /* Ensure it takes the full width of the parent container */
 }
+.Category-items-container .items-container .renter-full-name {
+  font-size: 0.95rem;
+  margin: 0;
+}
 .Category-items-container .item-image {
   height: auto;
   border-radius: 0.625rem;
@@ -182,20 +186,21 @@ p.user-address {
 }
 
 .rating-container {
-  display: flex;
-  align-items: center;
+  display: flex; /* Keep this as flex for horizontal alignment of stars */
+  align-items: center; /* Center align */
   color: #494949;
+  margin-top: -0.5rem;
 }
-
-.star-icon {
+.rating-container .star-icon {
   margin-right: 0.2rem;
   color: #C9D7A4;
-  height: 1.35rem;
+  height: 1.2rem;
 }
 
 .renter-rating {
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1;
+  padding-right: 0.09rem;
 }
 
 h2.welcome {
@@ -463,6 +468,28 @@ button.rent-button {
   justify-content: center;
   align-items: center;
   font-family: "Inter", sans-serif;
+}
+
+.login-prompt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 5rem;
+  padding-top: 1rem;
+}
+.login-prompt h2 {
+  font-family: "Inter", sans-serif;
+  color: #494949;
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding-top: 2rem;
+  flex-direction: column;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -43,7 +43,11 @@ const Profile = () => {
   }
 
   if (!isAuthenticated) {
-    return <div>Please log in to see your profile.</div>; // Prompt to log in
+    return (
+      <div className="login-prompt">
+        <h2>Please log in to see your profile.</h2>
+      </div>
+    ); // Prompt to log in
   }
 
   return (

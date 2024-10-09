@@ -136,7 +136,6 @@ p.user-address {
 }
 
 // LIST OF ITEMS IN A SPECIFIC CATEGORY PAGE AND NEARBY ITEMS
-
 .Category-items-container {
   display: flex;
   flex-direction: column;
@@ -190,6 +189,11 @@ p.user-address {
       align-items: flex-start; /* Center items vertically */
       width: 100%; /* Ensure it takes the full width of the parent container */
     }
+
+    .renter-full-name {
+      font-size: 0.95rem;
+      margin: 0;
+    }
   }
 
 
@@ -210,22 +214,23 @@ p.user-address {
   }
 }
 
-.rating-container {
-  display: flex;
-  align-items: center;
-  color: #494949;
-}
-
-.star-icon {
-  margin-right: 0.2rem;
-  color: #C9D7A4;
-  height: 1.35rem;
-}
-
-.renter-rating {
-  font-size: 1rem;
-  line-height: 1;
-}
+    .rating-container {
+      display: flex; /* Keep this as flex for horizontal alignment of stars */
+      align-items: center; /* Center align */
+      color: #494949;
+      margin-top: -0.5rem;
+      .star-icon {
+        margin-right: 0.2rem;
+        color: #C9D7A4;
+        height: 1.2rem;
+      }
+    }
+  
+    .renter-rating {
+      font-size: 0.95rem;
+      line-height: 1;
+      padding-right: 0.09rem;
+    }
 
 h2.welcome {
   display: block;
@@ -547,4 +552,27 @@ button {
     align-items: center;
     font-family: "Inter", sans-serif;
   }
+}
+
+.login-prompt {
+  display: flex;
+  flex-direction: column; // Stack items vertically
+  justify-content: center; // Center vertically
+  align-items: center; // Center horizontally
+  text-align: center; // Center text alignment
+  padding-bottom: 5rem;
+  padding-top: 1rem;
+
+  h2 {
+    font-family: "Inter", sans-serif;
+    color: #494949;
+  }
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  padding-top: 2rem;
+  flex-direction: column;
 }

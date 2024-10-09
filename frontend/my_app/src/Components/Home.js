@@ -47,7 +47,7 @@ const Home = () => {
   }, [isAuthenticated, fetchProtectedData]);
 
   return (
-    <div>
+    <div className="centered-container">
       {loading ? ( // Show loader while loading
         <LogoLoader />
       ) : (
