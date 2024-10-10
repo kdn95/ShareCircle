@@ -15,7 +15,7 @@ import LogoLoader from './LogoLoader';
 import '../index.css';
 
 const NearbyItems = () => {
-  const { getAccessTokenSilently } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   const [nearbyItems, setNearbyItems] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const [userAddress, setUserAddress] = useState({});
@@ -162,6 +162,21 @@ const NearbyItems = () => {
       fetchItemsNearby();
     }
   }, [userLocation, fetchItemsNearby]);
+
+  useEffect(() => {
+    if (userLocation) {
+      fetchItemsNearby();
+    }
+  }, [userLocation, fetchItemsNearby]);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="login-prompt">
+        <h2>Please log in to view nearby items.</h2>
+        <button className="login-button" onClick={() => loginWithRedirect()}>Log In</button>
+      </div>
+    );
+  }
 
   return (
     <div className="Nearby-items-map-container">
