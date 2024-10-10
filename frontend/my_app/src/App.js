@@ -9,6 +9,7 @@ import ItemsListing from './Components/Items';
 import Home from './Components/Home';
 import './index.css';
 import SuccessPage from './Components/SuccessPage';
+import Profile from './Components/Profile';
 
 const App = () => {
   const { loginWithRedirect } = useAuth0();
