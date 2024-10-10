@@ -213,7 +213,6 @@ app.get('/profile', jwtCheck, async (req, res) => {
     const profile = {
       name: userInfo.name || "No name provided", // Check if name exists
       email: userInfo.email || "No email provided", // Check if email exists
-      picture: userInfo.picture || "", // Check if picture exists
       // Add other Auth0 user properties as needed
     };
 
