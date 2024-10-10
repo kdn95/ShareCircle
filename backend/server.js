@@ -30,6 +30,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// Middleware to log errors
+app.use((err, req, res, next) => {
+  if (err && err.name === 'UnauthorizedError') {
+    console.error('JWT error:', err);
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+  next();
+});
+
 
 // JWT check middleware
 const jwtCheck = auth({
@@ -176,7 +185,10 @@ const userProfiles = new Map(); // In-memory store for user profiles
 
 // Middleware to get user profile
 app.get('/profile', jwtCheck, async (req, res) => {
-  const userId = req.user.sub; // Get user ID from Auth0 token
+  console.log("**********TEST*******");
+  // console.log(req.auth);
+  const userId = req.auth.payload.sub; // Get user ID from Auth0 token
+
 
   // Check if user profile exists in memory
   if (userProfiles.has(userId)) {
@@ -185,9 +197,9 @@ app.get('/profile', jwtCheck, async (req, res) => {
 
   // If profile does not exist, create one using Auth0 user info
   const profile = {
-    name: req.user.name,
-    email: req.user.email,
-    picture: req.user.picture,
+    name: req.auth.payload.name,
+    email: req.auth.payload.email,
+    picture: req.auth.payload.picture,
     // Add other Auth0 user properties as needed
   };
 
@@ -197,7 +209,7 @@ app.get('/profile', jwtCheck, async (req, res) => {
 
 // Example endpoint to update user profile (optional)
 app.put('/profile', jwtCheck, (req, res) => {
-  const userId = req.user.sub; // Get user ID from Auth0 token
+  const userId = req.auth.payload.sub; // Get user ID from Auth0 token
   const updatedProfile = req.body; // Assume updated profile data comes in the request body
 
   if (userProfiles.has(userId)) {
