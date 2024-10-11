@@ -1,10 +1,29 @@
 import React from "react";
 import HomeIcon from '@mui/icons-material/Home';
-import BookingsIcon from '@mui/icons-material/Book';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import ChatIcon from '@mui/icons-material/Chat';
 import AccountIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Navbar = ({ onAccountClick }) => {
+  const navigate = useNavigate();
+
+    // Navigate to nearby items
+  const handleFetchNearbyItems = () => {
+    navigate('/items/nearby');
+  };
+
+  // Navigate to profile page
+  const handleProfilePage = () => {
+    navigate('/profile');
+  };
+
+  // const handleChatBox = () => {
+  //   navigate('/chat/${renterId}');
+  // };
+
   return (
     <nav className="navbar">
       <div className="navbar-center">
@@ -14,16 +33,20 @@ const Navbar = ({ onAccountClick }) => {
             <a href="/">Home</a>
           </li>
           <li>
-            <BookingsIcon className="nav-icon" alt="bookings" />
-            <a href="/bookings">Bookings</a>
+            <TravelExploreIcon className="nav-icon" alt="explore" />
+            <button onClick={handleFetchNearbyItems} className="explore-button">
+              Explore
+            </button>
           </li>
           <li>
             <ChatIcon className="nav-icon" alt="chat" />
-            <a href="/chat">Chat</a>
+            {/* <button onClick={handleChatBox} className="chat-button"> */}
+              Chat
+            {/* </button> */}
           </li>
           <li>
             <AccountIcon className="nav-icon" alt="account" />
-            <button onClick={onAccountClick} className="account-button">
+            <button onClick={handleProfilePage} className="account-button">
               Account
             </button>
           </li>

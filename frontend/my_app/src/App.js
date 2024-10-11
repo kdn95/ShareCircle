@@ -7,11 +7,14 @@ import Categories from './Components/Categories';
 import CategoryItems from './Components/CategoryItems';
 import ItemsListing from './Components/Items';
 import Home from './Components/Home';
+import ChatPage from './Components/ChatPage';
 import './index.css';
+import SuccessPage from './Components/SuccessPage';
+import Profile from './Components/Profile';
 
 const App = () => {
   const { loginWithRedirect } = useAuth0();
-  
+
   const handleAccountClick = () => {
     loginWithRedirect();
   };
@@ -21,9 +24,12 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/items/nearby" element={<NearbyItems />} />
-        <Route path="/" element={<><Home /><Categories /></>} />
+        <Route path="/" element={<Categories />} />
+        <Route path="/profile" element={<><Home /><Profile /></>} />
         <Route path="/category/:category_name" element={<CategoryItems />} /> {/* New route for category items */}
         <Route path="/category/:category_name/:itemId" element={<ItemsListing />} /> {/* New route for item details */}
+        <Route path="/chat/:renterId" element={<ChatPage />} />{/* New route for item details */}
+        <Route path="/success" element={<SuccessPage />} /> {/* New route for SuccessPage */}
       </Routes>
     <Navbar onAccountClick={handleAccountClick} />  {/* Pass the function to Navbar */}
   </Router>

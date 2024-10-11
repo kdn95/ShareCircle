@@ -8,24 +8,29 @@ import CardActionArea from '@mui/material/CardActionArea';
 import StarIcon from '@mui/icons-material/Star';
 import '../index.css'; // Assuming your custom CSS is here
 import { getUserLocation } from '../Location';
+import LogoLoader from './LogoLoader'; // Import your LogoLoader component
 
 const CategoryItems = () => {
   const { category_name } = useParams(); // Get the category name from the URL
   const [items, setItems] = useState([]);
   const [userAddress, setUserAddress] = useState({});
+  const [loading, setLoading] = useState(true); // Initialize loading state
 
   const fetchCategoryItems = useCallback(async () => {
+    setLoading(true); // Set loading to true before fetching data
     try {
-      const response = await axios.get(`http://localhost:5008/${category_name}`); // Fetch items by category
+      const response = await axios.get(`http://localhost:5004/${category_name}`); // Fetch items by category
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);
+    } finally {
+      setLoading(false); // Set loading to false after fetching is complete
     }
   }, [category_name]);
 
   useEffect(() => {
     fetchCategoryItems();
-    
+
     const fetchUserLocation = async () => {
       try {
         const location = await getUserLocation();
@@ -35,18 +40,22 @@ const CategoryItems = () => {
         console.error('Error getting user location:', error);
       }
     };
-  
+
     fetchUserLocation(); // Get user location when component mounts
   }, [fetchCategoryItems]);
+
+  if (loading) {
+    return <LogoLoader />; // Show loader while loading
+  }
 
   return (
     <div className="Category-items-container">
       <div className="Category-items-title-address-container">
-      <h1 className="Category-items-title">Items in {category_name}</h1>
-      {userAddress && (
-      <p className="user-address">
-        {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
-      </p>
+        <h1 className="Category-items-title">Items in {category_name}</h1>
+        {userAddress && (
+          <p className="user-address">
+            {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
+          </p>
         )}{/* Display user's address */}
       </div>
       <div className="items-container">
@@ -64,12 +73,24 @@ const CategoryItems = () => {
                   />
                   <CardContent>
                     <h3 className="item-header">{item.Item_name}</h3>
-                    <div className="rating-container">
-                      <StarIcon className="star-icon" alt="star-icon" />
-                      <p className="renter-rating"> {item.Rating}</p> {/* Add rating instead */}
+                    <div className="renter-container">
+                      <div className="renter-info">
+                        <img
+                        src={item.Profile_pic}
+                        alt="Renter Profile"
+                        className="renter-profile-pic"
+                        />
+                        <div className="renter-details">
+                          <p className="renter-full-name">{item.Renter_name}</p>
+                          <div className="rating-container">
+                            <p className="renter-rating"> {item.Rating}</p> {/* Add rating instead */}
+                            <StarIcon className="star-icon" alt="star-icon" />
+                          </div>
+                        </div>
+                      </div>
+                      <p className="item-price">Price: ${item.Price_per_day} per day</p>
+                      {/* <img src={item.Image_url} alt={item.Item_name} /> */}
                     </div>
-                    <p className="item-price">Price: ${item.Price_per_day} per day</p>
-                    {/* <img src={item.Image_url} alt={item.Item_name} /> */}
                   </CardContent>
                 </CardActionArea>
               </Link>

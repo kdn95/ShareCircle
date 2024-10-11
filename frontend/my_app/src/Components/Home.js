@@ -1,22 +1,18 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getUserLocation } from '../Location';
-import PlaceIcon from '@mui/icons-material/Place';
-// import fetchItemsNearby from './NearbyItems';
-
+import LogoLoader from './LogoLoader';
 
 const Home = () => {
   const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
-  // const [userLocation, setUserLocation] = useState(null);
   const [userAddress, setUserAddress] = useState({});
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true); // Initialize loading state
 
   // Fetch protected data for renters/nearby items
   const fetchProtectedData = useCallback(async () => {
     try {
       const token = await getAccessTokenSilently();
-      const response = await fetch('http://localhost:5008/', {
+      const response = await fetch('http://localhost:5004/', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -29,49 +25,49 @@ const Home = () => {
   }, [getAccessTokenSilently]);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      fetchProtectedData();
-  
-      const fetchUserLocation = async () => {
+    const fetchData = async () => {
+      if (isAuthenticated) {
         try {
-          const location = await getUserLocation();
+          await fetchProtectedData(); // Fetch protected data
+
+          const location = await getUserLocation(); // Get user location
           console.log('User location:', location); // Debugging log
           setUserAddress(location.address || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' });
         } catch (error) {
           console.error('Error getting user location:', error);
+        } finally {
+          setLoading(false); // Set loading to false when data fetching is complete
         }
-      };
-  
-      fetchUserLocation(); // Get user location when the user is authenticated
-    }
+      } else {
+        setLoading(false); // Set loading to false if not authenticated
+      }
+    };
+
+    fetchData(); // Call fetchData when the user authentication state changes
   }, [isAuthenticated, fetchProtectedData]);
-  
-  // Navigate to nearby items
-  const handleFetchNearbyItems = () => {
-    navigate('/items/nearby');
-  };
 
   return (
-    <div>
-  {!isAuthenticated ? (
-    <button className="login-button" onClick={() => loginWithRedirect()}>Log In</button>
-  ) : (
-    <>
-      <button className="login-button" onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
-      <h2 className="welcome">Welcome, {user.name}!</h2>
-      {userAddress && (
-        <p className="user-address">
-          {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
-        </p>
-        )}
-      {/* Button to fetch nearby items */}
-      <button className="nearby-items-button"
-      onClick={handleFetchNearbyItems}><PlaceIcon className="Place-icon" />
-      Fetch Nearby Items
-      </button>
-    </>
-  )}
-</div>
+    <div className="centered-container">
+      {loading ? ( // Show loader while loading
+        <LogoLoader />
+      ) : (
+        <>
+          {!isAuthenticated ? (
+            <button className="login-button" onClick={() => loginWithRedirect()}>Log In</button>
+          ) : (
+            <>
+              <button className="login-button" onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
+              <h2 className="welcome">Welcome, {user.name}!</h2>
+              {userAddress && (
+                <p className="user-address">
+                  {userAddress.street}, {userAddress.city}, {userAddress.state} {userAddress.postcode}
+                </p>
+              )}
+            </>
+          )}
+        </>
+      )}
+    </div>
   );
 };
 
