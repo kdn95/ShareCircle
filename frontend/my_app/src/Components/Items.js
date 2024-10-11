@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
@@ -27,10 +27,6 @@ const ItemsListing = (syncConversation) => {
   const [loading, setLoading] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
   const [confirmedDates, setConfirmedDates] = useState(null);
-  
-  const handleRenterChatBox = () => {
-    navigate(`/chat/${item.Renter_id}`);
-  };
 
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
@@ -74,6 +70,11 @@ const ItemsListing = (syncConversation) => {
   const handleConfirmDates = (dates) => {
     setConfirmedDates(dates);
     setShowCalendar(false);
+  };
+
+  const handleRenterChatBox = () => {
+    console.log("Renter ID:", item.Renter_id);
+    navigate(`/chat/${item.Renter_id}`);
   };
   
 
