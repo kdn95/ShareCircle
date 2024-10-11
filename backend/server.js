@@ -301,12 +301,12 @@ app.get('/:category_name/:itemId', async (req, res) => {
 });
 
 //GET RENTERID FOR TALKJS
-app.get('/api/:userId/:renterId', async (req, res) => {
+app.get('/api/renters/:renterId', async (req, res) => {
   const { renterId } = req.params;
 
   try {
     // Query the database to get renter data by renterId
-    const result = await pool.query('SELECT * FROM "Renters" WHERE "Renter_id" = $1', [renterId]);
+    const result = await pool.query(`SELECT * FROM "Renters" WHERE "Renter_id" = $1`, [renterId]);
 
     if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Renter not found' });
