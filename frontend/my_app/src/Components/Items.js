@@ -27,6 +27,10 @@ const ItemsListing = (syncConversation) => {
   const [loading, setLoading] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
   const [confirmedDates, setConfirmedDates] = useState(null);
+  
+  const handleRenterChatBox = () => {
+    navigate(`/chat/${item.Renter_id}`);
+  };
 
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
@@ -71,6 +75,7 @@ const ItemsListing = (syncConversation) => {
     setConfirmedDates(dates);
     setShowCalendar(false);
   };
+  
 
 
   useEffect(() => {
