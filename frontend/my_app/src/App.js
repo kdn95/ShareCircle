@@ -52,37 +52,18 @@ const App = () => {
   if (isLoading) return <div>Loading...</div>; // Handle loading state
 
   return (
-    <Session appId={process.env.REACT_APP_TALKJS_APP_ID} syncUser={syncUser}>
-      <Router>
-        <Routes>
-          <Route path="/items/nearby" element={<NearbyItems />} />
-           {/* Chat Route */}
-           <Route 
-            path="/chat" 
-            element={
-              isAuthenticated ? (
-                <Inbox
-                  conversationId={`conversation_${user.sub}`} 
-                  style={{ width: '100%', height: '500px' }} 
-                />
-              ) : (
-                <div style={{ textAlign: 'center', marginTop: '50px' }}>
-                  <h2>You need to log in to access the chat</h2>
-                  <button onClick={loginWithRedirect}>Log In</button>
-                </div>
-              )
-            } 
-          />
-          <Route path="/" element={<Categories />} />
-          <Route path="/profile" element={<><Home /><Profile /></>} />
-          <Route path="/category/:category_name" element={<CategoryItems />} />
-          <Route path="/category/:category_name/:itemId" element={<ItemsListing/>} />
-          {/* syncConversation={syncConversation} */}
-          <Route path="/success" element={<SuccessPage />} />
-        </Routes>
-        <Navbar onAccountClick={handleAccountClick} />
-      </Router>
-    </Session>
+    <Router>
+      <Routes>
+        <Route path="/items/nearby" element={<NearbyItems />} />
+        <Route path="/" element={<Categories />} />
+        <Route path="/profile" element={<><Home /><Profile /></>} />
+        <Route path="/category/:category_name" element={<CategoryItems />} /> {/* New route for category items */}
+        <Route path="/category/:category_name/:itemId" element={<ItemsListing />} /> {/* New route for item details */}
+        <Route path="/chat/:renterId" element={<ChatPage />} />{/* New route for item details */}
+        <Route path="/success" element={<SuccessPage />} /> {/* New route for SuccessPage */}
+      </Routes>
+    <Navbar onAccountClick={handleAccountClick} />  {/* Pass the function to Navbar */}
+  </Router>
   );
 };
 
