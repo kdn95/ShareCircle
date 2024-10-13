@@ -72,11 +72,6 @@ const ItemsListing = (syncConversation) => {
     setShowCalendar(false);
   };
 
-  const handleRenterChatBox = () => {
-    console.log("Renter ID:", item.Renter_id);
-    navigate(`/chat/${item.Renter_id}`);
-  };
-  
 
 
   useEffect(() => {
@@ -244,7 +239,7 @@ const ItemsListing = (syncConversation) => {
                   <StarIcon className="star-icon" alt="star-icon" />
                 </div>
               </div>
-              {isAuthenticated && <Chat syncConversation={syncConversation} />} 
+                <ChatIcon className="chat-icon" alt="chat" />
             </div>
           </div>
           {/* Map container */}
