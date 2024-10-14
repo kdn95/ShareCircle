@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback} from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
@@ -14,11 +14,13 @@ import '../index.css';
 import mapboxgl from 'mapbox-gl'; // Import Mapbox
 import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox CSS
 import Modal from '@mui/material/Modal'; // Import Modal
+import Chat from './Session';
+import { useAuth0 } from '@auth0/auth0-react'; // Import Auth0
 
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`);
 
-const ItemsListing = () => {
+const ItemsListing = (syncConversation) => {
   const navigate = useNavigate();
   const { category_name, itemId } = useParams();
   const [item, setItem] = useState(null);
@@ -31,6 +33,9 @@ const ItemsListing = () => {
   const markerRef = useRef([]);
 
   mapboxgl.accessToken = process.env.REACT_APP_MB_TOKEN;
+
+  const { isAuthenticated } = useAuth0(); // Get authentication status
+
 
   // const clearMarkers = () => {
   //   markerRef.current.forEach(marker => marker.remove());
@@ -67,11 +72,6 @@ const ItemsListing = () => {
     setShowCalendar(false);
   };
 
-  const handleRenterChatBox = () => {
-    console.log("Renter ID:", item.Renter_id);
-    navigate(`/chat/${item.Renter_id}`);
-  };
-  
 
   useEffect(() => {
     console.log(mapContainerRef.current);
@@ -194,6 +194,7 @@ const ItemsListing = () => {
     }
   };
 
+
   if (loading) {
     return <LogoLoader />;
   }
@@ -201,6 +202,7 @@ const ItemsListing = () => {
   if (!item) {
     return <p>No item found.</p>;
   }
+
 
 
   return (
@@ -236,9 +238,7 @@ const ItemsListing = () => {
                   <StarIcon className="star-icon" alt="star-icon" />
                 </div>
               </div>
-              <button onClick={handleRenterChatBox} className="chat-renter-button">
-                <ChatIcon className="chat-icon" alt="chat" />
-              </button>
+              {isAuthenticated && <Chat syncConversation={syncConversation} />} 
             </div>
           </div>
           {/* Map container */}
