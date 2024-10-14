@@ -238,10 +238,7 @@ const ItemsListing = (syncConversation) => {
                   <StarIcon className="star-icon" alt="star-icon" />
                 </div>
               </div>
-              <button>
-                <ChatIcon className="chat-icon" alt="chat" />
                 <Chat userId="sample_user_alice" conversationId="your_conversation_id" />
-              </button>
             </div>
           </div>
           {/* Map container */}
