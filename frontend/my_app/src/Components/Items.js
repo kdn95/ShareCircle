@@ -15,7 +15,8 @@ import mapboxgl from 'mapbox-gl'; // Import Mapbox
 import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox CSS
 import Modal from '@mui/material/Modal'; // Import Modal
 import Chat from './Session';
-import Talk from 'talkjs';
+import { useAuth0 } from '@auth0/auth0-react'; // Import Auth0
+
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`);
 
@@ -265,7 +266,7 @@ const ItemsListing = (syncConversation) => {
                   <StarIcon className="star-icon" alt="star-icon" />
                 </div>
               </div>
-                <Chat syncUser={syncUser} />
+              {isAuthenticated && <Chat syncConversation={syncConversation} />} 
             </div>
           </div>
           {/* Map container */}
