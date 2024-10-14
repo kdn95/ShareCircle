@@ -686,19 +686,19 @@ button {
     padding: 20px;
     padding-top: 140px;
     background-color: #fff;
-
+  
     p {
       margin: 0; /* Remove the default margin */
       font-size: 1.1rem;
       font-family: "Inter", sans-serif;
       color: #494949;
     }
-
+  
     .label {
       font-weight: bold; /* Make the label bold */
       margin-left: -10px;
     }
-
+  
     .email {
       text-align: right; /* Align the email text to the right */
     }
@@ -717,14 +717,14 @@ button {
       padding: 10px 0;
       border-bottom: 1px solid #ddd;
       font-size: 1.1rem;
-
+    
       /* Container for the text on the left */
       .setting-text {
         margin: 0;
         font-family: "Inter", sans-serif;
         color: #494949;
       }
-
+    
       /* Add a ">" symbol on the far right */
       .right-arrow {
         margin-left: auto; /* Push the arrow to the right */

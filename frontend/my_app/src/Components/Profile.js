@@ -54,6 +54,7 @@ const Profile = () => {
         <div className="profile-image-container">
           <img src={user.picture}  alt="User Profile" className="profile-image" />
         </div>
+        {/* Moved user name outside profile-image-container */}
         <h2 className="user-name">{user.name || 'User Name'}</h2>
       </div>
       <div className="profile-info">
