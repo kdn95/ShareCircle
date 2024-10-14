@@ -14,38 +14,40 @@ import { Session } from '@talkjs/react';
 import Talk from 'talkjs';
 
 const App = () => {
-  const { loginWithRedirect, user } = useAuth0(); // Get user data from Auth0
+  const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
 
   const handleAccountClick = () => {
     loginWithRedirect();
   };
-
+  
   const syncUser = useCallback(() => {
-    if (!user) {
+    if (isAuthenticated && user) {
       return new Talk.User({
-        id: 'guest', // Fallback ID if user is not authenticated
+        id: user.sub,
+        name: user.name,
+        email: user.email,
+        photoUrl: user.picture || 'https://talkjs.com/new-web/avatar-7.jpg',
+        welcomeMessage: 'Hi!',
+      });
+    } else {
+      // Return a default guest user if not authenticated
+      return new Talk.User({
+        id: 'guest',
         name: 'Guest',
         email: 'guest@example.com',
         photoUrl: 'https://talkjs.com/new-web/avatar-7.jpg',
         welcomeMessage: 'Hi!',
       });
     }
+  }, [isAuthenticated, user]);
 
-    // Replace with actual user data from Auth0
-    return new Talk.User({
-      id: user.sub, // Use the Auth0 user ID
-      name: user.name || 'User', // Use the Auth0 user's name
-      email: user.email, // Use the Auth0 user's email
-      photoUrl: user.picture || 'https://talkjs.com/new-web/avatar-7.jpg', // Use Auth0 user's picture
-      welcomeMessage: 'Hi!',
-    });
-  }, [user]); // Add user as a dependency
+  // const syncConversation = useCallback((session) => {
+  //   // You can create a placeholder conversation or handle it in each component
+  //   const conversation = session.getOrCreateConversation('new_conversation');
+  //   return conversation;
+  // }, []);
 
-  const syncConversation = useCallback((session) => {
-    // You can create a placeholder conversation or handle it in each component
-    const conversation = session.getOrCreateConversation('new_conversation');
-    return conversation;
-  }, []);
+  if (isLoading) return <div>Loading...</div>; // Handle loading state
 
   return (
     <Session appId="tD4xpjcO" syncUser={syncUser}>
@@ -55,7 +57,8 @@ const App = () => {
           <Route path="/" element={<Categories />} />
           <Route path="/profile" element={<><Home /><Profile /></>} />
           <Route path="/category/:category_name" element={<CategoryItems />} />
-          <Route path="/category/:category_name/:itemId" element={<ItemsListing syncConversation={syncConversation} />} />
+          <Route path="/category/:category_name/:itemId" element={<ItemsListing/>} />
+          {/* syncConversation={syncConversation} */}
           <Route path="/success" element={<SuccessPage />} />
         </Routes>
         <Navbar onAccountClick={handleAccountClick} />
