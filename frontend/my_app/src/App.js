@@ -14,22 +14,32 @@ import { Session } from '@talkjs/react';
 import Talk from 'talkjs';
 
 const App = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, user } = useAuth0(); // Get user data from Auth0
 
   const handleAccountClick = () => {
     loginWithRedirect();
   };
 
   const syncUser = useCallback(() => {
-    // Replace with actual user data
+    if (!user) {
+      return new Talk.User({
+        id: 'guest', // Fallback ID if user is not authenticated
+        name: 'Guest',
+        email: 'guest@example.com',
+        photoUrl: 'https://talkjs.com/new-web/avatar-7.jpg',
+        welcomeMessage: 'Hi!',
+      });
+    }
+
+    // Replace with actual user data from Auth0
     return new Talk.User({
-      id: 'nina',
-      name: 'Nina',
-      email: 'nina@example.com',
-      photoUrl: 'https://talkjs.com/new-web/avatar-7.jpg',
+      id: user.sub, // Use the Auth0 user ID
+      name: user.name || 'User', // Use the Auth0 user's name
+      email: user.email, // Use the Auth0 user's email
+      photoUrl: user.picture || 'https://talkjs.com/new-web/avatar-7.jpg', // Use Auth0 user's picture
       welcomeMessage: 'Hi!',
     });
-  }, []);
+  }, [user]); // Add user as a dependency
 
   const syncConversation = useCallback((session) => {
     // You can create a placeholder conversation or handle it in each component
