@@ -73,10 +73,14 @@ const App = () => {
   if (isLoading) return <div>Loading...</div>; // Handle loading state
 
   return (
-    <Session appId="tD4xpjcO" syncUser={syncUser}>
+    <Session appId={process.env.REACT_APP_TALKJS_APP_ID} syncUser={syncUser}>
       <Router>
         <Routes>
           <Route path="/items/nearby" element={<NearbyItems />} />
+          <Route path="/chat" element={<Inbox 
+          conversationId={`conversation_${user.sub}`}
+        style={{ width: '100%', height: '500px' }}
+        ></Inbox>} />
           <Route path="/" element={<Categories />} />
           <Route path="/profile" element={<><Home /><Profile /></>} />
           <Route path="/category/:category_name" element={<CategoryItems />} />

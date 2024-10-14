@@ -20,6 +20,10 @@ const Navbar = ({ onAccountClick }) => {
     navigate('/profile');
   };
 
+  const handleInbox = () => {
+    navigate('/chat');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-center">
@@ -36,7 +40,9 @@ const Navbar = ({ onAccountClick }) => {
           </li>
           <li>
             <ChatIcon className="nav-icon" alt="chat" />
+            <button onClick={handleInbox} >
               Chat
+            </button>
           </li>
           <li>
             <AccountIcon className="nav-icon" alt="account" />
