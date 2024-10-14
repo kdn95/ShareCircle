@@ -3,17 +3,11 @@ import { Popup } from '@talkjs/react';
 import { useEffect, useState, useCallback } from 'react';
 import Talk from 'talkjs';
 
-function Chat() {
-  const syncUser = useCallback(() => {
-    // Rentee (person renting out stuff)
-    return new Talk.User({
-      id: 'nina',
-      name: 'Nina',
-      email: 'nina@example.com',
-      photoUrl: 'https://talkjs.com/new-web/avatar-7.jpg',
-      welcomeMessage: 'Hi!',
-    });
-  }, []);
+function Chat({ syncUser }) {
+    const { category_name, itemId } = useParams();
+    const [item, setItem] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [session, setSession] = useState(null); // State to store Talk.js session
 
   const syncConversation = useCallback((session) => {
     const conversation = session.getOrCreateConversation('new_conversation');
@@ -27,20 +21,67 @@ function Chat() {
       welcomeMessage: 'Hey, how can I help?',
     });
 
-    conversation.setParticipant(session.me);
-    conversation.setParticipant(other);
+        return () => {
+          setItem(null); // Cleanup
+          if (session) {
+              session.destroy(); // Cleanup session on unmount
+          }
+      };
+  }, [category_name, itemId]);
 
-    return conversation;
-  }, []);
+  // Create Talk.js session when item is loaded
+  useEffect(() => {
+    if (item) {
+        console.log(syncUser); 
+        if (typeof syncUser === 'function') {
+          const newSession = new Talk.Session({
+              appId: process.env.REACT_APP_TALKJS_APP_ID,
+              me: syncUser(), // Pass the synced user here
+          });
 
-  return (
-    <Session appId="tD4xpjcO" syncUser={syncUser}>
-      <Popup
-        conversationId="new_conversation"
-        syncConversation={syncConversation}
-      />
-    </Session>
-  );
+          setSession(newSession);
+      } else {
+        console.error('syncUser is not a function');
+    }
+  }
+  }, [item, syncUser]);
+
+
+    const syncConversation = useCallback((talkSession) => {
+        if (!item) {
+            console.warn("Item is not yet loaded, skipping conversation creation.");
+            return; // Skip if item is not loaded
+        }
+
+        // Generate a unique conversation ID based on itemId
+        const userId = talkSession.me.id;
+        const renterId = item.Renter_id; // Ensure this is the correct field from your item
+        const conversationId = `conversation_${userId}_${renterId}`;
+    
+
+        const conversation = talkSession.getOrCreateConversation(conversationId);
+
+        const other = new Talk.User({
+            id: item.Renter_id,
+            name: item.Renter_name,
+            photoUrl: item.Profile_pic,
+            welcomeMessage: 'Hello',
+        });
+
+        conversation.setParticipant(talkSession.me);
+        conversation.setParticipant(other);
+
+        return conversation;
+    }, [item, itemId]);
+
+    if (loading) return <div>Loading...</div>; // Optional loading state
+
+    return (
+        <Popup
+            conversationId={`item_${itemId}`}
+            syncConversation={syncConversation} // Pass the current session
+        />
+    );
 }
 
 export default Chat;

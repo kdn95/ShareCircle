@@ -13,7 +13,7 @@ import { Session, Inbox } from '@talkjs/react';
 import Talk from 'talkjs';
 
 const App = () => {
-  const { loginWithRedirect, user } = useAuth0(); // Get user data from Auth0
+  const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -42,27 +42,27 @@ const App = () => {
       console.error('Error fetching protected data:', error);
     }
   };
-
+  
   const syncUser = useCallback(() => {
-    if (!user) {
+    if (isAuthenticated && user) {
       return new Talk.User({
-        id: 'guest', // Fallback ID if user is not authenticated
+        id: user.sub,
+        name: user.name,
+        email: user.email,
+        photoUrl: user.picture || 'https://talkjs.com/new-web/avatar-7.jpg',
+        welcomeMessage: 'Hi!',
+      });
+    } else {
+      // Return a default guest user if not authenticated
+      return new Talk.User({
+        id: 'guest',
         name: 'Guest',
         email: 'guest@example.com',
         photoUrl: 'https://talkjs.com/new-web/avatar-7.jpg',
         welcomeMessage: 'Hi!',
       });
     }
-
-    // Replace with actual user data from Auth0
-    return new Talk.User({
-      id: user.sub, // Use the Auth0 user ID
-      name: user.name || 'User', // Use the Auth0 user's name
-      email: user.email, // Use the Auth0 user's email
-      photoUrl: user.picture || 'https://talkjs.com/new-web/avatar-7.jpg', // Use Auth0 user's picture
-      welcomeMessage: 'Hi!',
-    });
-  }, [user]); // Add user as a dependency
+  }, [isAuthenticated, user]);
 
   // const syncConversation = useCallback((session) => {
   //   // You can create a placeholder conversation or handle it in each component
@@ -73,17 +73,20 @@ const App = () => {
   if (isLoading) return <div>Loading...</div>; // Handle loading state
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/items/nearby" element={<NearbyItems />} />
-        <Route path="/" element={<Categories />} />
-        <Route path="/profile" element={<><Home /><Profile /></>} />
-        <Route path="/category/:category_name" element={<CategoryItems />} /> {/* New route for category items */}
-        <Route path="/category/:category_name/:itemId" element={<ItemsListing />} /> {/* New route for item details */}
-        <Route path="/success" element={<SuccessPage />} /> {/* New route for SuccessPage */}
-      </Routes>
-    <Navbar onAccountClick={handleAccountClick} />  {/* Pass the function to Navbar */}
-  </Router>
+    <Session appId="tD4xpjcO" syncUser={syncUser}>
+      <Router>
+        <Routes>
+          <Route path="/items/nearby" element={<NearbyItems />} />
+          <Route path="/" element={<Categories />} />
+          <Route path="/profile" element={<><Home /><Profile /></>} />
+          <Route path="/category/:category_name" element={<CategoryItems />} />
+          <Route path="/category/:category_name/:itemId" element={<ItemsListing/>} />
+          {/* syncConversation={syncConversation} */}
+          <Route path="/success" element={<SuccessPage />} />
+        </Routes>
+        <Navbar onAccountClick={handleAccountClick} />
+      </Router>
+    </Session>
   );
 };
 
