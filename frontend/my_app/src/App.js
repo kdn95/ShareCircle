@@ -13,7 +13,7 @@ import { Session, Inbox } from '@talkjs/react';
 import Talk from 'talkjs';
 
 const App = () => {
-  const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
+  const { loginWithRedirect, user } = useAuth0(); // Get user data from Auth0
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -42,29 +42,27 @@ const App = () => {
       console.error('Error fetching protected data:', error);
     }
   };
-  
+
   const syncUser = useCallback(() => {
-    if (isAuthenticated && user) {
+    if (!user) {
       return new Talk.User({
-        id: user.sub,
-        name: user.name,
-        email: user.email,
-        photoUrl: user.picture || 'https://talkjs.com/new-web/avatar-7.jpg',
-        welcomeMessage: 'Hi!',
-      });
-    } else {
-      // Return a default guest user if not authenticated
-      return new Talk.User({
-        id: 'guest',
+        id: 'guest', // Fallback ID if user is not authenticated
         name: 'Guest',
         email: 'guest@example.com',
         photoUrl: 'https://talkjs.com/new-web/avatar-7.jpg',
         welcomeMessage: 'Hi!',
       });
     }
-    
-  }, [isAuthenticated, user]);
-  
+
+    // Replace with actual user data from Auth0
+    return new Talk.User({
+      id: user.sub, // Use the Auth0 user ID
+      name: user.name || 'User', // Use the Auth0 user's name
+      email: user.email, // Use the Auth0 user's email
+      photoUrl: user.picture || 'https://talkjs.com/new-web/avatar-7.jpg', // Use Auth0 user's picture
+      welcomeMessage: 'Hi!',
+    });
+  }, [user]); // Add user as a dependency
 
   // const syncConversation = useCallback((session) => {
   //   // You can create a placeholder conversation or handle it in each component
