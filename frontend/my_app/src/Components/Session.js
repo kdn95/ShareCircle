@@ -3,12 +3,14 @@ import { useEffect, useState, useCallback } from 'react';
 import Talk from 'talkjs';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import ChatIcon from '@mui/icons-material/Chat';
 
 function Chat({ syncUser }) {
     const { category_name, itemId } = useParams();
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);
     const [session, setSession] = useState(null); // State to store Talk.js session
+    const [isPopupOpen, setIsPopupOpen] = useState(false); // State to control popup visibility
 
     useEffect(() => {
         const fetchItemDetails = async () => {
@@ -79,10 +81,18 @@ function Chat({ syncUser }) {
     if (loading) return <div>Loading...</div>; // Optional loading state
 
     return (
-        <Popup
-            conversationId={`item_${itemId}`}
-            syncConversation={syncConversation} // Pass the current session
-        />
+        <div>
+            <button>
+                <ChatIcon onClick={() => setIsPopupOpen(true)}/>
+            </button>
+            {isPopupOpen && (
+                <Popup
+                    conversationId={`item_${itemId}`}
+                    syncConversation={syncConversation} // Pass the current session
+                    onClose={() => setIsPopupOpen(false)} // Optionally handle closing
+                />
+            )}
+        </div>
     );
 }
 
