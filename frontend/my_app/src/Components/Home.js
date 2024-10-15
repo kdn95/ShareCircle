@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getUserLocation } from '../Location';
-import LogoLoader from './LogoLoader';
+import HomepageLoader from './HomepageLoader';
 
 const Home = () => {
   const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
@@ -72,7 +72,7 @@ const Home = () => {
   return (
     <div className="centered-container">
       {loading ? ( // Show loader while loading
-        <LogoLoader />
+        <HomepageLoader />
       ) : (
         <>
           {!isAuthenticated ? (

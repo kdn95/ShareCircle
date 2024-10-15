@@ -62,7 +62,7 @@ body {
 // LIST OF ALL CATEGORIES PAGE (HOMEPAGE)
 .categories-title {
   text-align: center;
-  font-weight: 600;
+  // font-weight: 600;
   color: #494949;
 }
 
@@ -488,6 +488,19 @@ button {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+//HOMEPAGE LOADER
+h2.slogan {
+  color:#C9D7A4;
+  text-align: center;
+  padding-bottom: 0.2rem;
+}
+
+.catch-phrase {
+  text-align: center;
+  max-width: 300px;
+  padding-bottom: 0.5rem;
 }
 
 // NEARBY ITEMS PAGE

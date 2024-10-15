@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 import { Link } from 'react-router-dom';
-import LogoLoader from './LogoLoader'; // Import your LogoLoader component
+import HomepageLoader from './HomepageLoader'; // Import your LogoLoader component
 import '../index.css'; // Assuming your custom CSS is here
 
 const Categories = () => {
@@ -13,30 +13,31 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true); // Initialize loading state
 
-  // Function to fetch categories from the API
   const fetchCategories = async () => {
-    setLoading(true); // Set loading to true before fetching data
+    const delay = new Promise((resolve) => setTimeout(resolve, 3000)); // 5 seconds delay
     try {
-      const response = await axios.get('http://localhost:5004/'); // Adjust the endpoint accordingly
-      setCategories(response.data); // Set the categories data
+      const response = await axios.get('http://localhost:5004/');
+
+      // Ensure both API fetching and 5 seconds delay are completed before proceeding
+      await Promise.all([delay, setCategories(response.data)]);
     } catch (error) {
       console.error('Error fetching categories:', error);
     } finally {
-      setLoading(false); // Set loading to false after fetching is complete
+      setLoading(false); // Set loading to false after both tasks finish
     }
   };
 
-  // Fetch categories on component mount
   useEffect(() => {
     fetchCategories();
   }, []); // Empty dependency array ensures this only runs once
 
   return (
     <>
-      <h1 className="categories-title">Categories</h1>
       {loading ? ( // Show loader while loading
-        <LogoLoader />
+        <HomepageLoader />
       ) : (
+        <>
+        <h2 className="categories-title">Categories</h2>
         <div className="categories-container">
           {categories.map((category) => (
             <Card sx={{ maxWidth: 345, margin: '20px', height: '380px' }} key={category.ID} className="category-card">
@@ -57,6 +58,7 @@ const Categories = () => {
             </Card>
           ))}
         </div>
+        </>
       )}
     </>
   );
