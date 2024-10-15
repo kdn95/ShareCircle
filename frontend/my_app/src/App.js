@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Navbar from './Components/Navbar';
 import NearbyItems from './Components/NearbyItems';
@@ -15,32 +16,8 @@ import Talk from 'talkjs';
 const App = () => {
   const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
 
-  useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-
-    if (query.get("success")) {
-      setMessage("Order placed! You will receive an email confirmation.");
-    }
-
-    if (query.get("canceled")) {
-      setMessage("Order canceled -- continue to shop around and checkout when you're ready.");
-    }
-  }, []);
-
-  const fetchProtectedData = async () => {
-    try {
-      const token = await getAccessTokenSilently();
-      const response = await fetch('http://localhost:5003/items/nearby', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      console.log(data); // Use this data in your frontend
-      // You might want to set fetched items to a state here if needed
-    } catch (error) {
-      console.error('Error fetching protected data:', error);
-    }
+  const handleAccountClick = () => {
+    loginWithRedirect();
   };
   
   const syncUser = useCallback(() => {

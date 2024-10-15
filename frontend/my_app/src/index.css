@@ -62,23 +62,12 @@ body {
   flex-wrap: wrap; /* Allow cards to wrap to the next row */
   justify-content: center; /* Center cards in the container */
   gap: 1rem; /* Space between cards */
-  /* Responsive adjustments for smaller screens */
 }
 .categories-container .MuiCard-root {
   flex: 0 0 calc(33.33% - 1rem); /* Three cards per row with space for margins */
   margin: 0.5rem; /* Space between cards */
   max-width: 21.56rem; /* Restrict card size */
   width: 100%; /* Ensure cards take full width available in the container */
-}
-@media (max-width: 48rem) {
-  .categories-container .MuiCard-root {
-    flex: 0 0 calc(50% - 1rem); /* Two cards per row on small screens */
-  }
-}
-@media (max-width: 30rem) {
-  .categories-container .MuiCard-root {
-    flex: 0 0 calc(100% - 1rem); /* One card per row on very small screens */
-  }
 }
 .categories-container .category-card {
   flex: 0 0 calc(33.33% - 1rem); /* Three cards per row with spacing */
@@ -89,6 +78,27 @@ body {
   border: 2px solid white;
   display: flex;
   flex-direction: column;
+  /* Responsive adjustments for smaller screens */
+}
+@media (max-width: 48rem) {
+  .categories-container .category-card .MuiCard-root {
+    flex: 0 0 calc(50% - 1rem); /* Two cards per row on small screens */
+  }
+}
+@media (max-width: 30rem) {
+  .categories-container .category-card {
+    height: 160px;
+  }
+  .categories-container .category-card .MuiCard-root {
+    flex: 0 0 calc(100% - 1rem); /* One card per row on very small screens */
+  }
+  .categories-container .category-card h4 {
+    color: #494949;
+    font-size: 0.8rem;
+    margin: 0 0 0.8125rem;
+    font-weight: 400;
+    text-align: center;
+  }
 }
 .categories-container .category-image {
   height: auto;
@@ -97,7 +107,7 @@ body {
 }
 .categories-container h4 {
   color: #494949;
-  font-size: 0.8rem;
+  font-size: 1.3rem;
   margin: 0 0 0.8125rem;
   font-weight: 400;
   text-align: center;
