@@ -228,6 +228,16 @@ button {
   transition: background-color 0.3s;
   border-radius: 0.625rem;
 }
+button.item-chat-button {
+  margin-left: auto; /* Pushes the chat icon to the right */
+  margin-right: -14rem;
+  color: #757575;
+}
+@media (max-width: 30rem) {
+  button.item-chat-button {
+    margin-right: -9.5rem;
+  }
+}
 button.nearby-items-button {
   max-width: 18.75rem;
   background-color: #C9D7A4;
@@ -318,6 +328,7 @@ button.rent-button, button.rent-login-button {
 }
 .item-details-container .renter-container .renter-info .chat-icon {
   margin-left: auto; /* Pushes the chat icon to the right */
+  margin-right: 0;
   color: #757575;
 }
 .item-details-container .renter-container .rating-container {

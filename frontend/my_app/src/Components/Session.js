@@ -82,7 +82,7 @@ function Chat({ syncUser }) {
 
     return (
         <div>
-            <button>
+            <button className="item-chat-button">
                 <ChatIcon onClick={() => setIsPopupOpen(true)}/>
             </button>
             {isPopupOpen && (
