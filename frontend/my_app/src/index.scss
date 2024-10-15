@@ -273,7 +273,7 @@ button {
     margin: 1rem 1rem;
   }
 
-  &.rent-button {
+  &.rent-button, &.rent-login-button {
     background-color: #C9D7A4; // Button background color
     padding: 0.5rem 1rem; // Button padding
     color: #494949; // Text color
@@ -295,6 +295,10 @@ button {
   align-items: center; /* Center inner content horizontally */
   flex-direction: column; /* Stack items vertically if needed */
   padding: 1.25rem;
+  
+  p.login-rent-prompt {
+    text-align: center;
+  }
 
   .item-details-card {
     box-shadow: 0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */

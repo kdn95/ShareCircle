@@ -21,6 +21,7 @@ import { useAuth0 } from '@auth0/auth0-react'; // Import Auth0
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`);
 
 const ItemsListing = (syncConversation) => {
+  const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   const navigate = useNavigate();
   const { category_name, itemId } = useParams();
   const [item, setItem] = useState(null);
@@ -33,8 +34,6 @@ const ItemsListing = (syncConversation) => {
   const markerRef = useRef([]);
 
   mapboxgl.accessToken = process.env.REACT_APP_MB_TOKEN;
-
-  const { isAuthenticated } = useAuth0(); // Get authentication status
 
 
   // const clearMarkers = () => {
@@ -203,7 +202,11 @@ const ItemsListing = (syncConversation) => {
     return <p>No item found.</p>;
   }
 
-
+  const handleLogin = () => {
+    loginWithRedirect({
+        redirectUri: window.location.origin + window.location.pathname // Redirect back to the same page
+    });
+};
 
   return (
     <div className="item-details-container">
@@ -243,9 +246,18 @@ const ItemsListing = (syncConversation) => {
           </div>
           {/* Map container */}
           <div ref={mapContainerRef} style={{ width: '100%', height: '300px' }} className="map-container" />
-          <div className="rent-button-container">
-            <button className="rent-button" onClick={handleRentNowClick}>Rent Now</button>
+          {!isAuthenticated && 
+          <div className="rent-login-button-container">
+            <p className="login-rent-prompt">Please log in to rent item</p>
+            <button className="rent-login-button" onClick={() => loginWithRedirect()}>Log in</button>
           </div>
+          }
+          {isAuthenticated && 
+          <div className="rent-button-container">
+          <button className="rent-button" onClick={handleRentNowClick}>Rent Now</button>
+          </div>
+          }
+          
           {/* {showCalendar && <Calendar onConfirmDates={handleConfirmDates} />}  */}
           {/* Modal for Calendar */}
           <Modal
