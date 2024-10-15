@@ -1,6 +1,8 @@
 import { Popup, Inbox } from '@talkjs/react';
 import { useEffect, useState, useCallback } from 'react';
 import Talk from 'talkjs';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function Chat({ syncUser }) {
     const { category_name, itemId } = useParams();
@@ -8,17 +10,20 @@ function Chat({ syncUser }) {
     const [loading, setLoading] = useState(true);
     const [session, setSession] = useState(null); // State to store Talk.js session
 
-  const syncConversation = useCallback((session) => {
-    const conversation = session.getOrCreateConversation('new_conversation');
+    useEffect(() => {
+        const fetchItemDetails = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(`http://localhost:5004/${category_name}/${itemId}`);
+                setItem(response.data);
+            } catch (error) {
+                console.error('Error fetching item details:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    // Renter
-    const other = new Talk.User({
-      id: 'frank',
-      name: 'Frank',
-      email: 'frank@example.com',
-      photoUrl: 'https://talkjs.com/new-web/avatar-8.jpg',
-      welcomeMessage: 'Hey, how can I help?',
-    });
+        fetchItemDetails();
 
         return () => {
             setItem(null); // Cleanup

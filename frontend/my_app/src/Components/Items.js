@@ -73,7 +73,6 @@ const ItemsListing = (syncConversation) => {
   };
 
 
-
   useEffect(() => {
     console.log(mapContainerRef.current);
     if (item && mapContainerRef.current && item.renter_longitude && item.renter_latitude) {
@@ -195,33 +194,6 @@ const ItemsListing = (syncConversation) => {
     }
   };
 
-    // Define syncUser here
-    const syncUser = useCallback(() => {
-      return new Talk.User({
-        id: 'nina', // Replace with actual user ID
-        name: 'Nina', // Replace with actual user name
-        email: 'nina@example.com', // Replace with actual user email
-        photoUrl: 'https://talkjs.com/new-web/avatar-7.jpg', // Replace with actual user photo URL
-        welcomeMessage: 'Hi!',
-      });
-    }, []);
-
-    const syncConversation = useCallback((session) => {
-      // JavaScript SDK code here
-      const conversation = session.getOrCreateConversation('new_conversation');
-
-      const other = new Talk.User({
-        id: 'frank',
-        name: 'Frank',
-        email: 'frank@example.com',
-        photoUrl: 'https://talkjs.com/new-web/avatar-8.jpg',
-        welcomeMessage: 'Hey, how can I help?',
-      });
-      conversation.setParticipant(session.me);
-      conversation.setParticipant(other);
-
-      return conversation;
-    }, []);
 
   if (loading) {
     return <LogoLoader />;
