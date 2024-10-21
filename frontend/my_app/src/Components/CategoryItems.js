@@ -11,7 +11,7 @@ import { getUserLocation } from '../Location';
 import LogoLoader from './LogoLoader'; // Import your LogoLoader component
 import { Select, MenuItem } from '@mui/material';
 
-// distance calculator for all items 
+// distance calculator for all items
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371; // Earth's radius in kilometers
   const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -49,7 +49,7 @@ const CategoryItems = () => {
         console.error('Error getting user location:', error);
       }
     };
-  
+
     fetchUserLocation(); // Call the async function to get user location
     //fetchCategoryItems
   }, []);
@@ -111,7 +111,7 @@ const CategoryItems = () => {
 
 
 
-  
+
   // Fetch Category Items after user location is set
   // useEffect(() => {
   //   if (userAddress.latitude && userAddress.longitude) {
@@ -135,7 +135,7 @@ const CategoryItems = () => {
   //       console.error('Error getting user location:', error);
   //     }
   //   };
-  
+
   //   fetchUserLocation(); // Call the async function to get user location
   //   //fetchCategoryItems
   // }, []);
@@ -145,7 +145,7 @@ const CategoryItems = () => {
        fetchCategoryItems();
     }
  }, [fetchCategoryItems, userAddress]);
-  
+
 
   if (loading) {
     return <LogoLoader />; // Show loader while loading
@@ -203,7 +203,7 @@ const CategoryItems = () => {
                           </div>
                         </div>
                       </div>
-                      <p className="item-price">Price: ${item.Price_per_day} per day</p>
+                      <p className="item-price">${item.Price_per_day} per day</p>
                       <p className='distance-info'>
                         {item.distance ? `${item.distance.toFixed(1)} km away` : 'Distance not available'}
                       </p>

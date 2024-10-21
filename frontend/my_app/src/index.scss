@@ -245,15 +245,15 @@ p.user-address {
     justify-content: center; // Center item cards horizontally
     width: 100%; // Ensure items container takes full width
     align-items: center;
-    
+
     .category-items-card {
       border-radius: 0.625rem;
       align-items: center;
-      height: 380px;
+      height: 450px;
 
     .item-image {
-      height: auto;
-      width: 250px;
+      height: 250px;
+      width: 350px;
       border-radius: 0.625rem 0.625rem 0 0;
     }
   }
@@ -263,12 +263,13 @@ p.user-address {
     margin: 0.375rem;
     max-width: 20rem;
     width: 100%;
-  
+    padding-left: 10px;
+
     @media (max-width: 768px) { // For tablet and smaller screens
       flex: 0 0 calc(100% - 1.25rem); // One card per row
-      max-width: 70%;
+      max-width: 90%;
     }
-  
+
     @media (min-width: 1024px) { // For larger screens
       flex: 0 0 calc(33.33% - 1.25rem); // Three cards per row
     }
@@ -286,6 +287,8 @@ p.user-address {
       display: flex;
       align-items: flex-start; /* Center items vertically */
       width: 100%; /* Ensure it takes the full width of the parent container */
+      padding-top: 1rem;
+
     }
 
     .renter-full-name {
@@ -294,14 +297,29 @@ p.user-address {
     }
   }
 
-  h3.item-header,
   p {
     color: #494949;
     text-decoration: none;
   }
 
+  p.item-price {
+    color: 494949;
+    margin-top: 5px;
+    font-size: 1.3rem;
+    font-family: "Inter", sans-serif;
+  }
   h3.item-header {
     font-weight: 700;
+    margin: 0;
+    color: #494949;
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+
+  p.distance-info {
+    font-size: 1rem;
+    padding-left: 12.5rem;
+    margin-top: 1.5rem;
   }
 }
 
@@ -393,7 +411,7 @@ button {
   align-items: center; /* Center inner content horizontally */
   flex-direction: column; /* Stack items vertically if needed */
   padding: 1.25rem;
-  
+
   p.login-rent-prompt {
     text-align: center;
   }
@@ -446,10 +464,12 @@ button {
     color: #494949;
     padding-top: 3rem;
 
+
     .renter-info {
       display: flex;
       align-items: flex-start; /* Center items vertically */
       width: 100%; /* Ensure it takes the full width of the parent container */
+
 
       .renter-profile-pic {
         width: 2.5rem; /* Set width */
@@ -580,7 +600,7 @@ button {
     width: 11rem; /* Adjust the size of your logo */
     height: 11rem;
     animation: pulse 1.5s ease-in-out infinite; /* Updated animation for pulsing */
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) 
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1))
     drop-shadow(0 0 15px rgba(255, 255, 255, 0.7));
   }
 }
@@ -669,25 +689,25 @@ h2.slogan {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Slight shadow for depth
     width: 40%; // Width for larger screens
     justify-content: space-between; // Space between items
-  
+
     .push-pin-icon {
       margin-right: 0.5rem; /* Space between icon and text */
       color: #757575; /* Color of the icon */
       vertical-align: middle; /* Aligns icon vertically with text */
     }
-  
+
     // Media query for smaller screens
     @media (max-width: 768px) {
       width: 90%; // Adjust width for mobile
       padding: 5px; // Reduce padding for mobile
       margin-bottom: 2rem; // Reduce bottom margin for mobile
-  
+
       .push-pin-icon {
         margin-right: 0.25rem; // Reduce space between icon and text
       }
     }
   }
-  
+
 
   .user-address {
     font-family: "Inter", sans-serif;
