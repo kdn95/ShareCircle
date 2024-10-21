@@ -91,7 +91,7 @@ const App = () => {
           path="/search"
           element={<SearchResults results={searchResults} />}
         />
-          <Route path="/profile" element={<><Profile /><Home /></>} />
+          <Route path="/profile" element={<><Home /><Profile /></>} />
           <Route path="/items" element={<ItemForm />} />
           <Route path="/category/:category_name" element={<CategoryItems />} />
           <Route path="/category/:category_name/:itemId" element={<ItemsListing/>} />
