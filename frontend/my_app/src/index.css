@@ -503,6 +503,7 @@ button.rent-button, button.rent-login-button {
   width: 11rem; /* Adjust the size of your logo */
   height: 11rem;
   animation: pulse 1.5s ease-in-out infinite; /* Updated animation for pulsing */
+  filter: drop-shadow(0 0 10px rgb(255, 255, 255)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.7));
 }
 
 @keyframes pulse {
@@ -520,7 +521,7 @@ button.rent-button, button.rent-login-button {
   }
 }
 h2.slogan {
-  color: #C9D7A4;
+  color: #8abee8;
   text-align: center;
   padding-bottom: 0.2rem;
 }
