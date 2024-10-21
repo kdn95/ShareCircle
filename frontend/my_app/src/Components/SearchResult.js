@@ -29,7 +29,7 @@ const SearchResults = () => {
         <div className="items-container">
           {results.map((item) => (
             <Card sx={{ maxWidth: 345, margin: '20px' }} key={item.Item_id} className="category-items-card">
-              <Link to={`/category/${category_name}/${item.Item_id}`} className="no-undies">
+              <Link to={`/category/${item.category}/${item.Item_id}`} className="no-undies">
                 <CardActionArea>
                   <CardMedia
                     component="img"

@@ -154,8 +154,11 @@ app.get('/item/search', async (req, res) => {
   }
   try {
     const query = `
-      SELECT * FROM "Items"
+      SELECT *,
+      "Categories"."Name" AS "category"
+      FROM "Items"
       INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
+      INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
       WHERE "Items"."Item_name" ILIKE $1
     `;
     const values = [`%${searchQuery}%`];
