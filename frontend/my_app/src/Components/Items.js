@@ -272,7 +272,7 @@ const ItemsListing = (syncConversation) => {
             </Modal>
             {confirmedDates && (
               <div className="confirmed-dates">
-                <h4 className="dates-title">Confirmed Dates:</h4>
+                <h4 className="dates-title">Selected Dates:</h4>
                 <p className="date-range">{format(confirmedDates.startDate, 'dd/MM/yyyy')} - {format(confirmedDates.endDate, 'dd/MM/yyyy')}</p>
                 <button className="proceed-button" onClick={handleProceedToPayment}>
             Proceed to Payment

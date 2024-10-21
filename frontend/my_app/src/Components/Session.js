@@ -80,7 +80,7 @@ function Chat({ syncUser }) {
     if (loading) return <div>Loading...</div>; // Optional loading state
 
     return (
-        <div>
+        <div className="chat-button">
             <button className="item-chat-button">
                 <ChatIcon onClick={() => setIsPopupOpen(true)}/>
             </button>

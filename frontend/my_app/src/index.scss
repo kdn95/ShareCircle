@@ -343,6 +343,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 0.625rem;
+  font-size: 20px;
 
   &.item-chat-button {
     margin-left: 11rem; /* Pushes the chat icon to the right */
@@ -366,12 +367,13 @@ button {
     max-width: 9.375rem; // Optional: limit the maximum width
     background-color: #f0f0f0; // Optional: change background color
     margin: 1rem 1rem;
+    height: 60px;
   }
 
   &.rent-button, &.rent-login-button {
     background-color: #C9D7A4; // Button background color
     padding: 0.5rem 1rem; // Button padding
-    color: #494949; // Text color
+    color: white; // Text color
     border: none; // Remove default border
     border-radius: 0.625rem; // Rounded corners
     cursor: pointer; // Pointer cursor on hover
@@ -380,6 +382,7 @@ button {
     margin: 1rem auto; // Center horizontally using margin
     max-width: 13.75rem; // Optional: set a maximum width for the button
     text-align: center; // Center text inside the button
+    height: 60px;
   }
 }
 
@@ -514,7 +517,9 @@ button {
     color: #494949;
     font-family: "Inter", sans-serif;
     padding: 0;
+    padding-top: 1rem;
     margin: 0;
+    font-size: 18px;
   }
 
   .date-range {
@@ -529,13 +534,14 @@ button {
 .proceed-button {
   margin-top: 1rem; /* Add some space above the button */
   padding: 10px 20px; /* Add padding for the button */
-  background-color: #B7DFF5; /* Green background */
-  color: #494949; /* White text */
+  background-color: #B7DFF5;
+  color: #494949;
   border: 3px solid transparent; /* Remove border */
   border-radius: 0.625rem; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
-  font-size: 16px; /* Increase font size */
+  font-size: 20px; /* Increase font size */
   width: 13.75rem;
+  height: 60px;
 }
 
 .proceed-button:hover {
@@ -958,6 +964,18 @@ h2.slogan {
   }
 
 }
+
+// TALK JS CHAT
+// chat button on itemsListing page
+.chat-button {
+  .item-chat-button {
+    @media (max-width: 30rem) {
+      margin-right: 1rem;
+    }
+  }
+}
+
+
 //itemForm section
 
 .item-form-body {
@@ -1109,12 +1127,13 @@ button[type="submit"] {
   border: none;
   padding: 12px;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: 50%; /* Make the button width smaller for centering */
   margin: 0 auto; /* Center the button */
   font-family: 'Montserrat', sans-serif;
+  height: 60px;
 }
 
 button[type="submit"]:hover {

@@ -303,6 +303,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 0.625rem;
+  font-size: 20px;
 }
 button.item-chat-button {
   margin-left: 11rem; /* Pushes the chat icon to the right */
@@ -323,11 +324,12 @@ button.login-button {
   max-width: 9.375rem;
   background-color: #f0f0f0;
   margin: 1rem 1rem;
+  height: 60px;
 }
 button.rent-button, button.rent-login-button {
   background-color: #C9D7A4;
   padding: 0.5rem 1rem;
-  color: #494949;
+  color: white;
   border: none;
   border-radius: 0.625rem;
   cursor: pointer;
@@ -336,6 +338,7 @@ button.rent-button, button.rent-login-button {
   margin: 1rem auto;
   max-width: 13.75rem;
   text-align: center;
+  height: 60px;
 }
 
 .item-details-container {
@@ -450,7 +453,9 @@ button.rent-button, button.rent-login-button {
   color: #494949;
   font-family: "Inter", sans-serif;
   padding: 0;
+  padding-top: 1rem;
   margin: 0;
+  font-size: 18px;
 }
 .confirmed-dates .date-range {
   color: #494949;
@@ -463,13 +468,14 @@ button.rent-button, button.rent-login-button {
 .proceed-button {
   margin-top: 1rem; /* Add some space above the button */
   padding: 10px 20px; /* Add padding for the button */
-  background-color: #B7DFF5; /* Green background */
-  color: #494949; /* White text */
+  background-color: #B7DFF5;
+  color: #494949;
   border: 3px solid transparent; /* Remove border */
   border-radius: 0.625rem; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
-  font-size: 16px; /* Increase font size */
+  font-size: 20px; /* Increase font size */
   width: 13.75rem;
+  height: 60px;
 }
 
 .proceed-button:hover {
@@ -821,6 +827,12 @@ h2.slogan {
   justify-content: center;
 }
 
+@media (max-width: 30rem) {
+  .chat-button .item-chat-button {
+    margin-right: 1rem;
+  }
+}
+
 .item-form-body {
   display: flex;
   justify-content: center;
@@ -916,12 +928,13 @@ h2.slogan {
   border: none;
   padding: 12px;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: 50%; /* Make the button width smaller for centering */
   margin: 0 auto; /* Center the button */
   font-family: "Montserrat", sans-serif;
+  height: 60px;
 }
 .item-form-body button[type=submit]:hover {
   background-color: #8ABEE8;
