@@ -281,7 +281,7 @@ app.get('/:category_name', async (req, res) => {
     SELECT "Items".*,
     "Categories"."Name" AS "CategoryName",
     "Renters"."Rating",
-    "Renters"."Profile_pic"
+    "Renters"."Profile_pic",
     ST_X(ST_AsText("Renters"."location"::geometry)) AS "renter_longitude",
     ST_Y(ST_AsText("Renters"."location"::geometry)) AS "renter_latitude"
     FROM "Items"
