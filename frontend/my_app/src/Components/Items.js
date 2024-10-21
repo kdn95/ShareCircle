@@ -18,6 +18,7 @@ import Chat from './Session';
 import { useAuth0 } from '@auth0/auth0-react'; // Import Auth0
 
 
+
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`);
 
 const ItemsListing = (syncConversation) => {
@@ -28,6 +29,8 @@ const ItemsListing = (syncConversation) => {
   const [loading, setLoading] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
   const [confirmedDates, setConfirmedDates] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+  const [distance, setDistance] = useState(null);
 
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
@@ -70,6 +73,45 @@ const ItemsListing = (syncConversation) => {
     setConfirmedDates(dates);
     setShowCalendar(false);
   };
+
+  // Get user location
+  useEffect(() => {
+    const getUserLocation = () => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ latitude, longitude });
+        },
+        (error) => {
+          console.error('Error getting user location:', error);
+        }
+      );
+    };
+
+    getUserLocation();
+  }, []);
+
+  useEffect(() => {
+    if (item && userLocation) {
+      const { renter_latitude, renter_longitude } = item;
+
+      // Calculate distance in kilometers
+      const calculateDistance = (lat1, lon1, lat2, lon2) => {
+        const R = 6371; // Radius of the Earth in km
+        const dLat = (lat2 - lat1) * (Math.PI / 180);
+        const dLon = (lon2 - lon1) * (Math.PI / 180);
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+          Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // Distance in km
+      };
+
+      const distanceInKm = calculateDistance(userLocation.latitude, userLocation.longitude, renter_latitude, renter_longitude);
+      setDistance(distanceInKm);
+    }
+  }, [item, userLocation]);
 
 
   useEffect(() => {
@@ -243,6 +285,10 @@ const ItemsListing = (syncConversation) => {
               </div>
               {isAuthenticated && <Chat syncConversation={syncConversation} />} 
             </div>
+            {/* Display distance from user's location */}
+            {distance !== null && (
+                <p className="distance-info">Distance: {distance.toFixed(1)} km</p>
+              )}
           </div>
           {/* Map container */}
           <div ref={mapContainerRef} style={{ width: '100%', height: '300px' }} className="map-container" />

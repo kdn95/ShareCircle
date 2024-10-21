@@ -9,6 +9,7 @@ import StarIcon from '@mui/icons-material/Star';
 import '../index.css'; // Assuming your custom CSS is here
 import { getUserLocation } from '../Location';
 import LogoLoader from './LogoLoader'; // Import your LogoLoader component
+import ItemsListing from './Items';
 
 // distance calculator for all items 
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -29,62 +30,120 @@ const CategoryItems = () => {
   const [userAddress, setUserAddress] = useState({});
   const [loading, setLoading] = useState(true); // Initialize loading state
 
-  const fetchCategoryItems = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(`http://localhost:5004/${category_name}`);
-      console.log('API Response:', response.data);
 
-      const theLot = response.data;
+  // useEffect(() => {
 
-      if (userAddress.latitude && userAddress.longitude) {
-        const updatedItems = theLot.map(item => {
-          console.log('Item Coordinates:', item.renter_latitude, item.renter_longitude);
-          let distance = null;
-          if (item.renter_latitude && item.renter_longitude) {
-            distance = calculateDistance(
-              userAddress.latitude,
-              userAddress.longitude,
-              item.renter_latitude,
-              item.renter_longitude
-            );
-          }
-          return { ...item, distance };
-        });
-        setItems(updatedItems);
-      } else {
-        setItems(theLot);
-      }
-    } catch (error) {
-      console.error('Error fetching items:', error);
-    } finally {
-      setLoading(false);
-    }
-  }, [category_name, userAddress]);
+  //   // const fetchUserLocation = async () => {
+  //   //   try {
+  //   //     const location = await getUserLocation();
+  //   //     console.log('User location:', location); // Debugging log
+  //   //     setUserAddress({
+  //   //       street: location.address?.street || 'Unknown',
+  //   //       city: location.address?.city || 'Unknown',
+  //   //       state: location.address?.state || 'Unknown',
+  //   //       postcode: location.address?.postcode || '',
+  //   //       latitude: location.latitude,    // Add latitude
+  //   //       longitude: location.longitude,  // Add longitude
+  //   //     });
+  //   //   } catch (error) {
+  //   //     console.error('Error getting user location:', error);
+  //   //   }
+  //   // };
+    
+  //   fetchUserLocation(); // Get user location when component mounts
+  // }, []);
 
   useEffect(() => {
-    fetchCategoryItems();
+    // fetchCategoryItems();
 
     const fetchUserLocation = async () => {
       try {
         const location = await getUserLocation();
         console.log('User location:', location); // Debugging log
         setUserAddress({
-          street: location.address?.street || 'Unknown',
-          city: location.address?.city || 'Unknown',
-          state: location.address?.state || 'Unknown',
-          postcode: location.address?.postcode || '',
-          latitude: location.latitude,    // Add latitude
-          longitude: location.longitude,  // Add longitude
-        });
+          latitude: location.latitude,
+          longitude: location.longitude,
+          // || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' }
+          ...location.address});
       } catch (error) {
         console.error('Error getting user location:', error);
       }
     };
-    
-
-    fetchUserLocation(); // Get user location when component mounts
+  
+    fetchUserLocation(); // Call the async function to get user location
+    //fetchCategoryItems
   }, []);
+
+  const fetchCategoryItems = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`http://localhost:5004/${category_name}`);
+      console.log('API Response:', response.data);
+
+      const fetchedItems = response.data;
+
+      // Calculate distance for each item if userAddress has latitude and longitude
+      if (userAddress.latitude && userAddress.longitude) {
+         const updatedItems = fetchedItems.map(item => {
+            console.log('Item:', item); // Should log an item object
+            const distance = calculateDistance(
+               userAddress.latitude,
+               userAddress.longitude,
+               item.renter_latitude,
+               item.renter_longitude
+            );
+            return { ...item, distance }; // Add distance to each item
+         });
+         setItems(updatedItems);  // Set the updated items with distance
+      } else {
+         setItems(fetchedItems);  // Set items without distance if no user location yet
+      }
+      console.log(fetchedItems); // Should log an array of items
+    } catch (error) {
+      console.error('Error fetching items:', error);
+    } finally {
+      setLoading(false);
+    }
+  // }, [category_name, userAddress]);
+  }, [category_name, userAddress]);
+
+
+
+  
+  // Fetch Category Items after user location is set
+  // useEffect(() => {
+  //   if (userAddress.latitude && userAddress.longitude) {
+  //     fetchCategoryItems();
+  //   }
+  // }, [fetchCategoryItems, userAddress]);
+
+  // useEffect(() => {
+  //   // fetchCategoryItems();
+
+  //   const fetchUserLocation = async () => {
+  //     try {
+  //       const location = await getUserLocation();
+  //       console.log('User location:', location); // Debugging log
+  //       setUserAddress({
+  //         latitude: location.latitude,
+  //         longitude: location.longitude,
+  //         // || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' }
+  //         ...location.address});
+  //     } catch (error) {
+  //       console.error('Error getting user location:', error);
+  //     }
+  //   };
+  
+  //   fetchUserLocation(); // Call the async function to get user location
+  //   //fetchCategoryItems
+  // }, []);
+
+  useEffect(() => {
+    if (userAddress.latitude && userAddress.longitude) {
+       fetchCategoryItems();
+    }
+ }, [fetchCategoryItems, userAddress]);
+  
 
   if (loading) {
     return <LogoLoader />; // Show loader while loading
@@ -130,9 +189,9 @@ const CategoryItems = () => {
                         </div>
                       </div>
                       <p className="item-price">Price: ${item.Price_per_day} per day</p>
-                      {/* {item.distance !== null && ( */}
-                        <p className="item-distance">Distance: {item.distance} km</p>
-                        {/* )} */}
+                      <p className='distance-info'>
+                        {item.distance ? `${item.distance.toFixed(1)} km away` : 'Distance not available'}
+                      </p>
                       {/* <img src={item.Image_url} alt={item.Item_name} /> */}
                     </div>
                   </CardContent>
