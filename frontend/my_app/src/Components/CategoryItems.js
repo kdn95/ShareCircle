@@ -10,6 +10,19 @@ import '../index.css'; // Assuming your custom CSS is here
 import { getUserLocation } from '../Location';
 import LogoLoader from './LogoLoader'; // Import your LogoLoader component
 
+// distance calculator for all items 
+const calculateDistance = (lat1, lon1, lat2, lon2) => {
+  const R = 6371; // Earth's radius in kilometers
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLon = (lon2 - lon1) * (Math.PI / 180);
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c; // Distance in kilometers
+};
+
+
 const CategoryItems = () => {
   const { category_name } = useParams(); // Get the category name from the URL
   const [items, setItems] = useState([]);
@@ -19,14 +32,34 @@ const CategoryItems = () => {
   const fetchCategoryItems = useCallback(async () => {
     setLoading(true); // Set loading to true before fetching data
     try {
-      const response = await axios.get(`http://localhost:5004/${category_name}`); // Fetch items by category
-      setItems(response.data);
+      const response = await axios.get(`http://localhost:5005/${category_name}`); // Fetch items by category
+      
+      const theLot = response.data;
+
+      console.log(theLot);
+      
+      // If user coordinates are available, calculate the distance for each item
+      if (userAddress.latitude && userAddress.longitude) {
+        const updatedItems = theLot.map(item => {
+          let distance = null;
+          if (userAddress.latitude && userAddress.longitude && item.Latitude && item.Longitude) {
+            distance = calculateDistance(
+              userAddress.latitude, 
+              userAddress.longitude, 
+              item.Latitude,  
+              item.Longitude  
+            );
+          }
+          return { ...item, distance }; // Add distance to each item or leave it as null if missing
+        });
+        setItems(updatedItems);  // <-- Update items state here
+      }
     } catch (error) {
       console.error('Error fetching items:', error);
     } finally {
       setLoading(false); // Set loading to false after fetching is complete
     }
-  }, [category_name]);
+  }, [category_name, userAddress.latitude, userAddress.longitude]);
 
   useEffect(() => {
     fetchCategoryItems();
@@ -35,11 +68,19 @@ const CategoryItems = () => {
       try {
         const location = await getUserLocation();
         console.log('User location:', location); // Debugging log
-        setUserAddress(location.address || { street: 'Unknown', city: 'Unknown', state: 'Unknown', postcode: '' });
+        setUserAddress({
+          street: location.address?.street || 'Unknown',
+          city: location.address?.city || 'Unknown',
+          state: location.address?.state || 'Unknown',
+          postcode: location.address?.postcode || '',
+          latitude: location.latitude,    // Add latitude
+          longitude: location.longitude,  // Add longitude
+        });
       } catch (error) {
         console.error('Error getting user location:', error);
       }
     };
+    
 
     fetchUserLocation(); // Get user location when component mounts
   }, [fetchCategoryItems]);
@@ -88,6 +129,9 @@ const CategoryItems = () => {
                         </div>
                       </div>
                       <p className="item-price">Price: ${item.Price_per_day} per day</p>
+                      {item.distance !== null && (
+                        <p className="item-distance">Distance: {item.distance.toFixed(1)} km</p>
+                        )}
                       {/* <img src={item.Image_url} alt={item.Item_name} /> */}
                     </div>
                   </CardContent>

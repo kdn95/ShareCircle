@@ -11,7 +11,7 @@ const multer = require('multer');
 const app = express();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 app.use(express.json());
-const PORT = process.env.PORT || 5004;
+const PORT = process.env.PORT || 5005;
 
 // Define allowed origins
 // const allowedOrigins = [
@@ -278,7 +278,12 @@ app.get('/:category_name', async (req, res) => {
   const categoryName = req.params.category_name;
   console.log('Fetching items with Category_name:', categoryName);
   const query = `
-    SELECT "Items".*, "Categories"."Name" AS "CategoryName", "Renters"."Rating", "Renters"."Profile_pic"
+    SELECT "Items".*,
+    "Categories"."Name" AS "CategoryName",
+    "Renters"."Rating",
+    "Renters"."Profile_pic"
+    ST_X(ST_AsText("Renters"."location"::geometry)) AS "renter_longitude",
+    ST_Y(ST_AsText("Renters"."location"::geometry)) AS "renter_latitude"
     FROM "Items"
     INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"
     INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
