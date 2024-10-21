@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation, Link, useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -6,44 +6,18 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 import StarIcon from '@mui/icons-material/Star';
 import SearchBar from "./SearchBar";
-import axios from 'axios';
 
 const SearchResults = () => {
-  const { category_name, itemId } = useParams();
+  const { category_name } = useParams();
   const location = useLocation();
   const initialResults = location.state?.results || [];
   const [results, setResults] = useState(initialResults); // Use state for results
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true); // Initialize loading state
-  const [item, setItem] = useState(null);
 
   const handleSearch = (newResults) => {
     setResults(newResults); // Update the results state
   };
 
   console.log('Search Results:', results);
-
-  
-  useEffect(() => {
-    const fetchItemDetails = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(`http://localhost:5005/${category_name}/${itemId}`);
-        setItem(response.data);
-      } catch (error) {
-        console.error('Error fetching item details:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchItemDetails();
-
-    return () => {
-      // Cleanup any potential ongoing fetches or subscriptions
-      setItem(null);
-    };
-  }, [category_name, itemId]);
 
   return (
     <div className="Category-items-container">
