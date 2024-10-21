@@ -9,7 +9,7 @@ import StarIcon from '@mui/icons-material/Star';
 import '../index.css'; // Assuming your custom CSS is here
 import { getUserLocation } from '../Location';
 import LogoLoader from './LogoLoader'; // Import your LogoLoader component
-import ItemsListing from './Items';
+import { Select, MenuItem } from '@mui/material';
 
 // distance calculator for all items 
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -29,29 +29,9 @@ const CategoryItems = () => {
   const [items, setItems] = useState([]);
   const [userAddress, setUserAddress] = useState({});
   const [loading, setLoading] = useState(true); // Initialize loading state
+  const [sortOption, setSortOption] = useState('name');
+  const [filterOption, setFilterOption] = useState('all');
 
-
-  // useEffect(() => {
-
-  //   // const fetchUserLocation = async () => {
-  //   //   try {
-  //   //     const location = await getUserLocation();
-  //   //     console.log('User location:', location); // Debugging log
-  //   //     setUserAddress({
-  //   //       street: location.address?.street || 'Unknown',
-  //   //       city: location.address?.city || 'Unknown',
-  //   //       state: location.address?.state || 'Unknown',
-  //   //       postcode: location.address?.postcode || '',
-  //   //       latitude: location.latitude,    // Add latitude
-  //   //       longitude: location.longitude,  // Add longitude
-  //   //     });
-  //   //   } catch (error) {
-  //   //     console.error('Error getting user location:', error);
-  //   //   }
-  //   // };
-    
-  //   fetchUserLocation(); // Get user location when component mounts
-  // }, []);
 
   useEffect(() => {
     // fetchCategoryItems();
@@ -74,10 +54,32 @@ const CategoryItems = () => {
     //fetchCategoryItems
   }, []);
 
+   // sorting filters
+  //Sorting Options
+  const sortItems = (items) => {
+    switch (sortOption) {
+      case 'name':
+        return [...items].sort((a, b) => a.Item_name.localeCompare(b.Item_name));
+      case 'name-desc':
+        return [...items].sort((a, b) => b.Item_name.localeCompare(a.Item_name));
+      case 'price':
+        return [...items].sort((a, b) => a.Price_per_day - b.Price_per_day);
+      case 'price-desc':
+        return [...items].sort((a, b) => b.Price_per_day - a.Price_per_day);
+      case 'distance':
+        return [...items].sort((a, b) => a.distance - b.distance);
+      case 'distance-desc':
+        return [...items].sort((a, b) => b.distance - a.distance);
+      default:
+        return items;
+    }
+  };
+
+
   const fetchCategoryItems = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5004/${category_name}`);
+      const response = await axios.get(`http://localhost:5006/${category_name}`);
       console.log('API Response:', response.data);
 
       const fetchedItems = response.data;
@@ -94,9 +96,9 @@ const CategoryItems = () => {
             );
             return { ...item, distance }; // Add distance to each item
          });
-         setItems(updatedItems);  // Set the updated items with distance
+         setItems(sortItems(updatedItems));  // Set the updated items with distance
       } else {
-         setItems(fetchedItems);  // Set items without distance if no user location yet
+         setItems(sortItems(fetchedItems));  // Set items without distance if no user location yet
       }
       console.log(fetchedItems); // Should log an array of items
     } catch (error) {
@@ -105,7 +107,7 @@ const CategoryItems = () => {
       setLoading(false);
     }
   // }, [category_name, userAddress]);
-  }, [category_name, userAddress]);
+  }, [category_name, userAddress, sortOption]);
 
 
 
@@ -149,8 +151,21 @@ const CategoryItems = () => {
     return <LogoLoader />; // Show loader while loading
   }
 
+  const sortedItems = sortItems(items);
+
   return (
     <div className="Category-items-container">
+      <div className="sort-selector">
+          <Select value={sortOption} onChange={(e) => setSortOption(e.target.value)} label="Sort By">
+            <MenuItem value="name">Name (A-Z)</MenuItem>
+            <MenuItem value="name-desc">Name (Z-A)</MenuItem>
+            <MenuItem value="price">Price (Low to High)</MenuItem>
+            <MenuItem value="price-desc">Price (High to Low)</MenuItem>
+            <MenuItem value="distance">Distance (Closest)</MenuItem>
+            <MenuItem value="distance-desc">Distance (Furthest)</MenuItem>
+          </Select>
+        {/* <p>Sorted by: {sortOption}</p> */}
+      </div>
       <div className="Category-items-title-address-container">
         <h1 className="Category-items-title">Items in {category_name}</h1>
         {userAddress && (
