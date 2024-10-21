@@ -57,6 +57,7 @@ const NearbyItems = () => {
     markersRef.current = [];
   };
 
+  // Automatic Mapbox Zoom
   const calculateBoundingBox = (latitude, longitude, radiusKm) => {
     const earthRadiusKm = 6371; // Earth's radius in km
     const angularDistance = radiusKm / earthRadiusKm;
@@ -110,6 +111,19 @@ const NearbyItems = () => {
     }
   };
 
+  // Define distance from user to item location
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Earth's radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in km
+  };
+  
+
   const fetchItemsNearby = useCallback(async (radius_km = radius) => {
     if (userLocation) {
       setLoading(true);
@@ -126,7 +140,20 @@ const NearbyItems = () => {
         }
 
         const data = await response.json();
-        setNearbyItems(sortItems(data)); // Sort items on fetch
+
+         // Calculate the distance from the user to each item
+        const itemsWithDistance = data.map(item => {
+          const distance = calculateDistance(
+            userLocation.latitude,
+            userLocation.longitude,
+            item.renter_latitude,
+            item.renter_longitude
+          );
+          return { ...item, distance }; // Add distance to the item object
+        });
+
+
+        setNearbyItems(sortItems(itemsWithDistance)); // Sort items after adding distance
       } catch (error) {
         console.error('Error fetching nearby items:', error);
       } finally {
@@ -135,6 +162,7 @@ const NearbyItems = () => {
     }
   }, [getAccessTokenSilently, userLocation, radius, sortOption]);
 
+  //Mapbox
   useEffect(() => {
     if (userLocation && mapContainerRef.current) {
       if (!mapRef.current) {
@@ -143,6 +171,7 @@ const NearbyItems = () => {
           style: 'mapbox://styles/mapbox/standard',
           center: [userLocation.longitude, userLocation.latitude],
           zoom: 11,
+          maxZoom: 12,
         });
 
         const navControl = new mapboxgl.NavigationControl();
@@ -298,6 +327,7 @@ const NearbyItems = () => {
                         </div>
                         <p className="item-price">Price: ${item.Price_per_day} per day</p>
                         <p className="renter-name">Renter: {item.Renter_name}</p>
+                        <p className="distance">Distance: {item.distance.toFixed(1)} km</p> {/* Show distance here */}
                       </CardContent>
                     </CardActionArea>
                   </Link>
