@@ -351,6 +351,7 @@ button.rent-button, button.rent-login-button {
 .item-details-container .item-details-card {
   box-shadow: 0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
   border-radius: 0.625rem; /* Rounded corners for the card */
+  align-items: center;
 }
 .item-details-container .item-image {
   height: auto;

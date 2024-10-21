@@ -47,7 +47,7 @@ const App = () => {
     }
   }, [isAuthenticated, user]);
 
-  if (isLoading) return <div>Loading...</div>; // Handle loading state
+  if (isLoading) return <div></div>; // Handle loading state
 
   return (
     <div className="whole-homepage">
