@@ -1025,4 +1025,49 @@ p.distance-info {
   }
 }
 
+.Success-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+.Success-page .MuiCard-root {
+  border-radius: 0.625rem;
+}
+.Success-page .success {
+  margin-bottom: 30px;
+}
+
+.card {
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-media {
+  height: 300px;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+h5 {
+  margin-bottom: 16px;
+}
+
+h6 {
+  margin: 8px 0;
+  padding-top: 1rem;
+}
+
+.body1 {
+  color: #666;
+}
+
+.color-primary {
+  color: #1976d2;
+}
+
 /*# sourceMappingURL=index.css.map */

@@ -1236,6 +1236,54 @@ button[type="submit"]:hover {
 }
 }
 
+// SUCCESS PAGE
+.Success-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh; // Ensure it takes the full viewport height
+
+  .MuiCard-root {
+    border-radius: 0.625rem;
+  }
+
+  .success {
+    margin-bottom: 30px;
+  }
+}
+
+.card {
+  max-width: 400px;
+  margin: auto; // Center the card horizontally
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+}
+
+.card-media {
+  height: 300px;
+}
+
+.card-content {
+  padding: 16px; // Padding inside the card
+}
+
+h5 {
+  margin-bottom: 16px; // Space below the title
+}
+
+h6 {
+  margin: 8px 0; // Space above and below the item name
+  padding-top: 1rem;
+}
+
+.body1 {
+  color: #666; // Secondary text color
+}
+
+.color-primary {
+  color: #1976d2; // Primary color for the total price
+}
+
 // /* Update your index.css */
 // .whole-homepage {
 //   position: fixed; /* Ensures the background stays in place when scrolling */
