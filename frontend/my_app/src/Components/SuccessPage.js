@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { format } from 'date-fns'; // Import date-fns for formatting dates
+import confetti from 'canvas-confetti';
 
 const SuccessPage = () => {
   const [message, setMessage] = useState('');
@@ -52,7 +53,38 @@ const SuccessPage = () => {
     localStorage.removeItem('paymentItemPhoto');
     localStorage.removeItem('paymentStartDate');
     localStorage.removeItem('paymentEndDate');
-  }, []);
+
+    // Confetti Effect
+    var duration = 3 * 1000; // 2 seconds
+    var animationEnd = Date.now() + duration;
+    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    var interval = setInterval(function () {
+      var timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      var particleCount = 50 * (timeLeft / duration);
+      // Since particles fall down, start a bit higher than random
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      });
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      });
+    }, 250);
+  }, []); // Only run once when the component is mounted
+
 
   return (
     <div className="Success-page">
