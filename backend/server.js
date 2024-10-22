@@ -194,7 +194,8 @@ app.get('/items/nearby', jwtCheck, async (req, res) => {
       ST_Y(ST_AsText("Renters"."location"::geometry)) AS "renter_latitude",
       "Items"."Renter_name",
       "Categories"."Name" AS "category",
-      "Renters"."Rating" AS "Rating"
+      "Renters"."Rating" AS "Rating",
+      "Renters"."Profile_pic" AS "Pic"
   FROM "Items"
   INNER JOIN "Renters" ON "Items"."Renter_id" = "Renters"."Renter_id"
   INNER JOIN "Categories" ON "Items"."Category_id" = "Categories"."ID"

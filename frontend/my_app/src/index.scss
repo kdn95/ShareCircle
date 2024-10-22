@@ -642,33 +642,102 @@ h2.slogan {
   justify-content: center; // Center items vertically if you want the entire container to be centered vertically
 
   .Nearby-item-image {
-    height: auto;
+    height: 250px;
+    border-radius: 0.625rem 0.625rem 0 0;
+    width: 350px;
   }
-}
 
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr)); // Adjust min width of cards
-  gap: 1.25rem; // Space between grid items
-}
+
+  .MuiCard-root {
+    flex: 0 0 calc(50% - 1.25rem); // Default to two cards per row
+    margin: 1rem;
+    max-width: 20rem;
+    width: 100%;
+    border-radius: 0.625rem;
+
+
+    @media (max-width: 768px) { // For tablet and smaller screens
+      flex: 0 0 calc(100% - 1.25rem); // One card per row
+      max-width: 90%;
+    }
+
+    @media (min-width: 1024px) { // For larger screens
+      flex: 0 0 calc(33.33% - 1.25rem); // Three cards per row
+    }
+  }
+
+    .renter-profile-pic {
+      width: 2.5rem; /* Set width */
+      height: 2.5rem; /* Set height */
+      border-radius: 50%; /* Make the image circular */
+      object-fit: cover; /* Ensure the image covers the area */
+      margin-right: 0.625rem; /* Space between the image and the name */
+    }
+
+    .renter-info {
+      display: flex;
+      align-items: flex-start; /* Center items vertically */
+      width: 100%; /* Ensure it takes the full width of the parent container */
+      padding-top: 1rem;
+
+    }
+
+    .renter-full-name {
+      font-size: 0.95rem;
+      margin: 0;
+    }
+  }
+
+  p {
+    color: #494949;
+    text-decoration: none;
+  }
+
+  p.item-price {
+    color: 494949;
+    margin-top: 5px;
+    font-size: 1.3rem;
+    font-family: "Inter", sans-serif;
+  }
+  h3.item-header {
+    font-weight: 700;
+    margin: 0;
+    color: #494949;
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+
+  p.distance-info {
+    font-size: 1rem;
+    padding-left: 12.5rem;
+    margin-top: 1.5rem;
+  }
+
+    .rating-container {
+      display: flex; /* Keep this as flex for horizontal alignment of stars */
+      align-items: center; /* Center align */
+      color: #494949;
+      margin-top: -0.5rem;
+      .star-icon {
+        margin-right: 0.2rem;
+        color: #C9D7A4;
+        height: 1.2rem;
+      }
+    }
+
+    .renter-rating {
+      font-size: 0.95rem;
+      line-height: 1;
+      padding-right: 0.09rem;
+    }
 
 .category-items-card {
   display: flex; // Ensures card content is centered
   flex-direction: column; // Keeps the card's content stacked
   justify-content: space-between; // Space between elements inside the card
+  height: 450px;
 }
 
-.Nearby-items {
-  font-weight: 600;
-  color: #494949;
-  padding-left: 1rem; // Add padding to the left if needed
-  margin: 0; // Remove margin for better control
-  padding-top: 2rem;
-  font-size: 32px;
-  margin-bottom: 20px;
-  text-align: center; // Center the title text
-  font-family: "Inter", sans-serif;
-}
 
 .Nearby-items-map-container {
   // Styles for the container that holds the map and other items

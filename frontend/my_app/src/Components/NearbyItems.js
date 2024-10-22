@@ -122,7 +122,7 @@ const NearbyItems = () => {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c; // Distance in km
   };
-  
+
 
   const fetchItemsNearby = useCallback(async (radius_km = radius) => {
     if (userLocation) {
@@ -309,26 +309,39 @@ const NearbyItems = () => {
           {nearbyItems.length > 0 ? (
             <div className="cards-grid">
               {nearbyItems.map(item => (
-                <Card sx={{ maxWidth: 345, margin: '20px' }} key={item.Item_id} className="category-items-card">
+                <Card sx={{}} key={item.Item_id} className="category-items-card">
                   <Link to={`/category/${item.category}/${item.Item_id}`} className="no-undies">
                     <CardActionArea>
                       <CardMedia
                         component="img"
                         className="Nearby-item-image"
-                        height="100"
                         image={item.Image_url}
                         alt={item.Item_name}
                       />
-                      <CardContent>
-                        <h3 className="item-header">{item.Item_name}</h3>
-                        <div className="rating-container">
-                          <p className="renter-rating">{item.Rating}</p>
-                          <StarIcon className="star-icon" alt="star-icon" />
+                       <CardContent>
+                    <h3 className="item-header">{item.Item_name}</h3>
+                    <div className="renter-container">
+                      <div className="renter-info">
+                        <img
+                        src={item.Pic}
+                        alt="Renter Profile"
+                        className="renter-profile-pic"
+                        />
+                        <div className="renter-details">
+                          <p className="renter-full-name">{item.Renter_name}</p>
+                          <div className="rating-container">
+                            <p className="renter-rating"> {item.Rating}</p> {/* Add rating instead */}
+                            <StarIcon className="star-icon" alt="star-icon" />
+                          </div>
                         </div>
-                        <p className="item-price">Price: ${item.Price_per_day} per day</p>
-                        <p className="renter-name">Renter: {item.Renter_name}</p>
-                        <p className="distance">Distance: {item.distance.toFixed(1)} km</p> {/* Show distance here */}
-                      </CardContent>
+                      </div>
+                      <p className="item-price">${item.Price_per_day} per day</p>
+                      <p className='distance-info'>
+                        {item.distance ? `${item.distance.toFixed(1)} km away` : 'Distance not available'}
+                      </p>
+                      {/* <img src={item.Image_url} alt={item.Item_name} /> */}
+                    </div>
+                  </CardContent>
                     </CardActionArea>
                   </Link>
                 </Card>
