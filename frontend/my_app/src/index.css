@@ -359,6 +359,7 @@ button.rent-button, button.rent-login-button {
   max-width: 13.75rem;
   text-align: center;
   height: 60px;
+  box-shadow: 0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 .item-details-container {

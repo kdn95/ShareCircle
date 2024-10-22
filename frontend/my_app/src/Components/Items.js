@@ -314,7 +314,7 @@ const ItemsListing = (syncConversation) => {
           }
           {isAuthenticated &&
           <div className="rent-button-container">
-           <button className="rent-button" onClick={handleRentNowClick}>
+            <button className="rent-button" onClick={handleRentNowClick}>
               {isDatesConfirmed ? "Edit Dates" : "Rent Now"}
             </button>
           </div>
