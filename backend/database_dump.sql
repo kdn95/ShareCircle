@@ -21,7 +21,6 @@ SET row_security = off;
 --
 
 CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
-
 DROP TABLE IF EXISTS public."Items" CASCADE;
 DROP TABLE IF EXISTS public."Categories" CASCADE;
 DROP TABLE IF EXISTS public."Renters" CASCADE;
@@ -234,7 +233,6 @@ COPY public."Renters" ("Renter_id", "First_name", "Last_name", "Rating", "Addres
 3	Adrian	Liew	5	1 Convention Centre Place, South Wharf, VIC 3006	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ujz4f5kufyuadtqugzse?_a=BAMAH2M20	0101000020E6100000A60A4625751E62407DAEB6627FE942C0
 4	Patrick	Star	4	513 Elizabeth St, Melbourne, VIC 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/qsnqezhyxsue6paaidzz?_a=BAMAH2M20	0101000020E6100000E9263108AC1E62409EEFA7C64BE742C0
 5	Christina	Quach	5	Birdwood Ave, Melbourne, VIC 3004	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/diysdsoqffanpk8tbmic?_a=BAMAH2M20	0101000020E610000068226C787A1F6240FAEDEBC039EB42C0
-7	Nicole	Gorospe	5	123 George St, Sydney, NSW 2000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/qakoin5fl7041mb0ym2g?_a=BAMAH2M20	0101000020E6100000B4C876BE9FE66240D7A3703D0AEF40C0
 8	Carole	Zen	5	456 King St, Newtown, NSW 2042	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/tzuw90oue6j6v8vfyoga?_a=BAMAH2M20	0101000020E610000039B4C876BEE562407B14AE47E1F240C0
 9	Jed	Roberts	2	789 Oxford St, Bondi Junction, NSW 2022	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/djae85791ltbwhuyiodw?_a=BAMAH2M20	0101000020E61000009CA223B9FCE7624060764F1E16F240C0
 10	Sarah	McNamara	4	101 Pacific Hwy, North Sydney, NSW 2060	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/nmayojmlo7mqvbutnwgu?_a=BAMAH2M20	0101000020E61000005BB1BFEC9EE6624008AC1C5A64EB40C0
@@ -261,6 +259,7 @@ COPY public."Renters" ("Renter_id", "First_name", "Last_name", "Rating", "Addres
 30	Thomas	Wender	2	75 Collins St, Melbourne, VIC 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/gu7aqxinvi7lveszlpr1?_a=BAMAH2M20	0101000020E6100000371AC05B201F6240AA60545227E842C0
 31	Eleanor	Flower	5	250 St Georges Rd, Fitzroy North, VIC 3068	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/lraezgx1g8flm1wj5hz2?_a=BAMAH2M20	0101000020E6100000A167B3EA731F6240780B24287EE442C0
 32	Peter	Pan	1	150 Queens Rd, Melbourne, VIC 3004	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/anke5i6kw5wkjqjhdu6z?_a=BAMAH2M20	0101000020E61000005305A3923A1F62405B423EE8D9EC42C0
+7	Nicole	Gorospe	5	123 George St, Sydney, NSW 2000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/o8crhqta22kpdbpxhrzs?_a=BAMCkGM20	0101000020E6100000B4C876BE9FE66240D7A3703D0AEF40C0
 \.
 
 
@@ -283,7 +282,7 @@ SELECT pg_catalog.setval('public."Items_Category_id_seq"', 1, false);
 -- Name: Items_Item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Items_Item_id_seq"', 48, true);
+SELECT pg_catalog.setval('public."Items_Item_id_seq"', 53, true);
 
 
 --

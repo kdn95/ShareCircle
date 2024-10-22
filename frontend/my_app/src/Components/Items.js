@@ -283,27 +283,27 @@ const ItemsListing = (syncConversation) => {
                   <StarIcon className="star-icon" alt="star-icon" />
                 </div>
               </div>
-              {isAuthenticated && <Chat syncConversation={syncConversation} />} 
+              {isAuthenticated && <Chat syncConversation={syncConversation} />}
             </div>
             {/* Display distance from user's location */}
             {distance !== null && (
-                <p className="distance-info">Distance: {distance.toFixed(1)} km</p>
+                <p className="distance-info">{distance.toFixed(1)} km away</p>
               )}
           </div>
           {/* Map container */}
           <div ref={mapContainerRef} style={{ width: '100%', height: '300px' }} className="map-container" />
-          {!isAuthenticated && 
+          {!isAuthenticated &&
           <div className="rent-login-button-container">
             <p className="login-rent-prompt">Please log in to rent item</p>
             <button className="rent-login-button" onClick={() => loginWithRedirect()}>Log in</button>
           </div>
           }
-          {isAuthenticated && 
+          {isAuthenticated &&
           <div className="rent-button-container">
           <button className="rent-button" onClick={handleRentNowClick}>Rent Now</button>
           </div>
           }
-          
+
           {/* {showCalendar && <Calendar onConfirmDates={handleConfirmDates} />}  */}
           {/* Modal for Calendar */}
           <Modal

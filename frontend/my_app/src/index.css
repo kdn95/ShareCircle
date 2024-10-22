@@ -269,6 +269,11 @@ p.user-address {
   font-size: 1.3rem;
   font-family: "Inter", sans-serif;
 }
+.Category-items-container .search-result-price {
+  color: 494949;
+  font-size: 1.3rem;
+  font-family: "Inter", sans-serif;
+}
 .Category-items-container h3.item-header {
   font-weight: 700;
   margin: 0;
@@ -366,6 +371,9 @@ button.rent-button, button.rent-login-button {
 }
 .item-details-container p.login-rent-prompt {
   text-align: center;
+}
+.item-details-container p.distance-info {
+  padding-left: 0;
 }
 .item-details-container .item-details-card {
   box-shadow: 0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
@@ -573,6 +581,7 @@ h2.slogan {
   max-width: 20rem;
   width: 100%;
   border-radius: 0.625rem;
+  padding-bottom: 1rem;
 }
 @media (max-width: 768px) {
   .Nearby-items-container .MuiCard-root {
@@ -625,7 +634,7 @@ h3.item-header {
 
 p.distance-info {
   font-size: 1rem;
-  padding-left: 12.5rem;
+  padding-left: 13.5rem;
   margin-top: 1.5rem;
 }
 
@@ -857,6 +866,7 @@ p.distance-info {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
+  justify-content: center;
 }
 .search-bar-container form input {
   width: 100%;

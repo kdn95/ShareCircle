@@ -55,7 +55,7 @@ const SearchResults = () => {
                           </div>
                         </div>
                       </div>
-                      <p className="item-price">Price: ${item.Price_per_day} per day</p>
+                      <p className="search-result-price">${item.Price_per_day} per day</p>
                     </div>
                   </CardContent>
                 </CardActionArea>

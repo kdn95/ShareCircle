@@ -308,6 +308,13 @@ p.user-address {
     font-size: 1.3rem;
     font-family: "Inter", sans-serif;
   }
+
+  // SEARCH RESULTS
+  .search-result-price {
+    color: 494949;
+    font-size: 1.3rem;
+    font-family: "Inter", sans-serif;
+}
   h3.item-header {
     font-weight: 700;
     margin: 0;
@@ -414,6 +421,10 @@ button {
 
   p.login-rent-prompt {
     text-align: center;
+  }
+
+  p.distance-info {
+    padding-left: 0;
   }
 
   .item-details-card {
@@ -654,6 +665,7 @@ h2.slogan {
     max-width: 20rem;
     width: 100%;
     border-radius: 0.625rem;
+    padding-bottom: 1rem;
 
 
     @media (max-width: 768px) { // For tablet and smaller screens
@@ -709,7 +721,7 @@ h2.slogan {
 
   p.distance-info {
     font-size: 1rem;
-    padding-left: 12.5rem;
+    padding-left: 13.5rem;
     margin-top: 1.5rem;
   }
 
@@ -995,6 +1007,7 @@ h2.slogan {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    justify-content: center;
 
     input {
       width: 100%;
@@ -1283,6 +1296,7 @@ h6 {
 .color-primary {
   color: #1976d2; // Primary color for the total price
 }
+
 
 // /* Update your index.css */
 // .whole-homepage {
