@@ -173,7 +173,6 @@ p.user-address {
   display: block;
   color: #494949;
   margin: 1rem 0;
-  padding-left: 1rem;
 }
 
 .Category-items-container {
@@ -201,6 +200,7 @@ p.user-address {
   padding-left: 1rem;
   margin: 0;
   padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 .Category-items-container p.user-address {
   color: #494949;
@@ -309,7 +309,6 @@ h2.welcome {
   display: block;
   color: #494949;
   margin: 1rem 0;
-  padding-left: 1rem;
 }
 
 button {

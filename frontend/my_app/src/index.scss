@@ -200,7 +200,6 @@ p.user-address {
   display: block;
   color: #494949;
   margin: 1rem 0;
-  padding-left: 1rem; // Adjusted from 20px to 1.25rem
 }
 
 // LIST OF ITEMS IN A SPECIFIC CATEGORY PAGE AND NEARBY ITEMS
@@ -231,6 +230,7 @@ p.user-address {
     padding-left: 1rem; // Add padding to the left if needed
     margin: 0; // Remove margin for better control
     padding-bottom: 1rem;
+    padding-top: 1rem;
   }
 
   p.user-address {
@@ -352,7 +352,6 @@ h2.welcome {
   display: block;
   color: #494949;
   margin: 1rem 0;
-  padding-left: 1rem;
 }
 
 // BUTTONS
