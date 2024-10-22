@@ -16,6 +16,8 @@ import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox CSS
 import Modal from '@mui/material/Modal'; // Import Modal
 import Chat from './Session';
 import { useAuth0 } from '@auth0/auth0-react'; // Import Auth0
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleLeft } from '@fortawesome/free-regular-svg-icons';
 
 
 
@@ -38,6 +40,9 @@ const ItemsListing = (syncConversation) => {
 
   mapboxgl.accessToken = process.env.REACT_APP_MB_TOKEN;
 
+  const handleBackButtonClick = () => {
+    navigate(-1); // Navigate to the previous page
+  };
 
   // const clearMarkers = () => {
   //   markerRef.current.forEach(marker => marker.remove());
@@ -252,6 +257,14 @@ const ItemsListing = (syncConversation) => {
 
   return (
     <div className="item-details-container">
+      <div className="back-button-container">
+      {/* Back Button */}
+      <FontAwesomeIcon 
+        icon={faCircleLeft} 
+        onClick={handleBackButtonClick} 
+        className="back-icon"
+      />
+      </div>
       <Card sx={{ maxWidth: 400, margin: '20px' }} className="item-details-card">
         <CardMedia
           component="img"

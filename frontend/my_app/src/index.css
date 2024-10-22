@@ -368,6 +368,18 @@ button.rent-button, button.rent-login-button {
   flex-direction: column; /* Stack items vertically if needed */
   padding: 1.25rem;
 }
+.item-details-container .back-button-container {
+  width: 100%;
+  display: flex; /* Add this to control icon position */
+  justify-content: flex-start; /* Aligns the back button to the left */
+  padding-left: 0.5rem; /* Optional, for some space on the left side */
+}
+.item-details-container .back-button-container .back-icon {
+  font-size: 30px;
+  cursor: pointer;
+  padding-left: 0; /* Ensure no padding here */
+  color: #494949;
+}
 .item-details-container p.login-rent-prompt {
   text-align: center;
 }
