@@ -21,12 +21,10 @@ SET row_security = off;
 --
 
 CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
-DROP TABLE IF EXISTS public."Items" CASCADE;
-DROP TABLE IF EXISTS public."Categories" CASCADE;
-DROP TABLE IF EXISTS public."Renters" CASCADE;
+
 
 --
--- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
@@ -40,7 +38,7 @@ SET default_table_access_method = heap;
 -- Name: Categories; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE IF NOT EXISTS public."Categories" (
+CREATE TABLE public."Categories" (
     "ID" integer NOT NULL,
     "Name" text,
     "Category_pic" text
@@ -53,7 +51,7 @@ ALTER TABLE public."Categories" OWNER TO postgres;
 -- Name: Items; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE IF NOT EXISTS public."Items" (
+CREATE TABLE public."Items" (
     "Item_id" integer NOT NULL,
     "Item_name" text,
     "Category_id" integer NOT NULL,
@@ -116,7 +114,7 @@ ALTER SEQUENCE public."Items_Item_id_seq" OWNED BY public."Items"."Item_id";
 -- Name: Renters; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE IF NOT EXISTS public."Renters" (
+CREATE TABLE public."Renters" (
     "Renter_id" integer NOT NULL,
     "First_name" text NOT NULL,
     "Last_name" text,
@@ -282,7 +280,7 @@ SELECT pg_catalog.setval('public."Items_Category_id_seq"', 1, false);
 -- Name: Items_Item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Items_Item_id_seq"', 53, true);
+SELECT pg_catalog.setval('public."Items_Item_id_seq"', 54, true);
 
 
 --
