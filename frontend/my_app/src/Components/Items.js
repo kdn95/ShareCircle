@@ -33,7 +33,7 @@ const ItemsListing = (syncConversation) => {
   const [confirmedDates, setConfirmedDates] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [distance, setDistance] = useState(null);
-
+  const [isDatesConfirmed, setIsDatesConfirmed] = useState(false);
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef([]);
@@ -77,6 +77,7 @@ const ItemsListing = (syncConversation) => {
   const handleConfirmDates = (dates) => {
     setConfirmedDates(dates);
     setShowCalendar(false);
+    setIsDatesConfirmed(true);  // Update button label state
   };
 
   // Get user location
@@ -313,7 +314,9 @@ const ItemsListing = (syncConversation) => {
           }
           {isAuthenticated &&
           <div className="rent-button-container">
-          <button className="rent-button" onClick={handleRentNowClick}>Rent Now</button>
+           <button className="rent-button" onClick={handleRentNowClick}>
+              {isDatesConfirmed ? "Edit Dates" : "Rent Now"}
+            </button>
           </div>
           }
 
