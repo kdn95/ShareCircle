@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getUserLocation } from '../Location';
 import mapboxgl from 'mapbox-gl';
@@ -160,7 +160,7 @@ const NearbyItems = () => {
         setLoading(false);
       }
     }
-  }, [getAccessTokenSilently, userLocation, radius, sortOption, sortItems]);
+  }, [getAccessTokenSilently, userLocation, radius, sortItems]);
 
   //Mapbox
   useEffect(() => {

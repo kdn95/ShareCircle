@@ -35,7 +35,7 @@ const Profile = () => {
     };
 
     fetchProfile();
-  }, [isAuthenticated, getAccessTokenSilently]);
+  }, [isAuthenticated, getAccessTokenSilently, setProfile]);
 
   if (loading) {
     return <div>Loading profile...</div>;

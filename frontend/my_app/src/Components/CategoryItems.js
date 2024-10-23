@@ -107,7 +107,7 @@ const CategoryItems = () => {
       setLoading(false);
     }
   // }, [category_name, userAddress]);
-  }, [category_name, userAddress, sortOption, sortItems]);
+  }, [category_name, userAddress, sortItems]);
 
 
 
