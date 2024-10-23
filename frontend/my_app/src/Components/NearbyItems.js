@@ -129,7 +129,8 @@ const NearbyItems = () => {
       setLoading(true);
       try {
         const token = await getAccessTokenSilently();
-        const response = await fetch(`http://localhost:5006/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=${radius_km}`, {
+        // const response = await fetch(`http://localhost:5006/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=${radius_km}`, {
+        const response = await fetch(`https://project-sc.onrender.com/items/nearby?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&radius_km=${radius_km}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -318,7 +319,7 @@ const NearbyItems = () => {
                         image={item.Image_url}
                         alt={item.Item_name}
                       />
-                       <CardContent>
+                      <CardContent>
                     <h3 className="item-header">{item.Item_name}</h3>
                     <div className="renter-container">
                       <div className="renter-info">

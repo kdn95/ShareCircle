@@ -681,6 +681,9 @@ p.distance-info {
   align-items: center;
   justify-content: center;
 }
+.Nearby-items-map-container h2.Nearby-items {
+  color: #494949;
+}
 .Nearby-items-map-container .address-bar {
   display: flex;
   align-items: center;
