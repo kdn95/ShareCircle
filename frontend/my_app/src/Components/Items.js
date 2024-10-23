@@ -219,8 +219,8 @@ const ItemsListing = (syncConversation) => {
       localStorage.setItem('paymentEndDate', confirmedDates.endDate.toISOString());     // Store end date as ISO string
       localStorage.setItem('paymentMessage', 'Payment Successful');
 
-      // const response = await axios.post('http://localhost:5006/create-checkout-session', {
-      const response = await axios.post('https://project-sc.onrender.com/create-checkout-session', {
+      const response = await axios.post('http://localhost:5006/create-checkout-session', {
+      // const response = await axios.post('https://project-sc.onrender.com/create-checkout-session', {
         amount: totalAmount,
         category: item.Category_id,
         itemName: item.Item_name,
