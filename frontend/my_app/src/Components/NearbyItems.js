@@ -91,7 +91,7 @@ const NearbyItems = () => {
   };
 
   //Sorting Options
-  const sortItems = (items) => {
+  const sortItems = useCallback((items) => {
     switch (sortOption) {
       case 'name':
         return [...items].sort((a, b) => a.Item_name.localeCompare(b.Item_name));
@@ -108,7 +108,7 @@ const NearbyItems = () => {
       default:
         return items;
     }
-  };
+  }, [sortOption]);
 
   // Define distance from user to item location
   const calculateDistance = (lat1, lon1, lat2, lon2) => {

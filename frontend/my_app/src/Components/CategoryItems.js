@@ -55,7 +55,7 @@ const CategoryItems = () => {
 
    // sorting filters
   //Sorting Options
-  const sortItems = (items) => {
+  const sortItems = useCallback((items) => {
     switch (sortOption) {
       case 'name':
         return [...items].sort((a, b) => a.Item_name.localeCompare(b.Item_name));
@@ -72,7 +72,9 @@ const CategoryItems = () => {
       default:
         return items;
     }
-  };
+  }, [sortOption]); // Add 'sortOption' as a dependency
+
+
 
 
   const fetchCategoryItems = useCallback(async () => {
