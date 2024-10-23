@@ -33,8 +33,8 @@ const ItemForm = () => {
     formData.append('image', image); // Append the image file
 
     try {
-      // const response = await fetch('http://localhost:5006/items', {
-      const response = await fetch('https://project-sc.onrender.com/items', {
+      const response = await fetch('http://localhost:5006/items', {
+      // const response = await fetch('https://project-sc.onrender.com/items', {
         method: 'POST',
         body: formData, // Send form data with image and other details
       });

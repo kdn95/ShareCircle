@@ -13,8 +13,8 @@ const Categories = () => {
   const fetchCategories = async () => {
     const delay = new Promise((resolve) => setTimeout(resolve, 2000)); // 2 seconds delay
     try {
-      // const response = await axios.get('http://localhost:5006/');
-      const response = await axios.get('https://project-sc.onrender.com/');
+      const response = await axios.get('http://localhost:5006/');
+      // const response = await axios.get('https://project-sc.onrender.com/');
       await Promise.all([delay, setCategories(response.data)]);
     } catch (error) {
       console.error('Error fetching categories:', error);

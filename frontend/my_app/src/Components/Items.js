@@ -52,8 +52,8 @@ const ItemsListing = (syncConversation) => {
     const fetchItemDetails = async () => {
       setLoading(true);
       try {
-        // const response = await axios.get(`http://localhost:5006/${category_name}/${itemId}`);
-        const response = await axios.get(`https://project-sc.onrender.com/${category_name}/${itemId}`);
+        const response = await axios.get(`http://localhost:5006/${category_name}/${itemId}`);
+        // const response = await axios.get(`https://project-sc.onrender.com/${category_name}/${itemId}`);
         setItem(response.data);
       } catch (error) {
         console.error('Error fetching item details:', error);
