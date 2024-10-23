@@ -345,11 +345,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // POST route to add a new item
 app.post('/items', upload.single('image'), async (req, res) => {
-  const { itemName, description, pricePerDay, availability, category_id, renter_id } = req.body;
+  const { itemName, description, pricePerDay, availability, category_id, renter_id, renter_name } = req.body;
   const image = req.file; // Get the uploaded image
 
   // Validate the inputs
-  if (!itemName || !description || !pricePerDay || !image || !availability || !category_id || !renter_id) {
+  if (!itemName || !description || !pricePerDay || !image || !availability || !category_id || !renter_id || !renter_name) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
@@ -391,11 +391,11 @@ app.post('/items', upload.single('image'), async (req, res) => {
 
     // Insert item details into the database
     const query = `
-      INSERT INTO "Items" ("Item_name", "Description", "Price_per_day", "Image_url", "Availability", "Category_id", "Renter_id")
-      VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;
+      INSERT INTO "Items" ("Item_name", "Description", "Price_per_day", "Image_url", "Availability", "Category_id", "Renter_id", "Renter_name")
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;
     `;
 
-    const values = [itemName, description, pricePerDay, imageUrl, availability, category_id, renter_id];
+    const values = [itemName, description, pricePerDay, imageUrl, availability, category_id, renter_id, renter_name];
     const result = await pool.query(query, values);
 
     // Return the newly added item

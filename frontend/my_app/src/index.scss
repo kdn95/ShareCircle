@@ -14,7 +14,7 @@ body {
   height: 100vh;   // Ensures the background takes full height
   width: 100vw;    // Ensures the background takes full width
   background-attachment: fixed; // Fix background to not scroll with content
-  padding-bottom: 23rem;
+  padding-bottom: 15rem;
 }
 
 .navbar {
@@ -260,7 +260,7 @@ p.user-address {
 
     .item-image {
       height: 250px;
-      width: 350px;
+      width: 380px;
       border-radius: 0.625rem 0.625rem 0 0;
     }
   }
@@ -271,6 +271,7 @@ p.user-address {
     max-width: 20rem;
     width: 100%;
     padding-left: 10px;
+    height: 475px;
 
     @media (max-width: 768px) { // For tablet and smaller screens
       flex: 0 0 calc(100% - 1.25rem); // One card per row
@@ -314,6 +315,7 @@ p.user-address {
     margin-top: 5px;
     font-size: 1.3rem;
     font-family: "Inter", sans-serif;
+    padding-bottom: 1rem;
   }
 
   // SEARCH RESULTS
@@ -427,7 +429,7 @@ button {
   padding: 1.25rem;
 
   .back-button-container {
-    width: 100%; 
+    width: 100%;
     display: flex; /* Add this to control icon position */
     justify-content: flex-start; /* Aligns the back button to the left */
     padding-left: 0.5rem; /* Optional, for some space on the left side */
@@ -626,7 +628,7 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Full height to center the loader */
+  height: 35vh; /* Full height to center the loader */
 
   .loader-image {
     width: 11rem; /* Adjust the size of your logo */
@@ -672,6 +674,7 @@ h2.slogan {
   flex-direction: column;
   align-items: center;  // Center items horizontally
   justify-content: center; // Center items vertically if you want the entire container to be centered vertically
+  padding-bottom: 7rem;
 
   .Nearby-item-image {
     height: 250px;
@@ -946,7 +949,7 @@ h2.slogan {
 .profile-container {
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 50px 20px 50px 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1012,7 +1015,7 @@ h2.slogan {
 .search-bar-container {
   display: flex;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 1rem;
   width: 100%;
 
   h2.categories-title {
@@ -1055,6 +1058,7 @@ h2.slogan {
 .searchbar-categories {
   form {
     justify-content: center;
+
   }
 }
 
@@ -1085,8 +1089,8 @@ h2.slogan {
   }
   .logo {
     padding-top: 2rem;
-    height: 150px;
-    width: 150px;
+    height: 80px;
+    width: 80px;
     justify-content: center;
   }
 
@@ -1101,6 +1105,9 @@ h2.slogan {
     }
   }
 }
+.Hub{
+  padding-bottom:-50px;
+}
 
 
 //itemForm section
@@ -1109,9 +1116,9 @@ h2.slogan {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
   background-color: #f8f9fa;
+  padding-bottom: 0px;
+
 
   .add-item-form {
     background-color: white;
@@ -1121,7 +1128,7 @@ h2.slogan {
     width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
     align-items: center;
     font-family: 'Montserrat', sans-serif;
   }

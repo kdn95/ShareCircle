@@ -11,7 +11,7 @@ body {
   height: 100vh;
   width: 100vw;
   background-attachment: fixed;
-  padding-bottom: 23rem;
+  padding-bottom: 15rem;
 }
 
 .navbar {
@@ -228,7 +228,7 @@ p.user-address {
 }
 .Category-items-container .items-container .category-items-card .item-image {
   height: 250px;
-  width: 350px;
+  width: 380px;
   border-radius: 0.625rem 0.625rem 0 0;
 }
 .Category-items-container .items-container .MuiCard-root {
@@ -237,6 +237,7 @@ p.user-address {
   max-width: 20rem;
   width: 100%;
   padding-left: 10px;
+  height: 475px;
 }
 @media (max-width: 768px) {
   .Category-items-container .items-container .MuiCard-root {
@@ -275,6 +276,7 @@ p.user-address {
   margin-top: 5px;
   font-size: 1.3rem;
   font-family: "Inter", sans-serif;
+  padding-bottom: 1rem;
 }
 .Category-items-container .search-result-price {
   color: 494949;
@@ -547,7 +549,7 @@ button.rent-button, button.rent-login-button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Full height to center the loader */
+  height: 35vh; /* Full height to center the loader */
 }
 .logo-loader .loader-image {
   width: 11rem; /* Adjust the size of your logo */
@@ -588,6 +590,7 @@ h2.slogan {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-bottom: 7rem;
 }
 .Nearby-items-container .Nearby-item-image {
   height: 250px;
@@ -814,7 +817,7 @@ p.distance-info {
 .profile-container {
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 50px 20px 50px 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -870,7 +873,7 @@ p.distance-info {
 .search-bar-container {
   display: flex;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 1rem;
   width: 100%;
 }
 .search-bar-container h2.categories-title {
@@ -934,8 +937,8 @@ p.distance-info {
 }
 .logo-container .logo {
   padding-top: 2rem;
-  height: 150px;
-  width: 150px;
+  height: 80px;
+  width: 80px;
   justify-content: center;
 }
 
@@ -945,13 +948,16 @@ p.distance-info {
   }
 }
 
+.Hub {
+  padding-bottom: -50px;
+}
+
 .item-form-body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
   background-color: #f8f9fa;
+  padding-bottom: 0px;
   /* Specific styling for item name field */
   /* Specific styling for item description field */
   /* Checkbox label */
@@ -964,7 +970,7 @@ p.distance-info {
   width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
   align-items: center;
   font-family: "Montserrat", sans-serif;
 }

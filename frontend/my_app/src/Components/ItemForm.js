@@ -8,6 +8,7 @@ const ItemForm = () => {
   const [categoryId, setCategoryId] = useState(1);
   const [renterId] = useState(7); // Set your default RenterID here
   const [image, setImage] = useState(null); // State to handle image file
+  const [renterName] = useState('Nicole'); // Set your default Renter Name here
 
   const categories = [
     { id: 1, name: 'Electronics' },
@@ -31,6 +32,7 @@ const ItemForm = () => {
     formData.append('category_id', categoryId);
     formData.append('renter_id', renterId); // Include renterId in the FormData
     formData.append('image', image); // Append the image file
+    formData.append('renter_name', renterName);
 
     try {
       const response = await fetch('http://localhost:5006/items', {
@@ -110,6 +112,11 @@ const ItemForm = () => {
       <input
       type="hidden"
       value={renterId}
+      readOnly
+      />
+      <input
+      type="hidden"
+      value={renterName}
       readOnly
       />
 
