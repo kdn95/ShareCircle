@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback} from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef} from 'react';
+import { useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import StarIcon from '@mui/icons-material/Star';
-import ChatIcon from '@mui/icons-material/Chat';
 import LogoLoader from './LogoLoader';
 import Calendar from './Calendar';
 import format from 'date-fns/format';
@@ -24,7 +23,7 @@ import { faCircleLeft } from '@fortawesome/free-regular-svg-icons';
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`);
 
 const ItemsListing = (syncConversation) => {
-  const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
   const { category_name, itemId } = useParams();
   const [item, setItem] = useState(null);
@@ -252,11 +251,11 @@ const ItemsListing = (syncConversation) => {
     return <p>No item found.</p>;
   }
 
-  const handleLogin = () => {
-    loginWithRedirect({
-        redirectUri: window.location.origin + window.location.pathname // Redirect back to the same page
-    });
-};
+  // const handleLogin = () => {
+  //   loginWithRedirect({
+  //       redirectUri: window.location.origin + window.location.pathname // Redirect back to the same page
+  //   });
+// };
 
   return (
     <div className="item-details-container">

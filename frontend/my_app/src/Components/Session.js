@@ -1,4 +1,4 @@
-import { Popup, Inbox } from '@talkjs/react';
+import { Popup } from '@talkjs/react';
 import { useEffect, useState, useCallback } from 'react';
 import Talk from 'talkjs';
 import axios from 'axios';
@@ -34,7 +34,7 @@ function Chat({ syncUser }) {
                 session.destroy(); // Cleanup session on unmount
             }
         };
-    }, [category_name, itemId]);
+    }, [category_name, itemId, session]);
 
     // Create Talk.js session when item is loaded
     useEffect(() => {
@@ -76,7 +76,7 @@ function Chat({ syncUser }) {
         conversation.setParticipant(other);
 
         return conversation;
-    }, [item, itemId]);
+    }, [item]);
 
     if (loading) return <div>Loading...</div>; // Optional loading state
 

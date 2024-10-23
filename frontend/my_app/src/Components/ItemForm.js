@@ -4,7 +4,7 @@ const ItemForm = () => {
   const [itemName, setItemName] = useState('');
   const [description, setDescription] = useState('');
   const [pricePerDay, setPricePerDay] = useState('');
-  const [availability, setAvailability] = useState(false);
+  const [availability] = useState(false);
   const [categoryId, setCategoryId] = useState(1);
   const [renterId] = useState(7); // Set your default RenterID here
   const [image, setImage] = useState(null); // State to handle image file

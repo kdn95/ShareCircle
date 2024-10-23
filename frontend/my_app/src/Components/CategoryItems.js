@@ -30,7 +30,6 @@ const CategoryItems = () => {
   const [userAddress, setUserAddress] = useState({});
   const [loading, setLoading] = useState(true); // Initialize loading state
   const [sortOption, setSortOption] = useState('name');
-  const [filterOption, setFilterOption] = useState('all');
 
 
   useEffect(() => {
@@ -108,7 +107,7 @@ const CategoryItems = () => {
       setLoading(false);
     }
   // }, [category_name, userAddress]);
-  }, [category_name, userAddress, sortOption]);
+  }, [category_name, userAddress, sortOption, sortItems]);
 
 
 
@@ -152,7 +151,7 @@ const CategoryItems = () => {
     return <LogoLoader />; // Show loader while loading
   }
 
-  const sortedItems = sortItems(items);
+
 
   return (
     <div className="Category-items-container">

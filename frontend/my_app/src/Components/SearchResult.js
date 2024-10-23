@@ -8,7 +8,6 @@ import StarIcon from '@mui/icons-material/Star';
 import SearchBar from "./SearchBar";
 
 const SearchResults = () => {
-  const { category_name } = useParams();
   const location = useLocation();
   const initialResults = location.state?.results || [];
   const [results, setResults] = useState(initialResults); // Use state for results

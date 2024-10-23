@@ -15,7 +15,7 @@ import LogoLoader from './LogoLoader';
 import '../index.css';
 
 const NearbyItems = () => {
-  const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [nearbyItems, setNearbyItems] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const [userAddress, setUserAddress] = useState({});
@@ -25,7 +25,6 @@ const NearbyItems = () => {
   const mapRef = useRef(null);
   const userMarkerRef = useRef(null);
   const markersRef = useRef([]);
-  const { category_name } = useParams();
   const [radius, setRadius] = useState(5);
 
   mapboxgl.accessToken = process.env.REACT_APP_MB_TOKEN;
@@ -161,7 +160,7 @@ const NearbyItems = () => {
         setLoading(false);
       }
     }
-  }, [getAccessTokenSilently, userLocation, radius, sortOption]);
+  }, [getAccessTokenSilently, userLocation, radius, sortOption, sortItems]);
 
   //Mapbox
   useEffect(() => {
