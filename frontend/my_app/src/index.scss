@@ -607,10 +607,15 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
   flex-direction: column;
   color:#494949;
   font-family: "Inter", sans-serif;
+  margin-top: 0rem;
+
+  .MuiCard-root {
+    border-radius: 0.625rem;
+  }
 
   .rental-period {
     display: flex;
@@ -1283,21 +1288,21 @@ button[type="submit"]:hover {
 }
 
 // SUCCESS PAGE
-.Success-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  min-height: 100vh; // Ensure it takes the full viewport height
+// .Success-page {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 20px;
+//   min-height: 100vh; // Ensure it takes the full viewport height
 
-  .MuiCard-root {
-    border-radius: 0.625rem;
-  }
+//   .MuiCard-root {
+//     border-radius: 0.625rem;
+//   }
 
-  .success {
-    margin-bottom: 30px;
-  }
-}
+//   .success {
+//     margin-bottom: 30px;
+//   }
+// }
 
 .card {
   max-width: 400px;

@@ -532,10 +532,14 @@ button.rent-button, button.rent-login-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
   flex-direction: column;
   color: #494949;
   font-family: "Inter", sans-serif;
+  margin-top: 0rem;
+}
+.Success-page .MuiCard-root {
+  border-radius: 0.625rem;
 }
 .Success-page .rental-period {
   display: flex;
@@ -1062,20 +1066,6 @@ p.distance-info {
   .item-form-body form {
     width: 90%;
   }
-}
-
-.Success-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  min-height: 100vh;
-}
-.Success-page .MuiCard-root {
-  border-radius: 0.625rem;
-}
-.Success-page .success {
-  margin-bottom: 30px;
 }
 
 .card {
