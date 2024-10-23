@@ -24,7 +24,7 @@ const SearchBar = ({ onSearch }) => {
       }
       const data = await response.json();
       console.log("Fetched Data:", data);
-      onSearch(data);
+      onSearch(data); // Pass the fetched data back to the parent component
       navigate(`/search?query=${query}`, { state: { results: data } });
     } catch (err) {
       setError(err.message);

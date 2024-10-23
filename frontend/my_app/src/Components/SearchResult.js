@@ -12,18 +12,20 @@ const SearchResults = () => {
   const initialResults = location.state?.results || [];
   const [results, setResults] = useState(initialResults); // Use state for results
 
+  // This function will be passed to the SearchBar to handle new searches
   const handleSearch = (newResults) => {
-    setResults(newResults); // Update the results state
+    setResults(newResults); // Update the results state with new search results
   };
 
   console.log('Search Results:', results);
 
   return (
     <div className="Category-items-container">
+      {/* SearchBar now allows users to search again */}
       <SearchBar onSearch={handleSearch} /> {/* Pass the handleSearch function */}
       <h2>Search Results</h2>
       {results.length === 0 ? (
-        <p>No items found</p>
+        <p>No items found. Try searching again!</p>
       ) : (
         <div className="items-container">
           {results.map((item) => (
