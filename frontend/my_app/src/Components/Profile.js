@@ -4,7 +4,7 @@ import HomepageLoader from './HomepageLoader'; // Import HomepageLoader
 
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-  const [profile, setProfile] = useState(null); // Correctly initialize profile state
+  const [setProfile] = useState(null); // Correctly initialize profile state
   const [loading, setLoading] = useState(true); // Initialize loading state
 
   useEffect(() => {
