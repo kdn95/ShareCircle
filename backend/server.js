@@ -134,7 +134,8 @@ app.post('/create-checkout-session', async (req, res) => {
               quantity: 1, // Adjust quantity as needed
           }],
           mode: 'payment', // Payment mode
-          success_url: 'http://localhost:3000/success?message=Payment+Successful',
+          // success_url: 'http://localhost:3000/success?message=Payment+Successful',
+          success_url: 'https://sharecircle.netlify.app/success?message=Payment+Successful',
           //success_url: 'http://localhost:3000/success', // Redirect on success
           cancel_url: previousPageUrl, // Redirect to previous item page
       });
