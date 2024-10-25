@@ -4,7 +4,7 @@ import HomepageLoader from './HomepageLoader'; // Import HomepageLoader
 
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-  const [setProfile] = useState(null);
+  const [profile, setProfile] = useState(null); // Correctly initialize profile state
   const [loading, setLoading] = useState(true); // Initialize loading state
 
   useEffect(() => {
@@ -12,7 +12,6 @@ const Profile = () => {
       if (isAuthenticated) {
         try {
           const token = await getAccessTokenSilently();
-          // const response = await fetch('http://localhost:5005/profile', {
           const response = await fetch('https://project-sc.onrender.com/profile', {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -36,7 +35,7 @@ const Profile = () => {
     };
 
     fetchProfile();
-  }, [isAuthenticated, getAccessTokenSilently]);
+  }, [isAuthenticated, getAccessTokenSilently]); // Add dependencies
 
   if (loading) {
     return <HomepageLoader />; // Show HomepageLoader while loading
