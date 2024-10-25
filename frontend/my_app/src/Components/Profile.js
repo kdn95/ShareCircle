@@ -35,7 +35,7 @@ const Profile = () => {
     };
 
     fetchProfile();
-  }, [isAuthenticated, getAccessTokenSilently]); // Add dependencies
+  }, [isAuthenticated, getAccessTokenSilently, setProfile]); // Add dependencies
 
   if (loading) {
     return <HomepageLoader />; // Show HomepageLoader while loading
