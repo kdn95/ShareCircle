@@ -17,8 +17,8 @@ const SearchBar = ({ onSearch }) => {
     setLoading(true);
     setError(null);
     try {
-      // const response = await fetch(`http://localhost:5005/item/search?q=${query}`);
-      const response = await fetch(`https://project-sc.onrender.com/item/search?q=${query}`);
+      const response = await fetch(`http://localhost:5005/item/search?q=${query}`);
+      // const response = await fetch(`https://project-sc.onrender.com/item/search?q=${query}`);
       if (!response.ok) {
         throw new Error('Failed to fetch search results');
       }

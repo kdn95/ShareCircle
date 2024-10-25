@@ -80,8 +80,8 @@ const CategoryItems = () => {
   const fetchCategoryItems = useCallback(async () => {
     setLoading(true);
     try {
-      // const response = await axios.get(`http://localhost:5005/${category_name}`);
-      const response = await axios.get(`https://project-sc.onrender.com/${category_name}`);
+      const response = await axios.get(`http://localhost:5005/${category_name}`);
+      // const response = await axios.get(`https://project-sc.onrender.com/${category_name}`);
       console.log('API Response:', response.data);
 
       const fetchedItems = response.data;

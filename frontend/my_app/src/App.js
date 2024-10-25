@@ -50,8 +50,8 @@ const App = () => {
     const fetchConversations = async () => {
       if (isAuthenticated && user) {
         try {
-          // const response = await fetch(`http://localhost:5005/conversations?userId=${user.sub}`); // Adjust your API endpoint
-          const response = await fetch(`https://project-sc.onrender.com/conversations?userId=${user.sub}`); // Adjust your API endpoint
+          const response = await fetch(`http://localhost:5005/conversations?userId=${user.sub}`); // Adjust your API endpoint
+          // const response = await fetch(`https://project-sc.onrender.com/conversations?userId=${user.sub}`); // Adjust your API endpoint
           const data = await response.json();
           const filteredConversations = data.filter(convo => convo.custom.state !== 'hidden');
 
