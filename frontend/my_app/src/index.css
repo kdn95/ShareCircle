@@ -380,6 +380,9 @@ button.rent-button, button.rent-login-button {
   padding: 1.25rem;
   padding-bottom: 7rem;
 }
+.item-details-container .chat-container {
+  height: 1rem;
+}
 .item-details-container .back-button-container {
   width: 100%;
   display: flex; /* Add this to control icon position */
@@ -958,7 +961,7 @@ p.distance-info {
 }
 
 .Hub {
-  padding-bottom: -20px;
+  padding-bottom: -50px;
 }
 
 .item-form-body {

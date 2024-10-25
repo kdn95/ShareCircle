@@ -432,6 +432,10 @@ button {
   padding: 1.25rem;
   padding-bottom: 7rem;
 
+  .chat-container {
+    height: 1rem;
+  }
+
   .back-button-container {
     width: 100%;
     display: flex; /* Add this to control icon position */
@@ -1117,7 +1121,7 @@ h2.slogan {
   }
 }
 .Hub{
-  padding-bottom:-20px;
+  padding-bottom:-50px;
 }
 
 
