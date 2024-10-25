@@ -12,8 +12,8 @@ const Profile = () => {
       if (isAuthenticated) {
         try {
           const token = await getAccessTokenSilently();
-          const response = await fetch('http://localhost:5005/profile', {
-          // const response = await fetch('https://project-sc.onrender.com/profile', {
+          // const response = await fetch('http://localhost:5005/profile', {
+          const response = await fetch('https://project-sc.onrender.com/profile', {
             headers: {
               Authorization: `Bearer ${token}`,
             },
