@@ -26,9 +26,8 @@ DROP TABLE IF EXISTS public."Items" CASCADE;
 DROP TABLE IF EXISTS public."Categories" CASCADE;
 DROP TABLE IF EXISTS public."Renters" CASCADE;
 
-
 --
--- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
@@ -222,6 +221,7 @@ COPY public."Items" ("Item_id", "Item_name", "Category_id", "Renter_id", "Descri
 31	Torch	8	31	Uses AA batteries (included)	2	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/ufswb8mxnfrrgiilzlvz?_a=BAMAH2M20	Available	Eleanor
 32	Portable Gas Cooker	8	32	Works well, does not come with gas canister	15	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/palknnf5pc8eyt8341lq?_a=BAMAH2M20	Available	Peter
 34	Stroller	6	12	Next level stroller	15	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/qpfcx8lqbhuebzmuitbm?_a=BAMAH2Oa0	Available\n	Francis\n
+55	test	1	7	2310	33	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/rzs9iaektsxan8lqipde?_a=BAMCkGM20	false	Nicole
 \.
 
 
@@ -242,7 +242,6 @@ COPY public."Renters" ("Renter_id", "First_name", "Last_name", "Rating", "Addres
 12	James	Bond	2	32 Parramatta Rd, Homebush, NSW 2140	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/cdqjt34be9ym5b8dsosj?_a=BAMAH2M20	0101000020E6100000A52C431CEBE26240AE47E17A14EE40C0
 13	Amanda	Ciccione	5	300 Victoria Rd, Gladesville, NSW 2111	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/lnolrmvtzhyxxrhzy8pk?_a=BAMAH2M20	0101000020E610000058A835CD3BE46240B4C876BE9FEA40C0
 14	Michelle	Anderson	2	25 Lane Cove Rd, Ryde, NSW 2112	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/q8z89peiucaaigqzoqbn?_a=BAMAH2M20	0101000020E6100000BADA8AFD65E36240D5E76A2BF6E740C0
-15	Tim	Jones	5	99 Belmore Rd, Randwick, NSW 2031	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/mpwt30b6muqdbquddzzs?_a=BAMAH2M20	0101000020E6100000598638D6C5E76240211FF46C56F540C0
 16	Georgia	Smith	2	66 Norton St, Leichhardt, NSW 2040	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/n0wmqnnr45zji801x3jq?_a=BAMAH2M20	0101000020E6100000A245B6F3FDE462401B2FDD2406F140C0
 17	Samuel	Jackson	4	200 Bourke St, Melbourne, VIC 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/kklbk29lajsbklylsswv?_a=BAMAH2M20	0101000020E6100000AC8BDB68001F62404703780B24E842C0
 6	Karen	Compli	1	7 Riverside Quay, Southbank, VIC 3006	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/umt11gyoygworetjcxw2?_a=BAMAH2M20	0101000020E6100000B459F5B9DA1E62400C022B8716E942C0
@@ -261,7 +260,8 @@ COPY public."Renters" ("Renter_id", "First_name", "Last_name", "Rating", "Addres
 30	Thomas	Wender	2	75 Collins St, Melbourne, VIC 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/gu7aqxinvi7lveszlpr1?_a=BAMAH2M20	0101000020E6100000371AC05B201F6240AA60545227E842C0
 31	Eleanor	Flower	5	250 St Georges Rd, Fitzroy North, VIC 3068	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/lraezgx1g8flm1wj5hz2?_a=BAMAH2M20	0101000020E6100000A167B3EA731F6240780B24287EE442C0
 32	Peter	Pan	1	150 Queens Rd, Melbourne, VIC 3004	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/anke5i6kw5wkjqjhdu6z?_a=BAMAH2M20	0101000020E61000005305A3923A1F62405B423EE8D9EC42C0
-7	Nicole	Gorospe	5	123 George St, Sydney, NSW 2000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/o8crhqta22kpdbpxhrzs?_a=BAMCkGM20	0101000020E6100000B4C876BE9FE66240D7A3703D0AEF40C0
+7	Nicole	Gorospe	5	123 Smith Street, Fitzroy, VIC 3065, Australia	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/o8crhqta22kpdbpxhrzs?_a=BAMCkGM20	0101000020E6100000B4C876BE9FE66240D7A3703D0AEF40C0
+15	Tim	Jones	5	592 Elizabeth St, Melbourne VIC 3000	https://res.cloudinary.com/dbsawv974/image/upload/f_auto,q_auto/c_fill,g_auto,h_340,w_400/mpwt30b6muqdbquddzzs?_a=BAMAH2M20	0101000020E6100000598638D6C5E76240211FF46C56F540C0
 \.
 
 
@@ -284,7 +284,7 @@ SELECT pg_catalog.setval('public."Items_Category_id_seq"', 1, false);
 -- Name: Items_Item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Items_Item_id_seq"', 54, true);
+SELECT pg_catalog.setval('public."Items_Item_id_seq"', 55, true);
 
 
 --
