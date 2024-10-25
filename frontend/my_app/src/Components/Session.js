@@ -90,6 +90,7 @@ function Chat({ syncUser }) {
                     conversationId={`item_${itemId}`}
                     syncConversation={syncConversation} // Pass the current session
                     onClose={() => setIsPopupOpen(false)} // Optionally handle closing
+                    style={{ width: '100%', height: '60%' }}
                 />
             )}
         </div>
