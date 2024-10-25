@@ -35,8 +35,8 @@ const ItemForm = () => {
     formData.append('renter_name', renterName);
 
     try {
-      const response = await fetch('http://localhost:5005/items', {
-      // const response = await fetch('https://project-sc.onrender.com/items', {
+      // const response = await fetch('http://localhost:5005/items', {
+      const response = await fetch('https://project-sc.onrender.com/items', {
         method: 'POST',
         body: formData, // Send form data with image and other details
       });
