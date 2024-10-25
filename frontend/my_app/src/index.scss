@@ -14,7 +14,7 @@ body {
   height: 100vh;   // Ensures the background takes full height
   width: 100vw;    // Ensures the background takes full width
   background-attachment: fixed; // Fix background to not scroll with content
-  padding-bottom: 5rem;
+  padding-bottom: 15rem;
 }
 
 .navbar {
@@ -432,10 +432,6 @@ button {
   padding: 1.25rem;
   padding-bottom: 7rem;
 
-  .chat-container {
-    height: 1rem;
-  }
-
   .back-button-container {
     width: 100%;
     display: flex; /* Add this to control icon position */
@@ -453,7 +449,6 @@ button {
   p.login-rent-prompt {
     text-align: center;
   }
-
   p.distance-info {
     padding-left: 0;
   }
@@ -493,7 +488,11 @@ button {
     align-items: center; /* Center vertically */
   }
 
-  .item-description,
+  .item-description {
+    padding-right: 20px;
+    color: #757575;
+  }
+
   .item-availability {
     margin: 0; /* Remove default margin */
     color: #757575;
