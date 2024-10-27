@@ -378,6 +378,7 @@ button.rent-button, button.rent-login-button {
   align-items: center; /* Center inner content horizontally */
   flex-direction: column; /* Stack items vertically if needed */
   padding: 1.25rem;
+  padding-bottom: 4rem;
 }
 .item-details-container .back-button-container {
   width: 100%;
