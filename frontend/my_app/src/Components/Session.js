@@ -66,10 +66,9 @@ function Chat({ syncUser }) {
 
         const conversation = talkSession.getOrCreateConversation(conversationId);
 
-
-        if (conversation && !conversation.hasParticipant(talkSession.me)) {
-            conversation.setParticipant(talkSession.me);
-        }
+        // if (conversation && !conversation.hasParticipant(talkSession.me)) {
+        //     conversation.setParticipant(talkSession.me);
+        // }
 
 
         const other = new Talk.User({
@@ -78,12 +77,8 @@ function Chat({ syncUser }) {
             photoUrl: item.Profile_pic,
         });
 
-        // conversation.setParticipant(talkSession.me);
-        // conversation.setParticipant(other);
-
-        if (!conversation.hasParticipant(other)) {
-            conversation.setParticipant(other);
-        }
+        conversation.setParticipant(talkSession.me);
+        conversation.setParticipant(other);
 
         return conversation;
     }, [item]);
