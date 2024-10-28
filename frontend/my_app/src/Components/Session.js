@@ -66,9 +66,11 @@ function Chat({ syncUser }) {
 
         const conversation = talkSession.getOrCreateConversation(conversationId);
 
-        if (!conversation.hasParticipant(talkSession.me)) {
+
+        if (conversation && !conversation.hasParticipant(talkSession.me)) {
             conversation.setParticipant(talkSession.me);
         }
+
 
         const other = new Talk.User({
             id: item.Renter_id,
