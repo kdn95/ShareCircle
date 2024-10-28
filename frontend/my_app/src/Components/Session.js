@@ -66,14 +66,22 @@ function Chat({ syncUser }) {
 
         const conversation = talkSession.getOrCreateConversation(conversationId);
 
+        if (!conversation.hasParticipant(talkSession.me)) {
+            conversation.setParticipant(talkSession.me);
+        }
+
         const other = new Talk.User({
             id: item.Renter_id,
             name: item.Renter_name,
             photoUrl: item.Profile_pic,
         });
 
-        conversation.setParticipant(talkSession.me);
-        conversation.setParticipant(other);
+        // conversation.setParticipant(talkSession.me);
+        // conversation.setParticipant(other);
+
+        if (!conversation.hasParticipant(other)) {
+            conversation.setParticipant(other);
+        }
 
         return conversation;
     }, [item]);
