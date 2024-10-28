@@ -1128,11 +1128,15 @@ h2.slogan {
   padding-bottom:-50px;
 }
 
-.Inbox, .Inbox>.hub-underlay {
+.Inbox chat-only {
   width: 100%;
-  height: 80%;
+  height: 70%;
 }
 
+.__talkjs_popup {
+  width: 100%;
+  height: 70%;
+}
 
 //itemForm section
 
