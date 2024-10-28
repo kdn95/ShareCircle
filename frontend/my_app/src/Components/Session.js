@@ -75,6 +75,7 @@ function Chat({ syncUser }) {
             id: item.Renter_id,
             name: item.Renter_name,
             photoUrl: item.Profile_pic,
+            welcomeMessage: null, // Disable the welcome message
         });
 
         conversation.setParticipant(talkSession.me);
