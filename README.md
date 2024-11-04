@@ -32,7 +32,6 @@ Ensure you have the following installed:
 2. Install dependencies:
 
     ```bash
-    Copy code
     npm install
     ```
 
@@ -41,7 +40,6 @@ Ensure you have the following installed:
     Create a .env file and include the following:
 
     ```bash
-    Copy code
     DATABASE_URL=postgresql://user:password@localhost:5432/sharecircle
     PORT=3000
     ```
@@ -51,18 +49,50 @@ Ensure you have the following installed:
     Make sure PostgreSQL is running, and the database is set up. You can create the database using:
 
       ```bash
-      Copy code
       createdb sharecircle
       ```
 
 5. Start the application:
 
-    bash
-    Copy code
+    ```bash
     npm start
-    Visit the app in your browser:
+    ```
+
+6. Visit the app in your browser:
 
     ```bash
-    Copy code
     http://localhost:3000
     ```
+
+### Running with Docker
+
+If you prefer using Docker for deployment, follow these steps:
+
+1. Build the Docker image:
+
+    ```bash
+    docker build -t sharecircle .
+    ```
+
+2. Run the Docker container:
+
+    ```bash
+    docker run -d -p 3000:3000 --name sharecircle sharecircle
+    ```
+
+
+## 🧑‍💻 Technologies Used
+- **Frontend:** React.js, SCSS
+- **Backend:** Node.js, Express.js
+- **Database:** PostgreSQL
+- **Containerization:** Docker
+
+## 📖 Documentation
+- For detailed API documentation, visit the API Docs.
+- User guides and tutorials are available in our Wiki.
+
+## 🛡 Security & Privacy
+We value the privacy and security of our users. Share Circle follows industry-standard security practices to protect user data and communications. For more information, please refer to our Privacy Policy.
+
+## 📬 Contact
+Have any questions or suggestions? Reach out to us at support@sharecircle.com or open an issue on GitHub.
