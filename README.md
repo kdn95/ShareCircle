@@ -127,12 +127,12 @@ Ensure you have the following installed:
 We value the privacy and security of our users. Share Circle follows standard security practices to protect user data and communications.
 
 ## 📬 Contact
-Have any questions or suggestions? Reach out to us at support@sharecircle.com or open an issue on GitHub.
+Have any questions or suggestions? Reach out to us at sharecircle.team@gmail.com.
 
-## :smiley_cat: Developers
+## :smiley_cat: :dog: :smile_cat: Developers
 - [Carole Zen-Ruffinen](https://github.com/crlzr)
 - [Nicole Ann Gorospe](https://github.com/NickelannG)
 - [Khang Duy Nguyen](https://github.com/kdn95)
 
-## Contributors
+## :snail: Contributors
 - [Kieran Hirsh](https://github.com/kieranhirsh)
