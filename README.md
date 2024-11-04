@@ -8,7 +8,8 @@
 - **User Profiles**: Manage your profile and track your borrowing and lending activity.
 - **Item Categories**: Browse items based on categories like electronics, tools, household, and more.
 - **Location-Based Search**: Find items available near your location.
-- **Secure Transactions**: Communicate safely and securely with neighbors to arrange item handovers.
+- **Secure Transactions**: Make secure payments via Stripe. 
+- **Communcation**: Communicate with your neighbours to arrange item handovers.
 
 ## 🚀 Getting Started
 
@@ -83,7 +84,7 @@ If you prefer using Docker for deployment, follow these steps:
 
 ## 🧑‍💻 Technologies Used
 - **Frontend:** React.js, SCSS
-- **Backend:** Node.js, Express.js
+- **Backend:** Node.js, Express.js, JWT
 - **Database:** PostgreSQL
 - **Containerization:** Docker
 
