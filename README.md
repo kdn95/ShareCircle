@@ -1,4 +1,5 @@
 # 🌍 Share Circle
+![Share circle screenshots](frontend/my_app/public/images/Live_Demo.png)
 
 **Share Circle** is a community-driven platform that facilitates sharing and renting items within local neighborhoods. Whether you have extra tools, furniture, or gadgets lying around, Share Circle connects you with your neighbors, fostering a sharing economy and helping you save money while reducing waste.
 
