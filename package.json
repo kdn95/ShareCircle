@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "cors": "^2.8.5",
+    "git-filter-repo": "^0.0.30",
     "netstat": "^0.0.2",
     "stripe": "^16.12.0"
   }
